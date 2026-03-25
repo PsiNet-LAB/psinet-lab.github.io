@@ -50,9 +50,24 @@
     header {
       position: fixed; top: 0; left: 0; right: 0;
       z-index: 1000;
+      background: transparent;
+      transition: background .3s ease, backdrop-filter .3s ease;
+    }
+    header.scrolled {
       background: rgba(11,22,41,.85);
       backdrop-filter: blur(20px);
-      border-bottom: 1px solid var(--border);
+    }
+
+    #particles-js {
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      z-index: 0;
+    }
+
+    .header-top,
+    nav.main-nav {
+      position: relative;
+      z-index: 1;
     }
 
     .header-top {
@@ -60,23 +75,41 @@
       align-items: center;
       justify-content: center;
       padding: .6rem 2.5rem;
-      border-bottom: 1px solid var(--border);
     }
 
     .social-links {
       display: flex;
-      gap: 1rem;
+      gap: 1.2rem;
       align-items: center;
     }
 
     .social-links a {
-      color: var(--muted);
-      transition: color .2s;
-      display: flex; align-items: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: rgba(94,234,212,.06);
+      border: 1px solid rgba(94,234,212,.12);
+      transition: all .35s cubic-bezier(.4,0,.2,1);
+      position: relative;
     }
-    .social-links a:hover { color: var(--teal); }
-
-    .social-links svg { width: 16px; height: 16px; fill: currentColor; }
+    .social-links a svg {
+      width: 15px;
+      height: 15px;
+      fill: url(#icon-gradient);
+      transition: filter .35s ease;
+    }
+    .social-links a:hover {
+      background: rgba(94,234,212,.12);
+      border-color: rgba(94,234,212,.35);
+      box-shadow: 0 0 16px rgba(94,234,212,.2), 0 0 4px rgba(45,212,191,.15);
+      transform: translateY(-2px);
+    }
+    .social-links a:hover svg {
+      filter: drop-shadow(0 0 4px rgba(94,234,212,.45));
+    }
 
     nav.main-nav {
       position: relative;
@@ -101,17 +134,7 @@
       align-items: center;
       gap: .15rem;
     }
-    .nav-center img { height: 38px; }
-    .nav-center .wordmark {
-      font-family: 'Syne', sans-serif;
-      font-weight: 800;
-      font-size: .85rem;
-      color: var(--white);
-      letter-spacing: .02em;
-      text-align: center;
-      line-height: 1.15;
-    }
-    .nav-center .wordmark span { display: block; }
+    .nav-center img { height: 50px; }
 
     nav.main-nav a {
       font-size: .82rem;
@@ -611,7 +634,6 @@
       nav.main-nav { padding: .55rem 1.2rem; }
       .nav-left, .nav-right { gap: 1rem; }
       section { padding: 4rem 1.5rem; }
-      .nav-center .wordmark { display: none; }
     }
 
     @media (max-width: 600px) {
@@ -629,6 +651,19 @@
      HEADER
 ══════════════════════════════════ -->
 <header>
+  <div id="particles-js"></div>
+
+  <!-- SVG gradient definition for social icons -->
+  <svg width="0" height="0" style="position:absolute">
+    <defs>
+      <linearGradient id="icon-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stop-color="#5eead4"/>
+        <stop offset="50%" stop-color="#38bdf8"/>
+        <stop offset="100%" stop-color="#818cf8"/>
+      </linearGradient>
+    </defs>
+  </svg>
+
   <!-- Top bar: social icons centered -->
   <div class="header-top">
     <div class="social-links">
@@ -675,8 +710,7 @@
     </div>
 
     <div class="nav-center">
-      <img src="https://psinetlab.wordpress.com/wp-content/uploads/2025/01/logos-2.png" alt="PsiNet LAB" onerror="this.style.display='none'" />
-      <span class="wordmark"><span>PsiNet</span><span>LAB</span></span>
+      <img src="assets/images/logo.png" alt="PsiNet LAB" onerror="this.style.display='none'" />
     </div>
 
     <div class="nav-right">
@@ -999,12 +1033,84 @@
 
   document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
 
-  // Header shrink on scroll
+  // Header background on scroll
   const header = document.querySelector('header');
   window.addEventListener('scroll', () => {
-    header.style.borderBottomColor = window.scrollY > 50
-      ? 'rgba(94,234,212,.25)'
-      : 'rgba(94,234,212,.15)';
+    header.classList.toggle('scrolled', window.scrollY > 50);
+  });
+</script>
+
+<script src="assets/js/particles.min.js"></script>
+<script>
+  particlesJS("particles-js", {
+    "particles": {
+      "number": {
+        "value": 80,
+        "density": {
+          "enable": true,
+          "value_area": 800
+        }
+      },
+      "color": {
+        "value": "#58a6ff"
+      },
+      "shape": {
+        "type": "circle"
+      },
+      "opacity": {
+        "value": 0.5,
+        "random": false
+      },
+      "size": {
+        "value": 4,
+        "random": true,
+        "anim": {
+          "enable": true,
+          "speed": 5,
+          "size_min": 0.1,
+          "sync": false
+        }
+      },
+      "line_linked": {
+        "enable": true,
+        "distance": 150,
+        "color": "#58a6ff",
+        "opacity": 0.2,
+        "width": 1
+      },
+      "move": {
+        "enable": true,
+        "speed": 2,
+        "direction": "none",
+        "random": false,
+        "straight": false,
+        "out_mode": "out",
+        "bounce": false
+      }
+    },
+    "interactivity": {
+      "detect_on": "window",
+      "events": {
+        "onhover": {
+          "enable": true,
+          "mode": "grab"
+        },
+        "onclick": {
+          "enable": true,
+          "mode": "push"
+        },
+        "resize": true
+      },
+      "modes": {
+        "grab": {
+          "distance": 200,
+          "line_linked": {
+            "opacity": 0.6
+          }
+        }
+      }
+    },
+    "retina_detect": true
   });
 </script>
 
