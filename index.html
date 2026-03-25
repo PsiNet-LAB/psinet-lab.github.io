@@ -4,6 +4,9 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>PsiNet LAB – Ciencia conectada para el desarrollo</title>
+  <link rel="icon" type="image/x-icon" href="favicon.ico" />
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/images/favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="192x192" href="assets/images/favicon-192x192.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Lora:ital,wght@0,400;0,500;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
@@ -134,7 +137,7 @@
       align-items: center;
       gap: .15rem;
     }
-    .nav-center img { height: 50px; }
+    .nav-center img { height: 80px; }
 
     nav.main-nav a {
       font-size: .82rem;
@@ -282,6 +285,34 @@
       border: 1px solid var(--border);
     }
     .btn-outline:hover { border-color: var(--teal); background: rgba(94,234,212,.06); }
+
+    /* ── CTA ANIMATED BUTTONS ── */
+    .cta-btns .btn {
+      font-size: .95rem;
+      padding: 1rem 2rem;
+      border-radius: 8px;
+      transition: all .35s cubic-bezier(.4,0,.2,1);
+    }
+    .cta-btns .btn-primary {
+      box-shadow: 0 0 15px rgba(94,234,212,.35), 0 0 30px rgba(94,234,212,.15);
+      animation: ctaPulse 2.5s ease-in-out infinite;
+    }
+    .cta-btns .btn-primary:hover {
+      transform: translateY(-4px) scale(1.05);
+      box-shadow: 0 0 25px rgba(94,234,212,.5), 0 0 50px rgba(94,234,212,.25);
+    }
+    .cta-btns .btn-primary:active {
+      transform: translateY(-1px) scale(.98);
+    }
+    .cta-btns .btn-outline:hover {
+      border-color: var(--teal);
+      background: rgba(94,234,212,.1);
+      transform: translateY(-4px) scale(1.05);
+      box-shadow: 0 0 20px rgba(94,234,212,.2);
+    }
+    .cta-btns .btn-outline:active {
+      transform: translateY(-1px) scale(.98);
+    }
 
     /* ── CEO SECTION ── */
     .ceo-section {
@@ -594,6 +625,10 @@
     @keyframes scrollDot {
       0%,100% { transform: translateY(0); opacity: 1; }
       80%      { transform: translateY(14px); opacity: 0; }
+    }
+    @keyframes ctaPulse {
+      0%, 100% { box-shadow: 0 0 15px rgba(94,234,212,.35), 0 0 30px rgba(94,234,212,.15); }
+      50%      { box-shadow: 0 0 25px rgba(94,234,212,.55), 0 0 50px rgba(94,234,212,.3); }
     }
 
     .reveal {
@@ -919,9 +954,9 @@
     <h2>Nos encantaría conectar con investigadores de todo el mundo</h2>
     <p>Creemos en la colaboración global para crear un impacto positivo juntos.</p>
     <div class="cta-btns">
-      <a href="https://psinetlab.wordpress.com/publicaciones/" target="_blank" class="btn btn-primary">Investigación →</a>
-      <a href="https://psinetlab.wordpress.com/proyectos/" target="_blank" class="btn btn-outline">Proyectos →</a>
-      <a href="https://psinetlab.wordpress.com/contacto/" target="_blank" class="btn btn-outline">Aplica →</a>
+      <a href="#blog" class="btn btn-primary">Investigación →</a>
+      <a href="#proyectos" class="btn btn-outline">Proyectos →</a>
+      <a href="#bienvenida" class="btn btn-outline">Conócenos →</a>
     </div>
   </div>
 </section>
