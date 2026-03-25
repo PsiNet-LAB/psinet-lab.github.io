@@ -193,27 +193,6 @@
         radial-gradient(ellipse 60% 40% at 20% 80%, rgba(94,234,212,.06) 0%, transparent 60%);
     }
 
-    .hero-cover {
-      position: absolute; inset: 0;
-      background-image: url('https://psinetlab.wordpress.com/wp-content/uploads/2025/01/cover.png');
-      background-size: cover;
-      background-position: center top;
-      opacity: .55;
-      filter: saturate(.8);
-    }
-
-    /* Constellation dots */
-    .constellation {
-      position: absolute; inset: 0;
-      background-image:
-        radial-gradient(circle, rgba(94,234,212,.5) 1px, transparent 1px),
-        radial-gradient(circle, rgba(94,234,212,.3) 1px, transparent 1px);
-      background-size: 80px 80px, 40px 40px;
-      background-position: 0 0, 20px 20px;
-      opacity: .15;
-      pointer-events: none;
-    }
-
     .hero-content { position: relative; z-index: 2; max-width: 900px; }
 
     .hero h1 {
@@ -651,8 +630,6 @@
      HEADER
 ══════════════════════════════════ -->
 <header>
-  <div id="particles-js"></div>
-
   <!-- SVG gradient definition for social icons -->
   <svg width="0" height="0" style="position:absolute">
     <defs>
@@ -727,9 +704,8 @@
      HERO
 ══════════════════════════════════ -->
 <section class="hero">
+  <div id="particles-js"></div>
   <div class="hero-bg"></div>
-  <div class="hero-cover"></div>
-  <div class="constellation"></div>
 
   <div class="hero-content">
     <h1><span class="hero-line">Ciencia</span><span class="hero-line">Conectada para</span><span class="hero-line">el Desarrollo</span></h1>
