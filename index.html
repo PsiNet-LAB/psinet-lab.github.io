@@ -58,7 +58,7 @@
     .header-top {
       display: flex;
       align-items: center;
-      justify-content: space-between;
+      justify-content: center;
       padding: .6rem 2.5rem;
       border-bottom: 1px solid var(--border);
     }
@@ -78,35 +78,38 @@
 
     .social-links svg { width: 16px; height: 16px; fill: currentColor; }
 
-    .header-logo {
-      position: absolute; left: 50%; transform: translateX(-50%);
-      display: flex; align-items: center; gap: .75rem;
-    }
-    .header-logo img { height: 38px; }
-
-    .header-logo .wordmark {
-      font-family: 'Syne', sans-serif;
-      font-weight: 800;
-      font-size: 1.1rem;
-      color: var(--white);
-      letter-spacing: -.02em;
-    }
-
-    .header-nav-right {
-      display: flex; gap: 1.5rem; align-items: center;
-      font-size: .82rem;
-      font-family: 'DM Sans', sans-serif;
-      font-weight: 500;
-      color: var(--muted);
-    }
-    .header-nav-right a:hover { color: var(--teal); }
-
     nav.main-nav {
+      position: relative;
       display: flex;
       align-items: center;
-      justify-content: flex-start;
-      gap: 2rem;
+      justify-content: space-between;
       padding: .65rem 2.5rem;
+    }
+
+    .nav-left, .nav-right {
+      display: flex;
+      gap: 2rem;
+      align-items: center;
+    }
+
+    .nav-center {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: .15rem;
+    }
+    .nav-center img { height: 38px; }
+    .nav-center .wordmark {
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: .85rem;
+      color: var(--white);
+      letter-spacing: .02em;
+      text-align: center;
+      line-height: 1.15;
     }
 
     nav.main-nav a {
@@ -171,8 +174,8 @@
       background-image: url('https://psinetlab.wordpress.com/wp-content/uploads/2025/01/cover.png');
       background-size: cover;
       background-position: center top;
-      opacity: .18;
-      filter: saturate(.4) blur(1px);
+      opacity: .55;
+      filter: saturate(.8);
     }
 
     /* Constellation dots */
@@ -189,39 +192,14 @@
 
     .hero-content { position: relative; z-index: 2; max-width: 900px; }
 
-    .hero-eyebrow {
-      display: inline-block;
-      font-size: .75rem;
-      font-family: 'DM Sans', sans-serif;
-      letter-spacing: .2em;
-      text-transform: uppercase;
-      color: var(--teal);
-      border: 1px solid var(--border);
-      padding: .3rem 1rem;
-      border-radius: 100px;
-      margin-bottom: 2rem;
-      animation: fadeUp .8s ease both;
-    }
-
     .hero h1 {
-      font-family: 'Syne', sans-serif;
-      font-weight: 800;
-      font-size: clamp(2.8rem, 7vw, 6rem);
-      line-height: 1.05;
-      letter-spacing: -.04em;
+      font-family: 'Lora', serif;
+      font-weight: 400;
+      font-size: clamp(2.8rem, 7vw, 5.5rem);
+      line-height: 1.15;
+      letter-spacing: -.01em;
       color: var(--white);
       animation: fadeUp .8s .15s ease both;
-    }
-    .hero h1 span { color: var(--teal); }
-
-    .hero-sub {
-      margin-top: 1.5rem;
-      font-family: 'Lora', serif;
-      font-size: 1.2rem;
-      color: var(--muted);
-      max-width: 560px;
-      margin-inline: auto;
-      animation: fadeUp .8s .3s ease both;
     }
 
     .hero-scroll {
@@ -229,25 +207,16 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: .5rem;
+      gap: .3rem;
       color: var(--muted);
-      font-size: .75rem;
-      letter-spacing: .15em;
-      text-transform: uppercase;
+      font-size: .85rem;
+      font-family: 'Lora', serif;
+      letter-spacing: .08em;
       animation: fadeUp .8s .45s ease both;
     }
-    .scroll-arrow {
-      width: 24px; height: 40px;
-      border: 2px solid var(--border);
-      border-radius: 100px;
-      display: flex; justify-content: center; align-items: flex-start;
-      padding-top: 6px;
-    }
-    .scroll-dot {
-      width: 4px; height: 8px;
-      background: var(--teal);
-      border-radius: 100px;
-      animation: scrollDot 1.8s ease infinite;
+    .hero-scroll .scroll-arrow-simple {
+      font-size: 1.2rem;
+      line-height: 1;
     }
 
     /* ── SECTION COMMONS ── */
@@ -637,16 +606,17 @@
       .blog-grid { grid-template-columns: 1fr 1fr; }
       .footer-grid { grid-template-columns: 1fr 1fr; }
       .header-top { padding: .6rem 1.2rem; }
-      nav.main-nav { padding: .55rem 1.2rem; gap: 1.2rem; overflow-x: auto; }
+      nav.main-nav { padding: .55rem 1.2rem; }
+      .nav-left, .nav-right { gap: 1rem; }
       section { padding: 4rem 1.5rem; }
-      .header-logo .wordmark { display: none; }
+      .nav-center .wordmark { display: none; }
     }
 
     @media (max-width: 600px) {
       .ethos-grid { grid-template-columns: 1fr; }
       .blog-grid { grid-template-columns: 1fr; }
       .footer-grid { grid-template-columns: 1fr; gap: 2rem; }
-      .header-nav-right { display: none; }
+      .nav-right { display: none; }
       .hero h1 { font-size: 2.5rem; }
     }
   </style>
@@ -657,8 +627,8 @@
      HEADER
 ══════════════════════════════════ -->
 <header>
+  <!-- Top bar: social icons centered -->
   <div class="header-top">
-    <!-- Social icons left -->
     <div class="social-links">
       <a href="https://www.facebook.com/psinetlab.of" target="_blank" aria-label="Facebook">
         <svg viewBox="0 0 24 24"><path d="M22 12A10 10 0 1 0 12 22v-7.09H9.27V12H12V9.8c0-2.7 1.6-4.19 4.07-4.19 1.18 0 2.41.21 2.41.21v2.65h-1.36c-1.34 0-1.75.83-1.75 1.68V12h2.98l-.48 2.91H15.37V22A10 10 0 0 0 22 12z"/></svg>
@@ -679,39 +649,40 @@
         <svg viewBox="0 0 24 24"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
       </a>
     </div>
-
-    <!-- Center logo -->
-    <div class="header-logo">
-      <img src="https://psinetlab.wordpress.com/wp-content/uploads/2025/01/logos-2.png" alt="PsiNet LAB" onerror="this.style.display='none'" />
-      <span class="wordmark">PsiNet LAB</span>
-    </div>
-
-    <!-- Right nav -->
-    <div class="header-nav-right">
-      <a href="#blog">Blog</a>
-      <a href="#contacto">Contacto</a>
-      <a href="#apoyanos" class="btn btn-outline" style="padding:.45rem 1rem;font-size:.75rem;">Apóyanos</a>
-    </div>
   </div>
 
+  <!-- Main nav: left items | center logo | right items -->
   <nav class="main-nav">
-    <a href="#miembros">Miembros</a>
-    <div class="nav-dropdown">
-      <a href="#investigaciones">Investigaciones ▾</a>
-      <div class="dropdown-menu">
-        <a href="#lineas">Líneas de Investigación</a>
-        <a href="#publicaciones">Publicaciones</a>
+    <div class="nav-left">
+      <a href="#miembros">Miembros</a>
+      <div class="nav-dropdown">
+        <a href="#investigaciones">Investigaciones ▾</a>
+        <div class="dropdown-menu">
+          <a href="#lineas">Líneas de Investigación</a>
+          <a href="#publicaciones">Publicaciones</a>
+        </div>
+      </div>
+      <div class="nav-dropdown">
+        <a href="#proyectos">Proyectos ▾</a>
+        <div class="dropdown-menu">
+          <a href="#bienestar">BienEstar</a>
+          <a href="#escool">PsiNet EsCool</a>
+          <a href="#mente">La Ciencia de la Mente</a>
+        </div>
       </div>
     </div>
-    <div class="nav-dropdown">
-      <a href="#proyectos">Proyectos ▾</a>
-      <div class="dropdown-menu">
-        <a href="#bienestar">BienEstar</a>
-        <a href="#escool">PsiNet EsCool</a>
-        <a href="#mente">La Ciencia de la Mente</a>
-      </div>
+
+    <div class="nav-center">
+      <img src="https://psinetlab.wordpress.com/wp-content/uploads/2025/01/logos-2.png" alt="PsiNet LAB" onerror="this.style.display='none'" />
+      <span class="wordmark">PsiNet<br/>LAB</span>
     </div>
-    <a href="#colaboraciones">Colaboraciones</a>
+
+    <div class="nav-right">
+      <a href="#blog">Blog</a>
+      <a href="#contacto">Contacto</a>
+      <a href="#apoyanos">Apóyanos</a>
+      <a href="#colaboraciones">Colaboraciones</a>
+    </div>
   </nav>
 </header>
 
@@ -725,14 +696,10 @@
   <div class="constellation"></div>
 
   <div class="hero-content">
-    <div class="hero-eyebrow">Laboratorio de Investigación Psicológica</div>
-    <h1>Ciencia <span>Conectada</span><br/>para el Desarrollo</h1>
-    <p class="hero-sub">
-      Transformamos el conocimiento psicológico en acciones que mejoren vidas.
-    </p>
+    <h1>Ciencia<br/>Conectada para<br/>el Desarrollo</h1>
     <div class="hero-scroll">
-      <div class="scroll-arrow"><div class="scroll-dot"></div></div>
       Explorar
+      <span class="scroll-arrow-simple">↓</span>
     </div>
   </div>
 </section>
