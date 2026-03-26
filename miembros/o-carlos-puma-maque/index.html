@@ -269,6 +269,31 @@
       margin-bottom: 1.5rem;
     }
 
+    .social-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .8rem;
+      margin-top: .5rem;
+    }
+    .social-link {
+      display: inline-flex;
+      align-items: center;
+      gap: .5rem;
+      background: rgba(94,234,212,.08);
+      border: 1px solid var(--border);
+      color: var(--teal);
+      font-size: .82rem;
+      font-weight: 500;
+      padding: .5rem 1.2rem;
+      border-radius: 8px;
+      letter-spacing: .02em;
+      transition: all .2s;
+    }
+    .social-link:hover {
+      background: rgba(94,234,212,.15);
+      border-color: var(--teal);
+    }
+
     /* ── FOOTER ── */
     footer {
       border-top: 1px solid var(--border);
@@ -397,21 +422,30 @@
       <div class="profile-content">
         <div class="profile-card reveal" style="transition-delay:.1s">
           <h3>Sobre</h3>
-          <p>Miembro Investigador en PsiNet LAB. Contribuye al desarrollo de investigaciones orientadas a generar impacto positivo en comunidades y políticas públicas.</p>
+          <p>Carlos Puma Maque holds a bachelor's degree in Psychology from the National University of San Agustín de Arequipa (UNSA), where he is currently completing his graduation through the publication of his article titled Psychometric Properties of the Collective Moral Disengagement Scale in the Classroom among Peruvian Adolescents. Over the past year, he has produced several publications and is a researcher at Psinet Lab. He is currently pursuing his master's degree at UNSA, furthering his expertise and interest in quantitative and qualitative analysis, as well as in methodologies related to psychometrics and network analysis.</p>
         </div>
 
         <div class="profile-card reveal" style="transition-delay:.18s">
           <h3>Áreas de interés</h3>
           <div class="interest-tags">
-              <span class="interest-tag">Políticas públicas</span>
-              <span class="interest-tag">Psicología social</span>
-              <span class="interest-tag">Impacto comunitario</span>
+              <span class="interest-tag">Quantitative analysis</span>
+              <span class="interest-tag">Qualitative analysis</span>
+              <span class="interest-tag">Psychometrics</span>
+              <span class="interest-tag">Network analysis</span>
           </div>
         </div>
 
         <div class="profile-card reveal" style="transition-delay:.26s">
           <h3>Afiliación</h3>
           <p>Miembro de PsiNet LAB — Laboratorio de investigación psicológica dedicado a generar conocimiento científico innovador, utilizando métodos avanzados y fundamentados en la teoría de la complejidad para contribuir al entendimiento del comportamiento humano.</p>
+        </div>
+
+        <div class="profile-card reveal" style="transition-delay:.34s">
+          <h3>Links</h3>
+          <div class="social-links">
+            <a href="https://www.linkedin.com/in/oscar-carlos-puma-maque-47386b23a" target="_blank" rel="noopener" class="social-link">LinkedIn</a>
+            <a href="https://typecard.com/04fdf78b" target="_blank" rel="noopener" class="social-link">Typecard</a>
+          </div>
         </div>
       </div>
     </div>
