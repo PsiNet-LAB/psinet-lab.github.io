@@ -127,6 +127,30 @@
       letter-spacing: 0;
     }
     .dropdown-menu a:hover { background: rgba(94,234,212,.06); color: var(--teal); }
+    /* Nested submenu */
+    .dropdown-submenu { position: relative; }
+    .dropdown-submenu > a { display: flex; justify-content: space-between; align-items: center; }
+    .dropdown-submenu:hover > .dropdown-submenu-menu { display: flex; }
+    .dropdown-submenu-menu {
+      display: none;
+      flex-direction: column;
+      position: absolute;
+      top: 0;
+      left: 100%;
+      background: var(--deep);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: .5rem 0;
+      min-width: 180px;
+      z-index: 101;
+    }
+    .dropdown-submenu-menu a {
+      padding: .5rem 1.2rem;
+      font-size: .8rem;
+      text-transform: none;
+      letter-spacing: 0;
+    }
+    .dropdown-submenu-menu a:hover { background: rgba(94,234,212,.06); color: var(--teal); }
 
     /* ── SECTION COMMONS ── */
     section { padding: 6rem 2.5rem; }
@@ -315,6 +339,13 @@
           <a href="../../">Investigaciones</a>
           <a href="../">Líneas de Investigación</a>
           <a href="../../publicaciones/">Publicaciones</a>
+          <div class="dropdown-submenu">
+            <a href="../../programas/">Programas ▸</a>
+            <div class="dropdown-submenu-menu">
+              <a href="../../programas/bienestar/">BienEstar</a>
+              <a href="../../programas/espacio-mental/">Espacio Mental</a>
+            </div>
+          </div>
         </div>
       </div>
       <div class="nav-dropdown">
