@@ -507,42 +507,14 @@
       animation: logoBreathe 4s ease-in-out infinite;
     }
 
-    /* ─ Honeycomb Overlay ─ */
-    .honeycomb-grid {
+    /* ─ Honeycomb Canvas Overlay ─ */
+    .honeycomb-canvas {
       position: absolute;
       inset: 0;
       z-index: 1;
-      pointer-events: none;
-      overflow: hidden;
-    }
-
-    .honeycomb-grid.interactive {
       pointer-events: auto;
-    }
-
-    .hex-cell {
-      position: absolute;
-      width: 40px;
-      height: 46px;
-      clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
-      background: rgba(94,234,212,.0);
-      border: none;
-      transition: background .5s ease, box-shadow .5s ease;
-      will-change: background;
-    }
-
-    .hex-cell.breathing {
-      animation: hexBreathe 4s ease-in-out infinite;
-    }
-
-    .hex-cell.active {
-      background: rgba(94,234,212,.18);
-      transition: background .15s ease;
-    }
-
-    @keyframes hexBreathe {
-      0%, 100% { background: rgba(94,234,212,.0); }
-      50%      { background: rgba(94,234,212,.06); }
+      width: 100%;
+      height: 100%;
     }
 
     @keyframes logoBreathe {
@@ -1081,7 +1053,7 @@
 
       <!-- Logo Card -->
       <div class="bento-card bento-logo reveal" style="transition-delay:.15s">
-        <div class="honeycomb-grid" id="honeycomb-grid"></div>
+        <canvas class="honeycomb-canvas" id="honeycomb-canvas"></canvas>
         <img
           src="assets/images/logos/logo-new-tl.png"
           alt="PsiNet LAB Logo"
@@ -1335,77 +1307,251 @@
     header.classList.toggle('scrolled', window.scrollY > 50);
   });
 
-  // ─ Honeycomb breathing grid on logo card ─
+  // ─ Canvas honeycomb breathing grid on logo card ─
   (function initHoneycomb() {
-    const grid = document.getElementById('honeycomb-grid');
-    if (!grid) return;
+    var canvas = document.getElementById('honeycomb-canvas');
+    if (!canvas) return;
 
-    const card = grid.closest('.bento-logo');
-    const hexW = 40, hexH = 46;
-    const colOffset = hexW * 0.75;
-    const rowOffset = hexH;
+    var ctx = canvas.getContext('2d');
+    var card = canvas.closest('.bento-logo');
+    var dpr = window.devicePixelRatio || 1;
+
+    // Hex geometry
+    var hexRadius = 20;
+    var hexH = hexRadius * 2;
+    var hexW = Math.sqrt(3) * hexRadius;
+    var colOffset = hexW;
+    var rowOffset = hexH * 0.75;
+
+    // Animation constants
+    var MOUSE_GLOW_RADIUS = 80;
+    var MAX_CELL_BRIGHTNESS = 0.45;
+    var PULSE_RING_WIDTH = 30;
+
+    // State
+    var cells = [];
+    var mouse = { x: -999, y: -999, active: false };
+    var pulses = [];
+    var centerX = 0, centerY = 0;
+    var time = 0;
+
+    // Pulse spawner timing
+    var nextPulseTime = 2;
+
+    function hexPath(cx, cy, r) {
+      ctx.beginPath();
+      for (var i = 0; i < 6; i++) {
+        var angle = Math.PI / 6 + i * Math.PI / 3;
+        var hx = cx + r * Math.cos(angle);
+        var hy = cy + r * Math.sin(angle);
+        if (i === 0) ctx.moveTo(hx, hy);
+        else ctx.lineTo(hx, hy);
+      }
+      ctx.closePath();
+    }
 
     function buildGrid() {
-      grid.innerHTML = '';
-      const w = card.offsetWidth;
-      const h = card.offsetHeight;
-      const cols = Math.ceil(w / colOffset) + 1;
-      const rows = Math.ceil(h / rowOffset) + 2;
+      var w = card.offsetWidth;
+      var h = card.offsetHeight;
+      canvas.width = w * dpr;
+      canvas.height = h * dpr;
+      canvas.style.width = w + 'px';
+      canvas.style.height = h + 'px';
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
 
-      for (let col = 0; col < cols; col++) {
-        for (let row = 0; row < rows; row++) {
-          const hex = document.createElement('div');
-          hex.className = 'hex-cell breathing';
-          const x = col * colOffset;
-          const y = row * rowOffset + (col % 2 === 1 ? rowOffset / 2 : 0);
-          hex.style.left = x + 'px';
-          hex.style.top = y + 'px';
-          // Deterministic stagger based on position for consistent breathing
-          hex.style.animationDelay = (((col * 7 + row * 3) % 20) * 0.2).toFixed(1) + 's';
-          hex.dataset.cx = (x + hexW / 2).toString();
-          hex.dataset.cy = (y + hexH / 2).toString();
-          grid.appendChild(hex);
+      centerX = w / 2;
+      centerY = h / 2;
+
+      cells = [];
+      var cols = Math.ceil(w / colOffset) + 2;
+      var rows = Math.ceil(h / rowOffset) + 2;
+
+      for (var col = -1; col < cols; col++) {
+        for (var row = -1; row < rows; row++) {
+          var cx = col * colOffset + (row % 2 === 1 ? colOffset / 2 : 0);
+          var cy = row * rowOffset;
+          var distCenter = Math.sqrt((cx - centerX) * (cx - centerX) + (cy - centerY) * (cy - centerY));
+          cells.push({
+            x: cx,
+            y: cy,
+            distCenter: distCenter,
+            phase: (col * 0.7 + row * 0.4) % (Math.PI * 2),
+            brightness: 0,
+            edgeBrightness: 0
+          });
         }
       }
-      grid.classList.add('interactive');
+    }
+
+    function spawnPulse() {
+      // Random pulse from a random cell or from center
+      var origin;
+      if (Math.random() < 0.5) {
+        origin = { x: centerX, y: centerY };
+      } else {
+        var idx = Math.floor(Math.random() * cells.length);
+        origin = { x: cells[idx].x, y: cells[idx].y };
+      }
+      pulses.push({
+        x: origin.x,
+        y: origin.y,
+        radius: 0,
+        maxRadius: Math.max(canvas.width, canvas.height) / dpr * 0.6,
+        speed: 80 + Math.random() * 40,
+        life: 1
+      });
+    }
+
+    function render(dt) {
+      time += dt;
+      var w = canvas.width / dpr;
+      var h = canvas.height / dpr;
+
+      ctx.clearRect(0, 0, w, h);
+
+      // Update pulses
+      nextPulseTime -= dt;
+      if (nextPulseTime <= 0) {
+        spawnPulse();
+        nextPulseTime = 3 + Math.random() * 4;
+      }
+
+      for (var p = pulses.length - 1; p >= 0; p--) {
+        pulses[p].radius += pulses[p].speed * dt;
+        pulses[p].life = 1 - (pulses[p].radius / pulses[p].maxRadius);
+        if (pulses[p].life <= 0) {
+          pulses.splice(p, 1);
+        }
+      }
+
+      // Compute brightness for each cell
+      var maxDist = Math.sqrt(centerX * centerX + centerY * centerY);
+
+      for (var i = 0; i < cells.length; i++) {
+        var cell = cells[i];
+
+        // Base breathing: concentric waves from center
+        var wavePhase = cell.distCenter * 0.02 - time * 1.2 + cell.phase * 0.3;
+        var breath = (Math.sin(wavePhase) * 0.5 + 0.5) * 0.08;
+
+        // Secondary slower wave
+        var wave2 = (Math.sin(cell.distCenter * 0.01 + time * 0.5) * 0.5 + 0.5) * 0.03;
+
+        // Pulse brightness
+        var pulseBright = 0;
+        for (var p = 0; p < pulses.length; p++) {
+          var pulse = pulses[p];
+          var distToPulse = Math.sqrt(
+            (cell.x - pulse.x) * (cell.x - pulse.x) +
+            (cell.y - pulse.y) * (cell.y - pulse.y)
+          );
+          var ringDist = Math.abs(distToPulse - pulse.radius);
+          if (ringDist < PULSE_RING_WIDTH) {
+            var ringIntensity = (1 - ringDist / PULSE_RING_WIDTH) * pulse.life * 0.25;
+            pulseBright = Math.max(pulseBright, ringIntensity);
+          }
+        }
+
+        // Mouse proximity
+        var mouseBright = 0;
+        if (mouse.active) {
+          var distMouse = Math.sqrt(
+            (cell.x - mouse.x) * (cell.x - mouse.x) +
+            (cell.y - mouse.y) * (cell.y - mouse.y)
+          );
+          if (distMouse < MOUSE_GLOW_RADIUS) {
+            mouseBright = (1 - distMouse / MOUSE_GLOW_RADIUS) * 0.3;
+          }
+        }
+
+        cell.brightness = Math.min(breath + wave2 + pulseBright + mouseBright, MAX_CELL_BRIGHTNESS);
+        cell.edgeBrightness = Math.min(0.04 + breath * 0.6 + pulseBright * 1.5 + mouseBright * 0.8, 0.5);
+      }
+
+      // Draw hex cells - fill
+      for (var i = 0; i < cells.length; i++) {
+        var cell = cells[i];
+        if (cell.brightness > 0.005) {
+          hexPath(cell.x, cell.y, hexRadius - 1);
+          ctx.fillStyle = 'rgba(94,234,212,' + cell.brightness.toFixed(3) + ')';
+          ctx.fill();
+        }
+      }
+
+      // Draw hex edges
+      ctx.lineWidth = 0.5;
+      for (var i = 0; i < cells.length; i++) {
+        var cell = cells[i];
+        if (cell.edgeBrightness > 0.01) {
+          hexPath(cell.x, cell.y, hexRadius - 1);
+          ctx.strokeStyle = 'rgba(94,234,212,' + cell.edgeBrightness.toFixed(3) + ')';
+          ctx.stroke();
+        }
+      }
+
+      // Connection lines between bright neighboring cells
+      ctx.lineWidth = 0.4;
+      var brightThreshold = 0.1;
+      var connectionDist = colOffset * 1.3;
+      for (var i = 0; i < cells.length; i++) {
+        if (cells[i].brightness < brightThreshold) continue;
+        for (var j = i + 1; j < cells.length; j++) {
+          if (cells[j].brightness < brightThreshold) continue;
+          var dx = cells[i].x - cells[j].x;
+          var dy = cells[i].y - cells[j].y;
+          var d = Math.sqrt(dx * dx + dy * dy);
+          if (d < connectionDist) {
+            var alpha = Math.min(cells[i].brightness, cells[j].brightness) * 0.5;
+            ctx.beginPath();
+            ctx.moveTo(cells[i].x, cells[i].y);
+            ctx.lineTo(cells[j].x, cells[j].y);
+            ctx.strokeStyle = 'rgba(94,234,212,' + alpha.toFixed(3) + ')';
+            ctx.stroke();
+          }
+        }
+      }
+
+      // Center glow
+      var glowSize = 60 + Math.sin(time * 1.2) * 10;
+      var grd = ctx.createRadialGradient(centerX, centerY, 0, centerX, centerY, glowSize);
+      grd.addColorStop(0, 'rgba(94,234,212,0.06)');
+      grd.addColorStop(1, 'rgba(94,234,212,0)');
+      ctx.fillStyle = grd;
+      ctx.fillRect(centerX - glowSize, centerY - glowSize, glowSize * 2, glowSize * 2);
     }
 
     buildGrid();
 
-    // Debounced resize handler
-    var resizeTimer;
-    window.addEventListener('resize', function() {
-      clearTimeout(resizeTimer);
-      resizeTimer = setTimeout(buildGrid, 200);
-    });
+    // Animation loop
+    var lastTime = performance.now();
+    function loop(now) {
+      var dt = Math.min((now - lastTime) / 1000, 0.1);
+      lastTime = now;
+      render(dt);
+      requestAnimationFrame(loop);
+    }
+    requestAnimationFrame(loop);
 
-    // Activate cells near cursor
-    let activeHexes = [];
+    // Mouse events
     card.addEventListener('mousemove', function(e) {
-      const rect = card.getBoundingClientRect();
-      const mx = e.clientX - rect.left;
-      const my = e.clientY - rect.top;
-      const radius = 60;
-
-      // Clear previously active
-      activeHexes.forEach(function(h) { h.classList.remove('active'); });
-      activeHexes = [];
-
-      const cells = grid.querySelectorAll('.hex-cell');
-      cells.forEach(function(hex) {
-        const cx = parseFloat(hex.dataset.cx);
-        const cy = parseFloat(hex.dataset.cy);
-        const dist = Math.sqrt((mx - cx) * (mx - cx) + (my - cy) * (my - cy));
-        if (dist < radius) {
-          hex.classList.add('active');
-          activeHexes.push(hex);
-        }
-      });
+      var rect = card.getBoundingClientRect();
+      mouse.x = e.clientX - rect.left;
+      mouse.y = e.clientY - rect.top;
+      mouse.active = true;
     });
 
     card.addEventListener('mouseleave', function() {
-      activeHexes.forEach(function(h) { h.classList.remove('active'); });
-      activeHexes = [];
+      mouse.active = false;
+    });
+
+    // Resize
+    var resizeTimer;
+    window.addEventListener('resize', function() {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(function() {
+        dpr = window.devicePixelRatio || 1;
+        buildGrid();
+      }, 200);
     });
   })();
 </script>
