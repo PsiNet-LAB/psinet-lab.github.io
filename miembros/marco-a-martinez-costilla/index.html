@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Marco A. Martínez Costilla – PsiNet LAB</title>
+  <link rel="icon" type="image/x-icon" href="../../favicon.ico" />
+  <link rel="icon" type="image/png" sizes="32x32" href="../../assets/images/favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="192x192" href="../../assets/images/favicon-192x192.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Lora:ital,wght@0,400;0,500;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --navy:   #0b1629;
+      --deep:   #0d1f3c;
+      --mid:    #112240;
+      --teal:   #5eead4;
+      --teal2:  #2dd4bf;
+      --gold:   #f0b429;
+      --white:  #f0f4ff;
+      --muted:  #8892b0;
+      --card-bg:#0e1f38;
+      --border: rgba(94,234,212,.15);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--navy);
+      color: var(--white);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 16px;
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    body::before {
+      content: '';
+      position: fixed; inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 9999;
+      opacity: .5;
+    }
+
+    /* ── HEADER ── */
+    header {
+      position: fixed; top: 0; left: 0; right: 0;
+      z-index: 1000;
+      background: rgba(11,22,41,.85);
+      backdrop-filter: blur(20px);
+    }
+
+    nav.main-nav {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: .65rem 2.5rem;
+      z-index: 1;
+    }
+
+    .nav-left, .nav-right {
+      display: flex;
+      gap: 2rem;
+      align-items: center;
+    }
+
+    .nav-center {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: .15rem;
+    }
+    .nav-center img { height: 80px; }
+
+    nav.main-nav a {
+      font-size: .82rem;
+      font-family: 'DM Sans', sans-serif;
+      color: var(--muted);
+      font-weight: 500;
+      letter-spacing: .02em;
+      text-transform: uppercase;
+      transition: color .2s;
+      position: relative;
+    }
+    nav.main-nav a:hover { color: var(--white); }
+    nav.main-nav a.active { color: var(--teal); }
+
+    .nav-dropdown { position: relative; }
+    .nav-dropdown:hover .dropdown-menu { display: flex; }
+    .dropdown-menu {
+      display: none;
+      flex-direction: column;
+      position: absolute; top: 100%; left: 0;
+      background: var(--deep);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: .5rem 0;
+      min-width: 200px;
+      gap: 0;
+      z-index: 100;
+    }
+    .dropdown-menu a {
+      padding: .5rem 1.2rem;
+      font-size: .8rem;
+      text-transform: none;
+      letter-spacing: 0;
+    }
+    .dropdown-menu a:hover { background: rgba(94,234,212,.06); color: var(--teal); }
+
+    /* ── SECTION COMMONS ── */
+    section { padding: 6rem 2.5rem; }
+    .container { max-width: 1160px; margin: 0 auto; }
+
+    .section-tag {
+      font-size: .7rem;
+      letter-spacing: .22em;
+      text-transform: uppercase;
+      color: var(--teal);
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 600;
+      margin-bottom: 1rem;
+    }
+
+    h2.section-title {
+      font-family: 'Syne', sans-serif;
+      font-weight: 700;
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      letter-spacing: -.03em;
+      line-height: 1.15;
+      color: var(--white);
+      margin-bottom: 1.5rem;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: .5rem;
+      font-size: .82rem;
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 600;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      padding: .75rem 1.6rem;
+      border-radius: 6px;
+      border: none;
+      cursor: pointer;
+      transition: all .2s;
+    }
+    .btn-outline {
+      background: transparent;
+      color: var(--teal);
+      border: 1px solid var(--border);
+    }
+    .btn-outline:hover { border-color: var(--teal); background: rgba(94,234,212,.06); }
+
+    /* ── PAGE HEADER ── */
+    .page-section { padding-top: 10rem; }
+
+    /* ── PROFILE LAYOUT ── */
+    .profile-layout {
+      display: grid;
+      grid-template-columns: 320px 1fr;
+      gap: 3rem;
+      align-items: start;
+    }
+
+    .profile-sidebar {
+      position: sticky;
+      top: 8rem;
+    }
+
+    .profile-photo {
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      object-fit: cover;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      display: block;
+      margin-bottom: 1.5rem;
+    }
+
+    .profile-name {
+      font-family: 'Syne', sans-serif;
+      font-weight: 700;
+      font-size: 1.6rem;
+      color: var(--white);
+      letter-spacing: -.02em;
+      margin-bottom: .3rem;
+    }
+
+    .profile-role {
+      font-size: .95rem;
+      color: var(--teal);
+      font-weight: 500;
+      margin-bottom: .3rem;
+    }
+
+    .profile-area {
+      font-size: .8rem;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: .1em;
+      margin-bottom: 1.5rem;
+    }
+
+    .profile-back {
+      display: inline-flex;
+      align-items: center;
+      gap: .4rem;
+      font-size: .82rem;
+      font-weight: 600;
+      color: var(--teal);
+      letter-spacing: .04em;
+      text-transform: uppercase;
+      transition: gap .2s;
+    }
+    .profile-back:hover { gap: .7rem; }
+
+    /* ── PROFILE CONTENT ── */
+    .profile-content h3 {
+      font-family: 'Syne', sans-serif;
+      font-weight: 600;
+      font-size: 1.15rem;
+      color: var(--white);
+      margin-bottom: .75rem;
+      margin-top: 2rem;
+    }
+    .profile-content h3:first-child { margin-top: 0; }
+
+    .profile-content p {
+      font-size: .92rem;
+      color: var(--muted);
+      line-height: 1.8;
+      margin-bottom: 1rem;
+    }
+
+    .interest-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .6rem;
+      margin-top: .5rem;
+    }
+
+    .interest-tag {
+      background: rgba(94,234,212,.08);
+      border: 1px solid var(--border);
+      color: var(--teal);
+      font-size: .78rem;
+      font-weight: 500;
+      padding: .4rem 1rem;
+      border-radius: 20px;
+      letter-spacing: .02em;
+    }
+
+    .profile-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 2rem;
+      margin-bottom: 1.5rem;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 4rem 2.5rem 2rem;
+    }
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 3rem;
+      max-width: 1160px;
+      margin: 0 auto 2rem;
+    }
+    .footer-col h4 {
+      font-family: 'Syne', sans-serif;
+      font-weight: 600;
+      font-size: .9rem;
+      color: var(--white);
+      margin-bottom: 1.2rem;
+    }
+    .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: .6rem; }
+    .footer-col ul li a {
+      font-size: .85rem;
+      color: var(--muted);
+      transition: color .2s;
+    }
+    .footer-col ul li a:hover { color: var(--teal); }
+
+    .footer-bottom {
+      border-top: 1px solid var(--border);
+      padding-top: 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+      max-width: 1160px;
+      margin: 0 auto;
+    }
+    .footer-bottom p { font-size: .8rem; color: var(--muted); }
+    .footer-bottom-links { display: flex; gap: 1.5rem; }
+    .footer-bottom-links a { font-size: .8rem; color: var(--muted); }
+    .footer-bottom-links a:hover { color: var(--teal); }
+
+    /* ── ANIMATIONS ── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity .7s ease, transform .7s ease;
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      .profile-layout {
+        grid-template-columns: 1fr;
+      }
+      .profile-sidebar {
+        position: static;
+        max-width: 360px;
+      }
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+      nav.main-nav { padding: .55rem 1.2rem; }
+      .nav-left, .nav-right { gap: 1rem; }
+      section { padding: 4rem 1.5rem; }
+      .page-section { padding-top: 8rem; }
+    }
+
+    @media (max-width: 600px) {
+      .profile-sidebar { max-width: 100%; }
+      .footer-grid { grid-template-columns: 1fr; gap: 2rem; }
+      .nav-right { display: none; }
+      .page-section { padding-top: 7rem; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <nav class="main-nav">
+    <div class="nav-left">
+      <a href="../../miembros/" class="active">Miembros</a>
+      <div class="nav-dropdown">
+        <a href="../../index.html#investigaciones">Investigaciones ▾</a>
+        <div class="dropdown-menu">
+          <a href="../../index.html#lineas">Líneas de Investigación</a>
+          <a href="../../index.html#publicaciones">Publicaciones</a>
+        </div>
+      </div>
+      <div class="nav-dropdown">
+        <a href="../../index.html#proyectos">Proyectos ▾</a>
+        <div class="dropdown-menu">
+          <a href="../../index.html#bienestar">BienEstar</a>
+          <a href="../../index.html#escool">PsiNet EsCool</a>
+          <a href="../../index.html#mente">La Ciencia de la Mente</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="nav-center">
+      <a href="../../index.html">
+        <img src="../../assets/images/logo.png" alt="PsiNet LAB" onerror="this.style.display='none'" />
+      </a>
+    </div>
+
+    <div class="nav-right">
+      <a href="../../blog/">Blog</a>
+      <a href="https://psinetlab.wordpress.com/contacto/" target="_blank">Contacto</a>
+      <a href="../../index.html#apoyanos">Apóyanos</a>
+      <a href="../../index.html#colaboraciones">Colaboraciones</a>
+    </div>
+  </nav>
+</header>
+
+<section class="page-section">
+  <div class="container">
+
+    <div class="profile-layout">
+      <div class="profile-sidebar reveal">
+        <img class="profile-photo" src="../../assets/images/photos/Marco-sd.jpg" alt="Marco A. Martínez Costilla" />
+        <h1 class="profile-name">Marco A. Martínez Costilla</h1>
+        <p class="profile-role">Miembro Investigador</p>
+        <p class="profile-area">Investigación</p>
+        <a href="../../miembros/" class="profile-back">← Todos los miembros</a>
+      </div>
+
+      <div class="profile-content">
+        <div class="profile-card reveal" style="transition-delay:.1s">
+          <h3>Sobre</h3>
+          <p>Miembro Investigador en PsiNet LAB. Contribuye al desarrollo de investigación psicológica innovadora, aplicando métodos científicos al estudio del comportamiento humano.</p>
+        </div>
+
+        <div class="profile-card reveal" style="transition-delay:.18s">
+          <h3>Áreas de interés</h3>
+          <div class="interest-tags">
+              <span class="interest-tag">Investigación psicológica</span>
+              <span class="interest-tag">Metodología científica</span>
+              <span class="interest-tag">Comportamiento humano</span>
+          </div>
+        </div>
+
+        <div class="profile-card reveal" style="transition-delay:.26s">
+          <h3>Afiliación</h3>
+          <p>Miembro de PsiNet LAB — Laboratorio de investigación psicológica dedicado a generar conocimiento científico innovador, utilizando métodos avanzados y fundamentados en la teoría de la complejidad para contribuir al entendimiento del comportamiento humano.</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<footer>
+  <div class="footer-grid">
+    <div class="footer-col">
+      <h4>PsiNet LAB</h4>
+      <p style="font-size:.85rem;color:var(--muted);max-width:280px;line-height:1.75;">
+        Ciencia psicológica conectada para el desarrollo humano y comunitario.
+      </p>
+    </div>
+
+    <div class="footer-col">
+      <h4>Proyectos</h4>
+      <ul>
+        <li><a href="https://psinetlab.wordpress.com/bienestar/" target="_blank">BienEstar</a></li>
+        <li><a href="https://psinetlab.wordpress.com/psinet-escool/" target="_blank">PsiNet EsCool</a></li>
+        <li><a href="https://psinetlab.wordpress.com/la-ciencia-de-la-mente/" target="_blank">La Ciencia de la Mente</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-col">
+      <h4>Investigación</h4>
+      <ul>
+        <li><a href="https://psinetlab.wordpress.com/publicaciones/" target="_blank">Publicaciones</a></li>
+        <li><a href="https://psinetlab.wordpress.com/lineas-de-investigacion/" target="_blank">Líneas de Investigación</a></li>
+        <li><a href="../../miembros/">Miembros</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-col">
+      <h4>Organización</h4>
+      <ul>
+        <li><a href="https://psinetlab.wordpress.com/contacto/" target="_blank">Contacto</a></li>
+        <li><a href="https://psinetlab.wordpress.com/apoyanos/" target="_blank">Apóyanos</a></li>
+        <li><a href="../../blog/">Blog</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <p>&copy; 2025 PsiNet LAB. Todos los derechos reservados.</p>
+    <div class="footer-bottom-links">
+      <a href="#">Cookie Policy</a>
+      <a href="#">Privacy Policy</a>
+      <a href="#">Policies</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Scroll reveal
+  var revealObserver = new IntersectionObserver(function(entries) {
+    entries.forEach(function(e) {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        revealObserver.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12 });
+
+  document.querySelectorAll('.reveal').forEach(function(el) {
+    revealObserver.observe(el);
+  });
+</script>
+
+</body>
+</html>
