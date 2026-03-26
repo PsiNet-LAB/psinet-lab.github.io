@@ -269,6 +269,31 @@
       margin-bottom: 1.5rem;
     }
 
+    .social-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .8rem;
+      margin-top: .5rem;
+    }
+    .social-link {
+      display: inline-flex;
+      align-items: center;
+      gap: .5rem;
+      background: rgba(94,234,212,.08);
+      border: 1px solid var(--border);
+      color: var(--teal);
+      font-size: .82rem;
+      font-weight: 500;
+      padding: .5rem 1.2rem;
+      border-radius: 8px;
+      letter-spacing: .02em;
+      transition: all .2s;
+    }
+    .social-link:hover {
+      background: rgba(94,234,212,.15);
+      border-color: var(--teal);
+    }
+
     /* ── FOOTER ── */
     footer {
       border-top: 1px solid var(--border);
@@ -397,21 +422,31 @@
       <div class="profile-content">
         <div class="profile-card reveal" style="transition-delay:.1s">
           <h3>Sobre</h3>
-          <p>Miembro Investigadora en PsiNet LAB. Participa activamente en proyectos que promueven el bienestar y el desarrollo humano sostenible.</p>
+          <p>Andrea Camila Moreno Tapia is a licensed psychologist from the Pontificia Universidad Católica del Perú (PUCP) and is currently pursuing a second specialization in Clinical Psychoanalytic Intervention at the same university. At PsiNet Lab, she works as a researcher with a particular interest in human identity processes, the psyche-soma relationship, and artistic and cultural manifestations. In addition to her background in psychology, she has a strong interest in performing arts and movement improvisation as potential psychotherapeutic tools. Through her research, she aims to contribute to their development.</p>
         </div>
 
         <div class="profile-card reveal" style="transition-delay:.18s">
           <h3>Áreas de interés</h3>
           <div class="interest-tags">
-              <span class="interest-tag">Desarrollo humano</span>
-              <span class="interest-tag">Bienestar psicológico</span>
-              <span class="interest-tag">Proyectos sociales</span>
+              <span class="interest-tag">Human identity processes</span>
+              <span class="interest-tag">Psyche-soma relationship</span>
+              <span class="interest-tag">Artistic and cultural manifestations</span>
+              <span class="interest-tag">Performing arts</span>
+              <span class="interest-tag">Movement improvisation</span>
           </div>
         </div>
 
         <div class="profile-card reveal" style="transition-delay:.26s">
           <h3>Afiliación</h3>
           <p>Miembro de PsiNet LAB — Laboratorio de investigación psicológica dedicado a generar conocimiento científico innovador, utilizando métodos avanzados y fundamentados en la teoría de la complejidad para contribuir al entendimiento del comportamiento humano.</p>
+        </div>
+
+        <div class="profile-card reveal" style="transition-delay:.34s">
+          <h3>Links</h3>
+          <div class="social-links">
+            <a href="https://www.linkedin.com/in/andrea-camila-moreno-tapia-642a34320/" target="_blank" rel="noopener" class="social-link">LinkedIn</a>
+            <a href="https://typecard.com/397f472f" target="_blank" rel="noopener" class="social-link">Typecard</a>
+          </div>
         </div>
       </div>
     </div>

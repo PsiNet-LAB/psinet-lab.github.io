@@ -269,6 +269,31 @@
       margin-bottom: 1.5rem;
     }
 
+    .social-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .8rem;
+      margin-top: .5rem;
+    }
+    .social-link {
+      display: inline-flex;
+      align-items: center;
+      gap: .5rem;
+      background: rgba(94,234,212,.08);
+      border: 1px solid var(--border);
+      color: var(--teal);
+      font-size: .82rem;
+      font-weight: 500;
+      padding: .5rem 1.2rem;
+      border-radius: 8px;
+      letter-spacing: .02em;
+      transition: all .2s;
+    }
+    .social-link:hover {
+      background: rgba(94,234,212,.15);
+      border-color: var(--teal);
+    }
+
     /* ── FOOTER ── */
     footer {
       border-top: 1px solid var(--border);
@@ -397,21 +422,33 @@
       <div class="profile-content">
         <div class="profile-card reveal" style="transition-delay:.1s">
           <h3>Sobre</h3>
-          <p>Miembro Investigador en PsiNet LAB. Participa en proyectos de investigación científica orientados al entendimiento del comportamiento humano y su mejora.</p>
+          <p>Dennis Calle Huánuco holds a Bachelor's degree in Psychology, having graduated from César Vallejo University (UCV) with a thesis on individual differences in aversive personality traits and underlying emotions. He is currently completing a Master's degree in Higher Education at UCV, focusing on the heterogeneity and impact of higher educational characteristics and the sociology of education.</p>
+          <p>He is a current member of PsinetLab, where he develops projects in psychology at both theoretical and practical levels, with a strong focus on quantitative methods and high-impact publications using innovative methodologies including network analysis. He is an officially active psychology researcher at the National Council of Science and Technology (CONCYTEC), with publications in clinical psychology, including studies on personality. He has served as a peer reviewer for the journal Interpersona. Additionally he has presented on the state of psychopathology in Latin America, having been invited by the International Society for the Study of Individual Differences, of which he is a member. His main research interests include positive psychology, educational differences, personality, aversive personality traits, nuances of violence, clinical comorbidities in psychology, and cross-cultural psychological research.</p>
         </div>
 
         <div class="profile-card reveal" style="transition-delay:.18s">
           <h3>Áreas de interés</h3>
           <div class="interest-tags">
-              <span class="interest-tag">Psicología del comportamiento</span>
-              <span class="interest-tag">Neurociencia</span>
-              <span class="interest-tag">Métodos de investigación</span>
+              <span class="interest-tag">Positive psychology</span>
+              <span class="interest-tag">Educational differences</span>
+              <span class="interest-tag">Personality</span>
+              <span class="interest-tag">Aversive personality traits</span>
+              <span class="interest-tag">Violence</span>
+              <span class="interest-tag">Clinical comorbidities</span>
+              <span class="interest-tag">Cross-cultural research</span>
           </div>
         </div>
 
         <div class="profile-card reveal" style="transition-delay:.26s">
           <h3>Afiliación</h3>
           <p>Miembro de PsiNet LAB — Laboratorio de investigación psicológica dedicado a generar conocimiento científico innovador, utilizando métodos avanzados y fundamentados en la teoría de la complejidad para contribuir al entendimiento del comportamiento humano.</p>
+        </div>
+
+        <div class="profile-card reveal" style="transition-delay:.34s">
+          <h3>Links</h3>
+          <div class="social-links">
+            <a href="https://typecard.com/85c33944" target="_blank" rel="noopener" class="social-link">Typecard</a>
+          </div>
         </div>
       </div>
     </div>

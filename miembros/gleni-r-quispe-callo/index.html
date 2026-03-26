@@ -269,6 +269,31 @@
       margin-bottom: 1.5rem;
     }
 
+    .social-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .8rem;
+      margin-top: .5rem;
+    }
+    .social-link {
+      display: inline-flex;
+      align-items: center;
+      gap: .5rem;
+      background: rgba(94,234,212,.08);
+      border: 1px solid var(--border);
+      color: var(--teal);
+      font-size: .82rem;
+      font-weight: 500;
+      padding: .5rem 1.2rem;
+      border-radius: 8px;
+      letter-spacing: .02em;
+      transition: all .2s;
+    }
+    .social-link:hover {
+      background: rgba(94,234,212,.15);
+      border-color: var(--teal);
+    }
+
     /* ── FOOTER ── */
     footer {
       border-top: 1px solid var(--border);
@@ -397,21 +422,36 @@
       <div class="profile-content">
         <div class="profile-card reveal" style="transition-delay:.1s">
           <h3>Sobre</h3>
-          <p>Miembro Investigadora en PsiNet LAB. Contribuye al avance de la investigación psicológica aplicada y participa en proyectos de impacto social.</p>
+          <p>Gleni Quispe Callo holds a Bachelor's degree in Psychology from the Universidad Nacional de San Agustín de Arequipa (Peru), where she graduated with honors for her thesis on adolescent depression, demonstrating an early commitment to addressing mental health challenges during critical developmental stages. She furthered her education by obtaining a Master's degree in University Teaching from the Universidad San Martín de Porres, where her work expanded to include the study of anxiety and cognitive processes, focusing on how these psychological factors impact learning and decision-making in educational settings. Currently, she is a member of PsiNet LAB (Peru). She also holds a position as an Investigator at the Psychometrics Research Center at Universidad César Vallejo.</p>
+          <p>Is a Renacyt researcher at Peru's National Council of Science and Technology (CONCYTEC). She also serves as an Editorial Assistant for INTERACCIONES: Journal of Family, Clinical and Health Psychology, contributing to the editorial process of high-impact publications in the fields of clinical psychology and public health. Additionally, she is an honorary member of the Centro de Estudios e Investigación en Neurociencias y Neuropsicología (CEINPS), reflecting her dedication to advancing knowledge in neuroscience. Her interdisciplinary interests are also evident through her membership in the Chemistry Student Society for Research-Peru. As a Research Assistant at the Neuroscience Laboratory of the Universidad Católica San Pablo.</p>
+          <p>Her primary research interests include neuroscience and positive psychology, with a particular focus on anxiety, cognitive processes, decision-making, mild cognitive impairment, augmented reality, and EEG studies.</p>
         </div>
 
         <div class="profile-card reveal" style="transition-delay:.18s">
           <h3>Áreas de interés</h3>
           <div class="interest-tags">
-              <span class="interest-tag">Investigación social</span>
-              <span class="interest-tag">Psicología comunitaria</span>
-              <span class="interest-tag">Intervención psicosocial</span>
+              <span class="interest-tag">Neuroscience</span>
+              <span class="interest-tag">Positive psychology</span>
+              <span class="interest-tag">Anxiety</span>
+              <span class="interest-tag">Cognitive processes</span>
+              <span class="interest-tag">Decision-making</span>
+              <span class="interest-tag">Mild cognitive impairment</span>
+              <span class="interest-tag">Augmented reality</span>
+              <span class="interest-tag">EEG studies</span>
           </div>
         </div>
 
         <div class="profile-card reveal" style="transition-delay:.26s">
           <h3>Afiliación</h3>
           <p>Miembro de PsiNet LAB — Laboratorio de investigación psicológica dedicado a generar conocimiento científico innovador, utilizando métodos avanzados y fundamentados en la teoría de la complejidad para contribuir al entendimiento del comportamiento humano.</p>
+        </div>
+
+        <div class="profile-card reveal" style="transition-delay:.34s">
+          <h3>Links</h3>
+          <div class="social-links">
+            <a href="https://www.linkedin.com/in/gleni-quispe-callo-4677941ba" target="_blank" rel="noopener" class="social-link">LinkedIn</a>
+            <a href="https://typecard.com/5cb7d345" target="_blank" rel="noopener" class="social-link">Typecard</a>
+          </div>
         </div>
       </div>
     </div>

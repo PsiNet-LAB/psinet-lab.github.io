@@ -269,6 +269,31 @@
       margin-bottom: 1.5rem;
     }
 
+    .social-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .8rem;
+      margin-top: .5rem;
+    }
+    .social-link {
+      display: inline-flex;
+      align-items: center;
+      gap: .5rem;
+      background: rgba(94,234,212,.08);
+      border: 1px solid var(--border);
+      color: var(--teal);
+      font-size: .82rem;
+      font-weight: 500;
+      padding: .5rem 1.2rem;
+      border-radius: 8px;
+      letter-spacing: .02em;
+      transition: all .2s;
+    }
+    .social-link:hover {
+      background: rgba(94,234,212,.15);
+      border-color: var(--teal);
+    }
+
     /* ── FOOTER ── */
     footer {
       border-top: 1px solid var(--border);
@@ -397,21 +422,31 @@
       <div class="profile-content">
         <div class="profile-card reveal" style="transition-delay:.1s">
           <h3>Sobre</h3>
-          <p>Chief People Officer de PsiNet LAB. Dirige la gestión del talento humano y el bienestar de los miembros de la organización, promoviendo un entorno colaborativo y de desarrollo profesional.</p>
+          <p>Valery Yanira Marín Jaimes holds a Bachelor's degree in Psychology from the Pontifical Catholic University of Peru. As a member of PsiNet LAB (Peru), she actively contributes to research projects in positive psychology and acceptance and commitment therapy. Her research interests focus on applying quantitative methods to areas such as positive psychology, health and well-being, and education and technology, with a particular interest in learning and motivation within educational contexts. Valery is dedicated to advancing innovative methodologies that bridge psychology and technology, supporting progress in psychological sciences through her work at PsiNet LAB.</p>
         </div>
 
         <div class="profile-card reveal" style="transition-delay:.18s">
           <h3>Áreas de interés</h3>
           <div class="interest-tags">
-              <span class="interest-tag">Bienestar comunitario</span>
-              <span class="interest-tag">Psicología clínica</span>
-              <span class="interest-tag">Investigación cualitativa</span>
+              <span class="interest-tag">Quantitative methods</span>
+              <span class="interest-tag">Positive psychology</span>
+              <span class="interest-tag">Health and well-being</span>
+              <span class="interest-tag">Education and technology</span>
+              <span class="interest-tag">Learning and motivation</span>
           </div>
         </div>
 
         <div class="profile-card reveal" style="transition-delay:.26s">
           <h3>Afiliación</h3>
           <p>Miembro de PsiNet LAB — Laboratorio de investigación psicológica dedicado a generar conocimiento científico innovador, utilizando métodos avanzados y fundamentados en la teoría de la complejidad para contribuir al entendimiento del comportamiento humano.</p>
+        </div>
+
+        <div class="profile-card reveal" style="transition-delay:.34s">
+          <h3>Links</h3>
+          <div class="social-links">
+            <a href="https://www.linkedin.com/in/valery-marin-45a351229/" target="_blank" rel="noopener" class="social-link">LinkedIn</a>
+            <a href="https://typecard.com/e9f90b3d" target="_blank" rel="noopener" class="social-link">Typecard</a>
+          </div>
         </div>
       </div>
     </div>
