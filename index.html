@@ -1544,6 +1544,21 @@
       mouse.active = false;
     });
 
+    // Click ripple effect
+    card.addEventListener('click', function(e) {
+      var rect = card.getBoundingClientRect();
+      var cx = e.clientX - rect.left;
+      var cy = e.clientY - rect.top;
+      pulses.push({
+        x: cx,
+        y: cy,
+        radius: 0,
+        maxRadius: Math.max(card.offsetWidth, card.offsetHeight) * 0.8,
+        speed: 120,
+        life: 1
+      });
+    });
+
     // Resize
     var resizeTimer;
     window.addEventListener('resize', function() {
