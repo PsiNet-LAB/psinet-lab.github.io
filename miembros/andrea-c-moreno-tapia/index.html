@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Proyectos Sociales – PsiNet LAB</title>
-  <link rel="icon" type="image/x-icon" href="../favicon.ico" />
-  <link rel="icon" type="image/png" sizes="32x32" href="../assets/images/favicon-32x32.png" />
-  <link rel="icon" type="image/png" sizes="192x192" href="../assets/images/favicon-192x192.png" />
+  <title>Andrea C. Moreno Tapia – PsiNet LAB</title>
+  <link rel="icon" type="image/x-icon" href="../../favicon.ico" />
+  <link rel="icon" type="image/png" sizes="32x32" href="../../assets/images/favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="192x192" href="../../assets/images/favicon-192x192.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Lora:ital,wght@0,400;0,500;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
@@ -55,25 +55,13 @@
       backdrop-filter: blur(20px);
     }
 
-    .header-top,
-    nav.main-nav {
-      position: relative;
-      z-index: 1;
-    }
-
-    .header-top {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: .6rem 2.5rem;
-    }
-
     nav.main-nav {
       position: relative;
       display: flex;
       align-items: center;
       justify-content: space-between;
       padding: .65rem 2.5rem;
+      z-index: 1;
     }
 
     .nav-left, .nav-right {
@@ -173,70 +161,112 @@
       border: 1px solid var(--border);
     }
     .btn-outline:hover { border-color: var(--teal); background: rgba(94,234,212,.06); }
-    .btn-primary {
-      background: var(--teal);
-      color: var(--navy);
-    }
-    .btn-primary:hover { background: var(--teal2); }
 
     /* ── PAGE HEADER ── */
     .page-section { padding-top: 10rem; }
-    .page-header {
-      display: flex; align-items: flex-end; justify-content: space-between;
-      margin-bottom: 3rem;
-    }
 
-    /* ── PROJECT CARDS ── */
-    .projects-grid {
+    /* ── PROFILE LAYOUT ── */
+    .profile-layout {
       display: grid;
-      grid-template-columns: repeat(1, 1fr);
-      gap: 2rem;
+      grid-template-columns: 320px 1fr;
+      gap: 3rem;
+      align-items: start;
     }
 
-    .project-card {
-      background: var(--card-bg);
+    .profile-sidebar {
+      position: sticky;
+      top: 8rem;
+    }
+
+    .profile-photo {
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      object-fit: cover;
+      border-radius: 12px;
       border: 1px solid var(--border);
-      border-radius: 10px;
-      overflow: hidden;
-      transition: border-color .25s, transform .25s;
-      display: grid;
-      grid-template-columns: 120px 1fr;
+      display: block;
+      margin-bottom: 1.5rem;
+    }
+
+    .profile-name {
+      font-family: 'Syne', sans-serif;
+      font-weight: 700;
+      font-size: 1.6rem;
+      color: var(--white);
+      letter-spacing: -.02em;
+      margin-bottom: .3rem;
+    }
+
+    .profile-role {
+      font-size: .95rem;
+      color: var(--teal);
+      font-weight: 500;
+      margin-bottom: .3rem;
+    }
+
+    .profile-area {
+      font-size: .8rem;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: .1em;
+      margin-bottom: 1.5rem;
+    }
+
+    .profile-back {
+      display: inline-flex;
       align-items: center;
+      gap: .4rem;
+      font-size: .82rem;
+      font-weight: 600;
+      color: var(--teal);
+      letter-spacing: .04em;
+      text-transform: uppercase;
+      transition: gap .2s;
     }
-    .project-card:hover { border-color: rgba(94,234,212,.4); transform: translateY(-4px); }
+    .profile-back:hover { gap: .7rem; }
 
-    .project-card-icon {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 3rem;
-      height: 100%;
-      background: linear-gradient(135deg, var(--mid) 0%, #1a3260 100%);
-    }
-
-    .project-card-body {
-      padding: 2rem;
-    }
-
-    .project-card h3 {
+    /* ── PROFILE CONTENT ── */
+    .profile-content h3 {
       font-family: 'Syne', sans-serif;
       font-weight: 600;
-      font-size: 1.2rem;
-      letter-spacing: -.01em;
+      font-size: 1.15rem;
       color: var(--white);
-      margin-bottom: .5rem;
+      margin-bottom: .75rem;
+      margin-top: 2rem;
     }
+    .profile-content h3:first-child { margin-top: 0; }
 
-    .project-card p {
-      font-size: .9rem;
+    .profile-content p {
+      font-size: .92rem;
       color: var(--muted);
-      line-height: 1.75;
+      line-height: 1.8;
       margin-bottom: 1rem;
     }
 
-    .project-card .btn {
-      font-size: .75rem;
-      padding: .6rem 1.2rem;
+    .interest-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .6rem;
+      margin-top: .5rem;
+    }
+
+    .interest-tag {
+      background: rgba(94,234,212,.08);
+      border: 1px solid var(--border);
+      color: var(--teal);
+      font-size: .78rem;
+      font-weight: 500;
+      padding: .4rem 1rem;
+      border-radius: 20px;
+      letter-spacing: .02em;
+    }
+
+    .profile-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 2rem;
+      margin-bottom: 1.5rem;
     }
 
     /* ── FOOTER ── */
@@ -292,8 +322,14 @@
 
     /* ── RESPONSIVE ── */
     @media (max-width: 900px) {
+      .profile-layout {
+        grid-template-columns: 1fr;
+      }
+      .profile-sidebar {
+        position: static;
+        max-width: 360px;
+      }
       .footer-grid { grid-template-columns: 1fr 1fr; }
-      .header-top { padding: .6rem 1.2rem; }
       nav.main-nav { padding: .55rem 1.2rem; }
       .nav-left, .nav-right { gap: 1rem; }
       section { padding: 4rem 1.5rem; }
@@ -301,12 +337,10 @@
     }
 
     @media (max-width: 600px) {
-      .project-card { grid-template-columns: 1fr; }
-      .project-card-icon { height: 100px; }
+      .profile-sidebar { max-width: 100%; }
       .footer-grid { grid-template-columns: 1fr; gap: 2rem; }
       .nav-right { display: none; }
       .page-section { padding-top: 7rem; }
-      .page-header { flex-direction: column; align-items: flex-start; gap: 1rem; }
     }
   </style>
 </head>
@@ -315,97 +349,73 @@
 <header>
   <nav class="main-nav">
     <div class="nav-left">
-      <a href="../miembros/">Miembros</a>
+      <a href="../../miembros/" class="active">Miembros</a>
       <div class="nav-dropdown">
-        <a href="../index.html#investigaciones">Investigaciones ▾</a>
+        <a href="../../index.html#investigaciones">Investigaciones ▾</a>
         <div class="dropdown-menu">
-          <a href="../index.html#lineas">Líneas de Investigación</a>
-          <a href="../index.html#publicaciones">Publicaciones</a>
+          <a href="../../index.html#lineas">Líneas de Investigación</a>
+          <a href="../../index.html#publicaciones">Publicaciones</a>
         </div>
       </div>
       <div class="nav-dropdown">
-        <a href="../index.html#proyectos">Proyectos ▾</a>
+        <a href="../../index.html#proyectos">Proyectos ▾</a>
         <div class="dropdown-menu">
-          <a href="../index.html#bienestar">BienEstar</a>
-          <a href="../index.html#escool">PsiNet EsCool</a>
-          <a href="../index.html#mente">La Ciencia de la Mente</a>
+          <a href="../../index.html#bienestar">BienEstar</a>
+          <a href="../../index.html#escool">PsiNet EsCool</a>
+          <a href="../../index.html#mente">La Ciencia de la Mente</a>
         </div>
       </div>
     </div>
 
     <div class="nav-center">
-      <a href="../index.html">
-        <img src="../assets/images/logo.png" alt="PsiNet LAB" onerror="this.style.display='none'" />
+      <a href="../../index.html">
+        <img src="../../assets/images/logo.png" alt="PsiNet LAB" onerror="this.style.display='none'" />
       </a>
     </div>
 
     <div class="nav-right">
-      <a href="../blog/">Blog</a>
+      <a href="../../blog/">Blog</a>
       <a href="https://psinetlab.wordpress.com/contacto/" target="_blank">Contacto</a>
-      <a href="../index.html#apoyanos">Apóyanos</a>
-      <a href="../index.html#colaboraciones">Colaboraciones</a>
+      <a href="../../index.html#apoyanos">Apóyanos</a>
+      <a href="../../index.html#colaboraciones">Colaboraciones</a>
     </div>
   </nav>
 </header>
 
 <section class="page-section">
   <div class="container">
-    <div class="page-header reveal">
-      <div>
-        <p class="section-tag">Proyectos Sociales</p>
-        <h2 class="section-title" style="margin-bottom:0;">Nuestros proyectos de impacto social</h2>
+
+    <div class="profile-layout">
+      <div class="profile-sidebar reveal">
+        <img class="profile-photo" src="../../assets/images/photos/andrea-sd.jpg" alt="Andrea C. Moreno Tapia" />
+        <h1 class="profile-name">Andrea C. Moreno Tapia</h1>
+        <p class="profile-role">Investigadora</p>
+        <p class="profile-area">Investigación</p>
+        <a href="../../miembros/" class="profile-back">← Todos los miembros</a>
       </div>
-      <a href="../index.html" class="btn btn-outline">← Inicio</a>
+
+      <div class="profile-content">
+        <div class="profile-card reveal" style="transition-delay:.1s">
+          <h3>Sobre</h3>
+          <p>Investigadora en PsiNet LAB. Participa activamente en proyectos que promueven el bienestar y el desarrollo humano sostenible.</p>
+        </div>
+
+        <div class="profile-card reveal" style="transition-delay:.18s">
+          <h3>Áreas de interés</h3>
+          <div class="interest-tags">
+              <span class="interest-tag">Desarrollo humano</span>
+              <span class="interest-tag">Bienestar psicológico</span>
+              <span class="interest-tag">Proyectos sociales</span>
+          </div>
+        </div>
+
+        <div class="profile-card reveal" style="transition-delay:.26s">
+          <h3>Afiliación</h3>
+          <p>Miembro de PsiNet LAB — Laboratorio de investigación psicológica dedicado a generar conocimiento científico innovador, utilizando métodos avanzados y fundamentados en la teoría de la complejidad para contribuir al entendimiento del comportamiento humano.</p>
+        </div>
+      </div>
     </div>
 
-    <p class="reveal" style="font-size:.95rem;color:var(--muted);line-height:1.75;margin-bottom:3rem;max-width:800px;">
-      En PsiNet LAB desarrollamos proyectos sociales que aplican la investigación psicológica
-      para generar un impacto positivo en comunidades. Cada proyecto busca transformar el
-      conocimiento científico en acciones concretas que mejoren la calidad de vida de las personas.
-    </p>
-
-    <div class="projects-grid">
-
-      <div class="project-card reveal">
-        <div class="project-card-icon">🧘</div>
-        <div class="project-card-body">
-          <h3>BienEstar</h3>
-          <p>
-            Proyecto enfocado en promover el bienestar psicológico y emocional en comunidades,
-            desarrollando intervenciones basadas en evidencia científica para mejorar la salud
-            mental y la calidad de vida de las personas.
-          </p>
-          <a href="https://psinetlab.wordpress.com/bienestar/" target="_blank" class="btn btn-primary">Conocer más →</a>
-        </div>
-      </div>
-
-      <div class="project-card reveal" style="transition-delay:.08s">
-        <div class="project-card-icon">🎓</div>
-        <div class="project-card-body">
-          <h3>PsiNet EsCool</h3>
-          <p>
-            Iniciativa educativa que busca acercar la psicología a entornos escolares,
-            proporcionando herramientas y recursos para promover el desarrollo socioemocional
-            de niños y jóvenes en contextos educativos.
-          </p>
-          <a href="https://psinetlab.wordpress.com/psinet-escool/" target="_blank" class="btn btn-primary">Conocer más →</a>
-        </div>
-      </div>
-
-      <div class="project-card reveal" style="transition-delay:.16s">
-        <div class="project-card-icon">🧠</div>
-        <div class="project-card-body">
-          <h3>La Ciencia de la Mente</h3>
-          <p>
-            Proyecto de divulgación científica que tiene como objetivo hacer accesible el
-            conocimiento psicológico al público general, fomentando la comprensión de los
-            procesos mentales y el comportamiento humano.
-          </p>
-          <a href="https://psinetlab.wordpress.com/la-ciencia-de-la-mente/" target="_blank" class="btn btn-primary">Conocer más →</a>
-        </div>
-      </div>
-
-    </div>
   </div>
 </section>
 
@@ -432,7 +442,7 @@
       <ul>
         <li><a href="https://psinetlab.wordpress.com/publicaciones/" target="_blank">Publicaciones</a></li>
         <li><a href="https://psinetlab.wordpress.com/lineas-de-investigacion/" target="_blank">Líneas de Investigación</a></li>
-        <li><a href="../miembros/">Miembros</a></li>
+        <li><a href="../../miembros/">Miembros</a></li>
       </ul>
     </div>
 
@@ -441,7 +451,7 @@
       <ul>
         <li><a href="https://psinetlab.wordpress.com/contacto/" target="_blank">Contacto</a></li>
         <li><a href="https://psinetlab.wordpress.com/apoyanos/" target="_blank">Apóyanos</a></li>
-        <li><a href="../blog/">Blog</a></li>
+        <li><a href="../../blog/">Blog</a></li>
       </ul>
     </div>
   </div>

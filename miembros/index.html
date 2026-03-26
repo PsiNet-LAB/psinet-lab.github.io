@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Proyectos Sociales – PsiNet LAB</title>
+  <title>Miembros – PsiNet LAB</title>
   <link rel="icon" type="image/x-icon" href="../favicon.ico" />
   <link rel="icon" type="image/png" sizes="32x32" href="../assets/images/favicon-32x32.png" />
   <link rel="icon" type="image/png" sizes="192x192" href="../assets/images/favicon-192x192.png" />
@@ -173,11 +173,6 @@
       border: 1px solid var(--border);
     }
     .btn-outline:hover { border-color: var(--teal); background: rgba(94,234,212,.06); }
-    .btn-primary {
-      background: var(--teal);
-      color: var(--navy);
-    }
-    .btn-primary:hover { background: var(--teal2); }
 
     /* ── PAGE HEADER ── */
     .page-section { padding-top: 10rem; }
@@ -186,58 +181,88 @@
       margin-bottom: 3rem;
     }
 
-    /* ── PROJECT CARDS ── */
-    .projects-grid {
+    .page-intro {
+      font-size: .95rem;
+      color: var(--muted);
+      line-height: 1.75;
+      max-width: 700px;
+      margin-bottom: 3rem;
+    }
+
+    /* ── MEMBERS GRID ── */
+    .members-grid {
       display: grid;
-      grid-template-columns: repeat(1, 1fr);
+      grid-template-columns: repeat(3, 1fr);
       gap: 2rem;
     }
 
-    .project-card {
+    .member-card {
       background: var(--card-bg);
       border: 1px solid var(--border);
-      border-radius: 10px;
+      border-radius: 12px;
       overflow: hidden;
-      transition: border-color .25s, transform .25s;
-      display: grid;
-      grid-template-columns: 120px 1fr;
-      align-items: center;
-    }
-    .project-card:hover { border-color: rgba(94,234,212,.4); transform: translateY(-4px); }
-
-    .project-card-icon {
+      transition: border-color .3s, transform .3s, box-shadow .3s;
       display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 3rem;
-      height: 100%;
-      background: linear-gradient(135deg, var(--mid) 0%, #1a3260 100%);
+      flex-direction: column;
+    }
+    .member-card:hover {
+      border-color: rgba(94,234,212,.4);
+      transform: translateY(-6px);
+      box-shadow: 0 20px 40px rgba(0,0,0,.3);
     }
 
-    .project-card-body {
-      padding: 2rem;
+    .member-card-photo {
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      object-fit: cover;
+      display: block;
     }
 
-    .project-card h3 {
-      font-family: 'Syne', sans-serif;
+    .member-card-body {
+      padding: 1.5rem;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .member-card-area {
+      font-size: .65rem;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: var(--teal);
       font-weight: 600;
-      font-size: 1.2rem;
-      letter-spacing: -.01em;
+      margin-bottom: .4rem;
+    }
+
+    .member-card-name {
+      font-family: 'Syne', sans-serif;
+      font-weight: 700;
+      font-size: 1.1rem;
       color: var(--white);
-      margin-bottom: .5rem;
+      margin-bottom: .3rem;
+      letter-spacing: -.01em;
     }
 
-    .project-card p {
-      font-size: .9rem;
+    .member-card-role {
+      font-size: .85rem;
       color: var(--muted);
-      line-height: 1.75;
       margin-bottom: 1rem;
+      line-height: 1.5;
     }
 
-    .project-card .btn {
-      font-size: .75rem;
-      padding: .6rem 1.2rem;
+    .member-card-link {
+      margin-top: auto;
+      font-size: .78rem;
+      font-weight: 600;
+      color: var(--teal);
+      letter-spacing: .04em;
+      text-transform: uppercase;
+      display: inline-flex;
+      align-items: center;
+      gap: .4rem;
+      transition: gap .2s;
     }
+    .member-card:hover .member-card-link { gap: .7rem; }
 
     /* ── FOOTER ── */
     footer {
@@ -292,6 +317,7 @@
 
     /* ── RESPONSIVE ── */
     @media (max-width: 900px) {
+      .members-grid { grid-template-columns: repeat(2, 1fr); }
       .footer-grid { grid-template-columns: 1fr 1fr; }
       .header-top { padding: .6rem 1.2rem; }
       nav.main-nav { padding: .55rem 1.2rem; }
@@ -301,8 +327,7 @@
     }
 
     @media (max-width: 600px) {
-      .project-card { grid-template-columns: 1fr; }
-      .project-card-icon { height: 100px; }
+      .members-grid { grid-template-columns: 1fr; }
       .footer-grid { grid-template-columns: 1fr; gap: 2rem; }
       .nav-right { display: none; }
       .page-section { padding-top: 7rem; }
@@ -315,7 +340,7 @@
 <header>
   <nav class="main-nav">
     <div class="nav-left">
-      <a href="../miembros/">Miembros</a>
+      <a href="../miembros/" class="active">Miembros</a>
       <div class="nav-dropdown">
         <a href="../index.html#investigaciones">Investigaciones ▾</a>
         <div class="dropdown-menu">
@@ -352,59 +377,20 @@
   <div class="container">
     <div class="page-header reveal">
       <div>
-        <p class="section-tag">Proyectos Sociales</p>
-        <h2 class="section-title" style="margin-bottom:0;">Nuestros proyectos de impacto social</h2>
+        <p class="section-tag">Equipo</p>
+        <h2 class="section-title" style="margin-bottom:0;">Nuestros Miembros</h2>
       </div>
       <a href="../index.html" class="btn btn-outline">← Inicio</a>
     </div>
 
-    <p class="reveal" style="font-size:.95rem;color:var(--muted);line-height:1.75;margin-bottom:3rem;max-width:800px;">
-      En PsiNet LAB desarrollamos proyectos sociales que aplican la investigación psicológica
-      para generar un impacto positivo en comunidades. Cada proyecto busca transformar el
-      conocimiento científico en acciones concretas que mejoren la calidad de vida de las personas.
+    <p class="page-intro reveal" style="transition-delay:.06s">
+      Conoce al equipo de investigadores y profesionales que conforman PsiNet LAB. Cada miembro
+      contribuye con su experiencia y pasión al desarrollo de investigación psicológica innovadora
+      y proyectos de impacto social.
     </p>
 
-    <div class="projects-grid">
-
-      <div class="project-card reveal">
-        <div class="project-card-icon">🧘</div>
-        <div class="project-card-body">
-          <h3>BienEstar</h3>
-          <p>
-            Proyecto enfocado en promover el bienestar psicológico y emocional en comunidades,
-            desarrollando intervenciones basadas en evidencia científica para mejorar la salud
-            mental y la calidad de vida de las personas.
-          </p>
-          <a href="https://psinetlab.wordpress.com/bienestar/" target="_blank" class="btn btn-primary">Conocer más →</a>
-        </div>
-      </div>
-
-      <div class="project-card reveal" style="transition-delay:.08s">
-        <div class="project-card-icon">🎓</div>
-        <div class="project-card-body">
-          <h3>PsiNet EsCool</h3>
-          <p>
-            Iniciativa educativa que busca acercar la psicología a entornos escolares,
-            proporcionando herramientas y recursos para promover el desarrollo socioemocional
-            de niños y jóvenes en contextos educativos.
-          </p>
-          <a href="https://psinetlab.wordpress.com/psinet-escool/" target="_blank" class="btn btn-primary">Conocer más →</a>
-        </div>
-      </div>
-
-      <div class="project-card reveal" style="transition-delay:.16s">
-        <div class="project-card-icon">🧠</div>
-        <div class="project-card-body">
-          <h3>La Ciencia de la Mente</h3>
-          <p>
-            Proyecto de divulgación científica que tiene como objetivo hacer accesible el
-            conocimiento psicológico al público general, fomentando la comprensión de los
-            procesos mentales y el comportamiento humano.
-          </p>
-          <a href="https://psinetlab.wordpress.com/la-ciencia-de-la-mente/" target="_blank" class="btn btn-primary">Conocer más →</a>
-        </div>
-      </div>
-
+    <div class="members-grid" id="members-grid">
+      <!-- Rendered dynamically from members-data.js -->
     </div>
   </div>
 </section>
@@ -456,7 +442,31 @@
   </div>
 </footer>
 
+<script src="../assets/js/members-data.js"></script>
 <script>
+  (function renderMembers() {
+    var grid = document.getElementById('members-grid');
+    if (!grid || typeof MEMBERS === 'undefined') return;
+
+    MEMBERS.forEach(function(m, i) {
+      var card = document.createElement('a');
+      card.href = m.slug + '/';
+      card.className = 'member-card reveal';
+      card.style.transitionDelay = (0.08 + i * 0.06) + 's';
+
+      card.innerHTML =
+        '<img class="member-card-photo" src="../assets/images/photos/' + m.photo + '" alt="' + m.name + '" loading="lazy" />' +
+        '<div class="member-card-body">' +
+          '<span class="member-card-area">' + m.area + '</span>' +
+          '<h3 class="member-card-name">' + m.name + '</h3>' +
+          '<p class="member-card-role">' + m.role + '</p>' +
+          '<span class="member-card-link">Ver perfil →</span>' +
+        '</div>';
+
+      grid.appendChild(card);
+    });
+  })();
+
   // Scroll reveal
   var revealObserver = new IntersectionObserver(function(entries) {
     entries.forEach(function(e) {
