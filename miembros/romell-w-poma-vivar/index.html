@@ -162,6 +162,63 @@
     }
     .btn-outline:hover { border-color: var(--teal); background: rgba(94,234,212,.06); }
 
+    .btn-teal {
+      background: var(--teal);
+      color: var(--navy);
+    }
+    .btn-teal:hover { background: var(--teal2); }
+
+    .profile-buttons {
+      display: flex;
+      flex-direction: column;
+      gap: .75rem;
+      margin-top: 1.5rem;
+    }
+    .profile-buttons .btn {
+      justify-content: center;
+      width: 100%;
+    }
+
+    .profile-quote {
+      background: var(--deep);
+      border: 1px solid var(--border);
+      border-left: 3px solid var(--teal);
+      border-radius: 8px;
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+      font-family: 'Lora', serif;
+      font-style: italic;
+      font-size: .95rem;
+      color: var(--white);
+      line-height: 1.8;
+    }
+
+    .social-icons {
+      display: flex;
+      gap: .6rem;
+      margin-top: 1rem;
+    }
+    .social-icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 38px;
+      height: 38px;
+      border-radius: 8px;
+      background: rgba(94,234,212,.08);
+      border: 1px solid var(--border);
+      color: var(--teal);
+      transition: all .2s;
+    }
+    .social-icon:hover {
+      background: rgba(94,234,212,.15);
+      border-color: var(--teal);
+    }
+    .social-icon svg {
+      width: 18px;
+      height: 18px;
+    }
+
     /* ── PAGE HEADER ── */
     .page-section { padding-top: 10rem; }
 
@@ -267,31 +324,6 @@
       border-radius: 12px;
       padding: 2rem;
       margin-bottom: 1.5rem;
-    }
-
-    .social-links {
-      display: flex;
-      flex-wrap: wrap;
-      gap: .8rem;
-      margin-top: .5rem;
-    }
-    .social-link {
-      display: inline-flex;
-      align-items: center;
-      gap: .5rem;
-      background: rgba(94,234,212,.08);
-      border: 1px solid var(--border);
-      color: var(--teal);
-      font-size: .82rem;
-      font-weight: 500;
-      padding: .5rem 1.2rem;
-      border-radius: 8px;
-      letter-spacing: .02em;
-      transition: all .2s;
-    }
-    .social-link:hover {
-      background: rgba(94,234,212,.15);
-      border-color: var(--teal);
     }
 
     /* ── FOOTER ── */
@@ -416,7 +448,10 @@
         <h1 class="profile-name">Romell W. Poma Vivar</h1>
         <p class="profile-role">Miembro Investigador</p>
         <p class="profile-area">Investigación</p>
-        <a href="../../miembros/" class="profile-back">← Todos los miembros</a>
+        <div class="profile-buttons">
+          <a href="https://typecard.com/276fd9b9" target="_blank" class="btn btn-teal">Membresía</a>
+        </div>
+        <a href="../../miembros/" class="profile-back" style="margin-top:1.5rem">← Todos los miembros</a>
       </div>
 
       <div class="profile-content">
@@ -439,13 +474,6 @@
         <div class="profile-card reveal" style="transition-delay:.26s">
           <h3>Afiliación</h3>
           <p>Miembro de PsiNet LAB — Laboratorio de investigación psicológica dedicado a generar conocimiento científico innovador, utilizando métodos avanzados y fundamentados en la teoría de la complejidad para contribuir al entendimiento del comportamiento humano.</p>
-        </div>
-
-        <div class="profile-card reveal" style="transition-delay:.34s">
-          <h3>Links</h3>
-          <div class="social-links">
-            <a href="https://typecard.com/276fd9b9" target="_blank" rel="noopener" class="social-link">Typecard</a>
-          </div>
         </div>
       </div>
     </div>
