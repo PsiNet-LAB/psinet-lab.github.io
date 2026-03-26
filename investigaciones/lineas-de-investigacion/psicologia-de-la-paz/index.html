@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Líneas de Investigación – PsiNet LAB</title>
-  <link rel="icon" type="image/x-icon" href="../../favicon.ico" />
-  <link rel="icon" type="image/png" sizes="32x32" href="../../assets/images/favicon-32x32.png" />
-  <link rel="icon" type="image/png" sizes="192x192" href="../../assets/images/favicon-192x192.png" />
+  <title>Psicología de la Paz – PsiNet LAB</title>
+  <link rel="icon" type="image/x-icon" href="../../../favicon.ico" />
+  <link rel="icon" type="image/png" sizes="32x32" href="../../../assets/images/favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="192x192" href="../../../assets/images/favicon-192x192.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Lora:ital,wght@0,400;0,500;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
@@ -173,11 +173,6 @@
       border: 1px solid var(--border);
     }
     .btn-outline:hover { border-color: var(--teal); background: rgba(94,234,212,.06); }
-    .btn-primary {
-      background: var(--teal);
-      color: var(--navy);
-    }
-    .btn-primary:hover { background: var(--teal2); }
 
     /* ── PAGE HEADER ── */
     .page-section { padding-top: 10rem; }
@@ -186,57 +181,55 @@
       margin-bottom: 3rem;
     }
 
-    /* ── PROJECT CARDS ── */
-    .projects-grid {
-      display: grid;
-      grid-template-columns: repeat(1, 1fr);
-      gap: 2rem;
-    }
-
-    .project-card {
+    /* ── DESCRIPTION CARD ── */
+    .description-card {
       background: var(--card-bg);
       border: 1px solid var(--border);
       border-radius: 10px;
-      overflow: hidden;
-      transition: border-color .25s, transform .25s;
-      display: grid;
-      grid-template-columns: 120px 1fr;
-      align-items: center;
+      padding: 2.5rem;
+      margin-bottom: 3rem;
     }
-    .project-card:hover { border-color: rgba(94,234,212,.4); transform: translateY(-4px); }
-
-    .project-card-icon {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 3rem;
-      height: 100%;
-      background: linear-gradient(135deg, var(--mid) 0%, #1a3260 100%);
-    }
-
-    .project-card-body {
-      padding: 2rem;
-    }
-
-    .project-card h3 {
-      font-family: 'Syne', sans-serif;
-      font-weight: 600;
-      font-size: 1.2rem;
-      letter-spacing: -.01em;
-      color: var(--white);
-      margin-bottom: .5rem;
-    }
-
-    .project-card p {
-      font-size: .9rem;
+    .description-card p {
+      font-size: .95rem;
       color: var(--muted);
-      line-height: 1.75;
+      line-height: 1.85;
+    }
+
+    /* ── FOCUS AREAS GRID ── */
+    .focus-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+    }
+
+    .focus-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 2rem;
+      text-align: center;
+      transition: border-color .25s, transform .25s;
+    }
+    .focus-card:hover { border-color: rgba(94,234,212,.4); transform: translateY(-4px); }
+
+    .focus-card-icon {
+      font-size: 2.5rem;
       margin-bottom: 1rem;
     }
 
-    .project-card .btn {
-      font-size: .75rem;
-      padding: .6rem 1.2rem;
+    .focus-card h3 {
+      font-family: 'Syne', sans-serif;
+      font-weight: 600;
+      font-size: 1.1rem;
+      letter-spacing: -.01em;
+      color: var(--white);
+      margin-bottom: .75rem;
+    }
+
+    .focus-card p {
+      font-size: .88rem;
+      color: var(--muted);
+      line-height: 1.75;
     }
 
     /* ── FOOTER ── */
@@ -298,15 +291,15 @@
       .nav-left, .nav-right { gap: 1rem; }
       section { padding: 4rem 1.5rem; }
       .page-section { padding-top: 8rem; }
+      .focus-grid { grid-template-columns: repeat(2, 1fr); }
     }
 
     @media (max-width: 600px) {
-      .project-card { grid-template-columns: 1fr; }
-      .project-card-icon { height: 100px; }
       .footer-grid { grid-template-columns: 1fr; gap: 2rem; }
       .nav-right { display: none; }
       .page-section { padding-top: 7rem; }
       .page-header { flex-direction: column; align-items: flex-start; gap: 1rem; }
+      .focus-grid { grid-template-columns: 1fr; }
     }
   </style>
 </head>
@@ -315,35 +308,34 @@
 <header>
   <nav class="main-nav">
     <div class="nav-left">
-      <a href="../../miembros/">Miembros</a>
+      <a href="../../../miembros/">Miembros</a>
       <div class="nav-dropdown">
-        <a href="../" class="active">Investigaciones ▾</a>
+        <a href="../../" class="active">Investigaciones ▾</a>
         <div class="dropdown-menu">
-          <a href="./">Líneas de Investigación</a>
-          <a href="../publicaciones/">Publicaciones</a>
+          <a href="../../">Investigaciones</a>
+          <a href="../">Líneas de Investigación</a>
+          <a href="../../publicaciones/">Publicaciones</a>
         </div>
       </div>
       <div class="nav-dropdown">
-        <a href="../../index.html#proyectos">Proyectos ▾</a>
+        <a href="#">Proyectos ▾</a>
         <div class="dropdown-menu">
-          <a href="../../index.html#bienestar">BienEstar</a>
-          <a href="../../index.html#escool">PsiNet EsCool</a>
-          <a href="../../index.html#mente">La Ciencia de la Mente</a>
+          <a href="https://psinetlab.wordpress.com/bienestar/" target="_blank">BienEstar</a>
+          <a href="https://psinetlab.wordpress.com/psinet-escool/" target="_blank">PsiNet EsCool</a>
+          <a href="https://psinetlab.wordpress.com/la-ciencia-de-la-mente/" target="_blank">La Ciencia de la Mente</a>
         </div>
       </div>
     </div>
 
     <div class="nav-center">
-      <a href="../../index.html">
-        <img src="../../assets/images/logo.png" alt="PsiNet LAB" onerror="this.style.display='none'" />
+      <a href="../../../index.html">
+        <img src="../../../assets/images/logo.png" alt="PsiNet LAB" onerror="this.style.display='none'" />
       </a>
     </div>
 
     <div class="nav-right">
-      <a href="../../blog/">Blog</a>
+      <a href="../../../blog/">Blog</a>
       <a href="https://psinetlab.wordpress.com/contacto/" target="_blank">Contacto</a>
-      <a href="../../index.html#apoyanos">Apóyanos</a>
-      <a href="../../index.html#colaboraciones">Colaboraciones</a>
     </div>
   </nav>
 </header>
@@ -352,89 +344,54 @@
   <div class="container">
     <div class="page-header reveal">
       <div>
-        <p class="section-tag">Líneas de Investigación</p>
-        <h2 class="section-title" style="margin-bottom:0;">Nuestras áreas de investigación</h2>
+        <p class="section-tag">Línea de Investigación</p>
+        <h2 class="section-title" style="margin-bottom:0;">Psicología de la Paz</h2>
       </div>
-      <a href="../" class="btn btn-outline">← Investigaciones</a>
+      <a href="../" class="btn btn-outline">← Líneas de Investigación</a>
     </div>
 
     <p class="reveal" style="font-size:.95rem;color:var(--muted);line-height:1.75;margin-bottom:3rem;max-width:800px;">
-      En PsiNet LAB exploramos diversas áreas del conocimiento psicológico a través de líneas
-      de investigación especializadas que integran métodos innovadores y enfoques interdisciplinarios.
+      Comprender los factores psicológicos que influyen en la paz, la violencia y el conflicto, y desarrollar estrategias para promover una cultura de paz.
     </p>
 
-    <div class="projects-grid">
+    <h2 class="section-title reveal" style="font-size:1.5rem;margin-bottom:1.5rem;">Descripción</h2>
+    <div class="description-card reveal">
+      <p>
+        La línea de investigación en Psicología de la Paz de PsiNet LAB se dedica a comprender los factores psicológicos que influyen en la paz, la violencia y el conflicto. A través de la investigación interdisciplinaria, buscamos desarrollar estrategias basadas en evidencia para promover una cultura de paz, estudiar los efectos psicológicos de la violencia y la guerra, y contribuir a la construcción de sociedades más pacíficas y resilientes.
+      </p>
+    </div>
 
-      <div class="project-card reveal">
-        <div class="project-card-icon">🧠</div>
-        <div class="project-card-body">
-          <h3>Neurociencias</h3>
-          <p>
-            Investigamos los fundamentos neurobiológicos del comportamiento humano, explorando
-            cómo los procesos cerebrales influyen en la cognición, las emociones y la conducta social.
-          </p>
-          <a href="neurociencias/" class="btn btn-primary">Conocer más →</a>
-        </div>
+    <h2 class="section-title reveal" style="font-size:1.5rem;margin-bottom:1.5rem;">Áreas de Enfoque</h2>
+    <div class="focus-grid">
+
+      <div class="focus-card reveal">
+        <div class="focus-card-icon">📏</div>
+        <h3>Medición de la Paz</h3>
+        <p>Desarrollo y validación de instrumentos y métricas para evaluar niveles de paz en individuos, comunidades y sociedades.</p>
       </div>
 
-      <div class="project-card reveal" style="transition-delay:.08s">
-        <div class="project-card-icon">💻</div>
-        <div class="project-card-body">
-          <h3>Comportamiento Humano Digital</h3>
-          <p>
-            Estudiamos cómo las tecnologías digitales transforman el comportamiento humano,
-            analizando patrones de interacción, bienestar digital y dinámicas sociales en entornos virtuales.
-          </p>
-          <a href="comportamiento-humano-digital/" class="btn btn-primary">Conocer más →</a>
-        </div>
+      <div class="focus-card reveal" style="transition-delay:.08s">
+        <div class="focus-card-icon">🕊️</div>
+        <h3>Construcción de la Paz</h3>
+        <p>Investigación de procesos y estrategias psicosociales que promueven la reconciliación, el diálogo y la convivencia pacífica.</p>
       </div>
 
-      <div class="project-card reveal" style="transition-delay:.16s">
-        <div class="project-card-icon">🌍</div>
-        <div class="project-card-body">
-          <h3>Estudios Transculturales</h3>
-          <p>
-            Realizamos investigaciones comparativas entre culturas para comprender las variaciones
-            en el comportamiento humano, los valores y las prácticas psicológicas a nivel global.
-          </p>
-          <a href="estudios-transculturales/" class="btn btn-primary">Conocer más →</a>
-        </div>
+      <div class="focus-card reveal" style="transition-delay:.16s">
+        <div class="focus-card-icon">⚠️</div>
+        <h3>Estudios de Violencia</h3>
+        <p>Análisis de los factores psicológicos, sociales y contextuales que contribuyen a la violencia y sus efectos en las personas y comunidades.</p>
       </div>
 
-      <div class="project-card reveal" style="transition-delay:.24s">
-        <div class="project-card-icon">📝</div>
-        <div class="project-card-body">
-          <h3>Estudios Cualitativos</h3>
-          <p>
-            Aplicamos metodologías cualitativas rigurosas para profundizar en la comprensión de
-            experiencias subjetivas, significados y procesos psicológicos complejos.
-          </p>
-          <a href="estudios-cualitativos/" class="btn btn-primary">Conocer más →</a>
-        </div>
+      <div class="focus-card reveal" style="transition-delay:.24s">
+        <div class="focus-card-icon">🛡️</div>
+        <h3>Estudios de Guerra</h3>
+        <p>Investigación del impacto psicológico de los conflictos armados en combatientes, víctimas y sociedades afectadas.</p>
       </div>
 
-      <div class="project-card reveal" style="transition-delay:.32s">
-        <div class="project-card-icon">📊</div>
-        <div class="project-card-body">
-          <h3>Métodos Cuantitativos</h3>
-          <p>
-            Desarrollar y aplicar métodos estadísticos y matemáticos complejos para analizar datos
-            y resolver problemas en diversas áreas de la ciencia y la sociedad.
-          </p>
-          <a href="metodos-cuantitativos/" class="btn btn-primary">Conocer más →</a>
-        </div>
-      </div>
-
-      <div class="project-card reveal" style="transition-delay:.40s">
-        <div class="project-card-icon">🕊️</div>
-        <div class="project-card-body">
-          <h3>Psicología de la Paz</h3>
-          <p>
-            Comprender los factores psicológicos que influyen en la paz, la violencia y el conflicto,
-            y desarrollar estrategias para promover una cultura de paz.
-          </p>
-          <a href="psicologia-de-la-paz/" class="btn btn-primary">Conocer más →</a>
-        </div>
+      <div class="focus-card reveal" style="transition-delay:.32s">
+        <div class="focus-card-icon">🌟</div>
+        <h3>Psicología Positiva</h3>
+        <p>Estudio de las fortalezas humanas, el bienestar y los factores que contribuyen a una vida plena como base para la construcción de la paz.</p>
       </div>
 
     </div>
@@ -462,9 +419,9 @@
     <div class="footer-col">
       <h4>Investigación</h4>
       <ul>
-        <li><a href="../publicaciones/">Publicaciones</a></li>
-        <li><a href="./">Líneas de Investigación</a></li>
-        <li><a href="../../miembros/">Miembros</a></li>
+        <li><a href="../../publicaciones/">Publicaciones</a></li>
+        <li><a href="../">Líneas de Investigación</a></li>
+        <li><a href="../../../miembros/">Miembros</a></li>
       </ul>
     </div>
 
@@ -473,7 +430,7 @@
       <ul>
         <li><a href="https://psinetlab.wordpress.com/contacto/" target="_blank">Contacto</a></li>
         <li><a href="https://psinetlab.wordpress.com/apoyanos/" target="_blank">Apóyanos</a></li>
-        <li><a href="../../blog/">Blog</a></li>
+        <li><a href="../../../blog/">Blog</a></li>
       </ul>
     </div>
   </div>
@@ -489,7 +446,6 @@
 </footer>
 
 <script>
-  // Scroll reveal
   var revealObserver = new IntersectionObserver(function(entries) {
     entries.forEach(function(e) {
       if (e.isIntersecting) {
