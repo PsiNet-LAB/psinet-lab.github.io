@@ -269,6 +269,31 @@
       margin-bottom: 1.5rem;
     }
 
+    .social-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .8rem;
+      margin-top: .5rem;
+    }
+    .social-link {
+      display: inline-flex;
+      align-items: center;
+      gap: .5rem;
+      background: rgba(94,234,212,.08);
+      border: 1px solid var(--border);
+      color: var(--teal);
+      font-size: .82rem;
+      font-weight: 500;
+      padding: .5rem 1.2rem;
+      border-radius: 8px;
+      letter-spacing: .02em;
+      transition: all .2s;
+    }
+    .social-link:hover {
+      background: rgba(94,234,212,.15);
+      border-color: var(--teal);
+    }
+
     /* ── FOOTER ── */
     footer {
       border-top: 1px solid var(--border);
@@ -397,21 +422,29 @@
       <div class="profile-content">
         <div class="profile-card reveal" style="transition-delay:.1s">
           <h3>Sobre</h3>
-          <p>Miembro Investigadora en PsiNet LAB. Participa en proyectos de investigación que abordan fenómenos psicológicos desde perspectivas interdisciplinarias.</p>
+          <p>Mavila Lizbeth Collanqui Narvaez is a student of psychology at the National University of San Agustín of Arequipa (UNSA), consistently ranking among the top students in her program. Winner of first place in the scientific poster contest organized by the Catholic University of Santa María (UCSM), with the research titled &quot;Effect of Physical Attractiveness on the Perception of Street Sexual Harassment.&quot; Currently contributes to research involving vulnerable populations, exploring topics such as child development in low-resource contexts and street sexual harassment. Her research interests focus on applying scientific methodologies to analyze human behavior, particularly in organizational and workplace contexts.</p>
         </div>
 
         <div class="profile-card reveal" style="transition-delay:.18s">
           <h3>Áreas de interés</h3>
           <div class="interest-tags">
-              <span class="interest-tag">Psicología interdisciplinaria</span>
-              <span class="interest-tag">Desarrollo humano</span>
-              <span class="interest-tag">Investigación aplicada</span>
+              <span class="interest-tag">Scientific methodologies</span>
+              <span class="interest-tag">Human behavior analysis</span>
+              <span class="interest-tag">Organizational psychology</span>
+              <span class="interest-tag">Workplace contexts</span>
           </div>
         </div>
 
         <div class="profile-card reveal" style="transition-delay:.26s">
           <h3>Afiliación</h3>
           <p>Miembro de PsiNet LAB — Laboratorio de investigación psicológica dedicado a generar conocimiento científico innovador, utilizando métodos avanzados y fundamentados en la teoría de la complejidad para contribuir al entendimiento del comportamiento humano.</p>
+        </div>
+
+        <div class="profile-card reveal" style="transition-delay:.34s">
+          <h3>Links</h3>
+          <div class="social-links">
+            <a href="https://typecard.com/98f7ed11" target="_blank" rel="noopener" class="social-link">Typecard</a>
+          </div>
         </div>
       </div>
     </div>
