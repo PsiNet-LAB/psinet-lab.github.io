@@ -215,15 +215,29 @@
       flex-direction: column;
       align-items: center;
       gap: .3rem;
-      color: var(--muted);
-      font-size: .85rem;
+      color: var(--teal);
+      font-size: 1rem;
+      font-weight: 600;
       font-family: 'Lora', serif;
-      letter-spacing: .08em;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      text-decoration: none;
       animation: fadeUp .8s .45s ease both;
+      transition: color .3s, text-shadow .3s, transform .3s;
+      text-shadow: 0 0 10px rgba(94,234,212,.4);
+    }
+    .hero-scroll:hover {
+      color: var(--teal2);
+      text-shadow: 0 0 20px rgba(94,234,212,.7), 0 0 40px rgba(94,234,212,.3);
+      transform: scale(1.08);
     }
     .hero-scroll .scroll-arrow-simple {
-      font-size: 1.2rem;
+      font-size: 1.5rem;
       line-height: 1;
+      animation: bounceArrow 1.5s ease-in-out infinite;
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .hero-scroll .scroll-arrow-simple { animation: none; }
     }
 
     /* ── SECTION COMMONS ── */
@@ -630,6 +644,10 @@
       0%, 100% { box-shadow: 0 0 15px rgba(94,234,212,.35), 0 0 30px rgba(94,234,212,.15); }
       50%      { box-shadow: 0 0 25px rgba(94,234,212,.55), 0 0 50px rgba(94,234,212,.3); }
     }
+    @keyframes bounceArrow {
+      0%, 100% { transform: translateY(0); }
+      50%      { transform: translateY(8px); }
+    }
 
     .reveal {
       opacity: 0;
@@ -744,10 +762,10 @@
 
   <div class="hero-content">
     <h1><span class="hero-line">Ciencia</span><span class="hero-line">Conectada para</span><span class="hero-line">el Desarrollo</span></h1>
-    <div class="hero-scroll">
+    <a href="#bienvenida" class="hero-scroll" aria-label="Explorar — ir a la sección de bienvenida del CEO">
       Explorar
       <span class="scroll-arrow-simple">↓</span>
-    </div>
+    </a>
   </div>
 </section>
 
