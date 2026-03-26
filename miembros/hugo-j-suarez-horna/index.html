@@ -162,6 +162,63 @@
     }
     .btn-outline:hover { border-color: var(--teal); background: rgba(94,234,212,.06); }
 
+    .btn-teal {
+      background: var(--teal);
+      color: var(--navy);
+    }
+    .btn-teal:hover { background: var(--teal2); }
+
+    .profile-buttons {
+      display: flex;
+      flex-direction: column;
+      gap: .75rem;
+      margin-top: 1.5rem;
+    }
+    .profile-buttons .btn {
+      justify-content: center;
+      width: 100%;
+    }
+
+    .profile-quote {
+      background: var(--deep);
+      border: 1px solid var(--border);
+      border-left: 3px solid var(--teal);
+      border-radius: 8px;
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+      font-family: 'Lora', serif;
+      font-style: italic;
+      font-size: .95rem;
+      color: var(--white);
+      line-height: 1.8;
+    }
+
+    .social-icons {
+      display: flex;
+      gap: .6rem;
+      margin-top: 1rem;
+    }
+    .social-icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 38px;
+      height: 38px;
+      border-radius: 8px;
+      background: rgba(94,234,212,.08);
+      border: 1px solid var(--border);
+      color: var(--teal);
+      transition: all .2s;
+    }
+    .social-icon:hover {
+      background: rgba(94,234,212,.15);
+      border-color: var(--teal);
+    }
+    .social-icon svg {
+      width: 18px;
+      height: 18px;
+    }
+
     /* ── PAGE HEADER ── */
     .page-section { padding-top: 10rem; }
 
