@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Luis E. Viloria Moreno – PsiNet LAB</title>
-  <link rel="icon" type="image/x-icon" href="../../favicon.ico" />
-  <link rel="icon" type="image/png" sizes="32x32" href="../../assets/images/favicon-32x32.png" />
-  <link rel="icon" type="image/png" sizes="192x192" href="../../assets/images/favicon-192x192.png" />
+  <title>Comportamiento Humano Digital – PsiNet LAB</title>
+  <link rel="icon" type="image/x-icon" href="../../../favicon.ico" />
+  <link rel="icon" type="image/png" sizes="32x32" href="../../../assets/images/favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="192x192" href="../../../assets/images/favicon-192x192.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Lora:ital,wght@0,400;0,500;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
@@ -55,13 +55,25 @@
       backdrop-filter: blur(20px);
     }
 
+    .header-top,
+    nav.main-nav {
+      position: relative;
+      z-index: 1;
+    }
+
+    .header-top {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: .6rem 2.5rem;
+    }
+
     nav.main-nav {
       position: relative;
       display: flex;
       align-items: center;
       justify-content: space-between;
       padding: .65rem 2.5rem;
-      z-index: 1;
     }
 
     .nav-left, .nav-right {
@@ -162,168 +174,62 @@
     }
     .btn-outline:hover { border-color: var(--teal); background: rgba(94,234,212,.06); }
 
-    .btn-teal {
-      background: var(--teal);
-      color: var(--navy);
-    }
-    .btn-teal:hover { background: var(--teal2); }
-
-    .profile-buttons {
-      display: flex;
-      flex-direction: column;
-      gap: .75rem;
-      margin-top: 1.5rem;
-    }
-    .profile-buttons .btn {
-      justify-content: center;
-      width: 100%;
-    }
-
-    .profile-quote {
-      background: var(--deep);
-      border: 1px solid var(--border);
-      border-left: 3px solid var(--teal);
-      border-radius: 8px;
-      padding: 1.5rem;
-      margin-bottom: 1.5rem;
-      font-family: 'Lora', serif;
-      font-style: italic;
-      font-size: .95rem;
-      color: var(--white);
-      line-height: 1.8;
-    }
-
-    .social-icons {
-      display: flex;
-      gap: .6rem;
-      margin-top: 1rem;
-    }
-    .social-icon {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      width: 38px;
-      height: 38px;
-      border-radius: 8px;
-      background: rgba(94,234,212,.08);
-      border: 1px solid var(--border);
-      color: var(--teal);
-      transition: all .2s;
-    }
-    .social-icon:hover {
-      background: rgba(94,234,212,.15);
-      border-color: var(--teal);
-    }
-    .social-icon svg {
-      width: 18px;
-      height: 18px;
-    }
-
     /* ── PAGE HEADER ── */
     .page-section { padding-top: 10rem; }
-
-    /* ── PROFILE LAYOUT ── */
-    .profile-layout {
-      display: grid;
-      grid-template-columns: 320px 1fr;
-      gap: 3rem;
-      align-items: start;
+    .page-header {
+      display: flex; align-items: flex-end; justify-content: space-between;
+      margin-bottom: 3rem;
     }
 
-    .profile-sidebar {
-      position: sticky;
-      top: 8rem;
-    }
-
-    .profile-photo {
-      width: 100%;
-      aspect-ratio: 1 / 1;
-      object-fit: cover;
-      border-radius: 12px;
+    /* ── DESCRIPTION CARD ── */
+    .description-card {
+      background: var(--card-bg);
       border: 1px solid var(--border);
-      display: block;
-      margin-bottom: 1.5rem;
+      border-radius: 10px;
+      padding: 2.5rem;
+      margin-bottom: 3rem;
     }
-
-    .profile-name {
-      font-family: 'Syne', sans-serif;
-      font-weight: 700;
-      font-size: 1.6rem;
-      color: var(--white);
-      letter-spacing: -.02em;
-      margin-bottom: .3rem;
-    }
-
-    .profile-role {
+    .description-card p {
       font-size: .95rem;
-      color: var(--teal);
-      font-weight: 500;
-      margin-bottom: .3rem;
-    }
-
-    .profile-area {
-      font-size: .8rem;
       color: var(--muted);
-      text-transform: uppercase;
-      letter-spacing: .1em;
-      margin-bottom: 1.5rem;
+      line-height: 1.85;
     }
 
-    .profile-back {
-      display: inline-flex;
-      align-items: center;
-      gap: .4rem;
-      font-size: .82rem;
-      font-weight: 600;
-      color: var(--teal);
-      letter-spacing: .04em;
-      text-transform: uppercase;
-      transition: gap .2s;
+    /* ── FOCUS AREAS GRID ── */
+    .focus-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
     }
-    .profile-back:hover { gap: .7rem; }
 
-    /* ── PROFILE CONTENT ── */
-    .profile-content h3 {
-      font-family: 'Syne', sans-serif;
-      font-weight: 600;
-      font-size: 1.15rem;
-      color: var(--white);
-      margin-bottom: .75rem;
-      margin-top: 2rem;
+    .focus-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 2rem;
+      text-align: center;
+      transition: border-color .25s, transform .25s;
     }
-    .profile-content h3:first-child { margin-top: 0; }
+    .focus-card:hover { border-color: rgba(94,234,212,.4); transform: translateY(-4px); }
 
-    .profile-content p {
-      font-size: .92rem;
-      color: var(--muted);
-      line-height: 1.8;
+    .focus-card-icon {
+      font-size: 2.5rem;
       margin-bottom: 1rem;
     }
 
-    .interest-tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: .6rem;
-      margin-top: .5rem;
+    .focus-card h3 {
+      font-family: 'Syne', sans-serif;
+      font-weight: 600;
+      font-size: 1.1rem;
+      letter-spacing: -.01em;
+      color: var(--white);
+      margin-bottom: .75rem;
     }
 
-    .interest-tag {
-      background: rgba(94,234,212,.08);
-      border: 1px solid var(--border);
-      color: var(--teal);
-      font-size: .78rem;
-      font-weight: 500;
-      padding: .4rem 1rem;
-      border-radius: 20px;
-      letter-spacing: .02em;
-    }
-
-    .profile-card {
-      background: var(--card-bg);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 2rem;
-      margin-bottom: 1.5rem;
+    .focus-card p {
+      font-size: .88rem;
+      color: var(--muted);
+      line-height: 1.75;
     }
 
     /* ── FOOTER ── */
@@ -379,25 +285,21 @@
 
     /* ── RESPONSIVE ── */
     @media (max-width: 900px) {
-      .profile-layout {
-        grid-template-columns: 1fr;
-      }
-      .profile-sidebar {
-        position: static;
-        max-width: 360px;
-      }
       .footer-grid { grid-template-columns: 1fr 1fr; }
+      .header-top { padding: .6rem 1.2rem; }
       nav.main-nav { padding: .55rem 1.2rem; }
       .nav-left, .nav-right { gap: 1rem; }
       section { padding: 4rem 1.5rem; }
       .page-section { padding-top: 8rem; }
+      .focus-grid { grid-template-columns: repeat(2, 1fr); }
     }
 
     @media (max-width: 600px) {
-      .profile-sidebar { max-width: 100%; }
       .footer-grid { grid-template-columns: 1fr; gap: 2rem; }
       .nav-right { display: none; }
       .page-section { padding-top: 7rem; }
+      .page-header { flex-direction: column; align-items: flex-start; gap: 1rem; }
+      .focus-grid { grid-template-columns: 1fr; }
     }
   </style>
 </head>
@@ -406,73 +308,81 @@
 <header>
   <nav class="main-nav">
     <div class="nav-left">
-      <a href="../../miembros/" class="active">Miembros</a>
+      <a href="../../../miembros/">Miembros</a>
       <div class="nav-dropdown">
-        <a href="../../investigaciones/">Investigaciones ▾</a>
+        <a href="../../" class="active">Investigaciones ▾</a>
         <div class="dropdown-menu">
-          <a href="../../investigaciones/lineas-de-investigacion/">Líneas de Investigación</a>
-          <a href="../../investigaciones/publicaciones/">Publicaciones</a>
+          <a href="../../">Investigaciones</a>
+          <a href="../">Líneas de Investigación</a>
+          <a href="../../publicaciones/">Publicaciones</a>
         </div>
       </div>
       <div class="nav-dropdown">
-        <a href="../../index.html#proyectos">Proyectos ▾</a>
+        <a href="#">Proyectos ▾</a>
         <div class="dropdown-menu">
-          <a href="../../index.html#bienestar">BienEstar</a>
-          <a href="../../index.html#escool">PsiNet EsCool</a>
-          <a href="../../index.html#mente">La Ciencia de la Mente</a>
+          <a href="https://psinetlab.wordpress.com/bienestar/" target="_blank">BienEstar</a>
+          <a href="https://psinetlab.wordpress.com/psinet-escool/" target="_blank">PsiNet EsCool</a>
+          <a href="https://psinetlab.wordpress.com/la-ciencia-de-la-mente/" target="_blank">La Ciencia de la Mente</a>
         </div>
       </div>
     </div>
 
     <div class="nav-center">
-      <a href="../../index.html">
-        <img src="../../assets/images/logo.png" alt="PsiNet LAB" onerror="this.style.display='none'" />
+      <a href="../../../index.html">
+        <img src="../../../assets/images/logo.png" alt="PsiNet LAB" onerror="this.style.display='none'" />
       </a>
     </div>
 
     <div class="nav-right">
-      <a href="../../blog/">Blog</a>
+      <a href="../../../blog/">Blog</a>
       <a href="https://psinetlab.wordpress.com/contacto/" target="_blank">Contacto</a>
-      <a href="../../index.html#apoyanos">Apóyanos</a>
-      <a href="../../index.html#colaboraciones">Colaboraciones</a>
     </div>
   </nav>
 </header>
 
 <section class="page-section">
   <div class="container">
-
-    <div class="profile-layout">
-      <div class="profile-sidebar reveal">
-        <img class="profile-photo" src="../../assets/images/photos/luis-6k.jpeg" alt="Luis E. Viloria Moreno" />
-        <h1 class="profile-name">Luis E. Viloria Moreno</h1>
-        <p class="profile-role">Host del podcast "La Ciencia de la Mente"</p>
-        <p class="profile-area">La Ciencia de la Mente</p>
-        <a href="../../miembros/" class="profile-back">← Todos los miembros</a>
+    <div class="page-header reveal">
+      <div>
+        <p class="section-tag">Línea de Investigación</p>
+        <h2 class="section-title" style="margin-bottom:0;">Comportamiento Humano Digital</h2>
       </div>
-
-      <div class="profile-content">
-        <div class="profile-card reveal" style="transition-delay:.1s">
-          <h3>Sobre</h3>
-          <p>Host del podcast "La Ciencia de la Mente" en PsiNet LAB. Conduce conversaciones sobre temas de psicología y ciencia del comportamiento, acercando el conocimiento científico al público general.</p>
-        </div>
-
-        <div class="profile-card reveal" style="transition-delay:.18s">
-          <h3>Áreas de interés</h3>
-          <div class="interest-tags">
-              <span class="interest-tag">Divulgación científica</span>
-              <span class="interest-tag">Psicología</span>
-              <span class="interest-tag">Comunicación</span>
-          </div>
-        </div>
-
-        <div class="profile-card reveal" style="transition-delay:.26s">
-          <h3>Afiliación</h3>
-          <p>Miembro de PsiNet LAB — Laboratorio de investigación psicológica dedicado a generar conocimiento científico innovador, utilizando métodos avanzados y fundamentados en la teoría de la complejidad para contribuir al entendimiento del comportamiento humano.</p>
-        </div>
-      </div>
+      <a href="../" class="btn btn-outline">← Líneas de Investigación</a>
     </div>
 
+    <p class="reveal" style="font-size:.95rem;color:var(--muted);line-height:1.75;margin-bottom:3rem;max-width:800px;">
+      Estudiamos cómo las tecnologías digitales transforman el comportamiento humano, analizando patrones de interacción, bienestar digital y dinámicas sociales en entornos virtuales.
+    </p>
+
+    <h2 class="section-title reveal" style="font-size:1.5rem;margin-bottom:1.5rem;">Descripción</h2>
+    <div class="description-card reveal">
+      <p>
+        La línea de Comportamiento Humano Digital explora la intersección entre la psicología y la tecnología. Investigamos cómo las plataformas digitales, las redes sociales y los entornos virtuales influyen en el comportamiento, las relaciones interpersonales y el bienestar psicológico. Utilizamos métodos innovadores como el análisis de datos digitales, la psicometría computacional y el modelado de redes para comprender las dinámicas del comportamiento en línea.
+      </p>
+    </div>
+
+    <h2 class="section-title reveal" style="font-size:1.5rem;margin-bottom:1.5rem;">Áreas de Enfoque</h2>
+    <div class="focus-grid">
+
+      <div class="focus-card reveal">
+        <div class="focus-card-icon">📱</div>
+        <h3>Redes Sociales y Bienestar</h3>
+        <p>Análisis del impacto de las redes sociales en la salud mental, la autoestima y las relaciones interpersonales.</p>
+      </div>
+
+      <div class="focus-card reveal" style="transition-delay:.08s">
+        <div class="focus-card-icon">🌐</div>
+        <h3>Interacción Humano-Computadora</h3>
+        <p>Estudio de cómo los usuarios interactúan con sistemas tecnológicos y cómo optimizar estas experiencias.</p>
+      </div>
+
+      <div class="focus-card reveal" style="transition-delay:.16s">
+        <div class="focus-card-icon">📊</div>
+        <h3>Analítica del Comportamiento Digital</h3>
+        <p>Uso de ciencia de datos y métodos computacionales para comprender patrones de comportamiento en línea.</p>
+      </div>
+
+    </div>
   </div>
 </section>
 
@@ -497,9 +407,9 @@
     <div class="footer-col">
       <h4>Investigación</h4>
       <ul>
-        <li><a href="../../investigaciones/publicaciones/">Publicaciones</a></li>
-        <li><a href="../../investigaciones/lineas-de-investigacion/">Líneas de Investigación</a></li>
-        <li><a href="../../miembros/">Miembros</a></li>
+        <li><a href="../../publicaciones/">Publicaciones</a></li>
+        <li><a href="../">Líneas de Investigación</a></li>
+        <li><a href="../../../miembros/">Miembros</a></li>
       </ul>
     </div>
 
@@ -508,7 +418,7 @@
       <ul>
         <li><a href="https://psinetlab.wordpress.com/contacto/" target="_blank">Contacto</a></li>
         <li><a href="https://psinetlab.wordpress.com/apoyanos/" target="_blank">Apóyanos</a></li>
-        <li><a href="../../blog/">Blog</a></li>
+        <li><a href="../../../blog/">Blog</a></li>
       </ul>
     </div>
   </div>
@@ -524,7 +434,6 @@
 </footer>
 
 <script>
-  // Scroll reveal
   var revealObserver = new IntersectionObserver(function(entries) {
     entries.forEach(function(e) {
       if (e.isIntersecting) {
