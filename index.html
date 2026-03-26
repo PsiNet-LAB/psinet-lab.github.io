@@ -1169,34 +1169,11 @@
         <p class="section-tag">Blogs Recientes</p>
         <h2 class="section-title" style="margin-bottom:0;">Últimas publicaciones</h2>
       </div>
-      <a href="https://psinetlab.wordpress.com/blog-psinet/" target="_blank" class="btn btn-outline">Ver Más →</a>
+      <a href="blog/" class="btn btn-outline">Ver Más →</a>
     </div>
 
-    <div class="blog-grid">
-      <div class="blog-card reveal">
-        <div class="blog-card-img">🧠</div>
-        <div class="blog-card-body">
-          <span class="blog-tag">Investigación</span>
-          <h3>Explorando la complejidad del comportamiento humano</h3>
-          <p>Descubre cómo la teoría de la complejidad transforma nuestra comprensión del bienestar psicológico.</p>
-        </div>
-      </div>
-      <div class="blog-card reveal" style="transition-delay:.1s">
-        <div class="blog-card-img">🌱</div>
-        <div class="blog-card-body">
-          <span class="blog-tag">Proyectos</span>
-          <h3>BienEstar: impacto comunitario basado en evidencia</h3>
-          <p>Cómo el proyecto BienEstar está transformando comunidades a través de intervenciones psicológicas.</p>
-        </div>
-      </div>
-      <div class="blog-card reveal" style="transition-delay:.2s">
-        <div class="blog-card-img">🎓</div>
-        <div class="blog-card-body">
-          <span class="blog-tag">Educación</span>
-          <h3>PsiNet EsCool: ciencia psicológica en las aulas</h3>
-          <p>Llevando el conocimiento psicológico a estudiantes para fomentar una cultura científica desde temprana edad.</p>
-        </div>
-      </div>
+    <div class="blog-grid" id="blog-grid">
+      <!-- Rendered dynamically from blog-data.js -->
     </div>
   </div>
 </section>
@@ -1271,7 +1248,7 @@
         <ul>
           <li><a href="https://psinetlab.wordpress.com/contacto/" target="_blank">Contacto</a></li>
           <li><a href="https://psinetlab.wordpress.com/apoyanos/" target="_blank">Apóyanos</a></li>
-          <li><a href="https://psinetlab.wordpress.com/blog-psinet/" target="_blank">Blog</a></li>
+          <li><a href="blog/">Blog</a></li>
         </ul>
       </div>
     </div>
@@ -1288,7 +1265,31 @@
 </footer>
 
 
+<script src="assets/js/blog-data.js"></script>
 <script>
+  // Render recent blog entries (3 most recent, sorted by date)
+  (function renderRecentBlogs() {
+    var grid = document.getElementById('blog-grid');
+    if (!grid) return;
+    var entries = BLOG_ENTRIES.slice().sort(function(a, b) {
+      return new Date(b.date) - new Date(a.date);
+    }).slice(0, 3);
+
+    entries.forEach(function(entry, i) {
+      var card = document.createElement('div');
+      card.className = 'blog-card reveal';
+      if (i > 0) card.style.transitionDelay = (i * 0.1) + 's';
+      card.innerHTML =
+        '<div class="blog-card-img">' + entry.emoji + '</div>' +
+        '<div class="blog-card-body">' +
+          '<span class="blog-tag">' + entry.tag + '</span>' +
+          '<h3>' + entry.title + '</h3>' +
+          '<p>' + entry.excerpt + '</p>' +
+        '</div>';
+      grid.appendChild(card);
+    });
+  })();
+
   // Scroll reveal
   const revealObserver = new IntersectionObserver((entries) => {
     entries.forEach(e => {
