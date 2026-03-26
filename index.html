@@ -550,11 +550,6 @@
       50%      { transform: scale(1.03); filter: drop-shadow(0 0 40px rgba(94,234,212,.25)); }
     }
 
-    .bento-logo:hover img {
-      animation: logoBreathe 4s ease-in-out infinite;
-      filter: drop-shadow(0 0 50px rgba(94,234,212,.3));
-    }
-
     /* ─ Admissions Card ─ */
     .bento-admissions {
       grid-area: admissions;
@@ -1365,8 +1360,8 @@
           const y = row * rowOffset + (col % 2 === 1 ? rowOffset / 2 : 0);
           hex.style.left = x + 'px';
           hex.style.top = y + 'px';
-          // Stagger the breathing animation for organic feel
-          hex.style.animationDelay = (Math.random() * 4).toFixed(2) + 's';
+          // Deterministic stagger based on position for consistent breathing
+          hex.style.animationDelay = (((col * 7 + row * 3) % 20) * 0.2).toFixed(1) + 's';
           hex.dataset.cx = (x + hexW / 2).toString();
           hex.dataset.cy = (y + hexH / 2).toString();
           grid.appendChild(hex);
@@ -1376,7 +1371,13 @@
     }
 
     buildGrid();
-    window.addEventListener('resize', buildGrid);
+
+    // Debounced resize handler
+    var resizeTimer;
+    window.addEventListener('resize', function() {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(buildGrid, 200);
+    });
 
     // Activate cells near cursor
     let activeHexes = [];
