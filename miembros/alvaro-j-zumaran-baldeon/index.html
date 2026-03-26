@@ -269,6 +269,31 @@
       margin-bottom: 1.5rem;
     }
 
+    .social-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .8rem;
+      margin-top: .5rem;
+    }
+    .social-link {
+      display: inline-flex;
+      align-items: center;
+      gap: .5rem;
+      background: rgba(94,234,212,.08);
+      border: 1px solid var(--border);
+      color: var(--teal);
+      font-size: .82rem;
+      font-weight: 500;
+      padding: .5rem 1.2rem;
+      border-radius: 8px;
+      letter-spacing: .02em;
+      transition: all .2s;
+    }
+    .social-link:hover {
+      background: rgba(94,234,212,.15);
+      border-color: var(--teal);
+    }
+
     /* ── FOOTER ── */
     footer {
       border-top: 1px solid var(--border);
@@ -397,21 +422,30 @@
       <div class="profile-content">
         <div class="profile-card reveal" style="transition-delay:.1s">
           <h3>Sobre</h3>
-          <p>Chief Learning Officer de PsiNet LAB. Dirige las estrategias de aprendizaje y desarrollo del conocimiento dentro de la organización, promoviendo la formación continua y la investigación psicológica aplicada.</p>
+          <p>Alvaro Joseandree Zumarán Baldeón holds a Bachelor's degree in Psychology from the Pontifical Catholic University of Peru (PUCP) and is currently pursuing a second specialization in Clinical Psychoanalytic Intervention at the same university. He is an active member of PsiNet Lab, a research laboratory specializing in psychological research using advanced methodologies. At PsiNet Lab, Alvaro serves as both a researcher and Chief Learning Officer, contributing to the lab's research initiatives and educational efforts. His research interests include quantitative methods, psychotherapy process research, social cognition and the psychology of music. Through his work, he aims to bridge innovative methodologies with practical applications in psychological sciences.</p>
         </div>
 
         <div class="profile-card reveal" style="transition-delay:.18s">
           <h3>Áreas de interés</h3>
           <div class="interest-tags">
-              <span class="interest-tag">Psicología aplicada</span>
-              <span class="interest-tag">Metodología de investigación</span>
-              <span class="interest-tag">Teoría de la complejidad</span>
+              <span class="interest-tag">Quantitative methods</span>
+              <span class="interest-tag">Psychotherapy process research</span>
+              <span class="interest-tag">Social cognition</span>
+              <span class="interest-tag">Psychology of music</span>
           </div>
         </div>
 
         <div class="profile-card reveal" style="transition-delay:.26s">
           <h3>Afiliación</h3>
           <p>Miembro de PsiNet LAB — Laboratorio de investigación psicológica dedicado a generar conocimiento científico innovador, utilizando métodos avanzados y fundamentados en la teoría de la complejidad para contribuir al entendimiento del comportamiento humano.</p>
+        </div>
+
+        <div class="profile-card reveal" style="transition-delay:.34s">
+          <h3>Links</h3>
+          <div class="social-links">
+            <a href="https://www.linkedin.com/in/alvaro-joseandree-zumar%C3%A1n-balde%C3%B3n-655340199/" target="_blank" rel="noopener" class="social-link">LinkedIn</a>
+            <a href="https://typecard.com/549dc253" target="_blank" rel="noopener" class="social-link">Typecard</a>
+          </div>
         </div>
       </div>
     </div>
