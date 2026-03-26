@@ -1323,6 +1323,11 @@
     var colOffset = hexW;
     var rowOffset = hexH * 0.75;
 
+    // Animation constants
+    var MOUSE_GLOW_RADIUS = 80;
+    var MAX_CELL_BRIGHTNESS = 0.45;
+    var PULSE_RING_WIDTH = 30;
+
     // State
     var cells = [];
     var mouse = { x: -999, y: -999, active: false };
@@ -1441,8 +1446,8 @@
             (cell.y - pulse.y) * (cell.y - pulse.y)
           );
           var ringDist = Math.abs(distToPulse - pulse.radius);
-          if (ringDist < 30) {
-            var ringIntensity = (1 - ringDist / 30) * pulse.life * 0.25;
+          if (ringDist < PULSE_RING_WIDTH) {
+            var ringIntensity = (1 - ringDist / PULSE_RING_WIDTH) * pulse.life * 0.25;
             pulseBright = Math.max(pulseBright, ringIntensity);
           }
         }
@@ -1454,12 +1459,12 @@
             (cell.x - mouse.x) * (cell.x - mouse.x) +
             (cell.y - mouse.y) * (cell.y - mouse.y)
           );
-          if (distMouse < 80) {
-            mouseBright = (1 - distMouse / 80) * 0.3;
+          if (distMouse < MOUSE_GLOW_RADIUS) {
+            mouseBright = (1 - distMouse / MOUSE_GLOW_RADIUS) * 0.3;
           }
         }
 
-        cell.brightness = Math.min(breath + wave2 + pulseBright + mouseBright, 0.45);
+        cell.brightness = Math.min(breath + wave2 + pulseBright + mouseBright, MAX_CELL_BRIGHTNESS);
         cell.edgeBrightness = Math.min(0.04 + breath * 0.6 + pulseBright * 1.5 + mouseBright * 0.8, 0.5);
       }
 
