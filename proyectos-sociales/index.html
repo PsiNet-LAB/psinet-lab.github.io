@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Blog – PsiNet LAB</title>
+  <title>Proyectos Sociales – PsiNet LAB</title>
   <link rel="icon" type="image/x-icon" href="../favicon.ico" />
   <link rel="icon" type="image/png" sizes="32x32" href="../assets/images/favicon-32x32.png" />
   <link rel="icon" type="image/png" sizes="192x192" href="../assets/images/favicon-192x192.png" />
@@ -173,61 +173,70 @@
       border: 1px solid var(--border);
     }
     .btn-outline:hover { border-color: var(--teal); background: rgba(94,234,212,.06); }
+    .btn-primary {
+      background: var(--teal);
+      color: var(--navy);
+    }
+    .btn-primary:hover { background: var(--teal2); }
 
-    /* ── BLOG GRID ── */
-    .blogs-section { padding-top: 10rem; }
-    .blogs-header {
+    /* ── PAGE HEADER ── */
+    .page-section { padding-top: 10rem; }
+    .page-header {
       display: flex; align-items: flex-end; justify-content: space-between;
       margin-bottom: 3rem;
     }
 
-    .blog-grid {
+    /* ── PROJECT CARDS ── */
+    .projects-grid {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 1.5rem;
+      grid-template-columns: repeat(1, 1fr);
+      gap: 2rem;
     }
 
-    .blog-card {
+    .project-card {
       background: var(--card-bg);
       border: 1px solid var(--border);
       border-radius: 10px;
       overflow: hidden;
       transition: border-color .25s, transform .25s;
+      display: grid;
+      grid-template-columns: 120px 1fr;
+      align-items: center;
     }
-    .blog-card:hover { border-color: rgba(94,234,212,.4); transform: translateY(-4px); }
+    .project-card:hover { border-color: rgba(94,234,212,.4); transform: translateY(-4px); }
 
-    .blog-card-img {
-      height: 180px;
+    .project-card-icon {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 3rem;
+      height: 100%;
       background: linear-gradient(135deg, var(--mid) 0%, #1a3260 100%);
-      display: flex; align-items: center; justify-content: center;
-      font-size: 2.5rem;
     }
 
-    .blog-card-body { padding: 1.5rem; }
-    .blog-tag {
-      display: inline-block;
-      font-size: .7rem;
-      letter-spacing: .12em;
-      text-transform: uppercase;
-      color: var(--teal);
-      font-family: 'DM Sans', sans-serif;
-      font-weight: 600;
-      margin-bottom: .75rem;
+    .project-card-body {
+      padding: 2rem;
     }
-    .blog-card h3 {
+
+    .project-card h3 {
       font-family: 'Syne', sans-serif;
       font-weight: 600;
-      font-size: 1rem;
+      font-size: 1.2rem;
       letter-spacing: -.01em;
       color: var(--white);
       margin-bottom: .5rem;
-      line-height: 1.35;
     }
-    .blog-card p { font-size: .85rem; color: var(--muted); }
-    .blog-card-date {
-      font-size: .75rem;
+
+    .project-card p {
+      font-size: .9rem;
       color: var(--muted);
-      margin-top: .75rem;
+      line-height: 1.75;
+      margin-bottom: 1rem;
+    }
+
+    .project-card .btn {
+      font-size: .75rem;
+      padding: .6rem 1.2rem;
     }
 
     /* ── FOOTER ── */
@@ -283,21 +292,21 @@
 
     /* ── RESPONSIVE ── */
     @media (max-width: 900px) {
-      .blog-grid { grid-template-columns: 1fr 1fr; }
       .footer-grid { grid-template-columns: 1fr 1fr; }
       .header-top { padding: .6rem 1.2rem; }
       nav.main-nav { padding: .55rem 1.2rem; }
       .nav-left, .nav-right { gap: 1rem; }
       section { padding: 4rem 1.5rem; }
-      .blogs-section { padding-top: 8rem; }
+      .page-section { padding-top: 8rem; }
     }
 
     @media (max-width: 600px) {
-      .blog-grid { grid-template-columns: 1fr; }
+      .project-card { grid-template-columns: 1fr; }
+      .project-card-icon { height: 100px; }
       .footer-grid { grid-template-columns: 1fr; gap: 2rem; }
       .nav-right { display: none; }
-      .blogs-section { padding-top: 7rem; }
-      .blogs-header { flex-direction: column; align-items: flex-start; gap: 1rem; }
+      .page-section { padding-top: 7rem; }
+      .page-header { flex-direction: column; align-items: flex-start; gap: 1rem; }
     }
   </style>
 </head>
@@ -331,7 +340,7 @@
     </div>
 
     <div class="nav-right">
-      <a href="../blog/" class="active">Blog</a>
+      <a href="../blog/">Blog</a>
       <a href="https://psinetlab.wordpress.com/contacto/" target="_blank">Contacto</a>
       <a href="../index.html#apoyanos">Apóyanos</a>
       <a href="../index.html#colaboraciones">Colaboraciones</a>
@@ -339,18 +348,63 @@
   </nav>
 </header>
 
-<section class="blogs-section">
+<section class="page-section">
   <div class="container">
-    <div class="blogs-header reveal">
+    <div class="page-header reveal">
       <div>
-        <p class="section-tag">Blog</p>
-        <h2 class="section-title" style="margin-bottom:0;">Todas las publicaciones</h2>
+        <p class="section-tag">Proyectos Sociales</p>
+        <h2 class="section-title" style="margin-bottom:0;">Nuestros proyectos de impacto social</h2>
       </div>
       <a href="../index.html" class="btn btn-outline">← Inicio</a>
     </div>
 
-    <div class="blog-grid" id="blog-grid">
-      <!-- Rendered dynamically from blog-data.js -->
+    <p class="reveal" style="font-size:.95rem;color:var(--muted);line-height:1.75;margin-bottom:3rem;max-width:800px;">
+      En PsiNet LAB desarrollamos proyectos sociales que aplican la investigación psicológica
+      para generar un impacto positivo en comunidades. Cada proyecto busca transformar el
+      conocimiento científico en acciones concretas que mejoren la calidad de vida de las personas.
+    </p>
+
+    <div class="projects-grid">
+
+      <div class="project-card reveal">
+        <div class="project-card-icon">🧘</div>
+        <div class="project-card-body">
+          <h3>BienEstar</h3>
+          <p>
+            Proyecto enfocado en promover el bienestar psicológico y emocional en comunidades,
+            desarrollando intervenciones basadas en evidencia científica para mejorar la salud
+            mental y la calidad de vida de las personas.
+          </p>
+          <a href="https://psinetlab.wordpress.com/bienestar/" target="_blank" class="btn btn-primary">Conocer más →</a>
+        </div>
+      </div>
+
+      <div class="project-card reveal" style="transition-delay:.08s">
+        <div class="project-card-icon">🎓</div>
+        <div class="project-card-body">
+          <h3>PsiNet EsCool</h3>
+          <p>
+            Iniciativa educativa que busca acercar la psicología a entornos escolares,
+            proporcionando herramientas y recursos para promover el desarrollo socioemocional
+            de niños y jóvenes en contextos educativos.
+          </p>
+          <a href="https://psinetlab.wordpress.com/psinet-escool/" target="_blank" class="btn btn-primary">Conocer más →</a>
+        </div>
+      </div>
+
+      <div class="project-card reveal" style="transition-delay:.16s">
+        <div class="project-card-icon">🧠</div>
+        <div class="project-card-body">
+          <h3>La Ciencia de la Mente</h3>
+          <p>
+            Proyecto de divulgación científica que tiene como objetivo hacer accesible el
+            conocimiento psicológico al público general, fomentando la comprensión de los
+            procesos mentales y el comportamiento humano.
+          </p>
+          <a href="https://psinetlab.wordpress.com/la-ciencia-de-la-mente/" target="_blank" class="btn btn-primary">Conocer más →</a>
+        </div>
+      </div>
+
     </div>
   </div>
 </section>
@@ -393,7 +447,7 @@
   </div>
 
   <div class="footer-bottom">
-    <p>© 2025 PsiNet LAB. Todos los derechos reservados.</p>
+    <p>&copy; 2025 PsiNet LAB. Todos los derechos reservados.</p>
     <div class="footer-bottom-links">
       <a href="#">Cookie Policy</a>
       <a href="#">Privacy Policy</a>
@@ -402,35 +456,7 @@
   </div>
 </footer>
 
-<script src="../assets/js/blog-data.js"></script>
 <script>
-  // Sort entries by date descending (most recent first)
-  var entries = BLOG_ENTRIES.slice().sort(function(a, b) {
-    return new Date(b.date) - new Date(a.date);
-  });
-
-  var grid = document.getElementById('blog-grid');
-  entries.forEach(function(entry, i) {
-    var card = document.createElement('div');
-    card.className = 'blog-card reveal';
-    if (i > 0) card.style.transitionDelay = (i * 0.05) + 's';
-
-    var dateStr = new Date(entry.date).toLocaleDateString('es-ES', {
-      year: 'numeric', month: 'long', day: 'numeric'
-    });
-
-    card.innerHTML =
-      '<div class="blog-card-img">' + entry.emoji + '</div>' +
-      '<div class="blog-card-body">' +
-        '<span class="blog-tag">' + entry.tag + '</span>' +
-        '<h3>' + entry.title + '</h3>' +
-        '<p>' + entry.excerpt + '</p>' +
-        '<p class="blog-card-date">' + dateStr + '</p>' +
-      '</div>';
-
-    grid.appendChild(card);
-  });
-
   // Scroll reveal
   var revealObserver = new IntersectionObserver(function(entries) {
     entries.forEach(function(e) {

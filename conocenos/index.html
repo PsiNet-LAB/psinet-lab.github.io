@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Blog – PsiNet LAB</title>
+  <title>Conócenos – PsiNet LAB</title>
   <link rel="icon" type="image/x-icon" href="../favicon.ico" />
   <link rel="icon" type="image/png" sizes="32x32" href="../assets/images/favicon-32x32.png" />
   <link rel="icon" type="image/png" sizes="192x192" href="../assets/images/favicon-192x192.png" />
@@ -174,60 +174,105 @@
     }
     .btn-outline:hover { border-color: var(--teal); background: rgba(94,234,212,.06); }
 
-    /* ── BLOG GRID ── */
-    .blogs-section { padding-top: 10rem; }
-    .blogs-header {
+    /* ── PAGE HEADER ── */
+    .page-section { padding-top: 10rem; }
+    .page-header {
       display: flex; align-items: flex-end; justify-content: space-between;
       margin-bottom: 3rem;
     }
 
-    .blog-grid {
+    /* ── INFO CARDS ── */
+    .info-grid {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: repeat(2, 1fr);
       gap: 1.5rem;
+      margin-bottom: 3rem;
     }
 
-    .blog-card {
+    .info-card {
       background: var(--card-bg);
       border: 1px solid var(--border);
       border-radius: 10px;
-      overflow: hidden;
+      padding: 2rem;
       transition: border-color .25s, transform .25s;
     }
-    .blog-card:hover { border-color: rgba(94,234,212,.4); transform: translateY(-4px); }
+    .info-card:hover { border-color: rgba(94,234,212,.4); transform: translateY(-4px); }
 
-    .blog-card-img {
-      height: 180px;
-      background: linear-gradient(135deg, var(--mid) 0%, #1a3260 100%);
-      display: flex; align-items: center; justify-content: center;
-      font-size: 2.5rem;
+    .info-card.full-width {
+      grid-column: 1 / -1;
     }
 
-    .blog-card-body { padding: 1.5rem; }
-    .blog-tag {
-      display: inline-block;
-      font-size: .7rem;
-      letter-spacing: .12em;
-      text-transform: uppercase;
-      color: var(--teal);
-      font-family: 'DM Sans', sans-serif;
+    .info-card h3 {
+      font-family: 'Syne', sans-serif;
       font-weight: 600;
+      font-size: 1.15rem;
+      letter-spacing: -.01em;
+      color: var(--teal);
       margin-bottom: .75rem;
     }
-    .blog-card h3 {
+
+    .info-card p {
+      font-size: .9rem;
+      color: var(--muted);
+      line-height: 1.75;
+    }
+
+    .info-card .icon {
+      font-size: 1.8rem;
+      margin-bottom: .75rem;
+    }
+
+    /* ── VALUES GRID ── */
+    .values-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+      margin-bottom: 3rem;
+    }
+
+    .value-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1.5rem;
+      text-align: center;
+      transition: border-color .25s, transform .25s;
+    }
+    .value-card:hover { border-color: rgba(94,234,212,.4); transform: translateY(-4px); }
+
+    .value-card .icon {
+      font-size: 2rem;
+      margin-bottom: .75rem;
+    }
+
+    .value-card h3 {
       font-family: 'Syne', sans-serif;
       font-weight: 600;
       font-size: 1rem;
-      letter-spacing: -.01em;
       color: var(--white);
       margin-bottom: .5rem;
-      line-height: 1.35;
     }
-    .blog-card p { font-size: .85rem; color: var(--muted); }
-    .blog-card-date {
-      font-size: .75rem;
+
+    .value-card p {
+      font-size: .85rem;
       color: var(--muted);
-      margin-top: .75rem;
+      line-height: 1.6;
+    }
+
+    /* ── GOVERNANCE ── */
+    .governance-section {
+      margin-top: 2rem;
+    }
+
+    .governance-section h2.section-title {
+      margin-bottom: 1rem;
+    }
+
+    .governance-body {
+      font-size: .9rem;
+      color: var(--muted);
+      line-height: 1.75;
+      margin-bottom: 2rem;
     }
 
     /* ── FOOTER ── */
@@ -283,21 +328,23 @@
 
     /* ── RESPONSIVE ── */
     @media (max-width: 900px) {
-      .blog-grid { grid-template-columns: 1fr 1fr; }
+      .info-grid { grid-template-columns: 1fr; }
+      .values-grid { grid-template-columns: 1fr 1fr; }
       .footer-grid { grid-template-columns: 1fr 1fr; }
       .header-top { padding: .6rem 1.2rem; }
       nav.main-nav { padding: .55rem 1.2rem; }
       .nav-left, .nav-right { gap: 1rem; }
       section { padding: 4rem 1.5rem; }
-      .blogs-section { padding-top: 8rem; }
+      .page-section { padding-top: 8rem; }
     }
 
     @media (max-width: 600px) {
-      .blog-grid { grid-template-columns: 1fr; }
+      .info-grid { grid-template-columns: 1fr; }
+      .values-grid { grid-template-columns: 1fr; }
       .footer-grid { grid-template-columns: 1fr; gap: 2rem; }
       .nav-right { display: none; }
-      .blogs-section { padding-top: 7rem; }
-      .blogs-header { flex-direction: column; align-items: flex-start; gap: 1rem; }
+      .page-section { padding-top: 7rem; }
+      .page-header { flex-direction: column; align-items: flex-start; gap: 1rem; }
     }
   </style>
 </head>
@@ -331,7 +378,7 @@
     </div>
 
     <div class="nav-right">
-      <a href="../blog/" class="active">Blog</a>
+      <a href="../blog/">Blog</a>
       <a href="https://psinetlab.wordpress.com/contacto/" target="_blank">Contacto</a>
       <a href="../index.html#apoyanos">Apóyanos</a>
       <a href="../index.html#colaboraciones">Colaboraciones</a>
@@ -339,19 +386,171 @@
   </nav>
 </header>
 
-<section class="blogs-section">
+<section class="page-section">
   <div class="container">
-    <div class="blogs-header reveal">
+    <div class="page-header reveal">
       <div>
-        <p class="section-tag">Blog</p>
-        <h2 class="section-title" style="margin-bottom:0;">Todas las publicaciones</h2>
+        <p class="section-tag">Conócenos</p>
+        <h2 class="section-title" style="margin-bottom:0;">Sobre PsiNet LAB</h2>
       </div>
       <a href="../index.html" class="btn btn-outline">← Inicio</a>
     </div>
 
-    <div class="blog-grid" id="blog-grid">
-      <!-- Rendered dynamically from blog-data.js -->
+    <!-- Misión y Visión -->
+    <div class="info-grid">
+      <div class="info-card reveal">
+        <div class="icon">🎯</div>
+        <h3>Misión</h3>
+        <p>
+          PsiNet LAB es una organización de investigación psicológica dedicada a generar conocimiento
+          científico innovador en el campo de la psicología, utilizando métodos avanzados y fundamentados
+          en la teoría de la complejidad. Nuestro objetivo es contribuir al entendimiento del
+          comportamiento humano y aplicar este conocimiento para mejorar la calidad de vida, promover
+          la diversidad y colaborar con comunidades para influir positivamente en políticas públicas.
+        </p>
+      </div>
+
+      <div class="info-card reveal" style="transition-delay:.08s">
+        <div class="icon">🔭</div>
+        <h3>Visión</h3>
+        <p>
+          Ser un referente global en investigación psicológica aplicada, reconocidos por nuestro
+          enfoque interdisciplinario, innovador y socialmente comprometido. Aspiramos a que nuestras
+          investigaciones y proyectos transformen comunidades, promoviendo el bienestar, la equidad
+          y el desarrollo humano sostenible en todo el mundo.
+        </p>
+      </div>
     </div>
+
+    <!-- Objetivos -->
+    <div class="info-grid">
+      <div class="info-card full-width reveal" style="transition-delay:.12s">
+        <div class="icon">📌</div>
+        <h3>Objetivos</h3>
+        <p>
+          Generar conocimiento científico innovador que aporte al entendimiento del comportamiento humano
+          y a la mejora de la calidad de vida. Aplicar métodos avanzados fundamentados en la teoría de
+          la complejidad para abordar fenómenos psicológicos desde perspectivas interdisciplinarias.
+          Colaborar con comunidades para desarrollar proyectos sociales que promuevan el bienestar,
+          la diversidad y la equidad. Influir positivamente en políticas públicas a través de
+          investigación basada en evidencia. Fomentar redes colaborativas con investigadores y
+          organizaciones a nivel nacional e internacional.
+        </p>
+      </div>
+    </div>
+
+    <!-- Valores -->
+    <p class="section-tag reveal" style="transition-delay:.16s">Nuestros Valores</p>
+    <h2 class="section-title reveal" style="transition-delay:.18s">Valores fundamentales</h2>
+
+    <div class="values-grid">
+      <div class="value-card reveal" style="transition-delay:.2s">
+        <div class="icon">💡</div>
+        <h3>Innovación</h3>
+        <p>Exploramos y aplicamos métodos avanzados e interdisciplinarios para generar soluciones prácticas que beneficien a las personas y a la sociedad en general.</p>
+      </div>
+
+      <div class="value-card reveal" style="transition-delay:.24s">
+        <div class="icon">💚</div>
+        <h3>Compromiso con el Bienestar</h3>
+        <p>Ponemos la mejora de la calidad de vida en el centro de nuestro trabajo, desarrollando soluciones que impacten positivamente en personas y comunidades.</p>
+      </div>
+
+      <div class="value-card reveal" style="transition-delay:.28s">
+        <div class="icon">🔬</div>
+        <h3>Integridad Científica</h3>
+        <p>Adoptamos un enfoque basado en la ética y la excelencia, asegurándonos de que nuestro trabajo sea riguroso, reproducible y al servicio del bien común.</p>
+      </div>
+
+      <div class="value-card reveal" style="transition-delay:.32s">
+        <div class="icon">🌐</div>
+        <h3>Redes Colaborativas</h3>
+        <p>Construimos relaciones sólidas y respetuosas con comunidades y aliados, co-creando iniciativas que generen impacto y valor compartido.</p>
+      </div>
+
+      <div class="value-card reveal" style="transition-delay:.36s">
+        <div class="icon">📖</div>
+        <h3>Accesibilidad del Conocimiento</h3>
+        <p>Promovemos la democratización del conocimiento psicológico, asegurando que esté disponible para todas las personas y sirva como catalizador del cambio.</p>
+      </div>
+
+      <div class="value-card reveal" style="transition-delay:.4s">
+        <div class="icon">🤝</div>
+        <h3>Humanidad Compartida</h3>
+        <p>Reconocemos la interconexión entre todas las personas y valoramos la dignidad, la empatía y el respeto mutuo como pilares fundamentales de nuestras acciones.</p>
+      </div>
+    </div>
+
+    <!-- Gobernanza -->
+    <div class="governance-section reveal" style="transition-delay:.44s">
+      <p class="section-tag">Estructura Organizacional</p>
+      <h2 class="section-title">Gobernanza</h2>
+      <p class="governance-body">
+        PsiNet LAB opera bajo un modelo de gobernanza colaborativa y transparente. Nuestra estructura
+        organizacional está diseñada para fomentar la participación activa de todos los miembros,
+        garantizando la toma de decisiones democrática y la rendición de cuentas. La organización
+        está liderada por un equipo directivo que coordina las líneas de investigación, los proyectos
+        sociales y las operaciones administrativas, asegurando que todas las actividades estén
+        alineadas con nuestra misión y valores.
+      </p>
+    </div>
+
+    <div class="info-grid">
+      <div class="info-card reveal" style="transition-delay:.48s">
+        <div class="icon">👤</div>
+        <h3>Dirección General</h3>
+        <p>
+          La Dirección General lidera la visión estratégica de PsiNet LAB, coordinando las diferentes
+          áreas de investigación y proyectos sociales para asegurar el cumplimiento de los objetivos
+          organizacionales.
+        </p>
+      </div>
+
+      <div class="info-card reveal" style="transition-delay:.52s">
+        <div class="icon">🧪</div>
+        <h3>Comité de Investigación</h3>
+        <p>
+          El Comité de Investigación supervisa la calidad científica de todos los proyectos,
+          garantizando estándares éticos y metodológicos rigurosos en cada línea de investigación.
+        </p>
+      </div>
+
+      <div class="info-card reveal" style="transition-delay:.56s">
+        <div class="icon">🌱</div>
+        <h3>Coordinación de Proyectos Sociales</h3>
+        <p>
+          Esta área gestiona los proyectos de impacto comunitario, coordinando con comunidades
+          y organizaciones aliadas para maximizar el alcance y la efectividad de nuestras
+          intervenciones.
+        </p>
+      </div>
+
+      <div class="info-card reveal" style="transition-delay:.6s">
+        <div class="icon">📋</div>
+        <h3>Administración y Operaciones</h3>
+        <p>
+          El área de administración y operaciones asegura la sostenibilidad organizacional,
+          gestionando recursos, alianzas y procesos internos que permiten el funcionamiento
+          eficiente de todas las áreas.
+        </p>
+      </div>
+    </div>
+
+    <!-- Ethos -->
+    <div class="info-grid">
+      <div class="info-card full-width reveal" style="transition-delay:.64s">
+        <div class="icon">✨</div>
+        <h3>El Ethos de PsiNet LAB</h3>
+        <p>
+          En PsiNet LAB, nuestro ethos se basa en la transformación humana a través de la ciencia,
+          la innovación y la colaboración, buscando mejorar vidas, promover la paz y construir
+          un mundo más justo e inclusivo. Creemos que la psicología tiene el poder de cambiar
+          realidades y nos comprometemos a utilizar ese poder de manera responsable, ética y
+          orientada al bienestar colectivo.
+        </p>
+      </div>
+    </div>
+
   </div>
 </section>
 
@@ -393,7 +592,7 @@
   </div>
 
   <div class="footer-bottom">
-    <p>© 2025 PsiNet LAB. Todos los derechos reservados.</p>
+    <p>&copy; 2025 PsiNet LAB. Todos los derechos reservados.</p>
     <div class="footer-bottom-links">
       <a href="#">Cookie Policy</a>
       <a href="#">Privacy Policy</a>
@@ -402,35 +601,7 @@
   </div>
 </footer>
 
-<script src="../assets/js/blog-data.js"></script>
 <script>
-  // Sort entries by date descending (most recent first)
-  var entries = BLOG_ENTRIES.slice().sort(function(a, b) {
-    return new Date(b.date) - new Date(a.date);
-  });
-
-  var grid = document.getElementById('blog-grid');
-  entries.forEach(function(entry, i) {
-    var card = document.createElement('div');
-    card.className = 'blog-card reveal';
-    if (i > 0) card.style.transitionDelay = (i * 0.05) + 's';
-
-    var dateStr = new Date(entry.date).toLocaleDateString('es-ES', {
-      year: 'numeric', month: 'long', day: 'numeric'
-    });
-
-    card.innerHTML =
-      '<div class="blog-card-img">' + entry.emoji + '</div>' +
-      '<div class="blog-card-body">' +
-        '<span class="blog-tag">' + entry.tag + '</span>' +
-        '<h3>' + entry.title + '</h3>' +
-        '<p>' + entry.excerpt + '</p>' +
-        '<p class="blog-card-date">' + dateStr + '</p>' +
-      '</div>';
-
-    grid.appendChild(card);
-  });
-
   // Scroll reveal
   var revealObserver = new IntersectionObserver(function(entries) {
     entries.forEach(function(e) {
