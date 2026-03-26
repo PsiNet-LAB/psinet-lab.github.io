@@ -359,7 +359,7 @@
       grid-template-areas:
         "ceo mission mission"
         "ceo logo    admissions"
-        "ethos ethos  community";
+        "ethos ethos  ethos";
     }
 
     .bento-card {
@@ -513,33 +513,23 @@
       grid-area: admissions;
       display: flex;
       flex-direction: column;
+      justify-content: center;
+      padding: 1.8rem 1.6rem;
+      background: linear-gradient(145deg, #0a1628 0%, #0e1f38 100%);
       position: relative;
       overflow: hidden;
     }
 
-    .bento-admissions-img {
-      flex: 1 1 auto;
-      overflow: hidden;
-      position: relative;
-    }
-
-    .bento-admissions-img img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-    }
-
-    .bento-admissions-img::after {
+    .bento-admissions::before {
       content: '';
       position: absolute;
       inset: 0;
-      background: linear-gradient(to top, var(--card-bg) 0%, rgba(14,31,56,.4) 50%, transparent 80%);
+      background: radial-gradient(circle at top right, rgba(94,234,212,.05) 0%, transparent 60%);
       pointer-events: none;
     }
 
     .bento-admissions-body {
-      padding: 1.4rem 1.4rem 1.6rem;
+      position: relative;
     }
 
     .bento-admissions-body .bento-title {
@@ -547,15 +537,7 @@
       font-weight: 700;
       font-size: 1.15rem;
       color: var(--white);
-      margin-bottom: .5rem;
-    }
-
-    .bento-admissions-body p {
-      font-family: 'Lora', serif;
-      font-size: .82rem;
-      color: var(--muted);
-      line-height: 1.6;
-      margin-bottom: 1rem;
+      margin-bottom: .8rem;
     }
 
     .bento-admissions-body .admissions-highlight {
@@ -607,30 +589,7 @@
       margin-bottom: 1.2rem;
     }
 
-    /* ─ Community Image Card ─ */
-    .bento-community {
-      grid-area: community;
-      overflow: hidden;
-      min-height: 200px;
-    }
-
-    .bento-community img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-      transition: transform .5s cubic-bezier(.4,0,.2,1);
-    }
-
-    .bento-community:hover img {
-      transform: scale(1.05);
-    }
-
     /* ─ Image Fallbacks ─ */
-    .bento-img-fallback {
-      background: linear-gradient(135deg, #112240, #0e1f38);
-    }
-
     .bento-logo-fallback::after {
       content: '∞';
       font-size: 5rem;
@@ -885,8 +844,7 @@
           "ceo       ceo"
           "mission   mission"
           "logo      admissions"
-          "ethos     ethos"
-          "community community";
+          "ethos     ethos";
       }
       .bento-ceo { min-height: 320px; }
       .ethos-grid { grid-template-columns: 1fr 1fr; }
@@ -906,11 +864,9 @@
           "mission"
           "logo"
           "admissions"
-          "ethos"
-          "community";
+          "ethos";
       }
       .bento-ceo { min-height: 300px; }
-      .bento-community { min-height: 220px; }
       .ethos-grid { grid-template-columns: 1fr; }
       .blog-grid { grid-template-columns: 1fr; }
       .footer-grid { grid-template-columns: 1fr; gap: 2rem; }
@@ -1072,13 +1028,6 @@
             Actualmente hemos finalizado con las postulaciones 2026-I. Permanece atento a nuestras redes para la siguiente convocatoria
           </p>
         </div>
-        <div class="bento-admissions-img">
-          <img
-            src="https://images.unsplash.com/photo-1529390079861-591de354faf5?w=600&q=80"
-            alt="Comunidad"
-            onerror="this.style.display='none';this.parentElement.classList.add('bento-img-fallback')"
-          />
-        </div>
       </div>
 
       <!-- Ethos Summary Card -->
@@ -1090,15 +1039,6 @@
           la innovación y la colaboración, buscando mejorar vidas, promover la paz y construir
           un mundo más justo e inclusivo.
         </p>
-      </div>
-
-      <!-- Community Image Card -->
-      <div class="bento-card bento-community reveal" style="transition-delay:.3s">
-        <img
-          src="https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?w=600&q=80"
-          alt="Comunidad e impacto social"
-          onerror="this.style.display='none';this.parentElement.classList.add('bento-img-fallback')"
-        />
       </div>
 
     </div>
