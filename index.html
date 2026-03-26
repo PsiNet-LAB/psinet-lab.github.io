@@ -502,9 +502,56 @@
       width: 100%;
       filter: drop-shadow(0 0 30px rgba(94,234,212,.15));
       transition: filter .3s;
+      position: relative;
+      z-index: 2;
+      animation: logoBreathe 4s ease-in-out infinite;
+    }
+
+    /* ─ Honeycomb Overlay ─ */
+    .honeycomb-grid {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      pointer-events: none;
+      overflow: hidden;
+    }
+
+    .honeycomb-grid.interactive {
+      pointer-events: auto;
+    }
+
+    .hex-cell {
+      position: absolute;
+      width: 40px;
+      height: 46px;
+      clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+      background: rgba(94,234,212,.0);
+      border: none;
+      transition: background .5s ease, box-shadow .5s ease;
+      will-change: background;
+    }
+
+    .hex-cell.breathing {
+      animation: hexBreathe 4s ease-in-out infinite;
+    }
+
+    .hex-cell.active {
+      background: rgba(94,234,212,.18);
+      transition: background .15s ease;
+    }
+
+    @keyframes hexBreathe {
+      0%, 100% { background: rgba(94,234,212,.0); }
+      50%      { background: rgba(94,234,212,.06); }
+    }
+
+    @keyframes logoBreathe {
+      0%, 100% { transform: scale(1); filter: drop-shadow(0 0 30px rgba(94,234,212,.15)); }
+      50%      { transform: scale(1.03); filter: drop-shadow(0 0 40px rgba(94,234,212,.25)); }
     }
 
     .bento-logo:hover img {
+      animation: logoBreathe 4s ease-in-out infinite;
       filter: drop-shadow(0 0 50px rgba(94,234,212,.3));
     }
 
@@ -1039,6 +1086,7 @@
 
       <!-- Logo Card -->
       <div class="bento-card bento-logo reveal" style="transition-delay:.15s">
+        <div class="honeycomb-grid" id="honeycomb-grid"></div>
         <img
           src="assets/images/logos/logo-new-tl.png"
           alt="PsiNet LAB Logo"
@@ -1291,6 +1339,74 @@
   window.addEventListener('scroll', () => {
     header.classList.toggle('scrolled', window.scrollY > 50);
   });
+
+  // ─ Honeycomb breathing grid on logo card ─
+  (function initHoneycomb() {
+    const grid = document.getElementById('honeycomb-grid');
+    if (!grid) return;
+
+    const card = grid.closest('.bento-logo');
+    const hexW = 40, hexH = 46;
+    const colOffset = hexW * 0.75;
+    const rowOffset = hexH;
+
+    function buildGrid() {
+      grid.innerHTML = '';
+      const w = card.offsetWidth;
+      const h = card.offsetHeight;
+      const cols = Math.ceil(w / colOffset) + 1;
+      const rows = Math.ceil(h / rowOffset) + 2;
+
+      for (let col = 0; col < cols; col++) {
+        for (let row = 0; row < rows; row++) {
+          const hex = document.createElement('div');
+          hex.className = 'hex-cell breathing';
+          const x = col * colOffset;
+          const y = row * rowOffset + (col % 2 === 1 ? rowOffset / 2 : 0);
+          hex.style.left = x + 'px';
+          hex.style.top = y + 'px';
+          // Stagger the breathing animation for organic feel
+          hex.style.animationDelay = (Math.random() * 4).toFixed(2) + 's';
+          hex.dataset.cx = (x + hexW / 2).toString();
+          hex.dataset.cy = (y + hexH / 2).toString();
+          grid.appendChild(hex);
+        }
+      }
+      grid.classList.add('interactive');
+    }
+
+    buildGrid();
+    window.addEventListener('resize', buildGrid);
+
+    // Activate cells near cursor
+    let activeHexes = [];
+    card.addEventListener('mousemove', function(e) {
+      const rect = card.getBoundingClientRect();
+      const mx = e.clientX - rect.left;
+      const my = e.clientY - rect.top;
+      const radius = 60;
+
+      // Clear previously active
+      activeHexes.forEach(function(h) { h.classList.remove('active'); });
+      activeHexes = [];
+
+      const cells = grid.querySelectorAll('.hex-cell');
+      cells.forEach(function(hex) {
+        const cx = parseFloat(hex.dataset.cx);
+        const cy = parseFloat(hex.dataset.cy);
+        const dist = Math.sqrt((mx - cx) * (mx - cx) + (my - cy) * (my - cy));
+        if (dist < radius) {
+          hex.classList.add('active');
+          activeHexes.push(hex);
+        }
+      });
+    });
+
+    card.addEventListener('mouseleave', function() {
+      activeHexes.forEach(function(h) { h.classList.remove('active'); });
+      activeHexes = [];
+    });
+  })();
 </script>
 
 <script src="assets/js/particles.min.js"></script>
