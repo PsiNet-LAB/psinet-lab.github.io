@@ -624,28 +624,53 @@
     .ethos-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 1.5px;
-      background: var(--border);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      overflow: hidden;
+      gap: 1.5rem;
     }
 
     .ethos-card {
-      background: var(--card-bg);
-      padding: 2.5rem;
+      position: relative;
+      background: linear-gradient(160deg, rgba(14,31,56,.95), rgba(11,22,41,.98));
+      padding: 2.5rem 2rem;
       display: flex;
       flex-direction: column;
-      gap: 1.2rem;
-      transition: background .25s;
+      align-items: center;
+      text-align: center;
+      gap: 1rem;
+      border-radius: 16px;
+      border: 1px solid rgba(94,234,212,.1);
+      transition: transform .35s cubic-bezier(.25,.46,.45,.94), border-color .35s, box-shadow .35s;
+      overflow: hidden;
     }
-    .ethos-card:hover { background: #132542; }
+    .ethos-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: 16px;
+      background: radial-gradient(circle at 50% 0%, rgba(94,234,212,.06) 0%, transparent 60%);
+      opacity: 0;
+      transition: opacity .4s;
+      pointer-events: none;
+    }
+    .ethos-card:hover {
+      transform: translateY(-6px);
+      border-color: rgba(94,234,212,.3);
+      box-shadow: 0 8px 32px rgba(94,234,212,.08), 0 0 0 1px rgba(94,234,212,.1);
+    }
+    .ethos-card:hover::before { opacity: 1; }
 
     .ethos-icon {
-      width: 64px; height: 64px;
-      border-radius: 12px;
+      width: 72px; height: 72px;
+      border-radius: 50%;
       overflow: hidden;
       flex-shrink: 0;
+      border: 2px solid rgba(94,234,212,.2);
+      box-shadow: 0 0 20px rgba(94,234,212,.08);
+      transition: border-color .35s, box-shadow .35s, transform .35s;
+    }
+    .ethos-card:hover .ethos-icon {
+      border-color: rgba(94,234,212,.45);
+      box-shadow: 0 0 28px rgba(94,234,212,.15);
+      transform: scale(1.08);
     }
     .ethos-icon img { width: 100%; height: 100%; object-fit: cover; }
 
@@ -655,25 +680,26 @@
       font-size: 1.1rem;
       letter-spacing: -.01em;
       color: var(--white);
+      transition: color .3s;
     }
+    .ethos-card:hover h3 { color: var(--teal); }
     .ethos-card p {
       font-family: 'Lora', serif;
-      font-size: .9rem;
+      font-size: .88rem;
       color: var(--muted);
       line-height: 1.75;
     }
-    .ethos-more {
-      margin-top: auto;
-      font-size: .75rem;
-      font-family: 'DM Sans', sans-serif;
-      font-weight: 600;
-      color: var(--teal);
-      letter-spacing: .1em;
-      text-transform: uppercase;
-      display: flex; align-items: center; gap: .4rem;
-      opacity: 0; transition: opacity .2s;
+
+    .ethos-card::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 10%; right: 10%;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--teal), transparent);
+      opacity: 0;
+      transition: opacity .35s;
     }
-    .ethos-card:hover .ethos-more { opacity: 1; }
+    .ethos-card:hover::after { opacity: .6; }
 
     /* ── BLOGS ── */
     .blogs-section { border-top: 1px solid var(--border); }
@@ -847,7 +873,7 @@
           "ethos     ethos";
       }
       .bento-ceo { min-height: 320px; }
-      .ethos-grid { grid-template-columns: 1fr 1fr; }
+      .ethos-grid { grid-template-columns: 1fr 1fr; gap: 1rem; }
       .blog-grid { grid-template-columns: 1fr 1fr; }
       .footer-grid { grid-template-columns: 1fr 1fr; }
       .header-top { padding: .6rem 1.2rem; }
@@ -867,7 +893,7 @@
           "ethos";
       }
       .bento-ceo { min-height: 300px; }
-      .ethos-grid { grid-template-columns: 1fr; }
+      .ethos-grid { grid-template-columns: 1fr; gap: 1rem; }
       .blog-grid { grid-template-columns: 1fr; }
       .footer-grid { grid-template-columns: 1fr; gap: 2rem; }
       .nav-right { display: none; }
@@ -1052,7 +1078,6 @@
 <section class="ethos-section" id="ethos">
   <div class="container">
     <div class="ethos-header reveal">
-      <p class="section-tag">El Ethos de PsiNet LAB</p>
       <h2 class="section-title">Nuestros valores fundamentales</h2>
       <p class="section-body">
         Nuestro ethos se basa en la transformación humana a través de la ciencia, la innovación
@@ -1069,7 +1094,6 @@
         </div>
         <h3>Innovación</h3>
         <p>Exploramos y aplicamos métodos avanzados e interdisciplinarios para generar soluciones prácticas que beneficien a las personas y a la sociedad en general.</p>
-        <span class="ethos-more">Saber más →</span>
       </div>
 
       <div class="ethos-card reveal" style="transition-delay:.08s">
@@ -1079,7 +1103,6 @@
         </div>
         <h3>Compromiso con el Bienestar</h3>
         <p>Ponemos la mejora de la calidad de vida en el centro de nuestro trabajo, desarrollando soluciones que impacten positivamente en personas y comunidades.</p>
-        <span class="ethos-more">Saber más →</span>
       </div>
 
       <div class="ethos-card reveal" style="transition-delay:.16s">
@@ -1089,7 +1112,6 @@
         </div>
         <h3>Integridad Científica</h3>
         <p>Adoptamos un enfoque basado en la ética y la excelencia, asegurándonos de que nuestro trabajo sea riguroso, reproducible y al servicio del bien común.</p>
-        <span class="ethos-more">Saber más →</span>
       </div>
 
       <div class="ethos-card reveal" style="transition-delay:.24s">
@@ -1099,7 +1121,6 @@
         </div>
         <h3>Redes Colaborativas</h3>
         <p>Construimos relaciones sólidas y respetuosas con comunidades y aliados, co-creando iniciativas que generen impacto y valor compartido.</p>
-        <span class="ethos-more">Saber más →</span>
       </div>
 
       <div class="ethos-card reveal" style="transition-delay:.32s">
@@ -1109,7 +1130,6 @@
         </div>
         <h3>Accesibilidad del Conocimiento</h3>
         <p>Promovemos la democratización del conocimiento psicológico, asegurando que esté disponible para todas las personas y sirva como catalizador del cambio.</p>
-        <span class="ethos-more">Saber más →</span>
       </div>
 
       <div class="ethos-card reveal" style="transition-delay:.4s">
@@ -1119,7 +1139,6 @@
         </div>
         <h3>Humanidad Compartida</h3>
         <p>Reconocemos la interconexión entre todas las personas y valoramos la dignidad, la empatía y el respeto mutuo como pilares fundamentales de nuestras acciones.</p>
-        <span class="ethos-more">Saber más →</span>
       </div>
     </div>
   </div>
