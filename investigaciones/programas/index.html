@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Lillian A. Infante Damian – PsiNet LAB</title>
+  <title>Programas – PsiNet LAB</title>
   <link rel="icon" type="image/x-icon" href="../../favicon.ico" />
   <link rel="icon" type="image/png" sizes="32x32" href="../../assets/images/favicon-32x32.png" />
   <link rel="icon" type="image/png" sizes="192x192" href="../../assets/images/favicon-192x192.png" />
@@ -55,13 +55,25 @@
       backdrop-filter: blur(20px);
     }
 
+    .header-top,
+    nav.main-nav {
+      position: relative;
+      z-index: 1;
+    }
+
+    .header-top {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: .6rem 2.5rem;
+    }
+
     nav.main-nav {
       position: relative;
       display: flex;
       align-items: center;
       justify-content: space-between;
       padding: .65rem 2.5rem;
-      z-index: 1;
     }
 
     .nav-left, .nav-right {
@@ -115,6 +127,7 @@
       letter-spacing: 0;
     }
     .dropdown-menu a:hover { background: rgba(94,234,212,.06); color: var(--teal); }
+
     /* Nested submenu */
     .dropdown-submenu { position: relative; }
     .dropdown-submenu > a { display: flex; justify-content: space-between; align-items: center; }
@@ -185,169 +198,114 @@
       border: 1px solid var(--border);
     }
     .btn-outline:hover { border-color: var(--teal); background: rgba(94,234,212,.06); }
-
-    .btn-teal {
+    .btn-primary {
       background: var(--teal);
       color: var(--navy);
     }
-    .btn-teal:hover { background: var(--teal2); }
+    .btn-primary:hover { background: var(--teal2); }
 
-    .profile-buttons {
+    /* ── RESEARCH GRID ── */
+    .research-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: 1fr 1fr;
+      min-height: 700px;
+      padding-top: calc(80px + 2rem);
+    }
+
+    .research-cell {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 350px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Decorative image cells */
+    .research-cell.decorative {
+      background: linear-gradient(135deg, #0d1f3c 0%, #1a3260 60%, #112240 100%);
+    }
+
+    .decorative-content {
       display: flex;
       flex-direction: column;
-      gap: .75rem;
-      margin-top: 1.5rem;
-    }
-    .profile-buttons .btn {
-      justify-content: center;
-      width: 100%;
-    }
-
-    .profile-quote {
-      background: var(--deep);
-      border: 1px solid var(--border);
-      border-left: 3px solid var(--teal);
-      border-radius: 8px;
-      padding: 1.5rem;
-      margin-bottom: 1.5rem;
-      font-family: 'Lora', serif;
-      font-style: italic;
-      font-size: .95rem;
-      color: var(--white);
-      line-height: 1.8;
-    }
-
-    .social-icons {
-      display: flex;
-      gap: .6rem;
-      margin-top: 1rem;
-    }
-    .social-icon {
-      display: inline-flex;
       align-items: center;
       justify-content: center;
-      width: 38px;
-      height: 38px;
-      border-radius: 8px;
-      background: rgba(94,234,212,.08);
-      border: 1px solid var(--border);
-      color: var(--teal);
-      transition: all .2s;
-    }
-    .social-icon:hover {
-      background: rgba(94,234,212,.15);
-      border-color: var(--teal);
-    }
-    .social-icon svg {
-      width: 18px;
-      height: 18px;
-    }
-
-    /* ── PAGE HEADER ── */
-    .page-section { padding-top: 10rem; }
-
-    /* ── PROFILE LAYOUT ── */
-    .profile-layout {
-      display: grid;
-      grid-template-columns: 320px 1fr;
-      gap: 3rem;
-      align-items: start;
-    }
-
-    .profile-sidebar {
-      position: sticky;
-      top: 8rem;
-    }
-
-    .profile-photo {
       width: 100%;
-      aspect-ratio: 1 / 1;
-      object-fit: cover;
-      border-radius: 12px;
-      border: 1px solid var(--border);
-      display: block;
-      margin-bottom: 1.5rem;
+      height: 100%;
+      position: relative;
     }
 
-    .profile-name {
+    .decorative-content .program-logo {
+      max-width: 220px;
+      max-height: 220px;
+      object-fit: contain;
+      filter: drop-shadow(0 4px 24px rgba(94,234,212,.15));
+      position: relative;
+      z-index: 2;
+    }
+
+    .decorative-content svg {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      opacity: .07;
+    }
+
+    /* Text cells */
+    .research-cell.text-cell {
+      background: var(--deep);
+      padding: 3rem 3.5rem;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: center;
+    }
+
+    .research-cell.text-cell .section-tag {
+      margin-bottom: .75rem;
+    }
+
+    .research-cell.text-cell h2 {
       font-family: 'Syne', sans-serif;
       font-weight: 700;
-      font-size: 1.6rem;
-      color: var(--white);
+      font-size: clamp(1.5rem, 3vw, 2.2rem);
       letter-spacing: -.02em;
-      margin-bottom: .3rem;
-    }
-
-    .profile-role {
-      font-size: .95rem;
-      color: var(--teal);
-      font-weight: 500;
-      margin-bottom: .3rem;
-    }
-
-    .profile-area {
-      font-size: .8rem;
-      color: var(--muted);
-      text-transform: uppercase;
-      letter-spacing: .1em;
-      margin-bottom: 1.5rem;
-    }
-
-    .profile-back {
-      display: inline-flex;
-      align-items: center;
-      gap: .4rem;
-      font-size: .82rem;
-      font-weight: 600;
-      color: var(--teal);
-      letter-spacing: .04em;
-      text-transform: uppercase;
-      transition: gap .2s;
-    }
-    .profile-back:hover { gap: .7rem; }
-
-    /* ── PROFILE CONTENT ── */
-    .profile-content h3 {
-      font-family: 'Syne', sans-serif;
-      font-weight: 600;
-      font-size: 1.15rem;
+      line-height: 1.2;
       color: var(--white);
-      margin-bottom: .75rem;
-      margin-top: 2rem;
-    }
-    .profile-content h3:first-child { margin-top: 0; }
-
-    .profile-content p {
-      font-size: .92rem;
-      color: var(--muted);
-      line-height: 1.8;
       margin-bottom: 1rem;
     }
 
-    .interest-tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: .6rem;
-      margin-top: .5rem;
+    .research-cell.text-cell p {
+      font-size: .95rem;
+      color: var(--muted);
+      line-height: 1.8;
+      margin-bottom: 1.8rem;
+      max-width: 440px;
     }
 
-    .interest-tag {
-      background: rgba(94,234,212,.08);
-      border: 1px solid var(--border);
+    .btn-round-outline {
+      display: inline-flex;
+      align-items: center;
+      gap: .5rem;
+      font-size: .82rem;
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 600;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      padding: .75rem 2rem;
+      border-radius: 50px;
+      border: 1.5px solid rgba(240,244,255,.35);
+      background: transparent;
+      color: var(--white);
+      cursor: pointer;
+      transition: all .25s;
+    }
+    .btn-round-outline:hover {
+      border-color: var(--teal);
       color: var(--teal);
-      font-size: .78rem;
-      font-weight: 500;
-      padding: .4rem 1rem;
-      border-radius: 20px;
-      letter-spacing: .02em;
-    }
-
-    .profile-card {
-      background: var(--card-bg);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 2rem;
-      margin-bottom: 1.5rem;
+      background: rgba(94,234,212,.06);
     }
 
     /* ── FOOTER ── */
@@ -403,25 +361,31 @@
 
     /* ── RESPONSIVE ── */
     @media (max-width: 900px) {
-      .profile-layout {
-        grid-template-columns: 1fr;
-      }
-      .profile-sidebar {
-        position: static;
-        max-width: 360px;
-      }
       .footer-grid { grid-template-columns: 1fr 1fr; }
+      .header-top { padding: .6rem 1.2rem; }
       nav.main-nav { padding: .55rem 1.2rem; }
       .nav-left, .nav-right { gap: 1rem; }
       section { padding: 4rem 1.5rem; }
-      .page-section { padding-top: 8rem; }
+      .research-cell.text-cell { padding: 2.5rem 2rem; }
+    }
+
+    @media (max-width: 768px) {
+      .research-grid {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto;
+      }
+      .research-cell.decorative.top-left { order: 2; }
+      .research-cell.text-cell.top-right { order: 1; }
+      .research-cell.text-cell.bottom-left { order: 3; }
+      .research-cell.decorative.bottom-right { order: 4; }
+
+      .research-cell { min-height: 280px; }
+      .research-cell.decorative { min-height: 200px; }
     }
 
     @media (max-width: 600px) {
-      .profile-sidebar { max-width: 100%; }
       .footer-grid { grid-template-columns: 1fr; gap: 2rem; }
       .nav-right { display: none; }
-      .page-section { padding-top: 7rem; }
     }
   </style>
 </head>
@@ -430,27 +394,27 @@
 <header>
   <nav class="main-nav">
     <div class="nav-left">
-      <a href="../../miembros/" class="active">Miembros</a>
+      <a href="../../miembros/">Miembros</a>
       <div class="nav-dropdown">
-        <a href="../../investigaciones/">Investigaciones ▾</a>
+        <a href="../" class="active">Investigaciones ▾</a>
         <div class="dropdown-menu">
-          <a href="../../investigaciones/lineas-de-investigacion/">Líneas de Investigación</a>
-          <a href="../../investigaciones/publicaciones/">Publicaciones</a>
+          <a href="../lineas-de-investigacion/">Líneas de Investigación</a>
+          <a href="../publicaciones/">Publicaciones</a>
           <div class="dropdown-submenu">
-            <a href="../../investigaciones/programas/">Programas ▸</a>
+            <a href="./">Programas ▸</a>
             <div class="dropdown-submenu-menu">
-              <a href="../../investigaciones/programas/bienestar/">BienEstar</a>
-              <a href="../../investigaciones/programas/espacio-mental/">Espacio Mental</a>
+              <a href="bienestar/">BienEstar</a>
+              <a href="espacio-mental/">Espacio Mental</a>
             </div>
           </div>
         </div>
       </div>
       <div class="nav-dropdown">
-        <a href="../../index.html#proyectos">Proyectos ▾</a>
+        <a href="../../proyectos-sociales/">Proyectos ▾</a>
         <div class="dropdown-menu">
-          <a href="../../index.html#bienestar">BienEstar</a>
-          <a href="../../index.html#escool">PsiNet EsCool</a>
-          <a href="../../index.html#mente">La Ciencia de la Mente</a>
+          <a href="https://psinetlab.wordpress.com/bienestar/" target="_blank">BienEstar</a>
+          <a href="https://psinetlab.wordpress.com/psinet-escool/" target="_blank">PsiNet EsCool</a>
+          <a href="https://psinetlab.wordpress.com/la-ciencia-de-la-mente/" target="_blank">La Ciencia de la Mente</a>
         </div>
       </div>
     </div>
@@ -470,42 +434,60 @@
   </nav>
 </header>
 
-<section class="page-section">
-  <div class="container">
+<div class="research-grid">
 
-    <div class="profile-layout">
-      <div class="profile-sidebar reveal">
-        <img class="profile-photo" src="../../assets/images/photos/lillian-8k.jpg" alt="Lillian A. Infante Damian" />
-        <h1 class="profile-name">Lillian A. Infante Damian</h1>
-        <p class="profile-role">Miembro Investigadora</p>
-        <p class="profile-area">Investigación</p>
-        <a href="../../miembros/" class="profile-back">← Todos los miembros</a>
-      </div>
-
-      <div class="profile-content">
-        <div class="profile-card reveal" style="transition-delay:.1s">
-          <h3>Sobre</h3>
-          <p>Miembro Investigadora en PsiNet LAB. Contribuye al desarrollo de proyectos de investigación psicológica orientados al bienestar y la comprensión del ser humano.</p>
-        </div>
-
-        <div class="profile-card reveal" style="transition-delay:.18s">
-          <h3>Áreas de interés</h3>
-          <div class="interest-tags">
-              <span class="interest-tag">Bienestar psicológico</span>
-              <span class="interest-tag">Investigación cualitativa</span>
-              <span class="interest-tag">Desarrollo humano</span>
-          </div>
-        </div>
-
-        <div class="profile-card reveal" style="transition-delay:.26s">
-          <h3>Afiliación</h3>
-          <p>Miembro de PsiNet LAB — Laboratorio de investigación psicológica dedicado a generar conocimiento científico innovador, utilizando métodos avanzados y fundamentados en la teoría de la complejidad para contribuir al entendimiento del comportamiento humano.</p>
-        </div>
-      </div>
+  <!-- Row 1, Left: Decorative (BienEstar logo) -->
+  <div class="research-cell decorative top-left reveal">
+    <div class="decorative-content">
+      <svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="200" cy="200" r="150" fill="none" stroke="#5eead4" stroke-width=".5"/>
+        <circle cx="200" cy="200" r="100" fill="none" stroke="#5eead4" stroke-width=".3"/>
+        <circle cx="200" cy="200" r="50" fill="none" stroke="#5eead4" stroke-width=".3"/>
+        <line x1="50" y1="200" x2="350" y2="200" stroke="#5eead4" stroke-width=".2"/>
+        <line x1="200" y1="50" x2="200" y2="350" stroke="#5eead4" stroke-width=".2"/>
+        <circle cx="140" cy="120" r="8" fill="#5eead4" opacity=".15"/>
+        <circle cx="280" cy="160" r="6" fill="#5eead4" opacity=".12"/>
+        <circle cx="160" cy="280" r="10" fill="#5eead4" opacity=".1"/>
+        <circle cx="300" cy="260" r="5" fill="#5eead4" opacity=".18"/>
+      </svg>
+      <img src="../../assets/images/logos/bienestar.png" alt="BienEstar" class="program-logo" />
     </div>
-
   </div>
-</section>
+
+  <!-- Row 1, Right: Text (BienEstar) -->
+  <div class="research-cell text-cell top-right reveal" style="transition-delay:.1s">
+    <p class="section-tag">Programa</p>
+    <h2>BienEstar</h2>
+    <p>Programa orientado a promover el bienestar integral mediante intervenciones basadas en evidencia científica y prácticas psicológicas innovadoras.</p>
+    <a href="bienestar/" class="btn-round-outline">Leer Más →</a>
+  </div>
+
+  <!-- Row 2, Left: Text (Espacio Mental) -->
+  <div class="research-cell text-cell bottom-left reveal" style="transition-delay:.2s">
+    <p class="section-tag">Programa</p>
+    <h2>Espacio Mental</h2>
+    <p>Un espacio dedicado a la exploración y comprensión de los procesos mentales, fomentando la salud mental y el desarrollo personal.</p>
+    <a href="espacio-mental/" class="btn-round-outline">Leer Más →</a>
+  </div>
+
+  <!-- Row 2, Right: Decorative (Espacio Mental logo) -->
+  <div class="research-cell decorative bottom-right reveal" style="transition-delay:.3s">
+    <div class="decorative-content">
+      <svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+        <rect x="100" y="80" width="200" height="240" rx="8" fill="none" stroke="#5eead4" stroke-width=".4"/>
+        <line x1="130" y1="140" x2="270" y2="140" stroke="#5eead4" stroke-width=".3"/>
+        <line x1="130" y1="170" x2="270" y2="170" stroke="#5eead4" stroke-width=".3"/>
+        <line x1="130" y1="200" x2="250" y2="200" stroke="#5eead4" stroke-width=".3"/>
+        <line x1="130" y1="230" x2="260" y2="230" stroke="#5eead4" stroke-width=".3"/>
+        <line x1="130" y1="260" x2="220" y2="260" stroke="#5eead4" stroke-width=".3"/>
+        <circle cx="320" cy="100" r="4" fill="#5eead4" opacity=".12"/>
+        <circle cx="80" cy="300" r="6" fill="#5eead4" opacity=".1"/>
+      </svg>
+      <img src="../../assets/images/logos/espacio-mental.png" alt="Espacio Mental" class="program-logo" />
+    </div>
+  </div>
+
+</div>
 
 <footer>
   <div class="footer-grid">
@@ -528,8 +510,8 @@
     <div class="footer-col">
       <h4>Investigación</h4>
       <ul>
-        <li><a href="../../investigaciones/publicaciones/">Publicaciones</a></li>
-        <li><a href="../../investigaciones/lineas-de-investigacion/">Líneas de Investigación</a></li>
+        <li><a href="../publicaciones/">Publicaciones</a></li>
+        <li><a href="../lineas-de-investigacion/">Líneas de Investigación</a></li>
         <li><a href="../../miembros/">Miembros</a></li>
       </ul>
     </div>
