@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Espacio Mental – PsiNet LAB</title>
+  <title>Espacio Mental – De la idea a la innovación – PsiNet LAB</title>
   <link rel="icon" type="image/x-icon" href="../../../favicon.ico" />
   <link rel="icon" type="image/png" sizes="32x32" href="../../../assets/images/favicon-32x32.png" />
   <link rel="icon" type="image/png" sizes="192x192" href="../../../assets/images/favicon-192x192.png" />
@@ -198,76 +198,546 @@
       border: 1px solid var(--border);
     }
     .btn-outline:hover { border-color: var(--teal); background: rgba(94,234,212,.06); }
+    .btn-teal {
+      background: var(--teal);
+      color: var(--navy);
+    }
+    .btn-teal:hover { background: var(--teal2); }
 
-    /* ── PAGE HEADER ── */
-    .page-section { padding-top: 10rem; }
-    .page-header {
-      display: flex; align-items: flex-end; justify-content: space-between;
-      margin-bottom: 3rem;
+    /* ── HERO ── */
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 8rem 2.5rem 4rem;
+      overflow: hidden;
     }
 
-    /* ── PROGRAM LOGO ── */
-    .program-logo-container {
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+    }
+
+    .hero-bg .orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(100px);
+      opacity: .25;
+      animation: orbFloat 12s ease-in-out infinite alternate;
+    }
+    .hero-bg .orb-1 {
+      width: 500px; height: 500px;
+      background: radial-gradient(circle, var(--teal) 0%, transparent 70%);
+      top: -10%; left: -10%;
+      animation-delay: 0s;
+    }
+    .hero-bg .orb-2 {
+      width: 400px; height: 400px;
+      background: radial-gradient(circle, var(--gold) 0%, transparent 70%);
+      bottom: -5%; right: -5%;
+      animation-delay: -4s;
+    }
+    .hero-bg .orb-3 {
+      width: 300px; height: 300px;
+      background: radial-gradient(circle, #6366f1 0%, transparent 70%);
+      top: 50%; left: 60%;
+      animation-delay: -8s;
+    }
+
+    @keyframes orbFloat {
+      0%   { transform: translate(0, 0) scale(1); }
+      50%  { transform: translate(40px, -30px) scale(1.1); }
+      100% { transform: translate(-20px, 20px) scale(.95); }
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      max-width: 760px;
+    }
+
+    .hero-logo {
+      width: 180px;
+      height: 180px;
+      object-fit: contain;
+      margin-bottom: 2rem;
+      filter: drop-shadow(0 0 40px rgba(94,234,212,.2));
+      animation: logoEntrance 1.2s ease-out both;
+    }
+
+    @keyframes logoEntrance {
+      0%   { opacity: 0; transform: scale(.7) translateY(30px); }
+      100% { opacity: 1; transform: scale(1) translateY(0); }
+    }
+
+    .hero-label {
+      font-size: .7rem;
+      letter-spacing: .22em;
+      text-transform: uppercase;
+      color: var(--teal);
+      font-weight: 600;
+      margin-bottom: .75rem;
+      animation: fadeUp .8s .3s ease-out both;
+    }
+
+    .hero h1 {
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: clamp(1.8rem, 4.5vw, 3rem);
+      letter-spacing: -.03em;
+      line-height: 1.1;
+      margin-bottom: 1.2rem;
+      animation: fadeUp .8s .5s ease-out both;
+    }
+
+    .hero h1 .accent {
+      background: linear-gradient(135deg, var(--teal), var(--gold));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero-subtitle {
+      font-family: 'Lora', serif;
+      font-size: 1.05rem;
+      font-style: italic;
+      color: var(--muted);
+      line-height: 1.75;
+      max-width: 580px;
+      margin: 0 auto 1.5rem;
+      animation: fadeUp .8s .7s ease-out both;
+    }
+
+    .hero-meta {
       display: flex;
       justify-content: center;
-      margin-bottom: 3rem;
-    }
-    .program-logo-container img {
-      max-width: 280px;
-      max-height: 280px;
-      object-fit: contain;
-      filter: drop-shadow(0 4px 24px rgba(94,234,212,.15));
+      gap: 2rem;
+      flex-wrap: wrap;
+      margin-bottom: 2rem;
+      animation: fadeUp .8s .85s ease-out both;
     }
 
-    /* ── DESCRIPTION CARD ── */
-    .description-card {
-      background: var(--card-bg);
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: 2.5rem;
-      margin-bottom: 3rem;
+    .hero-meta-item {
+      display: flex;
+      align-items: center;
+      gap: .5rem;
+      font-size: .8rem;
+      color: var(--muted);
     }
-    .description-card p {
+
+    .hero-meta-item svg {
+      width: 16px;
+      height: 16px;
+      fill: var(--teal);
+      flex-shrink: 0;
+    }
+
+    .hero-scroll {
+      animation: fadeUp .8s 1s ease-out both;
+    }
+    .hero-scroll a {
+      display: inline-flex;
+      flex-direction: column;
+      align-items: center;
+      gap: .4rem;
+      font-size: .72rem;
+      letter-spacing: .15em;
+      text-transform: uppercase;
+      color: var(--muted);
+      transition: color .3s;
+    }
+    .hero-scroll a:hover { color: var(--teal); }
+    .hero-scroll .scroll-line {
+      width: 1px;
+      height: 36px;
+      background: linear-gradient(to bottom, var(--teal), transparent);
+      animation: scrollPulse 2s ease-in-out infinite;
+    }
+
+    @keyframes scrollPulse {
+      0%, 100% { opacity: .4; transform: scaleY(1); }
+      50%      { opacity: 1; transform: scaleY(1.3); }
+    }
+
+    @keyframes fadeUp {
+      0%   { opacity: 0; transform: translateY(24px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ── SPLIT SECTION ── */
+    .split {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+    }
+
+    .split-text p {
       font-size: .95rem;
       color: var(--muted);
       line-height: 1.85;
-    }
-
-    /* ── FOCUS AREAS GRID ── */
-    .focus-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 2rem;
-    }
-
-    .focus-card {
-      background: var(--card-bg);
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: 2rem;
-      text-align: center;
-      transition: border-color .25s, transform .25s;
-    }
-    .focus-card:hover { border-color: rgba(94,234,212,.4); transform: translateY(-4px); }
-
-    .focus-card-icon {
-      font-size: 2.5rem;
       margin-bottom: 1rem;
     }
 
-    .focus-card h3 {
+    .split-text .highlight {
+      color: var(--white);
+      font-weight: 500;
+    }
+
+    /* ── TIMELINE ── */
+    .timeline {
+      position: relative;
+      padding-left: 2.5rem;
+    }
+
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 2px;
+      background: linear-gradient(to bottom, var(--teal), var(--gold), transparent);
+    }
+
+    .timeline-item {
+      position: relative;
+      margin-bottom: 2.5rem;
+    }
+
+    .timeline-item:last-child { margin-bottom: 0; }
+
+    .timeline-item::before {
+      content: '';
+      position: absolute;
+      left: -2.5rem;
+      top: .35rem;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: var(--teal);
+      border: 2px solid var(--navy);
+      box-shadow: 0 0 12px rgba(94,234,212,.4);
+      transform: translateX(-5px);
+    }
+
+    .timeline-date {
+      font-family: 'Syne', sans-serif;
+      font-weight: 700;
+      font-size: .95rem;
+      color: var(--teal);
+      margin-bottom: .3rem;
+    }
+
+    .timeline-badge {
+      display: inline-block;
+      font-size: .68rem;
+      font-weight: 600;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      padding: .25rem .75rem;
+      border-radius: 20px;
+      margin-bottom: .6rem;
+    }
+
+    .badge-presencial {
+      background: rgba(94,234,212,.12);
+      color: var(--teal);
+      border: 1px solid rgba(94,234,212,.25);
+    }
+
+    .badge-virtual {
+      background: rgba(240,180,41,.12);
+      color: var(--gold);
+      border: 1px solid rgba(240,180,41,.25);
+    }
+
+    .timeline-title {
+      font-family: 'Syne', sans-serif;
+      font-weight: 600;
+      font-size: 1rem;
+      color: var(--white);
+      margin-bottom: .4rem;
+    }
+
+    .timeline-desc {
+      font-size: .88rem;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    /* ── CONTRIBUTORS ── */
+    .contributors-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+
+    .contributor-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.8rem 1.5rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      transition: border-color .3s, transform .3s;
+    }
+    .contributor-card:hover {
+      border-color: rgba(94,234,212,.45);
+      transform: translateY(-6px);
+    }
+    .contributor-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--teal), var(--gold));
+      opacity: 0;
+      transition: opacity .3s;
+    }
+    .contributor-card:hover::before { opacity: 1; }
+
+    .contributor-avatar {
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--teal), var(--gold));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 1rem;
+      font-family: 'Syne', sans-serif;
+      font-weight: 700;
+      font-size: 1.1rem;
+      color: var(--navy);
+    }
+
+    .contributor-card h3 {
+      font-family: 'Syne', sans-serif;
+      font-weight: 600;
+      font-size: .95rem;
+      color: var(--white);
+      margin-bottom: .3rem;
+    }
+
+    .contributor-card .contributor-role {
+      font-size: .78rem;
+      color: var(--muted);
+      font-style: italic;
+    }
+
+    /* ── GALLERY ── */
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-auto-rows: 220px;
+      gap: 1rem;
+    }
+
+    .gallery-grid .gallery-item:first-child {
+      grid-column: 1 / 3;
+      grid-row: 1 / 3;
+    }
+
+    .gallery-item {
+      position: relative;
+      border-radius: 12px;
+      overflow: hidden;
+      cursor: pointer;
+    }
+
+    .gallery-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform .5s ease;
+    }
+    .gallery-item:hover img { transform: scale(1.05); }
+
+    .gallery-item .gallery-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(11,22,41,.7) 0%, transparent 50%);
+      opacity: 0;
+      transition: opacity .3s;
+      display: flex;
+      align-items: flex-end;
+      padding: 1rem;
+    }
+    .gallery-item:hover .gallery-overlay { opacity: 1; }
+
+    .gallery-overlay span {
+      font-size: .75rem;
+      color: var(--white);
+      font-style: italic;
+    }
+
+    /* ── VIDEO SECTION ── */
+    .video-section {
+      text-align: center;
+    }
+
+    .video-wrapper {
+      position: relative;
+      max-width: 860px;
+      margin: 0 auto;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 20px 80px rgba(94,234,212,.08), 0 2px 20px rgba(0,0,0,.4);
+      border: 1px solid var(--border);
+    }
+
+    .video-wrapper::before {
+      content: '';
+      display: block;
+      padding-top: 56.25%;
+    }
+
+    .video-wrapper iframe {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+
+    /* ── MATERIALS ── */
+    .material-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 2.5rem;
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 2rem;
+      align-items: center;
+      transition: border-color .3s;
+    }
+    .material-card:hover { border-color: rgba(94,234,212,.35); }
+
+    .material-icon {
+      width: 72px;
+      height: 72px;
+      border-radius: 16px;
+      background: linear-gradient(135deg, rgba(94,234,212,.15), rgba(240,180,41,.1));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+      flex-shrink: 0;
+    }
+
+    .material-info h3 {
       font-family: 'Syne', sans-serif;
       font-weight: 600;
       font-size: 1.1rem;
-      letter-spacing: -.01em;
       color: var(--white);
-      margin-bottom: .75rem;
+      margin-bottom: .4rem;
     }
 
-    .focus-card p {
-      font-size: .88rem;
+    .material-info .material-authors {
+      font-size: .85rem;
       color: var(--muted);
-      line-height: 1.75;
+      margin-bottom: .6rem;
+      line-height: 1.6;
+    }
+
+    .material-info .material-doi {
+      font-size: .78rem;
+      color: var(--teal);
+      word-break: break-all;
+    }
+    .material-info .material-doi:hover { color: var(--teal2); }
+
+    /* ── CITATION ── */
+    .citation-box {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 2rem 2.5rem;
+      position: relative;
+    }
+
+    .citation-box::before {
+      content: '"';
+      position: absolute;
+      top: -8px;
+      left: 1.5rem;
+      font-family: 'Lora', serif;
+      font-size: 4rem;
+      color: var(--teal);
+      opacity: .3;
+      line-height: 1;
+    }
+
+    .citation-text {
+      font-family: 'Lora', serif;
+      font-size: .9rem;
+      font-style: italic;
+      color: var(--muted);
+      line-height: 1.85;
+      padding-left: .5rem;
+    }
+
+    .citation-doi {
+      display: inline-flex;
+      align-items: center;
+      gap: .5rem;
+      margin-top: 1.2rem;
+      font-size: .82rem;
+      color: var(--teal);
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 500;
+      transition: color .2s;
+    }
+    .citation-doi:hover { color: var(--teal2); }
+
+    .citation-doi svg {
+      width: 16px;
+      height: 16px;
+      fill: currentColor;
+      flex-shrink: 0;
+    }
+
+    /* ── CLOSING ── */
+    .closing {
+      text-align: center;
+      padding: 5rem 2.5rem;
+      position: relative;
+    }
+
+    .closing-text {
+      font-family: 'Lora', serif;
+      font-size: clamp(1.1rem, 2.5vw, 1.4rem);
+      font-style: italic;
+      color: var(--muted);
+      max-width: 700px;
+      margin: 0 auto 1.5rem;
+      line-height: 1.8;
+    }
+
+    .closing-brand {
+      font-family: 'Syne', sans-serif;
+      font-weight: 700;
+      font-size: clamp(1rem, 2vw, 1.2rem);
+      background: linear-gradient(135deg, var(--teal), var(--gold));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .closing .divider {
+      width: 60px;
+      height: 2px;
+      background: linear-gradient(90deg, var(--teal), var(--gold));
+      margin: 2rem auto 0;
+      border-radius: 2px;
     }
 
     /* ── FOOTER ── */
@@ -321,6 +791,20 @@
     }
     .reveal.visible { opacity: 1; transform: translateY(0); }
 
+    .reveal-left {
+      opacity: 0;
+      transform: translateX(-40px);
+      transition: opacity .7s ease, transform .7s ease;
+    }
+    .reveal-left.visible { opacity: 1; transform: translateX(0); }
+
+    .reveal-right {
+      opacity: 0;
+      transform: translateX(40px);
+      transition: opacity .7s ease, transform .7s ease;
+    }
+    .reveal-right.visible { opacity: 1; transform: translateX(0); }
+
     /* ── RESPONSIVE ── */
     @media (max-width: 900px) {
       .footer-grid { grid-template-columns: 1fr 1fr; }
@@ -328,16 +812,35 @@
       nav.main-nav { padding: .55rem 1.2rem; }
       .nav-left, .nav-right { gap: 1rem; }
       section { padding: 4rem 1.5rem; }
-      .page-section { padding-top: 8rem; }
-      .focus-grid { grid-template-columns: repeat(2, 1fr); }
+      .split { grid-template-columns: 1fr; gap: 2.5rem; }
+      .contributors-grid { grid-template-columns: repeat(2, 1fr); }
+      .gallery-grid {
+        grid-template-columns: repeat(2, 1fr);
+        grid-auto-rows: 180px;
+      }
+      .gallery-grid .gallery-item:first-child {
+        grid-column: 1 / 3;
+        grid-row: auto;
+      }
+      .material-card { grid-template-columns: 1fr; text-align: center; }
+      .material-icon { margin: 0 auto; }
     }
 
     @media (max-width: 600px) {
       .footer-grid { grid-template-columns: 1fr; gap: 2rem; }
       .nav-right { display: none; }
-      .page-section { padding-top: 7rem; }
-      .page-header { flex-direction: column; align-items: flex-start; gap: 1rem; }
-      .focus-grid { grid-template-columns: 1fr; }
+      .hero { padding: 7rem 1.5rem 3rem; min-height: auto; }
+      .hero-logo { width: 130px; height: 130px; }
+      .hero-meta { gap: 1rem; }
+      .contributors-grid { grid-template-columns: 1fr; }
+      .gallery-grid {
+        grid-template-columns: 1fr;
+        grid-auto-rows: 200px;
+      }
+      .gallery-grid .gallery-item:first-child {
+        grid-column: auto;
+      }
+      .closing { padding: 3rem 1.5rem; }
     }
   </style>
 </head>
@@ -384,60 +887,213 @@
   </nav>
 </header>
 
-<section class="page-section">
-  <div class="container">
-    <div class="page-header reveal">
-      <div>
-        <p class="section-tag">Programa</p>
-        <h2 class="section-title" style="margin-bottom:0;">Espacio Mental</h2>
-      </div>
-      <a href="../" class="btn btn-outline">← Programas</a>
+<!-- ═══ HERO ═══ -->
+<section class="hero">
+  <div class="hero-bg">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+  </div>
+  <div class="hero-content">
+    <img class="hero-logo" src="../../../assets/images/logos/espacio-mental.png" alt="Espacio Mental" />
+    <p class="hero-label">Programa de PsiNet LAB</p>
+    <h1><span class="accent">Espacio Mental</span><br>De la idea a la innovación en investigación psicológica</h1>
+    <p class="hero-subtitle">Un evento académico para explorar nuevas fronteras en el desarrollo de la investigación psicológica.</p>
+    <div class="hero-meta">
+      <span class="hero-meta-item">
+        <svg viewBox="0 0 24 24"><path d="M19 4h-1V2h-2v2H8V2H6v2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V10h14v10zm0-12H5V6h14v2z"/></svg>
+        13 – 14 de diciembre, 2024
+      </span>
+      <span class="hero-meta-item">
+        <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5S10.62 6.5 12 6.5s2.5 1.12 2.5 2.5S13.38 11.5 12 11.5z"/></svg>
+        UNSA, Arequipa &amp; Virtual (Zoom)
+      </span>
     </div>
-
-    <div class="program-logo-container reveal">
-      <img src="../../../assets/images/logos/espacio-mental.png" alt="Espacio Mental" />
-    </div>
-
-    <p class="reveal" style="font-size:.95rem;color:var(--muted);line-height:1.75;margin-bottom:3rem;max-width:800px;">
-      Espacio Mental es un programa dedicado a la exploración y comprensión de los procesos mentales,
-      fomentando la salud mental y el desarrollo personal a través de la ciencia psicológica.
-    </p>
-
-    <h2 class="section-title reveal" style="font-size:1.5rem;margin-bottom:1.5rem;">Descripción</h2>
-    <div class="description-card reveal">
-      <p>
-        El programa Espacio Mental de PsiNet LAB se enfoca en crear un entorno donde la ciencia
-        psicológica se traduce en herramientas prácticas para el cuidado de la salud mental.
-        A través de la investigación, la divulgación y la intervención comunitaria, buscamos
-        desmitificar los procesos mentales y promover una cultura de bienestar psicológico
-        accesible para todos.
-      </p>
-    </div>
-
-    <h2 class="section-title reveal" style="font-size:1.5rem;margin-bottom:1.5rem;">Áreas de Enfoque</h2>
-    <div class="focus-grid">
-
-      <div class="focus-card reveal">
-        <div class="focus-card-icon">🧠</div>
-        <h3>Salud Mental</h3>
-        <p>Promoción y prevención en salud mental mediante estrategias basadas en evidencia científica y enfoques comunitarios.</p>
-      </div>
-
-      <div class="focus-card reveal" style="transition-delay:.08s">
-        <div class="focus-card-icon">📚</div>
-        <h3>Divulgación Científica</h3>
-        <p>Comunicación accesible del conocimiento psicológico para empoderar a las personas en el cuidado de su bienestar mental.</p>
-      </div>
-
-      <div class="focus-card reveal" style="transition-delay:.16s">
-        <div class="focus-card-icon">🌟</div>
-        <h3>Desarrollo Personal</h3>
-        <p>Herramientas y espacios para el autoconocimiento, la reflexión y el crecimiento personal basados en la psicología.</p>
-      </div>
-
+    <div class="hero-scroll">
+      <a href="#about">
+        <span>Descubre más</span>
+        <span class="scroll-line"></span>
+      </a>
     </div>
   </div>
 </section>
+
+<!-- ═══ ABOUT ═══ -->
+<section id="about">
+  <div class="container">
+    <div class="split">
+      <div class="split-text reveal-left">
+        <p class="section-tag">Acerca del evento</p>
+        <h2 class="section-title">Conectando ideas, inspirando innovación</h2>
+        <p><span class="highlight">ESPACIO MENTAL: De la idea a la innovación en investigación psicológica</span> fue un evento académico organizado por PsiNet LAB, diseñado para explorar nuevas fronteras en el desarrollo de la investigación psicológica.</p>
+        <p>Este espacio reunió a estudiantes, profesionales e investigadores para compartir conocimientos, técnicas innovadoras y perspectivas sobre el futuro de la psicología. Las presentaciones reflejan el compromiso con la ciencia y la curiosidad que impulsan las nuevas ideas hacia la práctica y la innovación.</p>
+      </div>
+      <div class="split-text reveal-right">
+        <div class="timeline">
+          <div class="timeline-item">
+            <p class="timeline-date">Día 1 · 13 de diciembre</p>
+            <span class="timeline-badge badge-presencial">Presencial</span>
+            <p class="timeline-title">Jornada presencial</p>
+            <p class="timeline-desc">Auditorio de la Facultad de Psicología, RR.II. y Cs. de la Comunicación – UNSA, Arequipa.</p>
+          </div>
+          <div class="timeline-item">
+            <p class="timeline-date">Día 2 · 14 de diciembre</p>
+            <span class="timeline-badge badge-virtual">Virtual</span>
+            <p class="timeline-title">Jornada virtual</p>
+            <p class="timeline-desc">Transmisión en vivo a través de Zoom, ampliando el alcance a participantes de todo el mundo.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ GALLERY ═══ -->
+<section style="background:var(--deep);">
+  <div class="container">
+    <p class="section-tag reveal">Galería del evento</p>
+    <h2 class="section-title reveal">Momentos que inspiran</h2>
+    <div class="gallery-grid reveal" style="transition-delay:.1s">
+      <div class="gallery-item">
+        <img src="../../../assets/images/espacio-mental/image.png" alt="ESPACIO MENTAL – Presentación principal" loading="lazy" />
+        <div class="gallery-overlay"><span>Presentaciones del evento EM 2024</span></div>
+      </div>
+      <div class="gallery-item">
+        <img src="../../../assets/images/espacio-mental/image-1.png" alt="ESPACIO MENTAL – Sesión académica" loading="lazy" />
+        <div class="gallery-overlay"><span>Sesión académica</span></div>
+      </div>
+      <div class="gallery-item">
+        <img src="../../../assets/images/espacio-mental/image-2.png" alt="ESPACIO MENTAL – Ponencia" loading="lazy" />
+        <div class="gallery-overlay"><span>Ponencia de investigación</span></div>
+      </div>
+      <div class="gallery-item">
+        <img src="../../../assets/images/espacio-mental/image-3.png" alt="ESPACIO MENTAL – Panel de discusión" loading="lazy" />
+        <div class="gallery-overlay"><span>Panel de discusión</span></div>
+      </div>
+      <div class="gallery-item">
+        <img src="../../../assets/images/espacio-mental/image-4.png" alt="ESPACIO MENTAL – Participantes" loading="lazy" />
+        <div class="gallery-overlay"><span>Participantes del evento</span></div>
+      </div>
+      <div class="gallery-item">
+        <img src="../../../assets/images/espacio-mental/image-5.png" alt="ESPACIO MENTAL – Cierre del evento" loading="lazy" />
+        <div class="gallery-overlay"><span>Cierre del evento</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ CONTRIBUTORS ═══ -->
+<section>
+  <div class="container">
+    <div style="text-align:center;margin-bottom:3rem;">
+      <p class="section-tag reveal">Ponentes y colaboradores</p>
+      <h2 class="section-title reveal">Quienes hicieron posible este evento</h2>
+    </div>
+    <div class="contributors-grid">
+      <div class="contributor-card reveal">
+        <div class="contributor-avatar">AG</div>
+        <h3>Angel Alfonso García O'Diana</h3>
+        <p class="contributor-role">Organizador – PsiNet LAB</p>
+      </div>
+      <div class="contributor-card reveal" style="transition-delay:.06s">
+        <div class="contributor-avatar">GQ</div>
+        <h3>Gleni Quispe-Callo</h3>
+        <p class="contributor-role">Ponente</p>
+      </div>
+      <div class="contributor-card reveal" style="transition-delay:.12s">
+        <div class="contributor-avatar">OP</div>
+        <h3>Oscar Carlos Puma Maque</h3>
+        <p class="contributor-role">Ponente</p>
+      </div>
+      <div class="contributor-card reveal" style="transition-delay:.18s">
+        <div class="contributor-avatar">AZ</div>
+        <h3>Álvaro Joseandree Zumarán Baldeón</h3>
+        <p class="contributor-role">Ponente</p>
+      </div>
+      <div class="contributor-card reveal" style="transition-delay:.24s">
+        <div class="contributor-avatar">JB</div>
+        <h3>Julián Buede</h3>
+        <p class="contributor-role">Ponente</p>
+      </div>
+      <div class="contributor-card reveal" style="transition-delay:.30s">
+        <div class="contributor-avatar">EG</div>
+        <h3>Emilia Gyr Morón</h3>
+        <p class="contributor-role">Ponente</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ RECORDINGS ═══ -->
+<section class="video-section" style="background:var(--deep);">
+  <div class="container">
+    <p class="section-tag reveal">Grabaciones</p>
+    <h2 class="section-title reveal">Revive las presentaciones</h2>
+    <p class="reveal" style="font-size:.95rem;color:var(--muted);max-width:600px;margin:0 auto 2.5rem;line-height:1.75;">
+      Todas las sesiones del evento están disponibles en nuestro canal de YouTube. Explora la playlist completa a continuación.
+    </p>
+    <div class="video-wrapper reveal" style="transition-delay:.1s">
+      <iframe
+        src="https://www.youtube-nocookie.com/embed/videoseries?list=PLkIaJDwih0sVUPSkhr0nYdYhN_ss1WRQC"
+        title="ESPACIO MENTAL – Playlist completa"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen
+        loading="lazy"
+      ></iframe>
+    </div>
+    <div class="reveal" style="margin-top:1.5rem;">
+      <a href="https://www.youtube.com/playlist?list=PLkIaJDwih0sVUPSkhr0nYdYhN_ss1WRQC" target="_blank" rel="noopener" class="btn btn-outline">
+        <svg style="width:16px;height:16px;fill:currentColor;" viewBox="0 0 24 24"><path d="M10 15l5.19-3L10 9v6m11.56-7.83c.13.47.22 1.1.28 1.9.07.8.1 1.49.1 2.09L22 12c0 2.19-.16 3.8-.44 4.83-.25.9-.83 1.48-1.73 1.73-.47.13-1.33.22-2.65.28-1.3.07-2.49.1-3.59.1L12 19c-4.19 0-6.8-.16-7.83-.44-.9-.25-1.48-.83-1.73-1.73-.13-.47-.22-1.1-.28-1.9-.07-.8-.1-1.49-.1-2.09L2 12c0-2.19.16-3.8.44-4.83.25-.9.83-1.48 1.73-1.73.47-.13 1.33-.22 2.65-.28 1.3-.07 2.49-.1 3.59-.1L12 5c4.19 0 6.8.16 7.83.44.9.25 1.48.83 1.73 1.73z"/></svg>
+        Ver playlist en YouTube
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ MATERIALS ═══ -->
+<section>
+  <div class="container">
+    <p class="section-tag reveal">Materiales</p>
+    <h2 class="section-title reveal">Presentaciones y recursos</h2>
+    <div class="material-card reveal" style="transition-delay:.1s">
+      <div class="material-icon">📖</div>
+      <div class="material-info">
+        <h3>Ciencia Abierta: La experiencia de MetaDocencia</h3>
+        <p class="material-authors">Buede, J., Formoso, J., &amp; Ascenzi, L. (2024, December 14)</p>
+        <p style="font-size:.85rem;color:var(--muted);margin-bottom:.8rem;line-height:1.7;">
+          Presentación para la charla en el evento "ESPACIO MENTAL: De la idea a la innovación en investigación psicológica".
+        </p>
+        <a href="https://doi.org/10.5281/zenodo.14477547" target="_blank" rel="noopener" class="material-doi">
+          DOI: 10.5281/zenodo.14477547 ↗
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ CITATION ═══ -->
+<section style="background:var(--deep);">
+  <div class="container">
+    <p class="section-tag reveal">Cita este evento</p>
+    <h2 class="section-title reveal">Referencia bibliográfica</h2>
+    <div class="citation-box reveal" style="transition-delay:.1s">
+      <p class="citation-text">
+        PsiNet LAB. (2024, December 16). ESPACIO MENTAL: De la idea a la innovación en investigación psicológica. ESPACIO MENTAL: De la idea a la innovación en investigación psicológica (EM), Virtual. PsiNet LAB.
+      </p>
+      <a href="https://doi.org/10.5281/zenodo.14503580" target="_blank" rel="noopener" class="citation-doi">
+        <svg viewBox="0 0 24 24"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"/></svg>
+        https://doi.org/10.5281/zenodo.14503580
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ CLOSING ═══ -->
+<div class="closing reveal">
+  <p class="closing-text">PsiNet LAB, ciencia conectada para el desarrollo, les presentó</p>
+  <p class="closing-brand">"ESPACIO MENTAL: De la idea a la innovación en investigación psicológica"</p>
+  <div class="divider"></div>
+</div>
 
 <footer>
   <div class="footer-grid">
@@ -487,17 +1143,17 @@
 </footer>
 
 <script>
-  var revealObserver = new IntersectionObserver(function(entries) {
+  var animObserver = new IntersectionObserver(function(entries) {
     entries.forEach(function(e) {
       if (e.isIntersecting) {
         e.target.classList.add('visible');
-        revealObserver.unobserve(e.target);
+        animObserver.unobserve(e.target);
       }
     });
   }, { threshold: 0.12 });
 
-  document.querySelectorAll('.reveal').forEach(function(el) {
-    revealObserver.observe(el);
+  document.querySelectorAll('.reveal, .reveal-left, .reveal-right').forEach(function(el) {
+    animObserver.observe(el);
   });
 </script>
 
