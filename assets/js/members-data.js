@@ -6,7 +6,7 @@ var MEMBERS = [
     role: "Chief Executive Officer",
     area: "Dirección",
     bio: "Chief Executive Officer de PsiNet LAB. Lidera la visión estratégica de la organización, coordinando las diferentes áreas de investigación y proyectos sociales para asegurar el cumplimiento de los objetivos organizacionales.",
-    interests: ["Psicología organizacional", "Liderazgo", "Gestión de la investigación"],
+    interests: ["Psicología de la paz", "Ciencia de datos", "Métodos cuantitativos", "Metodología de la investigación", "Psicología budista"],
     email: ""
   },
   {
