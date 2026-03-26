@@ -269,6 +269,31 @@
       margin-bottom: 1.5rem;
     }
 
+    .social-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .8rem;
+      margin-top: .5rem;
+    }
+    .social-link {
+      display: inline-flex;
+      align-items: center;
+      gap: .5rem;
+      background: rgba(94,234,212,.08);
+      border: 1px solid var(--border);
+      color: var(--teal);
+      font-size: .82rem;
+      font-weight: 500;
+      padding: .5rem 1.2rem;
+      border-radius: 8px;
+      letter-spacing: .02em;
+      transition: all .2s;
+    }
+    .social-link:hover {
+      background: rgba(94,234,212,.15);
+      border-color: var(--teal);
+    }
+
     /* ── FOOTER ── */
     footer {
       border-top: 1px solid var(--border);
@@ -389,29 +414,40 @@
       <div class="profile-sidebar reveal">
         <img class="profile-photo" src="../../assets/images/photos/marcelo-f.jpeg" alt="Marcelo S. Casa Chicata" />
         <h1 class="profile-name">Marcelo S. Casa Chicata</h1>
-        <p class="profile-role">Miembro Investigador</p>
-        <p class="profile-area">Investigación</p>
+        <p class="profile-role">Chief Financial Officer</p>
+        <p class="profile-area">Dirección</p>
         <a href="../../miembros/" class="profile-back">← Todos los miembros</a>
       </div>
 
       <div class="profile-content">
         <div class="profile-card reveal" style="transition-delay:.1s">
           <h3>Sobre</h3>
-          <p>Miembro Investigador en PsiNet LAB. Trabaja en el desarrollo de investigaciones que buscan comprender y mejorar la experiencia humana a través de la ciencia psicológica.</p>
+          <p>Marcelo Saúl Casa Chicata is a Psychology student at the Universidad Nacional de San Agustín (UNSA) in Arequipa, Peru. He currently serves as the CFO of PsiNet LAB (Peru) and works as a researcher, contributing to projects that utilize advanced methodologies such as network analysis. In addition, he is the director of the Center for Research in Neuroscience and Neuropsychology (CEINPS) at UNSA. His main research interests focus on quantitative methods and digital behavior, with additional emphasis on neuropsychology, social cognition, and interpersonal violence.</p>
         </div>
 
         <div class="profile-card reveal" style="transition-delay:.18s">
           <h3>Áreas de interés</h3>
           <div class="interest-tags">
-              <span class="interest-tag">Ciencia psicológica</span>
-              <span class="interest-tag">Análisis de datos</span>
-              <span class="interest-tag">Psicología experimental</span>
+              <span class="interest-tag">Quantitative methods</span>
+              <span class="interest-tag">Digital behavior</span>
+              <span class="interest-tag">Neuropsychology</span>
+              <span class="interest-tag">Social cognition</span>
+              <span class="interest-tag">Interpersonal violence</span>
           </div>
         </div>
 
         <div class="profile-card reveal" style="transition-delay:.26s">
           <h3>Afiliación</h3>
           <p>Miembro de PsiNet LAB — Laboratorio de investigación psicológica dedicado a generar conocimiento científico innovador, utilizando métodos avanzados y fundamentados en la teoría de la complejidad para contribuir al entendimiento del comportamiento humano.</p>
+        </div>
+
+        <div class="profile-card reveal" style="transition-delay:.34s">
+          <h3>Links</h3>
+          <div class="social-links">
+            <a href="https://www.facebook.com/marcelhch/" target="_blank" rel="noopener" class="social-link">Facebook</a>
+            <a href="https://www.linkedin.com/in/marcelo-saul-casa-chicata-5486a5271" target="_blank" rel="noopener" class="social-link">LinkedIn</a>
+            <a href="https://typecard.com/8f4215f5" target="_blank" rel="noopener" class="social-link">Typecard</a>
+          </div>
         </div>
       </div>
     </div>
