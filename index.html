@@ -328,96 +328,293 @@
       transform: translateY(-1px) scale(.98);
     }
 
-    /* ── CEO SECTION ── */
-    .ceo-section {
-      background: var(--deep);
-      border-top: 1px solid var(--border);
-      border-bottom: 1px solid var(--border);
-    }
-
-    .ceo-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 5rem;
-      align-items: center;
-    }
-
-    .ceo-image-wrap {
-      position: relative;
-    }
-
-    .ceo-image-wrap img {
-      width: 100%;
-      border-radius: 12px;
-      filter: saturate(.9);
-      border: 1px solid var(--border);
-    }
-
-    .ceo-image-wrap::after {
-      content: '';
-      position: absolute;
-      inset: -8px;
-      border: 1px solid var(--teal);
-      border-radius: 16px;
-      opacity: .25;
-      pointer-events: none;
-    }
-
-    /* ── MISSION ── */
-    .mission-section {
+    /* ── BENTO WELCOME SECTION ── */
+    .bento-section {
+      background: var(--navy);
       position: relative;
       overflow: hidden;
     }
 
-    .mission-section::before {
+    .bento-headline {
+      text-align: center;
+      margin-bottom: 3.5rem;
+    }
+
+    .bento-headline h2 {
+      font-family: 'Syne', sans-serif;
+      font-weight: 700;
+      font-size: clamp(1.6rem, 3.5vw, 2.4rem);
+      letter-spacing: -.02em;
+      line-height: 1.3;
+      color: var(--white);
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .bento-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      grid-template-rows: auto auto auto;
+      gap: 1rem;
+      grid-template-areas:
+        "ceo mission mission"
+        "ceo logo    admissions"
+        "ethos ethos  community";
+    }
+
+    .bento-card {
+      background: var(--card-bg);
+      border-radius: 20px;
+      border: 1px solid var(--border);
+      overflow: hidden;
+      position: relative;
+      transition: transform .35s cubic-bezier(.4,0,.2,1), box-shadow .35s cubic-bezier(.4,0,.2,1);
+    }
+
+    .bento-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 40px rgba(0,0,0,.35), 0 0 30px rgba(94,234,212,.06);
+    }
+
+    /* ─ CEO Card ─ */
+    .bento-ceo {
+      grid-area: ceo;
+      display: flex;
+      flex-direction: column;
+      min-height: 420px;
+    }
+
+    .bento-ceo-img {
+      position: relative;
+      flex: 1 1 auto;
+      overflow: hidden;
+    }
+
+    .bento-ceo-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      filter: saturate(.85) contrast(1.05);
+    }
+
+    .bento-ceo-img::after {
       content: '';
       position: absolute;
-      right: -10%;
-      top: 50%;
-      transform: translateY(-50%);
-      width: 500px; height: 500px;
-      background: radial-gradient(circle, rgba(94,234,212,.07), transparent 70%);
+      inset: 0;
+      background: linear-gradient(to top, var(--card-bg) 0%, rgba(14,31,56,.6) 40%, transparent 70%);
       pointer-events: none;
     }
 
-    .mission-grid {
-      display: grid;
-      grid-template-columns: 1.2fr 1fr;
-      gap: 5rem;
+    .bento-ceo-body {
+      padding: 1.8rem 1.6rem;
+      position: relative;
+    }
+
+    .bento-ceo-body .bento-tag {
+      font-size: .7rem;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      color: var(--teal);
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 700;
+      margin-bottom: .6rem;
+    }
+
+    .bento-ceo-body p {
+      font-family: 'Lora', serif;
+      font-size: .88rem;
+      color: var(--muted);
+      line-height: 1.7;
+      margin-bottom: 1.2rem;
+    }
+
+    .bento-btn {
+      display: inline-flex;
       align-items: center;
+      gap: .4rem;
+      font-size: .72rem;
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: var(--teal);
+      padding: .55rem 1.3rem;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      transition: all .25s;
+      background: transparent;
     }
 
-    .mission-logo {
+    .bento-btn:hover {
+      border-color: var(--teal);
+      background: rgba(94,234,212,.08);
+      box-shadow: 0 0 16px rgba(94,234,212,.15);
+    }
+
+    /* ─ Mission Card ─ */
+    .bento-mission {
+      grid-area: mission;
+      padding: 2.5rem 2.2rem;
       display: flex;
+      flex-direction: column;
       justify-content: center;
+      background: linear-gradient(145deg, #0a1628 0%, #0e1f38 100%);
     }
 
-    .mission-logo img {
-      max-width: 320px;
-      width: 100%;
-      filter: drop-shadow(0 0 40px rgba(94,234,212,.2));
-    }
-
-    /* ── ADMISSIONS BANNER ── */
-    .admissions-banner {
-      background: linear-gradient(135deg, var(--teal) 0%, var(--teal2) 100%);
-      padding: 4rem 2.5rem;
-      text-align: center;
-    }
-    .admissions-banner h2 {
+    .bento-mission .bento-title {
       font-family: 'Syne', sans-serif;
       font-weight: 800;
-      font-size: clamp(1.5rem, 3vw, 2.4rem);
-      color: var(--navy);
-      letter-spacing: -.03em;
+      font-size: clamp(1.4rem, 2.5vw, 1.9rem);
+      color: var(--gold);
+      letter-spacing: -.02em;
+      margin-bottom: 1.2rem;
+    }
+
+    .bento-mission p {
+      font-family: 'Lora', serif;
+      font-size: .92rem;
+      color: var(--muted);
+      line-height: 1.8;
+    }
+
+    /* ─ Logo Card ─ */
+    .bento-logo {
+      grid-area: logo;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+      background: linear-gradient(145deg, #0d1a30 0%, #0e1f38 100%);
+      position: relative;
+    }
+
+    .bento-logo::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at center, rgba(94,234,212,.04) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .bento-logo img {
+      max-width: 160px;
+      width: 100%;
+      filter: drop-shadow(0 0 30px rgba(94,234,212,.15));
+      transition: filter .3s;
+    }
+
+    .bento-logo:hover img {
+      filter: drop-shadow(0 0 50px rgba(94,234,212,.3));
+    }
+
+    /* ─ Admissions Card ─ */
+    .bento-admissions {
+      grid-area: admissions;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .bento-admissions-img {
+      flex: 1 1 auto;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .bento-admissions-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .bento-admissions-img::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, var(--card-bg) 0%, rgba(14,31,56,.4) 50%, transparent 80%);
+      pointer-events: none;
+    }
+
+    .bento-admissions-body {
+      padding: 1.4rem 1.4rem 1.6rem;
+    }
+
+    .bento-admissions-body .bento-title {
+      font-family: 'Syne', sans-serif;
+      font-weight: 700;
+      font-size: 1.15rem;
+      color: var(--white);
+      margin-bottom: .5rem;
+    }
+
+    .bento-admissions-body p {
+      font-family: 'Lora', serif;
+      font-size: .82rem;
+      color: var(--muted);
+      line-height: 1.6;
       margin-bottom: 1rem;
     }
-    .admissions-banner p {
-      color: rgba(11,22,41,.75);
-      font-family: 'Lora', serif;
-      max-width: 520px;
-      margin: 0 auto 2rem;
+
+    /* ─ Ethos Summary Card ─ */
+    .bento-ethos {
+      grid-area: ethos;
+      padding: 2.2rem 2rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      background: linear-gradient(145deg, #0a1628 0%, #0e1f38 100%);
     }
+
+    .bento-ethos .bento-tag {
+      font-size: .7rem;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      color: var(--teal);
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 700;
+      margin-bottom: .5rem;
+    }
+
+    .bento-ethos .bento-title {
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: clamp(1.2rem, 2vw, 1.5rem);
+      color: var(--white);
+      letter-spacing: -.02em;
+      margin-bottom: .8rem;
+    }
+
+    .bento-ethos p {
+      font-family: 'Lora', serif;
+      font-size: .88rem;
+      color: var(--muted);
+      line-height: 1.75;
+      margin-bottom: 1.2rem;
+    }
+
+    /* ─ Community Image Card ─ */
+    .bento-community {
+      grid-area: community;
+      overflow: hidden;
+      min-height: 200px;
+    }
+
+    .bento-community img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform .5s cubic-bezier(.4,0,.2,1);
+    }
+
+    .bento-community:hover img {
+      transform: scale(1.05);
+    }
+
+    /* ── ADMISSIONS BANNER (legacy support) ── */
     .btn-dark {
       background: var(--navy);
       color: var(--teal);
@@ -658,7 +855,16 @@
 
     /* ── RESPONSIVE ── */
     @media (max-width: 900px) {
-      .ceo-grid, .mission-grid { grid-template-columns: 1fr; gap: 3rem; }
+      .bento-grid {
+        grid-template-columns: 1fr 1fr;
+        grid-template-areas:
+          "ceo       ceo"
+          "mission   mission"
+          "logo      admissions"
+          "ethos     ethos"
+          "community community";
+      }
+      .bento-ceo { min-height: 320px; }
       .ethos-grid { grid-template-columns: 1fr 1fr; }
       .blog-grid { grid-template-columns: 1fr 1fr; }
       .footer-grid { grid-template-columns: 1fr 1fr; }
@@ -669,6 +875,18 @@
     }
 
     @media (max-width: 600px) {
+      .bento-grid {
+        grid-template-columns: 1fr;
+        grid-template-areas:
+          "ceo"
+          "mission"
+          "logo"
+          "admissions"
+          "ethos"
+          "community";
+      }
+      .bento-ceo { min-height: 300px; }
+      .bento-community { min-height: 220px; }
       .ethos-grid { grid-template-columns: 1fr; }
       .blog-grid { grid-template-columns: 1fr; }
       .footer-grid { grid-template-columns: 1fr; gap: 2rem; }
@@ -771,73 +989,100 @@
 
 
 <!-- ══════════════════════════════════
-     CEO BIENVENIDA
+     BIENVENIDA – BENTO GRID
 ══════════════════════════════════ -->
-<section class="ceo-section" id="bienvenida">
+<section class="bento-section" id="bienvenida">
   <div class="container">
-    <div class="ceo-grid">
-      <div class="ceo-image-wrap reveal">
-        <img
-          src="https://psinetlab.wordpress.com/wp-content/uploads/2025/01/gemini_generated_image_c3wvyvc3wvyvc3wv.png"
-          alt="CEO PsiNet LAB"
-          onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 400 300%22><rect fill=%22%230e1f38%22 width=%22400%22 height=%22300%22/><text fill=%22%235eead4%22 x=%22200%22 y=%22155%22 text-anchor=%22middle%22 font-size=%2240%22>🧠</text></svg>'"
-        />
-      </div>
-      <div class="reveal" style="transition-delay:.15s">
-        <p class="section-tag">Bienvenida del CEO</p>
-        <h2 class="section-title">Transformando el conocimiento en acción</h2>
-        <p class="section-body">
-          En PsiNet LAB transformamos el conocimiento psicológico en acciones que mejoren vidas.
-          Exploramos, innovamos y colaboramos para promover el bienestar, la diversidad y la equidad.
-          Te invitamos a conocer nuestros proyectos y unirte a nuestra misión de crear un impacto
-          positivo en la sociedad.
-        </p>
-        <a href="#" class="btn btn-outline" style="margin-top:2rem;">Leer Más →</a>
-      </div>
+    <div class="bento-headline reveal">
+      <h2>Trabajamos para transformar el conocimiento psicológico en acciones que mejoren vidas.</h2>
     </div>
-  </div>
-</section>
 
+    <div class="bento-grid">
 
-<!-- ══════════════════════════════════
-     MISIÓN
-══════════════════════════════════ -->
-<section class="mission-section" id="mision">
-  <div class="container">
-    <div class="mission-grid">
-      <div class="reveal">
-        <p class="section-tag">Misión</p>
-        <h2 class="section-title">Ciencia al servicio del ser humano</h2>
-        <p class="section-body">
+      <!-- CEO Card -->
+      <div class="bento-card bento-ceo reveal">
+        <div class="bento-ceo-img">
+          <img
+            src="https://psinetlab.wordpress.com/wp-content/uploads/2025/01/gemini_generated_image_c3wvyvc3wvyvc3wv.png"
+            alt="CEO PsiNet LAB"
+            onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 400 500%22><rect fill=%22%230e1f38%22 width=%22400%22 height=%22500%22/><text fill=%22%235eead4%22 x=%22200%22 y=%22260%22 text-anchor=%22middle%22 font-size=%2240%22>🧠</text></svg>'"
+          />
+        </div>
+        <div class="bento-ceo-body">
+          <p class="bento-tag">Bienvenida del CEO</p>
+          <p>
+            En PsiNet LAB transformamos el conocimiento psicológico en acciones que mejoren vidas.
+            Exploramos, innovamos y colaboramos para promover el bienestar, la diversidad y la equidad.
+            Te invitamos a conocer nuestros proyectos y unirte a nuestra misión de crear un impacto
+            positivo en la sociedad.
+          </p>
+          <a href="#" class="bento-btn">Leer Más →</a>
+        </div>
+      </div>
+
+      <!-- Mission Card -->
+      <div class="bento-card bento-mission reveal" id="mision" style="transition-delay:.1s">
+        <h3 class="bento-title">Misión</h3>
+        <p>
           PsiNet LAB es una organización de investigación psicológica dedicada a generar conocimiento
-          científico innovador, utilizando métodos avanzados y fundamentados en la teoría de la
-          complejidad. Nuestro objetivo es contribuir al entendimiento del comportamiento humano
-          y aplicar este conocimiento para mejorar la calidad de vida, promover la diversidad y
-          colaborar con comunidades para influir positivamente en políticas públicas.
+          científico innovador en el campo de la psicología, utilizando métodos avanzados y fundamentados
+          en la teoría de la complejidad. Nuestro objetivo es contribuir al entendimiento del
+          comportamiento humano y aplicar este conocimiento para mejorar la calidad de vida, promover
+          la diversidad y colaborar con comunidades para influir positivamente en políticas públicas.
         </p>
       </div>
-      <div class="mission-logo reveal" style="transition-delay:.15s">
+
+      <!-- Logo Card -->
+      <div class="bento-card bento-logo reveal" style="transition-delay:.15s">
         <img
           src="https://psinetlab.wordpress.com/wp-content/uploads/2025/01/logos-1.png"
           alt="PsiNet LAB Logo"
-          onerror="this.style.display='none'"
+          onerror="this.innerHTML='∞'"
         />
       </div>
+
+      <!-- Admissions Card -->
+      <div class="bento-card bento-admissions reveal" id="admisiones" style="transition-delay:.2s">
+        <div class="bento-admissions-body">
+          <h3 class="bento-title">Admisiones</h3>
+          <p>
+            Sé parte de nuestras investigaciones y transforma el conocimiento en acción
+          </p>
+          <a href="#contacto" class="bento-btn">Ver Más →</a>
+        </div>
+        <div class="bento-admissions-img">
+          <img
+            src="https://images.unsplash.com/photo-1529390079861-591de354faf5?w=600&q=80"
+            alt="Comunidad"
+            onerror="this.parentElement.style.background='linear-gradient(135deg, #112240, #0e1f38)'"
+          />
+        </div>
+      </div>
+
+      <!-- Ethos Summary Card -->
+      <div class="bento-card bento-ethos reveal" style="transition-delay:.25s">
+        <p class="bento-tag">El Ethos de PsiNet LAB</p>
+        <h3 class="bento-title">Nuestros valores fundamentales</h3>
+        <p>
+          En PsiNet LAB, nuestro ethos se basa en la transformación humana a través de la ciencia,
+          la innovación y la colaboración, buscando mejorar vidas, promover la paz y construir
+          un mundo más justo e inclusivo.
+        </p>
+        <a href="#ethos" class="bento-btn">Leer Más →</a>
+      </div>
+
+      <!-- Community Image Card -->
+      <div class="bento-card bento-community reveal" style="transition-delay:.3s">
+        <img
+          src="https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?w=600&q=80"
+          alt="Comunidad e impacto social"
+          onerror="this.parentElement.style.background='linear-gradient(135deg, #112240, #0e1f38)'"
+        />
+      </div>
+
     </div>
   </div>
 </section>
-
-
-<!-- ══════════════════════════════════
-     ADMISIONES BANNER
-══════════════════════════════════ -->
-<div class="admissions-banner" id="admisiones">
-  <div class="container">
-    <h2>Sé parte de nuestras investigaciones</h2>
-    <p>Transforma el conocimiento en acción. Únete a nuestro equipo de investigadores y colabora para generar impacto positivo.</p>
-    <a href="#contacto" class="btn-dark">Ver Más →</a>
-  </div>
-</div>
 
 
 <!-- ══════════════════════════════════
