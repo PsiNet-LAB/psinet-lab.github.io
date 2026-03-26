@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Investigaciones – PsiNet LAB</title>
+  <link rel="icon" type="image/x-icon" href="../favicon.ico" />
+  <link rel="icon" type="image/png" sizes="32x32" href="../assets/images/favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="192x192" href="../assets/images/favicon-192x192.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Lora:ital,wght@0,400;0,500;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --navy:   #0b1629;
+      --deep:   #0d1f3c;
+      --mid:    #112240;
+      --teal:   #5eead4;
+      --teal2:  #2dd4bf;
+      --gold:   #f0b429;
+      --white:  #f0f4ff;
+      --muted:  #8892b0;
+      --card-bg:#0e1f38;
+      --border: rgba(94,234,212,.15);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--navy);
+      color: var(--white);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 16px;
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    body::before {
+      content: '';
+      position: fixed; inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 9999;
+      opacity: .5;
+    }
+
+    /* ── HEADER ── */
+    header {
+      position: fixed; top: 0; left: 0; right: 0;
+      z-index: 1000;
+      background: rgba(11,22,41,.85);
+      backdrop-filter: blur(20px);
+    }
+
+    .header-top,
+    nav.main-nav {
+      position: relative;
+      z-index: 1;
+    }
+
+    .header-top {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: .6rem 2.5rem;
+    }
+
+    nav.main-nav {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: .65rem 2.5rem;
+    }
+
+    .nav-left, .nav-right {
+      display: flex;
+      gap: 2rem;
+      align-items: center;
+    }
+
+    .nav-center {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: .15rem;
+    }
+    .nav-center img { height: 80px; }
+
+    nav.main-nav a {
+      font-size: .82rem;
+      font-family: 'DM Sans', sans-serif;
+      color: var(--muted);
+      font-weight: 500;
+      letter-spacing: .02em;
+      text-transform: uppercase;
+      transition: color .2s;
+      position: relative;
+    }
+    nav.main-nav a:hover { color: var(--white); }
+    nav.main-nav a.active { color: var(--teal); }
+
+    .nav-dropdown { position: relative; }
+    .nav-dropdown:hover .dropdown-menu { display: flex; }
+    .dropdown-menu {
+      display: none;
+      flex-direction: column;
+      position: absolute; top: 100%; left: 0;
+      background: var(--deep);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: .5rem 0;
+      min-width: 200px;
+      gap: 0;
+      z-index: 100;
+    }
+    .dropdown-menu a {
+      padding: .5rem 1.2rem;
+      font-size: .8rem;
+      text-transform: none;
+      letter-spacing: 0;
+    }
+    .dropdown-menu a:hover { background: rgba(94,234,212,.06); color: var(--teal); }
+
+    /* ── SECTION COMMONS ── */
+    section { padding: 6rem 2.5rem; }
+    .container { max-width: 1160px; margin: 0 auto; }
+
+    .section-tag {
+      font-size: .7rem;
+      letter-spacing: .22em;
+      text-transform: uppercase;
+      color: var(--teal);
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 600;
+      margin-bottom: 1rem;
+    }
+
+    h2.section-title {
+      font-family: 'Syne', sans-serif;
+      font-weight: 700;
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      letter-spacing: -.03em;
+      line-height: 1.15;
+      color: var(--white);
+      margin-bottom: 1.5rem;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: .5rem;
+      font-size: .82rem;
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 600;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      padding: .75rem 1.6rem;
+      border-radius: 6px;
+      border: none;
+      cursor: pointer;
+      transition: all .2s;
+    }
+    .btn-outline {
+      background: transparent;
+      color: var(--teal);
+      border: 1px solid var(--border);
+    }
+    .btn-outline:hover { border-color: var(--teal); background: rgba(94,234,212,.06); }
+    .btn-primary {
+      background: var(--teal);
+      color: var(--navy);
+    }
+    .btn-primary:hover { background: var(--teal2); }
+
+    /* ── RESEARCH GRID ── */
+    .research-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: 1fr 1fr;
+      min-height: 700px;
+      padding-top: calc(80px + 2rem);
+    }
+
+    .research-cell {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 350px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Decorative image/gradient cells */
+    .research-cell.decorative {
+      background: linear-gradient(135deg, #0d1f3c 0%, #1a3260 60%, #112240 100%);
+    }
+
+    .decorative-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      height: 100%;
+      position: relative;
+    }
+
+    .decorative-content .emoji-icon {
+      font-size: 5rem;
+      filter: grayscale(20%);
+      opacity: .85;
+      margin-bottom: 1rem;
+      position: relative;
+      z-index: 2;
+    }
+
+    .decorative-content svg {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      opacity: .07;
+    }
+
+    /* Text cells */
+    .research-cell.text-cell {
+      background: var(--deep);
+      padding: 3rem 3.5rem;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: center;
+    }
+
+    .research-cell.text-cell .section-tag {
+      margin-bottom: .75rem;
+    }
+
+    .research-cell.text-cell h2 {
+      font-family: 'Syne', sans-serif;
+      font-weight: 700;
+      font-size: clamp(1.5rem, 3vw, 2.2rem);
+      letter-spacing: -.02em;
+      line-height: 1.2;
+      color: var(--white);
+      margin-bottom: 1rem;
+    }
+
+    .research-cell.text-cell p {
+      font-size: .95rem;
+      color: var(--muted);
+      line-height: 1.8;
+      margin-bottom: 1.8rem;
+      max-width: 440px;
+    }
+
+    .btn-round-outline {
+      display: inline-flex;
+      align-items: center;
+      gap: .5rem;
+      font-size: .82rem;
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 600;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      padding: .75rem 2rem;
+      border-radius: 50px;
+      border: 1.5px solid rgba(240,244,255,.35);
+      background: transparent;
+      color: var(--white);
+      cursor: pointer;
+      transition: all .25s;
+    }
+    .btn-round-outline:hover {
+      border-color: var(--teal);
+      color: var(--teal);
+      background: rgba(94,234,212,.06);
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 4rem 2.5rem 2rem;
+    }
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 3rem;
+      max-width: 1160px;
+      margin: 0 auto 2rem;
+    }
+    .footer-col h4 {
+      font-family: 'Syne', sans-serif;
+      font-weight: 600;
+      font-size: .9rem;
+      color: var(--white);
+      margin-bottom: 1.2rem;
+    }
+    .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: .6rem; }
+    .footer-col ul li a {
+      font-size: .85rem;
+      color: var(--muted);
+      transition: color .2s;
+    }
+    .footer-col ul li a:hover { color: var(--teal); }
+
+    .footer-bottom {
+      border-top: 1px solid var(--border);
+      padding-top: 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+      max-width: 1160px;
+      margin: 0 auto;
+    }
+    .footer-bottom p { font-size: .8rem; color: var(--muted); }
+    .footer-bottom-links { display: flex; gap: 1.5rem; }
+    .footer-bottom-links a { font-size: .8rem; color: var(--muted); }
+    .footer-bottom-links a:hover { color: var(--teal); }
+
+    /* ── ANIMATIONS ── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity .7s ease, transform .7s ease;
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+      .header-top { padding: .6rem 1.2rem; }
+      nav.main-nav { padding: .55rem 1.2rem; }
+      .nav-left, .nav-right { gap: 1rem; }
+      section { padding: 4rem 1.5rem; }
+      .research-cell.text-cell { padding: 2.5rem 2rem; }
+    }
+
+    @media (max-width: 768px) {
+      .research-grid {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto;
+      }
+      /* Reorder so text comes first on mobile */
+      .research-cell.decorative.top-left { order: 2; }
+      .research-cell.text-cell.top-right { order: 1; }
+      .research-cell.text-cell.bottom-left { order: 3; }
+      .research-cell.decorative.bottom-right { order: 4; }
+
+      .research-cell { min-height: 280px; }
+      .research-cell.decorative { min-height: 200px; }
+    }
+
+    @media (max-width: 600px) {
+      .footer-grid { grid-template-columns: 1fr; gap: 2rem; }
+      .nav-right { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <nav class="main-nav">
+    <div class="nav-left">
+      <a href="../miembros/">Miembros</a>
+      <div class="nav-dropdown">
+        <a href="#" class="active">Investigaciones ▾</a>
+        <div class="dropdown-menu">
+          <a href="lineas-de-investigacion/">Líneas de Investigación</a>
+          <a href="publicaciones/">Publicaciones</a>
+        </div>
+      </div>
+      <div class="nav-dropdown">
+        <a href="../proyectos-sociales/">Proyectos ▾</a>
+        <div class="dropdown-menu">
+          <a href="https://psinetlab.wordpress.com/bienestar/" target="_blank">BienEstar</a>
+          <a href="https://psinetlab.wordpress.com/psinet-escool/" target="_blank">PsiNet EsCool</a>
+          <a href="https://psinetlab.wordpress.com/la-ciencia-de-la-mente/" target="_blank">La Ciencia de la Mente</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="nav-center">
+      <a href="../index.html">
+        <img src="../assets/images/logo.png" alt="PsiNet LAB" onerror="this.style.display='none'" />
+      </a>
+    </div>
+
+    <div class="nav-right">
+      <a href="../blog/">Blog</a>
+      <a href="https://psinetlab.wordpress.com/contacto/" target="_blank">Contacto</a>
+      <a href="../index.html#apoyanos">Apóyanos</a>
+      <a href="../index.html#colaboraciones">Colaboraciones</a>
+    </div>
+  </nav>
+</header>
+
+<div class="research-grid">
+
+  <!-- Row 1, Left: Decorative (Research Lines) -->
+  <div class="research-cell decorative top-left reveal">
+    <div class="decorative-content">
+      <svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="200" cy="200" r="150" fill="none" stroke="#5eead4" stroke-width=".5"/>
+        <circle cx="200" cy="200" r="100" fill="none" stroke="#5eead4" stroke-width=".3"/>
+        <circle cx="200" cy="200" r="50" fill="none" stroke="#5eead4" stroke-width=".3"/>
+        <line x1="50" y1="200" x2="350" y2="200" stroke="#5eead4" stroke-width=".2"/>
+        <line x1="200" y1="50" x2="200" y2="350" stroke="#5eead4" stroke-width=".2"/>
+        <circle cx="140" cy="120" r="8" fill="#5eead4" opacity=".15"/>
+        <circle cx="280" cy="160" r="6" fill="#5eead4" opacity=".12"/>
+        <circle cx="160" cy="280" r="10" fill="#5eead4" opacity=".1"/>
+        <circle cx="300" cy="260" r="5" fill="#5eead4" opacity=".18"/>
+      </svg>
+      <span class="emoji-icon">🔬</span>
+    </div>
+  </div>
+
+  <!-- Row 1, Right: Text (Líneas de Investigación) -->
+  <div class="research-cell text-cell top-right reveal" style="transition-delay:.1s">
+    <p class="section-tag">Investigación</p>
+    <h2>Líneas de Investigación</h2>
+    <p>Exploramos la ciencia para el desarrollo humano mediante redes, psicometría y análisis cultural.</p>
+    <a href="lineas-de-investigacion/" class="btn-round-outline">Leer Más →</a>
+  </div>
+
+  <!-- Row 2, Left: Text (Publicaciones) -->
+  <div class="research-cell text-cell bottom-left reveal" style="transition-delay:.2s">
+    <p class="section-tag">Difusión</p>
+    <h2>Publicaciones</h2>
+    <p>Divulgamos conocimiento científico con rigor, impacto social y acceso abierto a la comunidad.</p>
+    <a href="publicaciones/" class="btn-round-outline">Leer Más →</a>
+  </div>
+
+  <!-- Row 2, Right: Decorative (Publications) -->
+  <div class="research-cell decorative bottom-right reveal" style="transition-delay:.3s">
+    <div class="decorative-content">
+      <svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+        <rect x="100" y="80" width="200" height="240" rx="8" fill="none" stroke="#5eead4" stroke-width=".4"/>
+        <line x1="130" y1="140" x2="270" y2="140" stroke="#5eead4" stroke-width=".3"/>
+        <line x1="130" y1="170" x2="270" y2="170" stroke="#5eead4" stroke-width=".3"/>
+        <line x1="130" y1="200" x2="250" y2="200" stroke="#5eead4" stroke-width=".3"/>
+        <line x1="130" y1="230" x2="260" y2="230" stroke="#5eead4" stroke-width=".3"/>
+        <line x1="130" y1="260" x2="220" y2="260" stroke="#5eead4" stroke-width=".3"/>
+        <circle cx="320" cy="100" r="4" fill="#5eead4" opacity=".12"/>
+        <circle cx="80" cy="300" r="6" fill="#5eead4" opacity=".1"/>
+      </svg>
+      <span class="emoji-icon">📄</span>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  <div class="footer-grid">
+    <div class="footer-col">
+      <h4>PsiNet LAB</h4>
+      <p style="font-size:.85rem;color:var(--muted);max-width:280px;line-height:1.75;">
+        Ciencia psicológica conectada para el desarrollo humano y comunitario.
+      </p>
+    </div>
+
+    <div class="footer-col">
+      <h4>Proyectos</h4>
+      <ul>
+        <li><a href="https://psinetlab.wordpress.com/bienestar/" target="_blank">BienEstar</a></li>
+        <li><a href="https://psinetlab.wordpress.com/psinet-escool/" target="_blank">PsiNet EsCool</a></li>
+        <li><a href="https://psinetlab.wordpress.com/la-ciencia-de-la-mente/" target="_blank">La Ciencia de la Mente</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-col">
+      <h4>Investigación</h4>
+      <ul>
+        <li><a href="publicaciones/">Publicaciones</a></li>
+        <li><a href="lineas-de-investigacion/">Líneas de Investigación</a></li>
+        <li><a href="../miembros/">Miembros</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-col">
+      <h4>Organización</h4>
+      <ul>
+        <li><a href="https://psinetlab.wordpress.com/contacto/" target="_blank">Contacto</a></li>
+        <li><a href="https://psinetlab.wordpress.com/apoyanos/" target="_blank">Apóyanos</a></li>
+        <li><a href="../blog/">Blog</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <p>&copy; 2025 PsiNet LAB. Todos los derechos reservados.</p>
+    <div class="footer-bottom-links">
+      <a href="#">Cookie Policy</a>
+      <a href="#">Privacy Policy</a>
+      <a href="#">Policies</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Scroll reveal
+  var revealObserver = new IntersectionObserver(function(entries) {
+    entries.forEach(function(e) {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        revealObserver.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12 });
+
+  document.querySelectorAll('.reveal').forEach(function(el) {
+    revealObserver.observe(el);
+  });
+</script>
+
+</body>
+</html>
