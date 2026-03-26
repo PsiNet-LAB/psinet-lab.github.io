@@ -269,6 +269,31 @@
       margin-bottom: 1.5rem;
     }
 
+    .social-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .8rem;
+      margin-top: .5rem;
+    }
+    .social-link {
+      display: inline-flex;
+      align-items: center;
+      gap: .5rem;
+      background: rgba(94,234,212,.08);
+      border: 1px solid var(--border);
+      color: var(--teal);
+      font-size: .82rem;
+      font-weight: 500;
+      padding: .5rem 1.2rem;
+      border-radius: 8px;
+      letter-spacing: .02em;
+      transition: all .2s;
+    }
+    .social-link:hover {
+      background: rgba(94,234,212,.15);
+      border-color: var(--teal);
+    }
+
     /* ── FOOTER ── */
     footer {
       border-top: 1px solid var(--border);
@@ -397,21 +422,33 @@
       <div class="profile-content">
         <div class="profile-card reveal" style="transition-delay:.1s">
           <h3>Sobre</h3>
-          <p>Chief Communications Officer de PsiNet LAB. Gestiona la estrategia de comunicación de la organización, fortaleciendo la difusión del conocimiento científico y la presencia institucional.</p>
+          <p>Jefri Andy Justo Mamani is a Psychology student at the Universidad Nacional de San Agustín de Arequipa (UNSA), where he ranks 27th at the university level, demonstrating his commitment to academic excellence. He currently serves as Chief Communications Officer (CCO) at PsiNet LAB (Peru). Additionally, he has been a member of the Center for Research in Neuroscience and Neuropsychology (CEINPS), highlighting his interest in advancements in neuroscience. He stays updated and actively participates in various academic events, both as a participant and as part of the organizing team, in activities such as round tables, conferences, seminars, and debates at the Universidad Nacional de San Agustín de Arequipa (UNSA). His research interests focus on digital behavior, behavior in video games and social networks, as well as mental health and educational well-being.</p>
         </div>
 
         <div class="profile-card reveal" style="transition-delay:.18s">
           <h3>Áreas de interés</h3>
           <div class="interest-tags">
-              <span class="interest-tag">Comportamiento humano</span>
-              <span class="interest-tag">Investigación cuantitativa</span>
-              <span class="interest-tag">Psicología social</span>
+              <span class="interest-tag">Digital behavior</span>
+              <span class="interest-tag">Behavior in video games and social networks</span>
+              <span class="interest-tag">Mental health</span>
+              <span class="interest-tag">Educational well-being</span>
           </div>
         </div>
 
         <div class="profile-card reveal" style="transition-delay:.26s">
           <h3>Afiliación</h3>
           <p>Miembro de PsiNet LAB — Laboratorio de investigación psicológica dedicado a generar conocimiento científico innovador, utilizando métodos avanzados y fundamentados en la teoría de la complejidad para contribuir al entendimiento del comportamiento humano.</p>
+        </div>
+
+        <div class="profile-card reveal" style="transition-delay:.34s">
+          <h3>Links</h3>
+          <div class="social-links">
+            <a href="https://www.instagram.com/jefrijustomamani/" target="_blank" rel="noopener" class="social-link">Instagram</a>
+            <a href="https://www.facebook.com/jefri.justomamani" target="_blank" rel="noopener" class="social-link">Facebook</a>
+            <a href="http://www.linkedin.com/in/jefri-andy-justo-mamani-708526308" target="_blank" rel="noopener" class="social-link">LinkedIn</a>
+            <a href="https://www.tiktok.com/@jefrijusto" target="_blank" rel="noopener" class="social-link">TikTok</a>
+            <a href="https://typecard.com/502d2f20" target="_blank" rel="noopener" class="social-link">Typecard</a>
+          </div>
         </div>
       </div>
     </div>
