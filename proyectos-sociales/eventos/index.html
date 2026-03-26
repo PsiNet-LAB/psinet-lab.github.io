@@ -1,0 +1,715 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Eventos – Proyectos Sociales | PsiNet LAB</title>
+
+  <link rel="icon" type="image/x-icon" href="../../favicon.ico" />
+  <link rel="icon" type="image/png" sizes="32x32" href="../../assets/images/favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="192x192" href="../../assets/images/favicon-192x192.png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Lora:ital,wght@0,400;0,500;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ── Reset & Variables ── */
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --navy:   #0b1629;
+      --deep:   #0d1f3c;
+      --mid:    #112240;
+      --teal:   #5eead4;
+      --teal2:  #2dd4bf;
+      --gold:   #f0b429;
+      --white:  #f0f4ff;
+      --muted:  #8892b0;
+      --card-bg:#0e1f38;
+      --border: rgba(94,234,212,.15);
+    }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--navy);
+      color: var(--white);
+      overflow-x: hidden;
+      line-height: 1.6;
+    }
+    a { text-decoration: none; color: inherit; }
+    ul { list-style: none; }
+
+    /* ── Header / Nav ── */
+    header {
+      position: fixed; top: 0; left: 0; width: 100%; z-index: 1000;
+      background: rgba(11,22,41,.6);
+      backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+      transition: background .4s ease, box-shadow .4s ease;
+    }
+    header.scrolled {
+      background: rgba(11,22,41,.92);
+      box-shadow: 0 4px 30px rgba(0,0,0,.35);
+    }
+    nav.main-nav {
+      max-width: 1260px; margin: auto;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1rem 2rem;
+      position: relative;
+    }
+    .nav-left, .nav-right { display: flex; gap: 2rem; align-items: center; }
+    .nav-center {
+      position: absolute; left: 50%; transform: translateX(-50%);
+      display: flex; flex-direction: column; align-items: center; gap: .15rem;
+    }
+    .nav-center img { height: 80px; }
+
+    nav.main-nav a {
+      font-size: .82rem; font-family: 'DM Sans', sans-serif;
+      color: rgba(240,244,255,.85); font-weight: 500;
+      letter-spacing: .02em; text-transform: uppercase;
+      transition: color .3s ease, text-shadow .3s ease;
+      position: relative;
+    }
+    nav.main-nav a::after {
+      content: ''; position: absolute; left: 0; bottom: -4px;
+      width: 0; height: 2px;
+      background: linear-gradient(90deg, var(--teal), var(--teal2));
+      border-radius: 1px; transition: width .3s ease;
+    }
+    nav.main-nav a:hover { color: #fff; text-shadow: 0 0 8px rgba(94,234,212,.35); }
+    nav.main-nav a:hover::after { width: 100%; }
+    nav.main-nav a.active { color: var(--teal); }
+    nav.main-nav a.active::after { width: 100%; }
+
+    /* Dropdown */
+    .nav-dropdown { position: relative; }
+    .dropdown-menu {
+      position: absolute; top: 100%; left: 50%; transform: translateX(-50%);
+      background: rgba(13,31,60,.97); backdrop-filter: blur(14px);
+      border: 1px solid var(--border); border-radius: 10px;
+      padding: .6rem 0; min-width: 210px;
+      opacity: 0; visibility: hidden; pointer-events: none;
+      transition: opacity .25s ease, transform .25s ease;
+      transform: translateX(-50%) translateY(8px);
+      box-shadow: 0 8px 32px rgba(0,0,0,.45);
+    }
+    .nav-dropdown:hover > .dropdown-menu {
+      opacity: 1; visibility: visible; pointer-events: auto;
+      transform: translateX(-50%) translateY(0);
+    }
+    .dropdown-menu a {
+      display: block; padding: .55rem 1.3rem; font-size: .78rem;
+      white-space: nowrap; transition: background .2s, color .2s;
+    }
+    .dropdown-menu a:hover { background: rgba(94,234,212,.08); color: var(--teal); }
+    .dropdown-menu a::after { display: none; }
+
+    /* Sub-dropdown */
+    .dropdown-submenu { position: relative; }
+    .dropdown-submenu-menu {
+      position: absolute; left: 100%; top: 0;
+      background: rgba(13,31,60,.97); backdrop-filter: blur(14px);
+      border: 1px solid var(--border); border-radius: 10px;
+      padding: .6rem 0; min-width: 200px;
+      opacity: 0; visibility: hidden; pointer-events: none;
+      transition: opacity .25s ease, transform .25s ease;
+      transform: translateX(8px);
+      box-shadow: 0 8px 32px rgba(0,0,0,.45);
+    }
+    .dropdown-submenu:hover > .dropdown-submenu-menu {
+      opacity: 1; visibility: visible; pointer-events: auto;
+      transform: translateX(0);
+    }
+
+    /* ── Hero ── */
+    .hero {
+      position: relative; min-height: 88vh;
+      display: flex; align-items: center; justify-content: center;
+      text-align: center; overflow: hidden;
+      padding: 8rem 2rem 4rem;
+    }
+    .hero-bg {
+      position: absolute; inset: 0; z-index: 0;
+      background:
+        radial-gradient(ellipse 70% 55% at 30% 40%, rgba(94,234,212,.12) 0%, transparent 60%),
+        radial-gradient(ellipse 60% 50% at 75% 55%, rgba(240,180,41,.10) 0%, transparent 55%),
+        radial-gradient(ellipse 90% 80% at 50% 50%, rgba(13,31,60,.9) 0%, var(--navy) 100%);
+      animation: heroPulse 12s ease-in-out infinite alternate;
+    }
+    @keyframes heroPulse {
+      0%   { filter: hue-rotate(0deg) brightness(1); }
+      50%  { filter: hue-rotate(8deg) brightness(1.08); }
+      100% { filter: hue-rotate(-5deg) brightness(1.03); }
+    }
+
+    /* Floating orbs */
+    .orb {
+      position: absolute; border-radius: 50%;
+      pointer-events: none; z-index: 0;
+      filter: blur(60px); opacity: .35;
+    }
+    .orb-1 {
+      width: 320px; height: 320px;
+      background: radial-gradient(circle, rgba(94,234,212,.5), transparent 70%);
+      top: 10%; left: -5%;
+      animation: orbFloat1 16s ease-in-out infinite;
+    }
+    .orb-2 {
+      width: 260px; height: 260px;
+      background: radial-gradient(circle, rgba(240,180,41,.45), transparent 70%);
+      bottom: 15%; right: -3%;
+      animation: orbFloat2 20s ease-in-out infinite;
+    }
+    .orb-3 {
+      width: 200px; height: 200px;
+      background: radial-gradient(circle, rgba(139,92,246,.4), transparent 70%);
+      top: 50%; left: 60%;
+      animation: orbFloat3 14s ease-in-out infinite;
+    }
+    .orb-4 {
+      width: 150px; height: 150px;
+      background: radial-gradient(circle, rgba(94,234,212,.35), transparent 70%);
+      bottom: 30%; left: 25%;
+      animation: orbFloat1 18s ease-in-out infinite reverse;
+    }
+    @keyframes orbFloat1 {
+      0%, 100% { transform: translate(0, 0) scale(1); }
+      33%      { transform: translate(40px, -30px) scale(1.12); }
+      66%      { transform: translate(-20px, 20px) scale(.92); }
+    }
+    @keyframes orbFloat2 {
+      0%, 100% { transform: translate(0, 0) scale(1); }
+      40%      { transform: translate(-50px, -25px) scale(1.1); }
+      70%      { transform: translate(30px, 15px) scale(.95); }
+    }
+    @keyframes orbFloat3 {
+      0%, 100% { transform: translate(0, 0) scale(1); }
+      50%      { transform: translate(-35px, 40px) scale(1.15); }
+    }
+
+    /* Particle grid overlay */
+    .hero-particles {
+      position: absolute; inset: 0; z-index: 0; overflow: hidden;
+    }
+    .hero-particles span {
+      position: absolute; width: 3px; height: 3px;
+      background: var(--teal); border-radius: 50%;
+      opacity: 0; animation: sparkle 4s ease-in-out infinite;
+    }
+
+    @keyframes sparkle {
+      0%, 100% { opacity: 0; transform: scale(.5) translateY(0); }
+      50%      { opacity: .7; transform: scale(1.2) translateY(-15px); }
+    }
+
+    .hero-content {
+      position: relative; z-index: 2;
+      max-width: 700px;
+    }
+    .hero-badge {
+      display: inline-block;
+      font-family: 'DM Sans', sans-serif;
+      font-size: .72rem; font-weight: 500;
+      letter-spacing: .15em; text-transform: uppercase;
+      color: var(--teal);
+      background: rgba(94,234,212,.08);
+      border: 1px solid rgba(94,234,212,.2);
+      padding: .45rem 1.2rem; border-radius: 50px;
+      margin-bottom: 1.5rem;
+      animation: badgePulse 3s ease-in-out infinite;
+    }
+    @keyframes badgePulse {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(94,234,212,.2); }
+      50%      { box-shadow: 0 0 20px 4px rgba(94,234,212,.15); }
+    }
+    .hero h1 {
+      font-family: 'Syne', sans-serif;
+      font-weight: 800; font-size: clamp(2.6rem, 6vw, 4.2rem);
+      line-height: 1.1; margin-bottom: 1.2rem;
+      background: linear-gradient(135deg, var(--white) 0%, var(--teal) 50%, var(--gold) 100%);
+      background-size: 200% 200%;
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: titleShimmer 6s ease-in-out infinite;
+    }
+    @keyframes titleShimmer {
+      0%, 100% { background-position: 0% 50%; }
+      50%      { background-position: 100% 50%; }
+    }
+    .hero p {
+      font-family: 'Lora', serif;
+      font-style: italic; font-size: 1.15rem;
+      color: var(--muted); max-width: 520px;
+      margin: 0 auto; line-height: 1.8;
+    }
+
+    /* Decorative line */
+    .hero-line {
+      width: 80px; height: 3px; margin: 2rem auto 0;
+      background: linear-gradient(90deg, var(--gold), var(--teal));
+      border-radius: 2px;
+      animation: lineExpand 3s ease-in-out infinite alternate;
+    }
+    @keyframes lineExpand {
+      0%   { width: 60px; opacity: .6; }
+      100% { width: 120px; opacity: 1; }
+    }
+
+    /* ── Cards Section ── */
+    .events-section {
+      position: relative;
+      max-width: 1060px; margin: 0 auto;
+      padding: 2rem 2rem 6rem;
+    }
+    .section-intro {
+      text-align: center; margin-bottom: 4rem;
+    }
+    .section-intro h2 {
+      font-family: 'Syne', sans-serif;
+      font-weight: 700; font-size: 1.6rem;
+      color: var(--white); margin-bottom: .8rem;
+    }
+    .section-intro p {
+      font-size: .95rem; color: var(--muted);
+      max-width: 540px; margin: 0 auto; line-height: 1.7;
+    }
+
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 2.5rem;
+    }
+
+    /* ── Event Card (shared) ── */
+    .event-card {
+      position: relative; border-radius: 20px;
+      padding: 3rem 2.5rem; overflow: hidden;
+      display: flex; flex-direction: column; gap: 1.2rem;
+      transition: transform .45s cubic-bezier(.25,.8,.25,1), box-shadow .45s ease;
+      cursor: pointer; min-height: 380px;
+    }
+    .event-card:hover {
+      transform: translateY(-8px) scale(1.015);
+    }
+    .event-card::before {
+      content: ''; position: absolute; inset: 0; border-radius: 20px;
+      z-index: 0; transition: opacity .5s ease;
+    }
+
+    /* Card inner glow on hover */
+    .event-card::after {
+      content: ''; position: absolute; inset: -1px;
+      border-radius: 20px; z-index: 0;
+      opacity: 0; transition: opacity .5s ease;
+    }
+    .event-card:hover::after { opacity: 1; }
+
+    .event-card > * { position: relative; z-index: 2; }
+
+    /* ── Eventos Pasados — warm/nostalgic ── */
+    .card-pasados {
+      background:
+        linear-gradient(145deg, rgba(240,180,41,.12) 0%, rgba(194,120,20,.08) 40%, var(--card-bg) 100%);
+      border: 1px solid rgba(240,180,41,.2);
+      box-shadow:
+        0 4px 30px rgba(240,180,41,.08),
+        inset 0 1px 0 rgba(240,180,41,.1);
+    }
+    .card-pasados:hover {
+      box-shadow:
+        0 16px 60px rgba(240,180,41,.18),
+        0 0 40px rgba(240,180,41,.06),
+        inset 0 1px 0 rgba(240,180,41,.15);
+    }
+    .card-pasados::before {
+      background:
+        radial-gradient(ellipse 80% 60% at 20% 80%, rgba(240,180,41,.15) 0%, transparent 60%),
+        radial-gradient(ellipse 60% 50% at 80% 20%, rgba(194,120,20,.1) 0%, transparent 50%);
+    }
+    .card-pasados::after {
+      background: linear-gradient(135deg, rgba(240,180,41,.15), transparent 50%, rgba(194,120,20,.1));
+    }
+
+    .card-pasados .card-icon {
+      width: 64px; height: 64px; border-radius: 16px;
+      background: linear-gradient(135deg, rgba(240,180,41,.2), rgba(194,120,20,.12));
+      border: 1px solid rgba(240,180,41,.25);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.8rem;
+      box-shadow: 0 4px 20px rgba(240,180,41,.15);
+      animation: iconGlowWarm 4s ease-in-out infinite;
+    }
+    @keyframes iconGlowWarm {
+      0%, 100% { box-shadow: 0 4px 20px rgba(240,180,41,.15); }
+      50%      { box-shadow: 0 4px 35px rgba(240,180,41,.3); }
+    }
+
+    .card-pasados h3 {
+      font-family: 'Syne', sans-serif; font-weight: 700;
+      font-size: 1.55rem;
+      background: linear-gradient(135deg, #f0b429, #c27814);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .card-pasados .card-desc {
+      color: var(--muted); font-size: .92rem; line-height: 1.75;
+    }
+    .card-pasados .card-cta {
+      display: inline-flex; align-items: center; gap: .5rem;
+      font-family: 'Syne', sans-serif; font-weight: 600;
+      font-size: .85rem; color: var(--gold);
+      letter-spacing: .04em; text-transform: uppercase;
+      margin-top: auto; transition: gap .3s ease, color .3s ease;
+    }
+    .card-pasados:hover .card-cta { gap: .9rem; color: #ffd166; }
+
+    /* Floating amber particles inside pasados card */
+    .card-pasados .card-particles span {
+      position: absolute; width: 4px; height: 4px;
+      background: var(--gold); border-radius: 50%;
+      opacity: 0; animation: cardSparkle 5s ease-in-out infinite;
+      filter: blur(1px);
+    }
+    @keyframes cardSparkle {
+      0%, 100% { opacity: 0; transform: translateY(0) scale(.5); }
+      50%      { opacity: .5; transform: translateY(-20px) scale(1); }
+    }
+
+    /* ── Eventos Próximos — excited/anticipatory ── */
+    .card-proximos {
+      background:
+        linear-gradient(145deg, rgba(94,234,212,.10) 0%, rgba(139,92,246,.08) 40%, var(--card-bg) 100%);
+      border: 1px solid rgba(94,234,212,.2);
+      box-shadow:
+        0 4px 30px rgba(94,234,212,.08),
+        inset 0 1px 0 rgba(94,234,212,.1);
+    }
+    .card-proximos:hover {
+      box-shadow:
+        0 16px 60px rgba(94,234,212,.18),
+        0 0 40px rgba(139,92,246,.08),
+        inset 0 1px 0 rgba(94,234,212,.15);
+    }
+    .card-proximos::before {
+      background:
+        radial-gradient(ellipse 80% 60% at 80% 80%, rgba(94,234,212,.12) 0%, transparent 60%),
+        radial-gradient(ellipse 60% 50% at 20% 20%, rgba(139,92,246,.12) 0%, transparent 50%);
+    }
+    .card-proximos::after {
+      background: linear-gradient(135deg, rgba(94,234,212,.12), transparent 50%, rgba(139,92,246,.1));
+    }
+
+    .card-proximos .card-icon {
+      width: 64px; height: 64px; border-radius: 16px;
+      background: linear-gradient(135deg, rgba(94,234,212,.2), rgba(139,92,246,.15));
+      border: 1px solid rgba(94,234,212,.25);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.8rem;
+      box-shadow: 0 4px 20px rgba(94,234,212,.15);
+      animation: iconGlowCool 4s ease-in-out infinite;
+    }
+    @keyframes iconGlowCool {
+      0%, 100% { box-shadow: 0 4px 20px rgba(94,234,212,.15); }
+      50%      { box-shadow: 0 4px 35px rgba(139,92,246,.3); }
+    }
+
+    .card-proximos h3 {
+      font-family: 'Syne', sans-serif; font-weight: 700;
+      font-size: 1.55rem;
+      background: linear-gradient(135deg, var(--teal), #8b5cf6);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .card-proximos .card-desc {
+      color: var(--muted); font-size: .92rem; line-height: 1.75;
+    }
+    .card-proximos .card-cta {
+      display: inline-flex; align-items: center; gap: .5rem;
+      font-family: 'Syne', sans-serif; font-weight: 600;
+      font-size: .85rem; color: var(--teal);
+      letter-spacing: .04em; text-transform: uppercase;
+      margin-top: auto; transition: gap .3s ease, color .3s ease;
+    }
+    .card-proximos:hover .card-cta { gap: .9rem; color: #a78bfa; }
+
+    /* Floating teal/purple particles inside proximos card */
+    .card-proximos .card-particles span {
+      position: absolute; width: 4px; height: 4px;
+      background: var(--teal); border-radius: 50%;
+      opacity: 0; animation: cardSparkleCool 5s ease-in-out infinite;
+      filter: blur(1px);
+    }
+    .card-proximos .card-particles span:nth-child(even) {
+      background: #8b5cf6;
+    }
+    @keyframes cardSparkleCool {
+      0%, 100% { opacity: 0; transform: translateY(0) scale(.5); }
+      50%      { opacity: .55; transform: translateY(-25px) scale(1.1); }
+    }
+
+    /* Shared card particle positioning */
+    .card-particles { position: absolute; inset: 0; z-index: 1; pointer-events: none; overflow: hidden; }
+
+    /* ── Reveal animation ── */
+    .reveal {
+      opacity: 0; transform: translateY(35px);
+      transition: opacity .8s cubic-bezier(.16,1,.3,1), transform .8s cubic-bezier(.16,1,.3,1);
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .reveal-delay-1 { transition-delay: .15s; }
+    .reveal-delay-2 { transition-delay: .3s; }
+
+    /* ── Bottom decorative wave ── */
+    .section-wave {
+      position: relative; height: 80px; overflow: hidden;
+    }
+    .section-wave svg {
+      position: absolute; bottom: 0; left: 0; width: 100%;
+      fill: var(--deep);
+    }
+
+    /* ── Footer ── */
+    footer {
+      background: var(--deep);
+      padding: 4rem 2rem 2rem;
+    }
+    .footer-grid {
+      display: grid; grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 3rem; margin-bottom: 3rem;
+      max-width: 1160px; margin-left: auto; margin-right: auto;
+    }
+    .footer-col h4 {
+      font-family: 'Syne', sans-serif; font-weight: 700;
+      font-size: .8rem; letter-spacing: .1em;
+      text-transform: uppercase; color: var(--white);
+      margin-bottom: 1.2rem;
+    }
+    .footer-col ul { display: flex; flex-direction: column; gap: .6rem; }
+    .footer-col ul li a {
+      font-size: .85rem; color: var(--muted); transition: color .2s;
+    }
+    .footer-col ul li a:hover { color: var(--teal); }
+
+    .footer-bottom {
+      border-top: 1px solid var(--border); padding-top: 2rem;
+      display: flex; justify-content: space-between; align-items: center;
+      flex-wrap: wrap; gap: 1rem;
+      max-width: 1160px; margin: 0 auto;
+    }
+    .footer-bottom p { font-size: .8rem; color: var(--muted); }
+    .footer-bottom-links { display: flex; gap: 1.5rem; }
+    .footer-bottom-links a {
+      font-size: .78rem; color: var(--muted); transition: color .2s;
+    }
+    .footer-bottom-links a:hover { color: var(--teal); }
+
+    /* ── Responsive ── */
+    @media (max-width: 860px) {
+      .cards-grid { grid-template-columns: 1fr; gap: 2rem; }
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 640px) {
+      nav.main-nav { flex-wrap: wrap; justify-content: center; gap: 1rem; padding: 1rem; }
+      .nav-left, .nav-right { gap: 1rem; flex-wrap: wrap; justify-content: center; }
+      .nav-center { position: static; transform: none; order: -1; width: 100%; justify-content: center; }
+      .hero { min-height: 70vh; padding: 7rem 1.5rem 3rem; }
+      .event-card { padding: 2rem 1.5rem; min-height: 300px; }
+      .footer-grid { grid-template-columns: 1fr; gap: 2rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── Header / Nav ── -->
+<header>
+  <nav class="main-nav">
+    <div class="nav-left">
+      <a href="../../miembros/">Miembros</a>
+      <div class="nav-dropdown">
+        <a href="../../investigaciones/">Investigaciones ▾</a>
+        <div class="dropdown-menu">
+          <a href="../../investigaciones/lineas-de-investigacion/">Líneas de Investigación</a>
+          <a href="../../investigaciones/publicaciones/">Publicaciones</a>
+          <div class="dropdown-submenu">
+            <a href="../../investigaciones/programas/">Programas ▸</a>
+            <div class="dropdown-submenu-menu">
+              <a href="../../investigaciones/programas/bienestar/">BienEstar</a>
+              <a href="../../investigaciones/programas/espacio-mental/">Espacio Mental</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="nav-dropdown">
+        <a href="../../proyectos-sociales/" class="active">Proyectos Sociales ▾</a>
+        <div class="dropdown-menu">
+          <div class="dropdown-submenu">
+            <a href="../../proyectos-sociales/eventos/">Eventos ▸</a>
+            <div class="dropdown-submenu-menu">
+              <a href="../../proyectos-sociales/eventos/eventos-pasados/">Eventos Pasados</a>
+              <a href="../../proyectos-sociales/eventos/eventos-proximos/">Eventos Próximos</a>
+            </div>
+          </div>
+          <a href="../../proyectos-sociales/psinet-escool/">PsiNet EsCool</a>
+          <a href="../../proyectos-sociales/psipaz/">PsiPaz</a>
+        </div>
+      </div>
+    </div>
+    <div class="nav-center">
+      <a href="../../index.html">
+        <img src="../../assets/images/logo.png" alt="PsiNet LAB" onerror="this.style.display='none'" />
+      </a>
+    </div>
+    <div class="nav-right">
+      <a href="../../blog/">Blog</a>
+      <a href="https://psinetlab.wordpress.com/contacto/" target="_blank">Contacto</a>
+      <a href="../../index.html#apoyanos">Apóyanos</a>
+      <a href="../../index.html#colaboraciones">Colaboraciones</a>
+    </div>
+  </nav>
+</header>
+
+<!-- ── Hero ── -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="orb orb-1"></div>
+  <div class="orb orb-2"></div>
+  <div class="orb orb-3"></div>
+  <div class="orb orb-4"></div>
+  <div class="hero-particles" id="heroParticles"></div>
+
+  <div class="hero-content">
+    <span class="hero-badge">Proyectos Sociales</span>
+    <h1>Eventos</h1>
+    <p>Espacios de encuentro que transforman ideas en impacto. Revive lo vivido y descubre lo que viene.</p>
+    <div class="hero-line"></div>
+  </div>
+</section>
+
+<!-- ── Cards Section ── -->
+<section class="events-section">
+  <div class="section-intro reveal">
+    <h2>Explora nuestros eventos</h2>
+    <p>Desde charlas y talleres hasta jornadas de ciencia abierta: cada evento es una oportunidad para conectar, aprender y crecer.</p>
+  </div>
+
+  <div class="cards-grid">
+    <!-- Eventos Pasados -->
+    <a href="eventos-pasados/" class="event-card card-pasados reveal reveal-delay-1" aria-label="Ver eventos pasados">
+      <div class="card-particles">
+        <span style="top:20%;left:15%;animation-delay:0s"></span>
+        <span style="top:60%;left:75%;animation-delay:1.2s"></span>
+        <span style="top:40%;left:45%;animation-delay:2.4s"></span>
+        <span style="top:80%;left:25%;animation-delay:3.6s"></span>
+        <span style="top:30%;left:85%;animation-delay:.8s"></span>
+      </div>
+      <div class="card-icon" role="img" aria-label="Libro abierto">📖</div>
+      <h3>Eventos Pasados</h3>
+      <p class="card-desc">Revive los momentos que marcaron nuestra historia. Conferencias, talleres y jornadas que dejaron huella en nuestra comunidad.</p>
+      <span class="card-cta">Explorar memorias <span>→</span></span>
+    </a>
+
+    <!-- Eventos Próximos -->
+    <a href="eventos-proximos/" class="event-card card-proximos reveal reveal-delay-2" aria-label="Ver eventos próximos">
+      <div class="card-particles">
+        <span style="top:15%;left:80%;animation-delay:0s"></span>
+        <span style="top:55%;left:20%;animation-delay:1s"></span>
+        <span style="top:35%;left:55%;animation-delay:2s"></span>
+        <span style="top:75%;left:70%;animation-delay:3s"></span>
+        <span style="top:25%;left:35%;animation-delay:1.5s"></span>
+        <span style="top:65%;left:90%;animation-delay:2.5s"></span>
+      </div>
+      <div class="card-icon" role="img" aria-label="Cohete">🚀</div>
+      <h3>Eventos Próximos</h3>
+      <p class="card-desc">Descubre lo que estamos preparando. Nuevas experiencias, temas innovadores y oportunidades para participar activamente.</p>
+      <span class="card-cta">Ver próximos eventos <span>→</span></span>
+    </a>
+  </div>
+</section>
+
+<!-- ── Wave divider ── -->
+<div class="section-wave">
+  <svg viewBox="0 0 1440 80" preserveAspectRatio="none">
+    <path d="M0,40 C360,80 720,0 1080,40 C1260,60 1380,50 1440,40 L1440,80 L0,80 Z" />
+  </svg>
+</div>
+
+<!-- ── Footer ── -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-col">
+      <h4>PsiNet LAB</h4>
+      <p style="font-size:.85rem;color:var(--muted);max-width:280px;line-height:1.75;">
+        Ciencia psicológica conectada para el desarrollo humano y comunitario.
+      </p>
+    </div>
+    <div class="footer-col">
+      <h4>Proyectos Sociales</h4>
+      <ul>
+        <li><a href="../../proyectos-sociales/eventos/">Eventos</a></li>
+        <li><a href="../../proyectos-sociales/psinet-escool/">PsiNet EsCool</a></li>
+        <li><a href="../../proyectos-sociales/psipaz/">PsiPaz</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Investigación</h4>
+      <ul>
+        <li><a href="../../investigaciones/publicaciones/">Publicaciones</a></li>
+        <li><a href="../../investigaciones/lineas-de-investigacion/">Líneas de Investigación</a></li>
+        <li><a href="../../miembros/">Miembros</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Organización</h4>
+      <ul>
+        <li><a href="https://psinetlab.wordpress.com/contacto/" target="_blank">Contacto</a></li>
+        <li><a href="https://psinetlab.wordpress.com/apoyanos/" target="_blank">Apóyanos</a></li>
+        <li><a href="../../blog/">Blog</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>&copy; 2025 PsiNet LAB. Todos los derechos reservados.</p>
+    <div class="footer-bottom-links">
+      <a href="#">Cookie Policy</a>
+      <a href="#">Privacy Policy</a>
+      <a href="#">Policies</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // ── IntersectionObserver for reveal animations ──
+  const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        revealObserver.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+  // ── Header scroll effect ──
+  const header = document.querySelector('header');
+  window.addEventListener('scroll', () => {
+    header.classList.toggle('scrolled', window.scrollY > 50);
+  });
+
+  // ── Generate hero sparkle particles ──
+  (function generateParticles() {
+    const container = document.getElementById('heroParticles');
+    if (!container) return;
+    for (let i = 0; i < 30; i++) {
+      const span = document.createElement('span');
+      span.style.left = Math.random() * 100 + '%';
+      span.style.top  = Math.random() * 100 + '%';
+      span.style.animationDelay = (Math.random() * 5).toFixed(2) + 's';
+      span.style.animationDuration = (3 + Math.random() * 4).toFixed(2) + 's';
+      container.appendChild(span);
+    }
+  })();
+</script>
+
+</body>
+</html>

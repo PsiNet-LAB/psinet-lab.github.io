@@ -1,0 +1,873 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Eventos Próximos – PsiNet LAB</title>
+  <link rel="icon" type="image/x-icon" href="../../../favicon.ico" />
+  <link rel="icon" type="image/png" sizes="32x32" href="../../../assets/images/favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="192x192" href="../../../assets/images/favicon-192x192.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Lora:ital,wght@0,400;0,500;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    /* ── Variables ── */
+    :root {
+      --navy:   #0b1629;
+      --deep:   #0d1f3c;
+      --mid:    #112240;
+      --teal:   #5eead4;
+      --teal2:  #2dd4bf;
+      --gold:   #f0b429;
+      --white:  #f0f4ff;
+      --muted:  #8892b0;
+      --card-bg:#0e1f38;
+      --border: rgba(94,234,212,.15);
+      --orange: #f97316;
+      --pink:   #ec4899;
+      --purple: #a855f7;
+    }
+
+    /* ── Reset ── */
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+    a{color:inherit;text-decoration:none;}
+    ul{list-style:none;}
+
+    body{
+      background:var(--navy);
+      color:var(--white);
+      font-family:'DM Sans',sans-serif;
+      font-size:16px;
+      line-height:1.7;
+      overflow-x:hidden;
+    }
+
+    /* Noise overlay */
+    body::before{
+      content:'';position:fixed;inset:0;
+      background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.04'/%3E%3C/svg%3E");
+      pointer-events:none;z-index:9999;opacity:.5;
+    }
+
+    /* ── Header / Nav ── */
+    header{
+      position:fixed;top:0;left:0;right:0;z-index:1000;
+      background:rgba(11,22,41,.85);
+      backdrop-filter:blur(20px);
+    }
+    nav.main-nav{
+      position:relative;display:flex;align-items:center;
+      justify-content:space-between;padding:.65rem 2.5rem;
+    }
+    .nav-left,.nav-right{display:flex;gap:2rem;align-items:center;}
+    .nav-center{
+      position:absolute;left:50%;transform:translateX(-50%);
+      display:flex;flex-direction:column;align-items:center;gap:.15rem;
+    }
+    .nav-center img{height:80px;}
+    nav.main-nav a{
+      font-size:.82rem;font-family:'DM Sans',sans-serif;
+      color:rgba(240,244,255,.85);font-weight:500;
+      letter-spacing:.02em;text-transform:uppercase;
+      transition:color .3s ease,text-shadow .3s ease;position:relative;
+    }
+    nav.main-nav a::after{
+      content:'';position:absolute;left:0;bottom:-4px;
+      width:0;height:2px;
+      background:linear-gradient(90deg,var(--teal),var(--teal2));
+      border-radius:1px;transition:width .3s ease;
+    }
+    nav.main-nav a:hover{color:#fff;text-shadow:0 0 8px rgba(94,234,212,.35);}
+    nav.main-nav a:hover::after{width:100%;}
+    nav.main-nav a.active{color:var(--teal);}
+    nav.main-nav a.active::after{width:100%;}
+
+    /* Dropdowns */
+    .nav-dropdown{position:relative;}
+    .dropdown-menu{
+      position:absolute;top:100%;left:50%;transform:translateX(-50%) translateY(8px);
+      background:rgba(13,31,60,.97);backdrop-filter:blur(14px);
+      border:1px solid var(--border);border-radius:10px;
+      padding:.6rem 0;min-width:210px;
+      opacity:0;visibility:hidden;pointer-events:none;
+      transition:opacity .25s ease,transform .25s ease;
+      box-shadow:0 8px 32px rgba(0,0,0,.45);z-index:100;
+      display:flex;flex-direction:column;gap:0;
+    }
+    .nav-dropdown:hover>.dropdown-menu{
+      opacity:1;visibility:visible;pointer-events:auto;
+      transform:translateX(-50%) translateY(0);
+    }
+    .dropdown-menu a{
+      padding:.5rem 1.2rem;font-size:.8rem;
+      text-transform:none;letter-spacing:0;
+    }
+    .dropdown-menu a:hover{background:rgba(94,234,212,.06);color:var(--teal);}
+    .dropdown-submenu{position:relative;}
+    .dropdown-submenu>a{display:flex;justify-content:space-between;align-items:center;}
+    .dropdown-submenu-menu{
+      display:flex;flex-direction:column;
+      position:absolute;top:0;left:100%;
+      background:rgba(13,31,60,.97);backdrop-filter:blur(14px);
+      border:1px solid var(--border);border-radius:10px;
+      padding:.6rem 0;min-width:190px;
+      opacity:0;visibility:hidden;pointer-events:none;
+      transition:opacity .25s ease,transform .25s ease;
+      box-shadow:0 8px 32px rgba(0,0,0,.45);z-index:101;
+    }
+    .dropdown-submenu:hover>.dropdown-submenu-menu{
+      opacity:1;visibility:visible;pointer-events:auto;
+    }
+    .dropdown-submenu-menu a:hover{background:rgba(94,234,212,.06);color:var(--teal);}
+
+    /* ── Animated Gradient Background ── */
+    .hero-bg{
+      position:fixed;inset:0;z-index:-2;
+      background:linear-gradient(135deg,
+        var(--navy) 0%,#0f1b3d 20%,#15234a 40%,
+        #0d2847 60%,#0b1629 80%,#111a35 100%);
+      background-size:400% 400%;
+      animation:gradientShift 12s ease infinite;
+    }
+    @keyframes gradientShift{
+      0%{background-position:0% 50%;}
+      25%{background-position:100% 0%;}
+      50%{background-position:100% 100%;}
+      75%{background-position:0% 100%;}
+      100%{background-position:0% 50%;}
+    }
+
+    /* Glow orbs behind hero */
+    .orb{
+      position:fixed;border-radius:50%;filter:blur(100px);
+      pointer-events:none;z-index:-1;opacity:.35;
+    }
+    .orb-1{
+      width:500px;height:500px;top:-10%;left:-5%;
+      background:radial-gradient(circle,rgba(94,234,212,.4),transparent 70%);
+      animation:orbFloat1 18s ease-in-out infinite;
+    }
+    .orb-2{
+      width:400px;height:400px;bottom:10%;right:-5%;
+      background:radial-gradient(circle,rgba(168,85,247,.35),transparent 70%);
+      animation:orbFloat2 22s ease-in-out infinite;
+    }
+    .orb-3{
+      width:350px;height:350px;top:40%;left:50%;
+      background:radial-gradient(circle,rgba(240,180,41,.25),transparent 70%);
+      animation:orbFloat3 15s ease-in-out infinite;
+    }
+    @keyframes orbFloat1{
+      0%,100%{transform:translate(0,0) scale(1);}
+      33%{transform:translate(80px,60px) scale(1.1);}
+      66%{transform:translate(-40px,30px) scale(.95);}
+    }
+    @keyframes orbFloat2{
+      0%,100%{transform:translate(0,0) scale(1);}
+      33%{transform:translate(-60px,-40px) scale(1.05);}
+      66%{transform:translate(30px,-80px) scale(.9);}
+    }
+    @keyframes orbFloat3{
+      0%,100%{transform:translate(0,0) scale(1);}
+      50%{transform:translate(50px,-50px) scale(1.15);}
+    }
+
+    /* ── Confetti / Floating Shapes ── */
+    .confetti-wrap{
+      position:fixed;inset:0;pointer-events:none;z-index:-1;overflow:hidden;
+    }
+    .confetti{
+      position:absolute;opacity:.45;
+    }
+    .confetti-circle{
+      width:10px;height:10px;border-radius:50%;
+    }
+    .confetti-square{
+      width:8px;height:8px;border-radius:2px;
+    }
+    .confetti-diamond{
+      width:10px;height:10px;transform:rotate(45deg);border-radius:2px;
+    }
+    .confetti-ring{
+      width:14px;height:14px;border-radius:50%;
+      border:2px solid currentColor;background:transparent;
+    }
+    .confetti-star{
+      width:0;height:0;
+      border-left:5px solid transparent;border-right:5px solid transparent;
+      border-bottom:10px solid currentColor;position:relative;
+    }
+    .confetti-star::after{
+      content:'';position:absolute;top:3px;left:-5px;
+      width:0;height:0;
+      border-left:5px solid transparent;border-right:5px solid transparent;
+      border-top:10px solid currentColor;
+    }
+
+    /* Confetti individual animations */
+    .c1{left:5%;top:-5%;background:var(--teal);animation:confettiFall 14s linear infinite 0s;}
+    .c2{left:15%;top:-8%;background:var(--gold);animation:confettiFall 18s linear infinite 2s;}
+    .c3{left:25%;top:-3%;background:var(--pink);animation:confettiFall 16s linear infinite 4s;}
+    .c4{left:35%;top:-6%;color:var(--teal2);animation:confettiFall 20s linear infinite 1s;}
+    .c5{left:45%;top:-4%;background:var(--purple);animation:confettiFall 15s linear infinite 3s;}
+    .c6{left:55%;top:-7%;background:var(--orange);animation:confettiFall 19s linear infinite 5s;}
+    .c7{left:65%;top:-5%;color:var(--gold);animation:confettiFall 17s linear infinite 2.5s;}
+    .c8{left:75%;top:-3%;background:var(--teal);animation:confettiFall 21s linear infinite 0.5s;}
+    .c9{left:85%;top:-8%;background:var(--pink);animation:confettiFall 13s linear infinite 4.5s;}
+    .c10{left:92%;top:-4%;background:var(--purple);animation:confettiFall 16s linear infinite 1.5s;}
+    .c11{left:10%;top:-6%;color:var(--orange);animation:confettiFall 22s linear infinite 6s;}
+    .c12{left:40%;top:-9%;background:var(--teal2);animation:confettiFall 14s linear infinite 3.5s;}
+
+    @keyframes confettiFall{
+      0%{transform:translateY(-10vh) rotate(0deg);opacity:.5;}
+      50%{opacity:.7;}
+      100%{transform:translateY(110vh) rotate(720deg);opacity:0;}
+    }
+
+    /* ── Sparkle Elements ── */
+    .sparkle-field{
+      position:fixed;inset:0;pointer-events:none;z-index:-1;
+    }
+    .sparkle{
+      position:absolute;width:4px;height:4px;
+      background:var(--white);border-radius:50%;
+      animation:sparkle 3s ease-in-out infinite;
+    }
+    .sparkle::before,.sparkle::after{
+      content:'';position:absolute;background:var(--white);border-radius:2px;
+    }
+    .sparkle::before{width:12px;height:2px;top:1px;left:-4px;}
+    .sparkle::after{width:2px;height:12px;top:-4px;left:1px;}
+    .s1{top:12%;left:8%;animation-delay:0s;animation-duration:2.5s;}
+    .s2{top:20%;right:12%;animation-delay:.8s;animation-duration:3.2s;}
+    .s3{top:55%;left:18%;animation-delay:1.5s;animation-duration:2.8s;}
+    .s4{top:35%;right:25%;animation-delay:.3s;animation-duration:3.5s;}
+    .s5{top:70%;left:75%;animation-delay:2s;animation-duration:2.2s;}
+    .s6{top:80%;left:30%;animation-delay:1.2s;animation-duration:4s;}
+    .s7{top:15%;left:55%;animation-delay:2.5s;animation-duration:3s;}
+    .s8{top:45%;right:8%;animation-delay:0.6s;animation-duration:2.6s;}
+
+    @keyframes sparkle{
+      0%,100%{opacity:0;transform:scale(0) rotate(0deg);}
+      50%{opacity:.8;transform:scale(1) rotate(180deg);}
+    }
+
+    /* ── Main Content ── */
+    main{
+      padding-top:130px;min-height:100vh;
+      display:flex;flex-direction:column;align-items:center;
+    }
+
+    /* ── Hero Section ── */
+    .hero-coming{
+      text-align:center;padding:4rem 2rem 3rem;
+      max-width:900px;margin:0 auto;position:relative;
+    }
+    .hero-tag{
+      display:inline-flex;align-items:center;gap:.5rem;
+      font-size:.7rem;letter-spacing:.22em;text-transform:uppercase;
+      color:var(--teal);font-family:'DM Sans',sans-serif;font-weight:600;
+      margin-bottom:1.5rem;
+      animation:fadeUp .8s ease both;
+    }
+    .hero-tag .dot{
+      width:8px;height:8px;border-radius:50%;
+      background:var(--teal);animation:dotPulse 1.5s ease-in-out infinite;
+    }
+    @keyframes dotPulse{
+      0%,100%{opacity:1;transform:scale(1);}
+      50%{opacity:.4;transform:scale(.6);}
+    }
+
+    /* Giant animated headline */
+    .hero-headline{
+      font-family:'Syne',sans-serif;font-weight:800;
+      font-size:clamp(2.2rem,6vw,4.5rem);
+      letter-spacing:-.03em;line-height:1.1;
+      margin-bottom:1.5rem;
+      background:linear-gradient(135deg,var(--teal),var(--gold),var(--pink),var(--teal2),var(--purple));
+      background-size:300% 300%;
+      -webkit-background-clip:text;background-clip:text;
+      -webkit-text-fill-color:transparent;
+      animation:headlineGradient 6s ease infinite,fadeUp 1s ease both .2s;
+    }
+    @keyframes headlineGradient{
+      0%{background-position:0% 50%;}
+      50%{background-position:100% 50%;}
+      100%{background-position:0% 50%;}
+    }
+
+    .hero-sub{
+      font-family:'Lora',serif;font-style:italic;
+      font-size:clamp(1.1rem,2.5vw,1.45rem);
+      color:var(--muted);line-height:1.6;max-width:600px;margin:0 auto 2.5rem;
+      animation:fadeUp 1s ease both .4s;
+    }
+
+    /* ── Countdown-Style Blocks ── */
+    .countdown-aesthetic{
+      display:flex;gap:1.5rem;justify-content:center;flex-wrap:wrap;
+      margin:0 auto 3rem;animation:fadeUp 1s ease both .6s;
+    }
+    .count-block{
+      width:100px;height:110px;
+      background:rgba(14,31,56,.8);
+      border:1px solid var(--border);border-radius:14px;
+      display:flex;flex-direction:column;align-items:center;justify-content:center;
+      gap:.3rem;position:relative;overflow:hidden;
+      backdrop-filter:blur(10px);
+      animation:blockPulse 3s ease-in-out infinite;
+    }
+    .count-block:nth-child(2){animation-delay:.5s;}
+    .count-block:nth-child(3){animation-delay:1s;}
+    .count-block:nth-child(4){animation-delay:1.5s;}
+
+    .count-block::before{
+      content:'';position:absolute;inset:-1px;border-radius:14px;
+      background:linear-gradient(135deg,var(--teal),var(--purple),var(--gold),var(--pink));
+      background-size:300% 300%;animation:borderRotate 4s linear infinite;
+      z-index:-1;opacity:.5;
+    }
+    @keyframes borderRotate{
+      0%{background-position:0% 50%;}
+      50%{background-position:100% 50%;}
+      100%{background-position:0% 50%;}
+    }
+
+    .count-icon{font-size:1.8rem;line-height:1;}
+    .count-label{
+      font-size:.65rem;text-transform:uppercase;letter-spacing:.1em;
+      color:var(--muted);font-weight:500;
+    }
+
+    @keyframes blockPulse{
+      0%,100%{
+        transform:scale(1);
+        box-shadow:0 0 20px rgba(94,234,212,.08);
+      }
+      50%{
+        transform:scale(1.04);
+        box-shadow:0 0 35px rgba(94,234,212,.2),0 0 60px rgba(168,85,247,.1);
+      }
+    }
+
+    /* ── Glow Ring ── */
+    .glow-ring-wrap{
+      position:relative;width:220px;height:220px;margin:0 auto 3rem;
+      animation:fadeUp 1s ease both .8s;
+    }
+    .glow-ring{
+      width:100%;height:100%;border-radius:50%;
+      border:3px solid transparent;
+      background-image:
+        linear-gradient(var(--deep),var(--deep)),
+        conic-gradient(from 0deg,var(--teal),var(--purple),var(--gold),var(--pink),var(--teal));
+      background-origin:border-box;background-clip:padding-box,border-box;
+      animation:ringRotate 6s linear infinite;
+      display:flex;align-items:center;justify-content:center;
+    }
+    .glow-ring-inner{
+      font-size:3.5rem;animation:ringPulse 2s ease-in-out infinite;
+    }
+    @keyframes ringRotate{
+      0%{transform:rotate(0deg);}
+      100%{transform:rotate(360deg);}
+    }
+    @keyframes ringPulse{
+      0%,100%{transform:scale(1);opacity:1;}
+      50%{transform:scale(1.15);opacity:.8;}
+    }
+    .glow-ring::after{
+      content:'';position:absolute;inset:-15px;border-radius:50%;
+      background:conic-gradient(from 0deg,
+        rgba(94,234,212,.2),rgba(168,85,247,.15),
+        rgba(240,180,41,.15),rgba(236,72,153,.15),rgba(94,234,212,.2));
+      filter:blur(25px);animation:ringRotate 8s linear infinite reverse;
+      z-index:-1;
+    }
+
+    /* ── Message Card ── */
+    .message-card{
+      max-width:700px;margin:0 auto 3rem;padding:2.5rem 3rem;
+      background:linear-gradient(135deg,rgba(14,31,56,.9),rgba(17,34,64,.85));
+      border:1px solid var(--border);border-radius:16px;
+      text-align:center;position:relative;overflow:hidden;
+      backdrop-filter:blur(12px);
+      animation:fadeUp 1s ease both 1s;
+    }
+    .message-card::before{
+      content:'';position:absolute;top:-50%;left:-50%;width:200%;height:200%;
+      background:conic-gradient(from 0deg,transparent,rgba(94,234,212,.06),transparent,rgba(168,85,247,.04),transparent);
+      animation:cardShine 8s linear infinite;
+    }
+    @keyframes cardShine{
+      0%{transform:rotate(0deg);}
+      100%{transform:rotate(360deg);}
+    }
+    .message-card>*{position:relative;z-index:1;}
+    .message-card h3{
+      font-family:'Syne',sans-serif;font-weight:700;
+      font-size:clamp(1.3rem,3vw,1.8rem);margin-bottom:1rem;
+      color:var(--white);
+    }
+    .message-card p{
+      color:var(--muted);font-size:.95rem;line-height:1.8;
+      max-width:520px;margin:0 auto;
+    }
+
+    /* ── CTA Section ── */
+    .cta-section{
+      text-align:center;padding:2rem 2rem 4rem;
+      animation:fadeUp 1s ease both 1.2s;
+    }
+    .cta-label{
+      font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;
+      color:var(--teal);font-weight:600;margin-bottom:1.5rem;
+    }
+    .cta-btns{
+      display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;
+    }
+    .btn{
+      display:inline-flex;align-items:center;gap:.5rem;
+      padding:.9rem 2rem;border-radius:8px;
+      font-family:'DM Sans',sans-serif;font-weight:500;
+      font-size:.9rem;cursor:pointer;border:none;
+      transition:all .35s cubic-bezier(.4,0,.2,1);
+      text-decoration:none;
+    }
+    .btn-primary{
+      background:var(--teal);color:var(--navy);
+      box-shadow:0 0 15px rgba(94,234,212,.35),0 0 30px rgba(94,234,212,.15);
+      animation:ctaPulse 2.5s ease-in-out infinite;
+    }
+    .btn-primary:hover{
+      background:var(--teal2);transform:translateY(-3px);
+      box-shadow:0 0 25px rgba(94,234,212,.55),0 0 50px rgba(94,234,212,.3);
+    }
+    .btn-outline{
+      background:transparent;color:var(--teal);
+      border:1px solid var(--border);
+    }
+    .btn-outline:hover{
+      border-color:var(--teal);background:rgba(94,234,212,.06);
+      transform:translateY(-3px);
+    }
+    @keyframes ctaPulse{
+      0%,100%{box-shadow:0 0 15px rgba(94,234,212,.35),0 0 30px rgba(94,234,212,.15);}
+      50%{box-shadow:0 0 25px rgba(94,234,212,.55),0 0 50px rgba(94,234,212,.3);}
+    }
+
+    /* ── Floating Emojis ── */
+    .float-el{
+      position:fixed;pointer-events:none;z-index:-1;
+      font-size:2rem;opacity:.15;
+    }
+    .f1{top:18%;left:4%;animation:floatA 12s ease-in-out infinite;}
+    .f2{top:65%;right:6%;animation:floatB 15s ease-in-out infinite;}
+    .f3{top:30%;right:15%;animation:floatA 18s ease-in-out infinite 2s;}
+    .f4{bottom:25%;left:10%;animation:floatB 14s ease-in-out infinite 1s;}
+    .f5{top:50%;left:80%;animation:floatA 16s ease-in-out infinite 3s;}
+    .f6{bottom:15%;left:50%;animation:floatB 20s ease-in-out infinite 4s;}
+
+    @keyframes floatA{
+      0%,100%{transform:translate(0,0) rotate(0deg);}
+      25%{transform:translate(20px,-30px) rotate(15deg);}
+      50%{transform:translate(-10px,-60px) rotate(-10deg);}
+      75%{transform:translate(30px,-20px) rotate(5deg);}
+    }
+    @keyframes floatB{
+      0%,100%{transform:translate(0,0) rotate(0deg);}
+      33%{transform:translate(-25px,25px) rotate(-20deg);}
+      66%{transform:translate(15px,-35px) rotate(10deg);}
+    }
+
+    /* ── Wave Divider ── */
+    .wave-section{
+      position:relative;padding:5rem 2rem 4rem;overflow:hidden;
+    }
+    .wave-section::before{
+      content:'';position:absolute;top:0;left:0;right:0;height:80px;
+      background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 80'%3E%3Cpath d='M0,40 C300,80 600,0 900,40 C1050,60 1150,30 1200,40 L1200,0 L0,0 Z' fill='%230b1629' opacity='.5'/%3E%3C/svg%3E") no-repeat center;
+      background-size:cover;
+    }
+
+    /* ── Info Tiles ── */
+    .info-tiles{
+      display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+      gap:1.5rem;max-width:900px;margin:0 auto 3rem;
+    }
+    .info-tile{
+      background:rgba(14,31,56,.7);border:1px solid var(--border);
+      border-radius:14px;padding:2rem;text-align:center;
+      transition:transform .3s ease,border-color .3s ease,box-shadow .3s ease;
+      backdrop-filter:blur(8px);
+    }
+    .info-tile:hover{
+      transform:translateY(-6px);border-color:rgba(94,234,212,.35);
+      box-shadow:0 12px 40px rgba(0,0,0,.3);
+    }
+    .info-tile .tile-icon{
+      font-size:2.2rem;margin-bottom:.8rem;display:block;
+    }
+    .info-tile h4{
+      font-family:'Syne',sans-serif;font-weight:700;
+      font-size:1rem;margin-bottom:.5rem;
+    }
+    .info-tile p{
+      font-size:.85rem;color:var(--muted);line-height:1.6;
+    }
+
+    /* ── Marquee Banner ── */
+    .marquee-wrap{
+      overflow:hidden;padding:1.5rem 0;margin:2rem 0;
+      border-top:1px solid var(--border);border-bottom:1px solid var(--border);
+    }
+    .marquee-track{
+      display:flex;gap:3rem;white-space:nowrap;
+      animation:marquee 25s linear infinite;
+    }
+    .marquee-item{
+      font-family:'Syne',sans-serif;font-weight:700;
+      font-size:clamp(1rem,2.5vw,1.6rem);
+      color:rgba(240,244,255,.08);letter-spacing:.05em;
+      text-transform:uppercase;flex-shrink:0;
+    }
+    .marquee-item span{color:rgba(94,234,212,.15);}
+    @keyframes marquee{
+      0%{transform:translateX(0);}
+      100%{transform:translateX(-50%);}
+    }
+
+    /* ── Scroll Reveal ── */
+    .reveal{
+      opacity:0;transform:translateY(28px);
+      transition:opacity .7s ease,transform .7s ease;
+    }
+    .reveal.visible{opacity:1;transform:translateY(0);}
+
+    /* ── Keyframes ── */
+    @keyframes fadeUp{
+      from{opacity:0;transform:translateY(30px);}
+      to{opacity:1;transform:translateY(0);}
+    }
+
+    /* ── Footer ── */
+    footer{
+      background:#080f1e;border-top:1px solid var(--border);
+      padding:4rem 2.5rem 2rem;position:relative;z-index:1;
+    }
+    .footer-grid{
+      display:grid;grid-template-columns:2fr 1fr 1fr 1fr;
+      gap:3rem;margin-bottom:3rem;
+    }
+    .footer-col h4{
+      font-family:'Syne',sans-serif;font-weight:600;
+      font-size:.9rem;color:var(--white);margin-bottom:1.2rem;
+    }
+    .footer-col ul{display:flex;flex-direction:column;gap:.6rem;}
+    .footer-col ul li a{font-size:.85rem;color:var(--muted);transition:color .2s;}
+    .footer-col ul li a:hover{color:var(--teal);}
+    .footer-bottom{
+      border-top:1px solid var(--border);padding-top:2rem;
+      display:flex;justify-content:space-between;align-items:center;
+      flex-wrap:wrap;gap:1rem;
+    }
+    .footer-bottom p{font-size:.8rem;color:var(--muted);}
+    .footer-bottom-links{display:flex;gap:1.5rem;}
+    .footer-bottom-links a{font-size:.8rem;color:var(--muted);}
+    .footer-bottom-links a:hover{color:var(--teal);}
+
+    /* ── Responsive ── */
+    @media(max-width:900px){
+      nav.main-nav{padding:.55rem 1.2rem;}
+      .nav-left,.nav-right{gap:1rem;}
+      .hero-headline{font-size:clamp(1.8rem,5vw,3rem);}
+      .count-block{width:80px;height:90px;}
+      .glow-ring-wrap{width:160px;height:160px;}
+      .message-card{padding:2rem 1.5rem;margin-left:1rem;margin-right:1rem;}
+      .info-tiles{margin-left:1rem;margin-right:1rem;}
+      .footer-grid{grid-template-columns:1fr 1fr;}
+    }
+    @media(max-width:600px){
+      .nav-right{display:none;}
+      .nav-left{gap:.75rem;}
+      .countdown-aesthetic{gap:.8rem;}
+      .count-block{width:68px;height:78px;}
+      .count-icon{font-size:1.4rem;}
+      .glow-ring-wrap{width:140px;height:140px;}
+      .glow-ring-inner{font-size:2.5rem;}
+      .cta-btns{flex-direction:column;align-items:center;}
+      .footer-grid{grid-template-columns:1fr;gap:2rem;}
+      .footer-bottom{flex-direction:column;text-align:center;}
+      .info-tiles{grid-template-columns:1fr;}
+      .float-el{display:none;}
+    }
+  </style>
+</head>
+<body>
+
+<!-- Animated background -->
+<div class="hero-bg"></div>
+<div class="orb orb-1"></div>
+<div class="orb orb-2"></div>
+<div class="orb orb-3"></div>
+
+<!-- Sparkle field -->
+<div class="sparkle-field">
+  <div class="sparkle s1"></div>
+  <div class="sparkle s2"></div>
+  <div class="sparkle s3"></div>
+  <div class="sparkle s4"></div>
+  <div class="sparkle s5"></div>
+  <div class="sparkle s6"></div>
+  <div class="sparkle s7"></div>
+  <div class="sparkle s8"></div>
+</div>
+
+<!-- Confetti shapes -->
+<div class="confetti-wrap">
+  <div class="confetti confetti-circle c1"></div>
+  <div class="confetti confetti-square c2"></div>
+  <div class="confetti confetti-diamond c3"></div>
+  <div class="confetti confetti-ring c4"></div>
+  <div class="confetti confetti-circle c5"></div>
+  <div class="confetti confetti-square c6"></div>
+  <div class="confetti confetti-ring c7"></div>
+  <div class="confetti confetti-diamond c8"></div>
+  <div class="confetti confetti-circle c9"></div>
+  <div class="confetti confetti-square c10"></div>
+  <div class="confetti confetti-ring c11"></div>
+  <div class="confetti confetti-diamond c12"></div>
+</div>
+
+<!-- Floating decorative elements -->
+<div class="float-el f1">🎉</div>
+<div class="float-el f2">✨</div>
+<div class="float-el f3">🧠</div>
+<div class="float-el f4">🎯</div>
+<div class="float-el f5">🌟</div>
+<div class="float-el f6">🚀</div>
+
+<!-- Navigation -->
+<header>
+  <nav class="main-nav">
+    <div class="nav-left">
+      <a href="../../../miembros/">Miembros</a>
+      <div class="nav-dropdown">
+        <a href="../../../investigaciones/">Investigaciones ▾</a>
+        <div class="dropdown-menu">
+          <a href="../../../investigaciones/lineas-de-investigacion/">Líneas de Investigación</a>
+          <a href="../../../investigaciones/publicaciones/">Publicaciones</a>
+          <div class="dropdown-submenu">
+            <a href="../../../investigaciones/programas/">Programas ▸</a>
+            <div class="dropdown-submenu-menu">
+              <a href="../../../investigaciones/programas/bienestar/">BienEstar</a>
+              <a href="../../../investigaciones/programas/espacio-mental/">Espacio Mental</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="nav-dropdown">
+        <a href="../../../proyectos-sociales/" class="active">Proyectos Sociales ▾</a>
+        <div class="dropdown-menu">
+          <div class="dropdown-submenu">
+            <a href="../../../proyectos-sociales/eventos/">Eventos ▸</a>
+            <div class="dropdown-submenu-menu">
+              <a href="../../../proyectos-sociales/eventos/eventos-pasados/">Eventos Pasados</a>
+              <a href="../../../proyectos-sociales/eventos/eventos-proximos/">Eventos Próximos</a>
+            </div>
+          </div>
+          <a href="../../../proyectos-sociales/psinet-escool/">PsiNet EsCool</a>
+          <a href="../../../proyectos-sociales/psipaz/">PsiPaz</a>
+        </div>
+      </div>
+    </div>
+    <div class="nav-center">
+      <a href="../../../index.html">
+        <img src="../../../assets/images/logo.png" alt="PsiNet LAB" onerror="this.style.display='none'" />
+      </a>
+    </div>
+    <div class="nav-right">
+      <a href="../../../blog/">Blog</a>
+      <a href="https://psinetlab.wordpress.com/contacto/" target="_blank">Contacto</a>
+      <a href="../../../index.html#apoyanos">Apóyanos</a>
+      <a href="../../../index.html#colaboraciones">Colaboraciones</a>
+    </div>
+  </nav>
+</header>
+
+<!-- Main Content -->
+<main>
+
+  <!-- Hero Coming Soon -->
+  <section class="hero-coming">
+    <div class="hero-tag">
+      <span class="dot"></span>
+      Eventos Próximos
+    </div>
+
+    <h1 class="hero-headline">¡Pronto estaremos comunicando más eventos!</h1>
+
+    <p class="hero-sub">
+      Estamos preparando experiencias increíbles para nuestra comunidad.
+      Algo grande está en camino…
+    </p>
+
+    <!-- Countdown Aesthetic Blocks -->
+    <div class="countdown-aesthetic">
+      <div class="count-block">
+        <span class="count-icon">📅</span>
+        <span class="count-label">Fechas</span>
+      </div>
+      <div class="count-block">
+        <span class="count-icon">🎤</span>
+        <span class="count-label">Charlas</span>
+      </div>
+      <div class="count-block">
+        <span class="count-icon">🤝</span>
+        <span class="count-label">Talleres</span>
+      </div>
+      <div class="count-block">
+        <span class="count-icon">🌍</span>
+        <span class="count-label">Comunidad</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Glowing Ring -->
+  <div class="glow-ring-wrap reveal">
+    <div class="glow-ring">
+      <span class="glow-ring-inner">🔮</span>
+    </div>
+  </div>
+
+  <!-- Message Card -->
+  <div class="message-card reveal" style="transition-delay:.15s;">
+    <h3>Nuevas experiencias en preparación</h3>
+    <p>
+      Nuestro equipo está diseñando eventos que conectan la ciencia psicológica
+      con el bienestar comunitario. Conferencias, talleres interactivos y
+      encuentros que transforman. ¡Mantente atento!
+    </p>
+  </div>
+
+  <!-- Marquee -->
+  <div class="marquee-wrap reveal" style="transition-delay:.25s;">
+    <div class="marquee-track">
+      <span class="marquee-item">Próximamente <span>✦</span></span>
+      <span class="marquee-item">Nuevos Eventos <span>✦</span></span>
+      <span class="marquee-item">Talleres <span>✦</span></span>
+      <span class="marquee-item">Conferencias <span>✦</span></span>
+      <span class="marquee-item">Comunidad <span>✦</span></span>
+      <span class="marquee-item">Bienestar <span>✦</span></span>
+      <span class="marquee-item">Ciencia <span>✦</span></span>
+      <span class="marquee-item">Psicología <span>✦</span></span>
+      <!-- Duplicated for seamless loop -->
+      <span class="marquee-item">Próximamente <span>✦</span></span>
+      <span class="marquee-item">Nuevos Eventos <span>✦</span></span>
+      <span class="marquee-item">Talleres <span>✦</span></span>
+      <span class="marquee-item">Conferencias <span>✦</span></span>
+      <span class="marquee-item">Comunidad <span>✦</span></span>
+      <span class="marquee-item">Bienestar <span>✦</span></span>
+      <span class="marquee-item">Ciencia <span>✦</span></span>
+      <span class="marquee-item">Psicología <span>✦</span></span>
+    </div>
+  </div>
+
+  <!-- Info Tiles -->
+  <section class="wave-section">
+    <div class="info-tiles">
+      <div class="info-tile reveal">
+        <span class="tile-icon">📢</span>
+        <h4>Anuncios</h4>
+        <p>Publicaremos las fechas y detalles de nuestros próximos eventos aquí mismo.</p>
+      </div>
+      <div class="info-tile reveal" style="transition-delay:.12s;">
+        <span class="tile-icon">💡</span>
+        <h4>Ideas en Acción</h4>
+        <p>Estamos co-creando con nuestra comunidad para traer lo que más necesitan.</p>
+      </div>
+      <div class="info-tile reveal" style="transition-delay:.24s;">
+        <span class="tile-icon">🔔</span>
+        <h4>No te lo pierdas</h4>
+        <p>Síguenos en redes sociales para ser de los primeros en enterarte.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-section reveal" style="transition-delay:.1s;">
+    <p class="cta-label">Mantente conectado</p>
+    <div class="cta-btns">
+      <a href="https://psinetlab.wordpress.com/contacto/" target="_blank" class="btn btn-primary">
+        ✉️ Contáctanos
+      </a>
+      <a href="../../../proyectos-sociales/eventos/eventos-pasados/" class="btn btn-outline">
+        📂 Ver Eventos Pasados
+      </a>
+      <a href="../../../blog/" class="btn btn-outline">
+        📰 Visitar el Blog
+      </a>
+    </div>
+  </section>
+
+</main>
+
+<!-- Footer -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-col">
+      <h4>PsiNet LAB</h4>
+      <p style="font-size:.85rem;color:var(--muted);max-width:280px;line-height:1.75;">
+        Ciencia psicológica conectada para el desarrollo humano y comunitario.
+      </p>
+    </div>
+    <div class="footer-col">
+      <h4>Proyectos Sociales</h4>
+      <ul>
+        <li><a href="../../../proyectos-sociales/eventos/">Eventos</a></li>
+        <li><a href="../../../proyectos-sociales/psinet-escool/">PsiNet EsCool</a></li>
+        <li><a href="../../../proyectos-sociales/psipaz/">PsiPaz</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Investigación</h4>
+      <ul>
+        <li><a href="../../../investigaciones/publicaciones/">Publicaciones</a></li>
+        <li><a href="../../../investigaciones/lineas-de-investigacion/">Líneas de Investigación</a></li>
+        <li><a href="../../../miembros/">Miembros</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Organización</h4>
+      <ul>
+        <li><a href="https://psinetlab.wordpress.com/contacto/" target="_blank">Contacto</a></li>
+        <li><a href="https://psinetlab.wordpress.com/apoyanos/" target="_blank">Apóyanos</a></li>
+        <li><a href="../../../blog/">Blog</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>&copy; 2025 PsiNet LAB. Todos los derechos reservados.</p>
+    <div class="footer-bottom-links">
+      <a href="#">Cookie Policy</a>
+      <a href="#">Privacy Policy</a>
+      <a href="#">Policies</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Scroll reveal with IntersectionObserver
+  const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        revealObserver.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+</script>
+</body>
+</html>
