@@ -366,12 +366,11 @@
     .bento-grid {
       display: grid;
       grid-template-columns: 1fr 1fr 1fr;
-      grid-template-rows: auto auto auto;
+      grid-template-rows: auto auto;
       gap: 1rem;
       grid-template-areas:
-        "ceo mission mission"
-        "ceo logo    admissions"
-        "ethos ethos  ethos";
+        "mission  mission  logo"
+        "ethos    ethos    admissions";
     }
 
     .bento-card {
@@ -386,59 +385,6 @@
     .bento-card:hover {
       transform: translateY(-4px);
       box-shadow: 0 12px 40px rgba(0,0,0,.35), 0 0 30px rgba(94,234,212,.06);
-    }
-
-    /* ─ CEO Card ─ */
-    .bento-ceo {
-      grid-area: ceo;
-      display: flex;
-      flex-direction: column;
-      min-height: 420px;
-    }
-
-    .bento-ceo-img {
-      position: relative;
-      flex: 1 1 auto;
-      overflow: hidden;
-    }
-
-    .bento-ceo-img img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-      filter: saturate(.85) contrast(1.05);
-    }
-
-    .bento-ceo-img::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(to top, var(--card-bg) 0%, rgba(14,31,56,.6) 40%, transparent 70%);
-      pointer-events: none;
-    }
-
-    .bento-ceo-body {
-      padding: 1.8rem 1.6rem;
-      position: relative;
-    }
-
-    .bento-ceo-body .bento-tag {
-      font-size: .7rem;
-      letter-spacing: .2em;
-      text-transform: uppercase;
-      color: var(--teal);
-      font-family: 'DM Sans', sans-serif;
-      font-weight: 700;
-      margin-bottom: .6rem;
-    }
-
-    .bento-ceo-body p {
-      font-family: 'Lora', serif;
-      font-size: .88rem;
-      color: var(--muted);
-      line-height: 1.7;
-      margin-bottom: 1.2rem;
     }
 
     .bento-btn {
@@ -893,12 +839,10 @@
       .bento-grid {
         grid-template-columns: 1fr 1fr;
         grid-template-areas:
-          "ceo       ceo"
           "mission   mission"
           "logo      admissions"
           "ethos     ethos";
       }
-      .bento-ceo { min-height: 320px; }
       .ethos-grid { grid-template-columns: 1fr 1fr; gap: 1rem; }
       .blog-grid { grid-template-columns: 1fr 1fr; }
       .footer-grid { grid-template-columns: 1fr 1fr; }
@@ -912,13 +856,11 @@
       .bento-grid {
         grid-template-columns: 1fr;
         grid-template-areas:
-          "ceo"
           "mission"
           "logo"
           "admissions"
           "ethos";
       }
-      .bento-ceo { min-height: 300px; }
       .ethos-grid { grid-template-columns: 1fr; gap: 1rem; }
       .blog-grid { grid-template-columns: 1fr; }
       .footer-grid { grid-template-columns: 1fr; gap: 2rem; }
@@ -1012,7 +954,7 @@
 
   <div class="hero-content">
     <h1><span class="hero-line">Ciencia</span><span class="hero-line">Conectada para</span><span class="hero-line">el Desarrollo</span></h1>
-    <a href="#bienvenida" class="hero-scroll" aria-label="Explorar — ir a la sección de bienvenida del CEO">
+    <a href="#bienvenida" class="hero-scroll" aria-label="Explorar — ir a la sección de bienvenida">
       Explorar
       <span class="scroll-arrow-simple">↓</span>
     </a>
@@ -1030,26 +972,6 @@
     </div>
 
     <div class="bento-grid">
-
-      <!-- CEO Card -->
-      <div class="bento-card bento-ceo reveal">
-        <div class="bento-ceo-img">
-          <img
-            src="assets/images/photos/Angel-4k.png"
-            alt="CEO PsiNet LAB"
-            onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 400 500%22><rect fill=%22%230e1f38%22 width=%22400%22 height=%22500%22/><text fill=%22%235eead4%22 x=%22200%22 y=%22260%22 text-anchor=%22middle%22 font-size=%2240%22>🧠</text></svg>'"
-          />
-        </div>
-        <div class="bento-ceo-body">
-          <p class="bento-tag">Bienvenida del CEO</p>
-          <p>
-            En PsiNet LAB transformamos el conocimiento psicológico en acciones que mejoren vidas.
-            Exploramos, innovamos y colaboramos para promover el bienestar, la diversidad y la equidad.
-            Te invitamos a conocer nuestros proyectos y unirte a nuestra misión de crear un impacto
-            positivo en la sociedad.
-          </p>
-        </div>
-      </div>
 
       <!-- Mission Card -->
       <div class="bento-card bento-mission reveal" id="mision" style="transition-delay:.1s">
