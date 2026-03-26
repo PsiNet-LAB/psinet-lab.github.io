@@ -614,6 +614,18 @@
       transform: scale(1.05);
     }
 
+    /* ─ Image Fallbacks ─ */
+    .bento-img-fallback {
+      background: linear-gradient(135deg, #112240, #0e1f38);
+    }
+
+    .bento-logo-fallback::after {
+      content: '∞';
+      font-size: 5rem;
+      color: var(--teal);
+      opacity: .6;
+    }
+
     /* ── ADMISSIONS BANNER (legacy support) ── */
     .btn-dark {
       background: var(--navy);
@@ -1037,7 +1049,7 @@
         <img
           src="https://psinetlab.wordpress.com/wp-content/uploads/2025/01/logos-1.png"
           alt="PsiNet LAB Logo"
-          onerror="this.innerHTML='∞'"
+          onerror="this.style.display='none';this.parentElement.classList.add('bento-logo-fallback')"
         />
       </div>
 
@@ -1054,7 +1066,7 @@
           <img
             src="https://images.unsplash.com/photo-1529390079861-591de354faf5?w=600&q=80"
             alt="Comunidad"
-            onerror="this.parentElement.style.background='linear-gradient(135deg, #112240, #0e1f38)'"
+            onerror="this.style.display='none';this.parentElement.classList.add('bento-img-fallback')"
           />
         </div>
       </div>
@@ -1076,7 +1088,7 @@
         <img
           src="https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?w=600&q=80"
           alt="Comunidad e impacto social"
-          onerror="this.parentElement.style.background='linear-gradient(135deg, #112240, #0e1f38)'"
+          onerror="this.style.display='none';this.parentElement.classList.add('bento-img-fallback')"
         />
       </div>
 
