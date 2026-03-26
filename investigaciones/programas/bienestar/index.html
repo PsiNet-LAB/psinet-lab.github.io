@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>BienEstar – PsiNet LAB</title>
+  <title>BienEstar – Avances en Salud Mental – PsiNet LAB</title>
   <link rel="icon" type="image/x-icon" href="../../../favicon.ico" />
   <link rel="icon" type="image/png" sizes="32x32" href="../../../assets/images/favicon-32x32.png" />
   <link rel="icon" type="image/png" sizes="192x192" href="../../../assets/images/favicon-192x192.png" />
@@ -199,75 +199,322 @@
     }
     .btn-outline:hover { border-color: var(--teal); background: rgba(94,234,212,.06); }
 
-    /* ── PAGE HEADER ── */
-    .page-section { padding-top: 10rem; }
-    .page-header {
-      display: flex; align-items: flex-end; justify-content: space-between;
-      margin-bottom: 3rem;
-    }
-
-    /* ── PROGRAM LOGO ── */
-    .program-logo-container {
+    /* ── HERO ── */
+    .hero {
+      position: relative;
+      min-height: 100vh;
       display: flex;
+      align-items: center;
       justify-content: center;
-      margin-bottom: 3rem;
-    }
-    .program-logo-container img {
-      max-width: 280px;
-      max-height: 280px;
-      object-fit: contain;
-      filter: drop-shadow(0 4px 24px rgba(94,234,212,.15));
+      text-align: center;
+      padding: 8rem 2.5rem 4rem;
+      overflow: hidden;
     }
 
-    /* ── DESCRIPTION CARD ── */
-    .description-card {
-      background: var(--card-bg);
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: 2.5rem;
-      margin-bottom: 3rem;
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
     }
-    .description-card p {
+
+    .hero-bg .orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(100px);
+      opacity: .25;
+      animation: orbFloat 12s ease-in-out infinite alternate;
+    }
+    .hero-bg .orb-1 {
+      width: 500px; height: 500px;
+      background: radial-gradient(circle, var(--teal) 0%, transparent 70%);
+      top: -10%; left: -10%;
+      animation-delay: 0s;
+    }
+    .hero-bg .orb-2 {
+      width: 400px; height: 400px;
+      background: radial-gradient(circle, var(--gold) 0%, transparent 70%);
+      bottom: -5%; right: -5%;
+      animation-delay: -4s;
+    }
+    .hero-bg .orb-3 {
+      width: 300px; height: 300px;
+      background: radial-gradient(circle, #6366f1 0%, transparent 70%);
+      top: 50%; left: 60%;
+      animation-delay: -8s;
+    }
+
+    @keyframes orbFloat {
+      0%   { transform: translate(0, 0) scale(1); }
+      50%  { transform: translate(40px, -30px) scale(1.1); }
+      100% { transform: translate(-20px, 20px) scale(.95); }
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      max-width: 720px;
+    }
+
+    .hero-logo {
+      width: 200px;
+      height: 200px;
+      object-fit: contain;
+      margin-bottom: 2rem;
+      filter: drop-shadow(0 0 40px rgba(94,234,212,.2));
+      animation: logoEntrance 1.2s ease-out both;
+    }
+
+    @keyframes logoEntrance {
+      0%   { opacity: 0; transform: scale(.7) translateY(30px); }
+      100% { opacity: 1; transform: scale(1) translateY(0); }
+    }
+
+    .hero-label {
+      font-size: .7rem;
+      letter-spacing: .22em;
+      text-transform: uppercase;
+      color: var(--teal);
+      font-weight: 600;
+      margin-bottom: .75rem;
+      animation: fadeUp .8s .3s ease-out both;
+    }
+
+    .hero h1 {
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: clamp(2rem, 5vw, 3.2rem);
+      letter-spacing: -.03em;
+      line-height: 1.1;
+      margin-bottom: 1.5rem;
+      animation: fadeUp .8s .5s ease-out both;
+    }
+
+    .hero h1 .accent {
+      background: linear-gradient(135deg, var(--teal), var(--gold));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero-subtitle {
+      font-family: 'Lora', serif;
+      font-size: 1.05rem;
+      font-style: italic;
+      color: var(--muted);
+      line-height: 1.75;
+      max-width: 560px;
+      margin: 0 auto 2rem;
+      animation: fadeUp .8s .7s ease-out both;
+    }
+
+    .hero-scroll {
+      animation: fadeUp .8s .9s ease-out both;
+    }
+    .hero-scroll a {
+      display: inline-flex;
+      flex-direction: column;
+      align-items: center;
+      gap: .4rem;
+      font-size: .72rem;
+      letter-spacing: .15em;
+      text-transform: uppercase;
+      color: var(--muted);
+      transition: color .3s;
+    }
+    .hero-scroll a:hover { color: var(--teal); }
+    .hero-scroll .scroll-line {
+      width: 1px;
+      height: 36px;
+      background: linear-gradient(to bottom, var(--teal), transparent);
+      animation: scrollPulse 2s ease-in-out infinite;
+    }
+
+    @keyframes scrollPulse {
+      0%, 100% { opacity: .4; transform: scaleY(1); }
+      50%      { opacity: 1; transform: scaleY(1.3); }
+    }
+
+    @keyframes fadeUp {
+      0%   { opacity: 0; transform: translateY(24px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ── SPLIT SECTION ── */
+    .split {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+    }
+
+    .split-text p {
       font-size: .95rem;
       color: var(--muted);
       line-height: 1.85;
-    }
-
-    /* ── FOCUS AREAS GRID ── */
-    .focus-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 2rem;
-    }
-
-    .focus-card {
-      background: var(--card-bg);
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: 2rem;
-      text-align: center;
-      transition: border-color .25s, transform .25s;
-    }
-    .focus-card:hover { border-color: rgba(94,234,212,.4); transform: translateY(-4px); }
-
-    .focus-card-icon {
-      font-size: 2.5rem;
       margin-bottom: 1rem;
     }
 
-    .focus-card h3 {
-      font-family: 'Syne', sans-serif;
-      font-weight: 600;
-      font-size: 1.1rem;
-      letter-spacing: -.01em;
+    .split-text .highlight {
       color: var(--white);
-      margin-bottom: .75rem;
+      font-weight: 500;
     }
 
-    .focus-card p {
-      font-size: .88rem;
+    .split-visual {
+      position: relative;
+    }
+
+    /* ── PILLAR CARDS ── */
+    .pillars {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+      margin-top: 2.5rem;
+    }
+
+    .pillar {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 2rem 1.5rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      transition: border-color .3s, transform .3s;
+    }
+    .pillar:hover {
+      border-color: rgba(94,234,212,.45);
+      transform: translateY(-6px);
+    }
+    .pillar::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--teal), var(--gold));
+      opacity: 0;
+      transition: opacity .3s;
+    }
+    .pillar:hover::before { opacity: 1; }
+
+    .pillar-icon {
+      font-size: 2.2rem;
+      margin-bottom: .8rem;
+      display: block;
+    }
+
+    .pillar h3 {
+      font-family: 'Syne', sans-serif;
+      font-weight: 600;
+      font-size: 1rem;
+      color: var(--white);
+      margin-bottom: .6rem;
+    }
+
+    .pillar p {
+      font-size: .82rem;
       color: var(--muted);
-      line-height: 1.75;
+      line-height: 1.65;
+    }
+
+    /* ── IMAGE SHOWCASE ── */
+    .img-showcase {
+      position: relative;
+      border-radius: 14px;
+      overflow: hidden;
+      box-shadow: 0 20px 60px rgba(0,0,0,.4);
+    }
+
+    .img-showcase img {
+      width: 100%;
+      display: block;
+      transition: transform .6s ease;
+    }
+    .img-showcase:hover img { transform: scale(1.03); }
+
+    .img-showcase .img-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(11,22,41,.8) 0%, transparent 50%);
+      display: flex;
+      align-items: flex-end;
+      padding: 1.5rem;
+    }
+
+    .img-overlay span {
+      font-size: .75rem;
+      color: var(--muted);
+      font-style: italic;
+    }
+
+    /* ── SECOND IMAGE (offset overlap) ── */
+    .img-offset-wrap {
+      position: relative;
+      margin-top: -3rem;
+      padding-left: 3rem;
+    }
+
+    /* ── VIDEO SECTION ── */
+    .video-section {
+      text-align: center;
+    }
+
+    .video-wrapper {
+      position: relative;
+      max-width: 860px;
+      margin: 0 auto;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 20px 80px rgba(94,234,212,.08), 0 2px 20px rgba(0,0,0,.4);
+      border: 1px solid var(--border);
+    }
+
+    .video-wrapper::before {
+      content: '';
+      display: block;
+      padding-top: 56.25%;
+    }
+
+    .video-wrapper iframe {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+
+    /* ── CLOSING ── */
+    .closing {
+      text-align: center;
+      padding: 5rem 2.5rem;
+      position: relative;
+    }
+
+    .closing-text {
+      font-family: 'Lora', serif;
+      font-size: clamp(1.1rem, 2.5vw, 1.4rem);
+      font-style: italic;
+      color: var(--muted);
+      max-width: 700px;
+      margin: 0 auto 1.5rem;
+      line-height: 1.8;
+    }
+
+    .closing-brand {
+      font-family: 'Syne', sans-serif;
+      font-weight: 700;
+      font-size: clamp(1rem, 2vw, 1.2rem);
+      background: linear-gradient(135deg, var(--teal), var(--gold));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .closing .divider {
+      width: 60px;
+      height: 2px;
+      background: linear-gradient(90deg, var(--teal), var(--gold));
+      margin: 2rem auto 0;
+      border-radius: 2px;
     }
 
     /* ── FOOTER ── */
@@ -321,6 +568,20 @@
     }
     .reveal.visible { opacity: 1; transform: translateY(0); }
 
+    .reveal-left {
+      opacity: 0;
+      transform: translateX(-40px);
+      transition: opacity .7s ease, transform .7s ease;
+    }
+    .reveal-left.visible { opacity: 1; transform: translateX(0); }
+
+    .reveal-right {
+      opacity: 0;
+      transform: translateX(40px);
+      transition: opacity .7s ease, transform .7s ease;
+    }
+    .reveal-right.visible { opacity: 1; transform: translateX(0); }
+
     /* ── RESPONSIVE ── */
     @media (max-width: 900px) {
       .footer-grid { grid-template-columns: 1fr 1fr; }
@@ -328,16 +589,18 @@
       nav.main-nav { padding: .55rem 1.2rem; }
       .nav-left, .nav-right { gap: 1rem; }
       section { padding: 4rem 1.5rem; }
-      .page-section { padding-top: 8rem; }
-      .focus-grid { grid-template-columns: repeat(2, 1fr); }
+      .split { grid-template-columns: 1fr; gap: 2.5rem; }
+      .pillars { grid-template-columns: repeat(2, 1fr); }
+      .img-offset-wrap { padding-left: 0; margin-top: 2rem; }
     }
 
     @media (max-width: 600px) {
       .footer-grid { grid-template-columns: 1fr; gap: 2rem; }
       .nav-right { display: none; }
-      .page-section { padding-top: 7rem; }
-      .page-header { flex-direction: column; align-items: flex-start; gap: 1rem; }
-      .focus-grid { grid-template-columns: 1fr; }
+      .hero { padding: 7rem 1.5rem 3rem; min-height: auto; }
+      .hero-logo { width: 140px; height: 140px; }
+      .pillars { grid-template-columns: 1fr; }
+      .closing { padding: 3rem 1.5rem; }
     }
   </style>
 </head>
@@ -384,60 +647,125 @@
   </nav>
 </header>
 
-<section class="page-section">
-  <div class="container">
-    <div class="page-header reveal">
-      <div>
-        <p class="section-tag">Programa</p>
-        <h2 class="section-title" style="margin-bottom:0;">BienEstar</h2>
-      </div>
-      <a href="../" class="btn btn-outline">← Programas</a>
-    </div>
-
-    <div class="program-logo-container reveal">
-      <img src="../../../assets/images/logos/bienestar.png" alt="BienEstar" />
-    </div>
-
-    <p class="reveal" style="font-size:.95rem;color:var(--muted);line-height:1.75;margin-bottom:3rem;max-width:800px;">
-      BienEstar es un programa de PsiNet LAB orientado a promover el bienestar integral
-      mediante intervenciones basadas en evidencia científica y prácticas psicológicas innovadoras.
-    </p>
-
-    <h2 class="section-title reveal" style="font-size:1.5rem;margin-bottom:1.5rem;">Descripción</h2>
-    <div class="description-card reveal">
-      <p>
-        El programa BienEstar busca integrar conocimientos de diversas áreas de la psicología
-        para desarrollar estrategias efectivas que promuevan la salud mental y el bienestar
-        emocional en diferentes contextos. A través de investigación aplicada, talleres y
-        actividades comunitarias, trabajamos para crear herramientas accesibles que contribuyan
-        a mejorar la calidad de vida de las personas y comunidades.
-      </p>
-    </div>
-
-    <h2 class="section-title reveal" style="font-size:1.5rem;margin-bottom:1.5rem;">Áreas de Enfoque</h2>
-    <div class="focus-grid">
-
-      <div class="focus-card reveal">
-        <div class="focus-card-icon">💚</div>
-        <h3>Bienestar Emocional</h3>
-        <p>Promoción de la salud emocional a través de estrategias basadas en evidencia para el manejo del estrés y la regulación emocional.</p>
-      </div>
-
-      <div class="focus-card reveal" style="transition-delay:.08s">
-        <div class="focus-card-icon">🤝</div>
-        <h3>Bienestar Comunitario</h3>
-        <p>Desarrollo de intervenciones grupales y comunitarias que fomenten el apoyo social y la cohesión entre las personas.</p>
-      </div>
-
-      <div class="focus-card reveal" style="transition-delay:.16s">
-        <div class="focus-card-icon">🌱</div>
-        <h3>Crecimiento Personal</h3>
-        <p>Herramientas y recursos para el desarrollo personal, la resiliencia y el fortalecimiento de habilidades socioemocionales.</p>
-      </div>
-
+<!-- ═══ HERO ═══ -->
+<section class="hero">
+  <div class="hero-bg">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+  </div>
+  <div class="hero-content">
+    <img class="hero-logo" src="../../../assets/images/logos/bienestar.png" alt="BienEstar" />
+    <p class="hero-label">Programa de PsiNet LAB</p>
+    <h1><span class="accent">BienEstar</span> – Avances en Salud Mental</h1>
+    <p class="hero-subtitle">Desde PsiNet LAB, ciencia conectada para el desarrollo. Les presentamos BienEstar – Avances en Salud Mental.</p>
+    <div class="hero-scroll">
+      <a href="#formacion">
+        <span>Descubre más</span>
+        <span class="scroll-line"></span>
+      </a>
     </div>
   </div>
 </section>
+
+<!-- ═══ FORMACIÓN ═══ -->
+<section id="formacion">
+  <div class="container">
+    <div class="split">
+      <div class="split-text reveal-left">
+        <p class="section-tag">Formación</p>
+        <h2 class="section-title">Educamos a la próxima generación de investigadores</h2>
+        <p>Educamos a jóvenes investigadores en técnicas avanzadas como el <span class="highlight">análisis de redes</span>, <span class="highlight">machine learning</span> e <span class="highlight">inteligencia artificial</span>. Al desarrollar estas habilidades, buscamos generar conocimientos innovadores y publicaciones científicas de alta calidad.</p>
+      </div>
+      <div class="split-visual reveal-right">
+        <div class="pillars">
+          <div class="pillar">
+            <span class="pillar-icon">🔬</span>
+            <h3>Análisis de Redes</h3>
+            <p>Técnicas avanzadas para mapear conexiones psicológicas</p>
+          </div>
+          <div class="pillar">
+            <span class="pillar-icon">🤖</span>
+            <h3>Machine Learning</h3>
+            <p>Algoritmos que revelan patrones en datos de salud mental</p>
+          </div>
+          <div class="pillar">
+            <span class="pillar-icon">🧠</span>
+            <h3>Inteligencia Artificial</h3>
+            <p>Modelos inteligentes para innovar en psicología</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ MISIÓN ═══ -->
+<section style="background:var(--deep);">
+  <div class="container">
+    <div class="split">
+      <div class="split-visual reveal-left">
+        <div class="img-showcase">
+          <img src="../../../assets/images/bienestar/video-senaju.jpg" alt="Compartiendo lo nuestro – PsiNet LAB" loading="lazy" />
+          <div class="img-overlay">
+            <span>Compartiendo lo Nuestro. PsiNet LAB © 2024</span>
+          </div>
+        </div>
+      </div>
+      <div class="split-text reveal-right">
+        <p class="section-tag">Nuestra Misión</p>
+        <h2 class="section-title">Comprender los fenómenos psicológicos que afectan a la sociedad</h2>
+        <p>Nuestra misión es explorar y comprender los fenómenos psicológicos que afectan a la sociedad. Durante la pandemia, investigamos el <span class="highlight">estrés postraumático</span>, <span class="highlight">ansiedad</span> y <span class="highlight">depresión</span>.</p>
+        <p>En nuestra investigación más reciente, identificamos la <span class="highlight">evitación experiencial</span> como factor clave para poder mejorar la resiliencia emocional. De esta manera, desarrollamos estrategias para el bienestar psicológico de los jóvenes en nuestra jornada de divulgación <span class="highlight">'Compartiendo lo nuestro'</span>.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ INICIATIVA ═══ -->
+<section>
+  <div class="container">
+    <div class="split">
+      <div class="split-text reveal-left">
+        <p class="section-tag">Nuestra Iniciativa</p>
+        <h2 class="section-title">Bienestar psicológico adaptado a nuestra realidad</h2>
+        <p>Nuestra iniciativa promueve el <span class="highlight">bienestar psicológico</span> y la <span class="highlight">salud mental</span> mediante formación, investigación aplicada y compromiso comunitario, adaptándose a los diversos contextos sociales y culturales del Perú.</p>
+      </div>
+      <div class="split-visual reveal-right">
+        <div class="img-showcase">
+          <img src="../../../assets/images/bienestar/video-senaju-1.jpg" alt="Compartiendo lo nuestro en la DINA – PsiNet LAB" loading="lazy" />
+          <div class="img-overlay">
+            <span>Compartiendo lo Nuestro en la DINA. PsiNet LAB © 2024</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ VIDEO ═══ -->
+<section class="video-section" style="background:var(--deep);">
+  <div class="container">
+    <p class="section-tag reveal">Video introductorio</p>
+    <h2 class="section-title reveal">Conoce el Programa BienEstar</h2>
+    <div class="video-wrapper reveal" style="transition-delay:.1s">
+      <iframe
+        src="https://www.youtube-nocookie.com/embed/yDCKIVxEly8"
+        title="BienEstar – Avances en Salud Mental"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen
+        loading="lazy"
+      ></iframe>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ CIERRE ═══ -->
+<div class="closing reveal">
+  <p class="closing-text">PsiNet LAB, ciencia conectada para el desarrollo, les presentó</p>
+  <p class="closing-brand">"BienEstar: Avances en Salud Mental"</p>
+  <div class="divider"></div>
+</div>
 
 <footer>
   <div class="footer-grid">
@@ -487,17 +815,17 @@
 </footer>
 
 <script>
-  var revealObserver = new IntersectionObserver(function(entries) {
+  var animObserver = new IntersectionObserver(function(entries) {
     entries.forEach(function(e) {
       if (e.isIntersecting) {
         e.target.classList.add('visible');
-        revealObserver.unobserve(e.target);
+        animObserver.unobserve(e.target);
       }
     });
   }, { threshold: 0.12 });
 
-  document.querySelectorAll('.reveal').forEach(function(el) {
-    revealObserver.observe(el);
+  document.querySelectorAll('.reveal, .reveal-left, .reveal-right').forEach(function(el) {
+    animObserver.observe(el);
   });
 </script>
 
