@@ -22,6 +22,9 @@
       --muted:  #8892b0;
       --card-bg:#0e1f38;
       --border: rgba(94,234,212,.15);
+      --orange: #f97316;
+      --pink:   #ec4899;
+      --purple: #a855f7;
     }
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -127,7 +130,6 @@
       letter-spacing: 0;
     }
     .dropdown-menu a:hover { background: rgba(94,234,212,.06); color: var(--teal); }
-    /* Nested submenu */
     .dropdown-submenu { position: relative; }
     .dropdown-submenu > a { display: flex; justify-content: space-between; align-items: center; }
     .dropdown-submenu:hover > .dropdown-submenu-menu { display: flex; }
@@ -189,7 +191,7 @@
       border-radius: 6px;
       border: none;
       cursor: pointer;
-      transition: all .2s;
+      transition: all .25s;
     }
     .btn-outline {
       background: transparent;
@@ -203,64 +205,511 @@
     }
     .btn-primary:hover { background: var(--teal2); }
 
-    /* ── PAGE HEADER ── */
-    .page-section { padding-top: 10rem; }
-    .page-header {
-      display: flex; align-items: flex-end; justify-content: space-between;
-      margin-bottom: 3rem;
-    }
-
-    /* ── PROJECT CARDS ── */
-    .projects-grid {
-      display: grid;
-      grid-template-columns: repeat(1, 1fr);
-      gap: 2rem;
-    }
-
-    .project-card {
-      background: var(--card-bg);
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      overflow: hidden;
-      transition: border-color .25s, transform .25s;
-      display: grid;
-      grid-template-columns: 120px 1fr;
-      align-items: center;
-    }
-    .project-card:hover { border-color: rgba(94,234,212,.4); transform: translateY(-4px); }
-
-    .project-card-icon {
+    /* ── HERO SECTION ── */
+    .hero {
+      position: relative;
+      min-height: 100vh;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 3rem;
-      height: 100%;
-      background: linear-gradient(135deg, var(--mid) 0%, #1a3260 100%);
+      text-align: center;
+      padding: 10rem 2.5rem 6rem;
+      overflow: hidden;
     }
 
-    .project-card-body {
-      padding: 2rem;
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg,
+        #0b1629 0%,
+        #1a0a2e 15%,
+        #2d1b4e 28%,
+        #4a1942 40%,
+        #6b2142 50%,
+        #8b3a2a 60%,
+        #a85420 70%,
+        #1a3a4a 85%,
+        #0b1629 100%
+      );
+      background-size: 400% 400%;
+      animation: heroGradientShift 12s ease infinite;
+      z-index: 0;
     }
 
-    .project-card h3 {
-      font-family: 'Syne', sans-serif;
+    @keyframes heroGradientShift {
+      0%   { background-position: 0% 50%; }
+      25%  { background-position: 100% 25%; }
+      50%  { background-position: 100% 75%; }
+      75%  { background-position: 0% 100%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    /* Floating orbs */
+    .hero-orbs {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      pointer-events: none;
+      overflow: hidden;
+    }
+
+    .orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(40px);
+      opacity: .35;
+      animation: orbFloat 8s ease-in-out infinite;
+    }
+
+    .orb-1 {
+      width: 300px; height: 300px;
+      background: radial-gradient(circle, #f97316 0%, transparent 70%);
+      top: 15%; left: 8%;
+      animation-duration: 9s;
+      animation-delay: 0s;
+    }
+    .orb-2 {
+      width: 250px; height: 250px;
+      background: radial-gradient(circle, #ec4899 0%, transparent 70%);
+      top: 55%; right: 10%;
+      animation-duration: 11s;
+      animation-delay: -2s;
+    }
+    .orb-3 {
+      width: 200px; height: 200px;
+      background: radial-gradient(circle, #a855f7 0%, transparent 70%);
+      bottom: 20%; left: 25%;
+      animation-duration: 10s;
+      animation-delay: -4s;
+    }
+    .orb-4 {
+      width: 180px; height: 180px;
+      background: radial-gradient(circle, #5eead4 0%, transparent 70%);
+      top: 25%; right: 25%;
+      animation-duration: 8s;
+      animation-delay: -1s;
+    }
+    .orb-5 {
+      width: 140px; height: 140px;
+      background: radial-gradient(circle, #f0b429 0%, transparent 70%);
+      bottom: 30%; right: 5%;
+      animation-duration: 12s;
+      animation-delay: -3s;
+    }
+    .orb-6 {
+      width: 220px; height: 220px;
+      background: radial-gradient(circle, #fb7185 0%, transparent 70%);
+      top: 60%; left: 5%;
+      animation-duration: 13s;
+      animation-delay: -5s;
+    }
+    .orb-7 {
+      width: 160px; height: 160px;
+      background: radial-gradient(circle, #c084fc 0%, transparent 70%);
+      top: 10%; left: 50%;
+      animation-duration: 7s;
+      animation-delay: -6s;
+    }
+    .orb-8 {
+      width: 120px; height: 120px;
+      background: radial-gradient(circle, #34d399 0%, transparent 70%);
+      bottom: 10%; left: 60%;
+      animation-duration: 14s;
+      animation-delay: -7s;
+    }
+
+    @keyframes orbFloat {
+      0%, 100% { transform: translate(0, 0) scale(1); }
+      25%      { transform: translate(30px, -40px) scale(1.1); }
+      50%      { transform: translate(-20px, 20px) scale(.95); }
+      75%      { transform: translate(15px, 35px) scale(1.05); }
+    }
+
+    /* Floating particles */
+    .hero-particles {
+      position: absolute;
+      inset: 0;
+      z-index: 2;
+      pointer-events: none;
+      overflow: hidden;
+    }
+
+    .particle {
+      position: absolute;
+      border-radius: 50%;
+      animation: particleRise linear infinite;
+    }
+
+    .particle:nth-child(1)  { width: 4px; height: 4px; left: 10%; background: var(--orange); animation-duration: 14s; animation-delay: 0s; opacity:.7; }
+    .particle:nth-child(2)  { width: 3px; height: 3px; left: 20%; background: var(--pink); animation-duration: 18s; animation-delay: -2s; opacity:.5; }
+    .particle:nth-child(3)  { width: 5px; height: 5px; left: 35%; background: var(--teal); animation-duration: 16s; animation-delay: -4s; opacity:.6; }
+    .particle:nth-child(4)  { width: 3px; height: 3px; left: 50%; background: var(--purple); animation-duration: 20s; animation-delay: -6s; opacity:.5; }
+    .particle:nth-child(5)  { width: 4px; height: 4px; left: 65%; background: var(--gold); animation-duration: 15s; animation-delay: -3s; opacity:.7; }
+    .particle:nth-child(6)  { width: 3px; height: 3px; left: 75%; background: var(--pink); animation-duration: 17s; animation-delay: -8s; opacity:.4; }
+    .particle:nth-child(7)  { width: 5px; height: 5px; left: 85%; background: var(--orange); animation-duration: 19s; animation-delay: -1s; opacity:.6; }
+    .particle:nth-child(8)  { width: 4px; height: 4px; left: 5%;  background: var(--teal); animation-duration: 22s; animation-delay: -10s; opacity:.5; }
+    .particle:nth-child(9)  { width: 3px; height: 3px; left: 42%; background: var(--purple); animation-duration: 13s; animation-delay: -5s; opacity:.6; }
+    .particle:nth-child(10) { width: 4px; height: 4px; left: 58%; background: var(--pink); animation-duration: 21s; animation-delay: -7s; opacity:.5; }
+    .particle:nth-child(11) { width: 3px; height: 3px; left: 92%; background: var(--gold); animation-duration: 16s; animation-delay: -9s; opacity:.4; }
+    .particle:nth-child(12) { width: 5px; height: 5px; left: 28%; background: var(--orange); animation-duration: 18s; animation-delay: -11s; opacity:.5; }
+
+    @keyframes particleRise {
+      0%   { transform: translateY(100vh) scale(0); opacity: 0; }
+      10%  { opacity: 1; }
+      90%  { opacity: 1; }
+      100% { transform: translateY(-100vh) scale(1); opacity: 0; }
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 3;
+      max-width: 800px;
+    }
+
+    .hero-tag {
+      display: inline-block;
+      font-size: .72rem;
+      letter-spacing: .25em;
+      text-transform: uppercase;
       font-weight: 600;
-      font-size: 1.2rem;
-      letter-spacing: -.01em;
-      color: var(--white);
-      margin-bottom: .5rem;
+      padding: .5rem 1.4rem;
+      border-radius: 50px;
+      background: rgba(249,115,22,.15);
+      color: var(--orange);
+      border: 1px solid rgba(249,115,22,.3);
+      margin-bottom: 1.5rem;
+      animation: tagPulse 3s ease-in-out infinite;
     }
 
-    .project-card p {
+    @keyframes tagPulse {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(249,115,22,.3); }
+      50%      { box-shadow: 0 0 20px 4px rgba(249,115,22,.15); }
+    }
+
+    .hero h1 {
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: clamp(2.2rem, 6vw, 3.8rem);
+      letter-spacing: -.04em;
+      line-height: 1.1;
+      margin-bottom: 1.5rem;
+    }
+
+    .hero h1 .gradient-text {
+      background: linear-gradient(135deg, var(--orange), var(--pink), var(--purple), var(--teal));
+      background-size: 300% 300%;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: textGradient 6s ease infinite;
+    }
+
+    @keyframes textGradient {
+      0%   { background-position: 0% 50%; }
+      50%  { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    .hero-subtitle {
+      font-size: clamp(.95rem, 2vw, 1.15rem);
+      color: rgba(240,244,255,.75);
+      line-height: 1.85;
+      max-width: 620px;
+      margin: 0 auto 2.5rem;
+    }
+
+    .hero-cta {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .btn-warm {
+      background: linear-gradient(135deg, var(--orange), var(--pink));
+      color: #fff;
+      border: none;
+      box-shadow: 0 4px 24px rgba(249,115,22,.3);
+      transition: transform .25s, box-shadow .25s;
+    }
+    .btn-warm:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 32px rgba(249,115,22,.45);
+    }
+
+    .hero-scroll {
+      position: absolute;
+      bottom: 2.5rem;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 3;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: .5rem;
+      color: rgba(240,244,255,.5);
+      font-size: .7rem;
+      letter-spacing: .15em;
+      text-transform: uppercase;
+      animation: scrollBounce 2s ease-in-out infinite;
+    }
+
+    .hero-scroll-line {
+      width: 1px;
+      height: 40px;
+      background: linear-gradient(to bottom, rgba(240,244,255,.4), transparent);
+    }
+
+    @keyframes scrollBounce {
+      0%, 100% { transform: translateX(-50%) translateY(0); }
+      50%      { transform: translateX(-50%) translateY(8px); }
+    }
+
+    /* ── PROJECT CARDS ── */
+    .projects-section {
+      padding: 6rem 2.5rem 8rem;
+      position: relative;
+    }
+
+    .projects-section .section-header {
+      text-align: center;
+      margin-bottom: 4rem;
+    }
+
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+      max-width: 1160px;
+      margin: 0 auto;
+    }
+
+    .project-card {
+      position: relative;
+      border-radius: 16px;
+      overflow: hidden;
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      transition: transform .4s ease, box-shadow .4s ease, border-color .4s ease;
+      display: flex;
+      flex-direction: column;
+      text-align: center;
+    }
+
+    .project-card::before {
+      content: '';
+      position: absolute;
+      inset: -1px;
+      border-radius: 17px;
+      padding: 1px;
+      background: linear-gradient(135deg, transparent, transparent);
+      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+      transition: background .4s ease;
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    .project-card:hover {
+      transform: translateY(-8px);
+      border-color: transparent;
+    }
+
+    .project-card:nth-child(1):hover { box-shadow: 0 12px 48px rgba(249,115,22,.2), 0 0 0 1px rgba(249,115,22,.3); }
+    .project-card:nth-child(1):hover::before { background: linear-gradient(135deg, var(--orange), var(--gold)); }
+
+    .project-card:nth-child(2):hover { box-shadow: 0 12px 48px rgba(168,85,247,.2), 0 0 0 1px rgba(168,85,247,.3); }
+    .project-card:nth-child(2):hover::before { background: linear-gradient(135deg, var(--purple), var(--pink)); }
+
+    .project-card:nth-child(3):hover { box-shadow: 0 12px 48px rgba(94,234,212,.2), 0 0 0 1px rgba(94,234,212,.3); }
+    .project-card:nth-child(3):hover::before { background: linear-gradient(135deg, var(--teal), var(--teal2)); }
+
+    .card-gradient-top {
+      height: 6px;
+      width: 100%;
+      position: relative;
+      z-index: 2;
+    }
+
+    .project-card:nth-child(1) .card-gradient-top { background: linear-gradient(90deg, var(--orange), var(--gold), var(--orange)); background-size: 200% 100%; animation: gradientSlide 4s ease infinite; }
+    .project-card:nth-child(2) .card-gradient-top { background: linear-gradient(90deg, var(--purple), var(--pink), var(--purple)); background-size: 200% 100%; animation: gradientSlide 4s ease infinite; animation-delay: -1.3s; }
+    .project-card:nth-child(3) .card-gradient-top { background: linear-gradient(90deg, var(--teal), var(--teal2), var(--teal)); background-size: 200% 100%; animation: gradientSlide 4s ease infinite; animation-delay: -2.6s; }
+
+    @keyframes gradientSlide {
+      0%, 100% { background-position: 0% 50%; }
+      50%      { background-position: 100% 50%; }
+    }
+
+    .card-body {
+      padding: 2.5rem 2rem 2rem;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .card-icon {
+      font-size: 3.5rem;
+      margin-bottom: 1.2rem;
+      line-height: 1;
+      animation: iconFloat 4s ease-in-out infinite;
+    }
+
+    .project-card:nth-child(2) .card-icon { animation-delay: -1.3s; }
+    .project-card:nth-child(3) .card-icon { animation-delay: -2.6s; }
+
+    @keyframes iconFloat {
+      0%, 100% { transform: translateY(0); }
+      50%      { transform: translateY(-6px); }
+    }
+
+    .card-body h3 {
+      font-family: 'Syne', sans-serif;
+      font-weight: 700;
+      font-size: 1.35rem;
+      letter-spacing: -.02em;
+      color: var(--white);
+      margin-bottom: .75rem;
+    }
+
+    .card-body p {
       font-size: .9rem;
       color: var(--muted);
-      line-height: 1.75;
-      margin-bottom: 1rem;
+      line-height: 1.8;
+      margin-bottom: 1.5rem;
+      flex: 1;
     }
 
-    .project-card .btn {
-      font-size: .75rem;
-      padding: .6rem 1.2rem;
+    .card-link {
+      display: inline-flex;
+      align-items: center;
+      gap: .5rem;
+      font-size: .82rem;
+      font-weight: 600;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      padding: .7rem 1.4rem;
+      border-radius: 8px;
+      transition: all .3s ease;
+      align-self: center;
+    }
+
+    .card-link .arrow {
+      transition: transform .3s ease;
+    }
+
+    .card-link:hover .arrow {
+      transform: translateX(4px);
+    }
+
+    .project-card:nth-child(1) .card-link { color: var(--orange); background: rgba(249,115,22,.1); border: 1px solid rgba(249,115,22,.2); }
+    .project-card:nth-child(1) .card-link:hover { background: rgba(249,115,22,.2); border-color: rgba(249,115,22,.4); box-shadow: 0 0 20px rgba(249,115,22,.15); }
+
+    .project-card:nth-child(2) .card-link { color: var(--purple); background: rgba(168,85,247,.1); border: 1px solid rgba(168,85,247,.2); }
+    .project-card:nth-child(2) .card-link:hover { background: rgba(168,85,247,.2); border-color: rgba(168,85,247,.4); box-shadow: 0 0 20px rgba(168,85,247,.15); }
+
+    .project-card:nth-child(3) .card-link { color: var(--teal); background: rgba(94,234,212,.1); border: 1px solid rgba(94,234,212,.2); }
+    .project-card:nth-child(3) .card-link:hover { background: rgba(94,234,212,.2); border-color: rgba(94,234,212,.4); box-shadow: 0 0 20px rgba(94,234,212,.15); }
+
+    /* ── MISSION / QUOTE SECTION ── */
+    .mission-section {
+      padding: 6rem 2.5rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .mission-inner {
+      max-width: 820px;
+      margin: 0 auto;
+      text-align: center;
+      position: relative;
+      z-index: 1;
+    }
+
+    .mission-glow {
+      position: absolute;
+      width: 500px;
+      height: 500px;
+      border-radius: 50%;
+      filter: blur(120px);
+      opacity: .12;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: radial-gradient(circle, var(--pink) 0%, var(--purple) 50%, transparent 70%);
+      animation: missionPulse 6s ease-in-out infinite;
+      z-index: 0;
+    }
+
+    @keyframes missionPulse {
+      0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: .12; }
+      50%      { transform: translate(-50%, -50%) scale(1.15); opacity: .18; }
+    }
+
+    .mission-divider {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .mission-divider-line {
+      width: 60px;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--pink), transparent);
+    }
+
+    .mission-divider-icon {
+      font-size: 1.4rem;
+      animation: heartPulse 2s ease-in-out infinite;
+    }
+
+    @keyframes heartPulse {
+      0%, 100% { transform: scale(1); }
+      15%      { transform: scale(1.2); }
+      30%      { transform: scale(1); }
+      45%      { transform: scale(1.15); }
+      60%      { transform: scale(1); }
+    }
+
+    .mission-quote {
+      font-family: 'Lora', serif;
+      font-size: clamp(1.1rem, 2.5vw, 1.45rem);
+      font-style: italic;
+      color: rgba(240,244,255,.85);
+      line-height: 1.9;
+      margin-bottom: 2rem;
+    }
+
+    .mission-quote::before,
+    .mission-quote::after {
+      font-family: 'Syne', sans-serif;
+      font-size: 2rem;
+      line-height: 0;
+      vertical-align: middle;
+      background: linear-gradient(135deg, var(--orange), var(--pink));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .mission-quote::before { content: '\201C '; }
+    .mission-quote::after  { content: ' \201D'; }
+
+    .mission-attribution {
+      font-size: .85rem;
+      color: var(--muted);
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      font-weight: 500;
+    }
+
+    .mission-attribution span {
+      background: linear-gradient(135deg, var(--orange), var(--pink), var(--purple));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      font-weight: 700;
     }
 
     /* ── FOOTER ── */
@@ -320,17 +769,20 @@
       .header-top { padding: .6rem 1.2rem; }
       nav.main-nav { padding: .55rem 1.2rem; }
       .nav-left, .nav-right { gap: 1rem; }
-      section { padding: 4rem 1.5rem; }
-      .page-section { padding-top: 8rem; }
+      section, .projects-section, .mission-section { padding: 4rem 1.5rem; }
+      .projects-grid { grid-template-columns: 1fr 1fr; }
+      .hero { padding: 9rem 1.5rem 5rem; min-height: 90vh; }
+      .orb { filter: blur(50px); opacity: .25; }
     }
 
     @media (max-width: 600px) {
-      .project-card { grid-template-columns: 1fr; }
-      .project-card-icon { height: 100px; }
+      .projects-grid { grid-template-columns: 1fr; }
       .footer-grid { grid-template-columns: 1fr; gap: 2rem; }
       .nav-right { display: none; }
-      .page-section { padding-top: 7rem; }
-      .page-header { flex-direction: column; align-items: flex-start; gap: 1rem; }
+      .hero { padding: 8rem 1.2rem 4rem; min-height: 85vh; }
+      .hero h1 { font-size: clamp(1.8rem, 8vw, 2.6rem); }
+      .hero-cta { flex-direction: column; align-items: center; }
+      .orb-5, .orb-6, .orb-7, .orb-8 { display: none; }
     }
   </style>
 </head>
@@ -355,21 +807,25 @@
         </div>
       </div>
       <div class="nav-dropdown">
-        <a href="../index.html#proyectos">Proyectos ▾</a>
+        <a href="../proyectos-sociales/" class="active">Proyectos Sociales ▾</a>
         <div class="dropdown-menu">
-          <a href="../index.html#bienestar">BienEstar</a>
-          <a href="../index.html#escool">PsiNet EsCool</a>
-          <a href="../index.html#mente">La Ciencia de la Mente</a>
+          <div class="dropdown-submenu">
+            <a href="../proyectos-sociales/eventos/">Eventos ▸</a>
+            <div class="dropdown-submenu-menu">
+              <a href="../proyectos-sociales/eventos/eventos-pasados/">Eventos Pasados</a>
+              <a href="../proyectos-sociales/eventos/eventos-proximos/">Eventos Próximos</a>
+            </div>
+          </div>
+          <a href="../proyectos-sociales/psinet-escool/">PsiNet EsCool</a>
+          <a href="../proyectos-sociales/psipaz/">PsiPaz</a>
         </div>
       </div>
     </div>
-
     <div class="nav-center">
       <a href="../index.html">
         <img src="../assets/images/logo.png" alt="PsiNet LAB" onerror="this.style.display='none'" />
       </a>
     </div>
-
     <div class="nav-right">
       <a href="../blog/">Blog</a>
       <a href="https://psinetlab.wordpress.com/contacto/" target="_blank">Contacto</a>
@@ -379,64 +835,117 @@
   </nav>
 </header>
 
-<section class="page-section">
-  <div class="container">
-    <div class="page-header reveal">
-      <div>
-        <p class="section-tag">Proyectos Sociales</p>
-        <h2 class="section-title" style="margin-bottom:0;">Nuestros proyectos de impacto social</h2>
-      </div>
-      <a href="../index.html" class="btn btn-outline">← Inicio</a>
-    </div>
+<!-- ── HERO ── -->
+<section class="hero">
+  <div class="hero-bg"></div>
 
-    <p class="reveal" style="font-size:.95rem;color:var(--muted);line-height:1.75;margin-bottom:3rem;max-width:800px;">
-      En PsiNet LAB desarrollamos proyectos sociales que aplican la investigación psicológica
-      para generar un impacto positivo en comunidades. Cada proyecto busca transformar el
-      conocimiento científico en acciones concretas que mejoren la calidad de vida de las personas.
+  <div class="hero-orbs">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+    <div class="orb orb-4"></div>
+    <div class="orb orb-5"></div>
+    <div class="orb orb-6"></div>
+    <div class="orb orb-7"></div>
+    <div class="orb orb-8"></div>
+  </div>
+
+  <div class="hero-particles">
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+  </div>
+
+  <div class="hero-content">
+    <div class="hero-tag">El corazón social de PsiNet LAB</div>
+    <h1>
+      <span class="gradient-text">Proyectos Sociales</span>
+    </h1>
+    <p class="hero-subtitle">
+      Transformamos el conocimiento psicológico en acciones concretas que generan
+      impacto positivo en comunidades. Cada proyecto es un puente entre la ciencia
+      y el bienestar colectivo.
     </p>
+    <div class="hero-cta">
+      <a href="#proyectos" class="btn btn-warm" aria-label="Explorar proyectos, desplazar hacia abajo">Explorar proyectos ↓</a>
+      <a href="../index.html" class="btn btn-outline">← Volver al inicio</a>
+    </div>
+  </div>
+
+  <div class="hero-scroll">
+    Descubre
+    <div class="hero-scroll-line"></div>
+  </div>
+</section>
+
+<!-- ── PROJECTS ── -->
+<section class="projects-section" id="proyectos">
+  <div class="container">
+    <div class="section-header reveal">
+      <p class="section-tag">Nuestros Proyectos</p>
+      <h2 class="section-title">Ciencia al servicio de la comunidad</h2>
+    </div>
 
     <div class="projects-grid">
 
       <div class="project-card reveal">
-        <div class="project-card-icon">🧘</div>
-        <div class="project-card-body">
-          <h3>BienEstar</h3>
-          <p>
-            Proyecto enfocado en promover el bienestar psicológico y emocional en comunidades,
-            desarrollando intervenciones basadas en evidencia científica para mejorar la salud
-            mental y la calidad de vida de las personas.
-          </p>
-          <a href="https://psinetlab.wordpress.com/bienestar/" target="_blank" class="btn btn-primary">Conocer más →</a>
+        <div class="card-gradient-top"></div>
+        <div class="card-body">
+          <div class="card-icon">🎪</div>
+          <h3>Eventos</h3>
+          <p>Organizamos y participamos en eventos que generan impacto social a través de la psicología aplicada.</p>
+          <a href="eventos/" class="card-link">Conocer más <span class="arrow">→</span></a>
         </div>
       </div>
 
-      <div class="project-card reveal" style="transition-delay:.08s">
-        <div class="project-card-icon">🎓</div>
-        <div class="project-card-body">
+      <div class="project-card reveal" style="transition-delay:.1s">
+        <div class="card-gradient-top"></div>
+        <div class="card-body">
+          <div class="card-icon">🎓</div>
           <h3>PsiNet EsCool</h3>
-          <p>
-            Iniciativa educativa que busca acercar la psicología a entornos escolares,
-            proporcionando herramientas y recursos para promover el desarrollo socioemocional
-            de niños y jóvenes en contextos educativos.
-          </p>
-          <a href="https://psinetlab.wordpress.com/psinet-escool/" target="_blank" class="btn btn-primary">Conocer más →</a>
+          <p>Iniciativa educativa que busca acercar la psicología a entornos escolares, promoviendo el desarrollo socioemocional.</p>
+          <a href="psinet-escool/" class="card-link">Conocer más <span class="arrow">→</span></a>
         </div>
       </div>
 
-      <div class="project-card reveal" style="transition-delay:.16s">
-        <div class="project-card-icon">🧠</div>
-        <div class="project-card-body">
-          <h3>La Ciencia de la Mente</h3>
-          <p>
-            Proyecto de divulgación científica que tiene como objetivo hacer accesible el
-            conocimiento psicológico al público general, fomentando la comprensión de los
-            procesos mentales y el comportamiento humano.
-          </p>
-          <a href="https://psinetlab.wordpress.com/la-ciencia-de-la-mente/" target="_blank" class="btn btn-primary">Conocer más →</a>
+      <div class="project-card reveal" style="transition-delay:.2s">
+        <div class="card-gradient-top"></div>
+        <div class="card-body">
+          <div class="card-icon">🕊️</div>
+          <h3>PsiPaz</h3>
+          <p>Proyecto dedicado a la construcción de paz y resolución de conflictos desde la psicología.</p>
+          <a href="psipaz/" class="card-link">Conocer más <span class="arrow">→</span></a>
         </div>
       </div>
 
     </div>
+  </div>
+</section>
+
+<!-- ── MISSION / QUOTE ── -->
+<section class="mission-section">
+  <div class="mission-glow"></div>
+  <div class="mission-inner reveal">
+    <div class="mission-divider">
+      <div class="mission-divider-line"></div>
+      <div class="mission-divider-icon">💜</div>
+      <div class="mission-divider-line"></div>
+    </div>
+    <p class="mission-quote">
+      Creemos que la psicología tiene el poder de transformar comunidades.
+      Nuestros proyectos sociales nacen del compromiso con el bienestar colectivo
+      y la convicción de que la ciencia debe estar al servicio de las personas.
+    </p>
+    <p class="mission-attribution">— <span>PsiNet LAB</span> · Proyectos Sociales</p>
   </div>
 </section>
 
@@ -448,16 +957,14 @@
         Ciencia psicológica conectada para el desarrollo humano y comunitario.
       </p>
     </div>
-
     <div class="footer-col">
-      <h4>Proyectos</h4>
+      <h4>Proyectos Sociales</h4>
       <ul>
-        <li><a href="https://psinetlab.wordpress.com/bienestar/" target="_blank">BienEstar</a></li>
-        <li><a href="https://psinetlab.wordpress.com/psinet-escool/" target="_blank">PsiNet EsCool</a></li>
-        <li><a href="https://psinetlab.wordpress.com/la-ciencia-de-la-mente/" target="_blank">La Ciencia de la Mente</a></li>
+        <li><a href="eventos/">Eventos</a></li>
+        <li><a href="psinet-escool/">PsiNet EsCool</a></li>
+        <li><a href="psipaz/">PsiPaz</a></li>
       </ul>
     </div>
-
     <div class="footer-col">
       <h4>Investigación</h4>
       <ul>
@@ -466,7 +973,6 @@
         <li><a href="../miembros/">Miembros</a></li>
       </ul>
     </div>
-
     <div class="footer-col">
       <h4>Organización</h4>
       <ul>
@@ -476,7 +982,6 @@
       </ul>
     </div>
   </div>
-
   <div class="footer-bottom">
     <p>&copy; 2025 PsiNet LAB. Todos los derechos reservados.</p>
     <div class="footer-bottom-links">
@@ -488,7 +993,6 @@
 </footer>
 
 <script>
-  // Scroll reveal
   var revealObserver = new IntersectionObserver(function(entries) {
     entries.forEach(function(e) {
       if (e.isIntersecting) {

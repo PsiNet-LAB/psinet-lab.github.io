@@ -1,0 +1,736 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+  <title>PsiPaz — PsiNet LAB</title>
+  <meta name="description" content="Proyecto dedicado a la construcción de paz y resolución de conflictos desde la perspectiva de la psicología, promoviendo el bienestar comunitario y la convivencia pacífica." />
+  <link rel="icon" href="../../favicon.ico" />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,400&family=Lora:ital,wght@0,400;1,400;1,500&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --navy:   #0b1629;
+      --deep:   #0d1f3c;
+      --mid:    #112240;
+      --teal:   #5eead4;
+      --teal2:  #2dd4bf;
+      --gold:   #f0b429;
+      --white:  #f0f4ff;
+      --muted:  #8892b0;
+      --card-bg:#0e1f38;
+      --border: rgba(94,234,212,.15);
+      --peace-blue: #6cb4ee;
+      --peace-sky:  #89c4f4;
+      --peace-light:#d6eaf8;
+      --peace-teal: #48c9b0;
+      --peace-gold: #f7dc6f;
+    }
+
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--navy);
+      color: var(--white);
+      min-height: 100vh;
+      overflow-x: hidden;
+      line-height: 1.6;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.04'/%3E%3C/svg%3E");
+      opacity: .04;
+      pointer-events: none;
+      z-index: 9999;
+    }
+
+    /* ─── HEADER ─── */
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 1000;
+      background: rgba(11,22,41,.75);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+      transition: background .3s, box-shadow .3s;
+    }
+    header.scrolled {
+      background: rgba(11,22,41,.92);
+      box-shadow: 0 4px 30px rgba(0,0,0,.3);
+    }
+
+    .main-nav {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: .9rem 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .main-nav a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: .85rem;
+      font-weight: 500;
+      transition: color .2s;
+      padding: .35rem .6rem;
+      font-family: 'DM Sans', sans-serif;
+    }
+    .main-nav a:hover,
+    .main-nav a.active { color: var(--teal); }
+
+    .nav-left, .nav-right { display: flex; align-items: center; gap: .3rem; }
+    .nav-center img { height: 38px; }
+    .nav-center a { padding: 0; }
+
+    .nav-dropdown { position: relative; }
+    .dropdown-menu {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      background: var(--deep);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: .5rem 0;
+      min-width: 200px;
+      z-index: 100;
+      box-shadow: 0 12px 40px rgba(0,0,0,.4);
+    }
+    .nav-dropdown:hover > .dropdown-menu { display: block; }
+    .dropdown-menu a {
+      display: block;
+      padding: .45rem 1.1rem;
+      font-size: .82rem;
+      white-space: nowrap;
+    }
+    .dropdown-submenu { position: relative; }
+    .dropdown-submenu-menu {
+      display: none;
+      position: absolute;
+      left: 100%;
+      top: 0;
+      background: var(--deep);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: .5rem 0;
+      min-width: 190px;
+      box-shadow: 0 12px 40px rgba(0,0,0,.4);
+    }
+    .dropdown-submenu:hover > .dropdown-submenu-menu { display: block; }
+
+    /* ─── HERO ─── */
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 8rem 2rem 5rem;
+      overflow: hidden;
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, #0b1629 0%, #0d2847 20%, #10405a 40%, #1a5276 55%, #0d3b5e 70%, #0b1629 100%);
+      background-size: 300% 300%;
+      animation: heroGradientShift 16s ease infinite;
+    }
+    @keyframes heroGradientShift {
+      0%   { background-position: 0% 50%; }
+      25%  { background-position: 100% 25%; }
+      50%  { background-position: 100% 75%; }
+      75%  { background-position: 0% 100%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    /* ─── FLOATING ORBS ─── */
+    .orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(50px);
+      opacity: .3;
+      pointer-events: none;
+    }
+    .orb-1 { width: 320px; height: 320px; background: radial-gradient(circle, rgba(108,180,238,.5), transparent); top: 10%; left: -5%; animation: orbFloat1 12s ease-in-out infinite; }
+    .orb-2 { width: 250px; height: 250px; background: radial-gradient(circle, rgba(94,234,212,.45), transparent); top: 60%; right: -3%; animation: orbFloat2 10s ease-in-out infinite; }
+    .orb-3 { width: 200px; height: 200px; background: radial-gradient(circle, rgba(247,220,111,.35), transparent); bottom: 15%; left: 20%; animation: orbFloat3 14s ease-in-out infinite; }
+    .orb-4 { width: 280px; height: 280px; background: radial-gradient(circle, rgba(72,201,176,.4), transparent); top: 30%; right: 15%; animation: orbFloat4 11s ease-in-out infinite; }
+    .orb-5 { width: 180px; height: 180px; background: radial-gradient(circle, rgba(137,196,244,.35), transparent); top: 5%; right: 30%; animation: orbFloat5 9s ease-in-out infinite; }
+    .orb-6 { width: 160px; height: 160px; background: radial-gradient(circle, rgba(240,180,41,.3), transparent); bottom: 30%; right: 10%; animation: orbFloat6 13s ease-in-out infinite; }
+
+    @keyframes orbFloat1 { 0%,100% { transform: translate(0,0) scale(1); } 50% { transform: translate(40px,-30px) scale(1.1); } }
+    @keyframes orbFloat2 { 0%,100% { transform: translate(0,0) scale(1); } 50% { transform: translate(-35px,25px) scale(1.08); } }
+    @keyframes orbFloat3 { 0%,100% { transform: translate(0,0) scale(1); } 50% { transform: translate(25px,-40px) scale(1.12); } }
+    @keyframes orbFloat4 { 0%,100% { transform: translate(0,0) scale(1); } 50% { transform: translate(-30px,-20px) scale(1.06); } }
+    @keyframes orbFloat5 { 0%,100% { transform: translate(0,0) scale(1); } 50% { transform: translate(20px,35px) scale(1.09); } }
+    @keyframes orbFloat6 { 0%,100% { transform: translate(0,0) scale(1); } 50% { transform: translate(-20px,-25px) scale(1.07); } }
+
+    /* ─── PARTICLES ─── */
+    .particle {
+      position: absolute;
+      border-radius: 50%;
+      pointer-events: none;
+      opacity: 0;
+    }
+    .particle-1  { width: 3px; height: 3px; background: var(--peace-blue);  left: 8%;  animation: particleRise 18s linear infinite -2s; }
+    .particle-2  { width: 4px; height: 4px; background: var(--teal);        left: 15%; animation: particleRise 15s linear infinite -5s; }
+    .particle-3  { width: 3px; height: 3px; background: var(--peace-gold);  left: 25%; animation: particleRise 20s linear infinite -8s; }
+    .particle-4  { width: 5px; height: 5px; background: var(--peace-sky);   left: 35%; animation: particleRise 16s linear infinite -3s; }
+    .particle-5  { width: 3px; height: 3px; background: var(--peace-teal);  left: 45%; animation: particleRise 22s linear infinite -11s; }
+    .particle-6  { width: 4px; height: 4px; background: var(--peace-blue);  left: 55%; animation: particleRise 17s linear infinite -7s; }
+    .particle-7  { width: 3px; height: 3px; background: var(--gold);        left: 65%; animation: particleRise 19s linear infinite -1s; }
+    .particle-8  { width: 5px; height: 5px; background: var(--teal2);       left: 72%; animation: particleRise 14s linear infinite -9s; }
+    .particle-9  { width: 3px; height: 3px; background: var(--peace-light); left: 80%; animation: particleRise 21s linear infinite -4s; }
+    .particle-10 { width: 4px; height: 4px; background: var(--peace-gold);  left: 88%; animation: particleRise 16s linear infinite -13s; }
+    .particle-11 { width: 3px; height: 3px; background: var(--peace-sky);   left: 92%; animation: particleRise 18s linear infinite -6s; }
+    .particle-12 { width: 4px; height: 4px; background: var(--peace-teal);  left: 50%; animation: particleRise 20s linear infinite -15s; }
+
+    @keyframes particleRise {
+      0%   { transform: translateY(100vh) scale(.5); opacity: 0; }
+      10%  { opacity: .6; }
+      90%  { opacity: .6; }
+      100% { transform: translateY(-100vh) scale(1.2); opacity: 0; }
+    }
+
+    /* ─── HERO CONTENT ─── */
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 720px;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: .5rem;
+      background: linear-gradient(135deg, rgba(108,180,238,.15), rgba(94,234,212,.1));
+      border: 1px solid rgba(108,180,238,.25);
+      border-radius: 50px;
+      padding: .4rem 1.2rem;
+      font-size: .78rem;
+      font-weight: 500;
+      color: var(--peace-blue);
+      letter-spacing: .5px;
+      text-transform: uppercase;
+      margin-bottom: 1.5rem;
+      animation: shimmer 3s ease-in-out infinite;
+    }
+    .badge-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--peace-teal);
+      animation: dotPulse 1.5s ease-in-out infinite;
+    }
+    @keyframes dotPulse {
+      0%,100% { opacity: 1; transform: scale(1); }
+      50%     { opacity: .4; transform: scale(.7); }
+    }
+    @keyframes shimmer {
+      0%,100% { box-shadow: 0 0 15px rgba(108,180,238,.1), 0 0 30px rgba(94,234,212,.05); }
+      50%     { box-shadow: 0 0 25px rgba(108,180,238,.2), 0 0 50px rgba(94,234,212,.1); }
+    }
+
+    .hero-emoji {
+      font-size: 5rem;
+      display: block;
+      margin-bottom: 1.5rem;
+      animation: emojiFloat 4s ease-in-out infinite;
+      filter: drop-shadow(0 0 30px rgba(108,180,238,.4)) drop-shadow(0 0 60px rgba(94,234,212,.2));
+    }
+    @keyframes emojiFloat {
+      0%,100% { transform: translateY(0) rotate(0deg); }
+      25%     { transform: translateY(-12px) rotate(3deg); }
+      75%     { transform: translateY(-8px) rotate(-2deg); }
+    }
+
+    .hero-title {
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: clamp(2.8rem, 6vw, 4.5rem);
+      line-height: 1.1;
+      margin-bottom: .6rem;
+      background: linear-gradient(135deg, var(--peace-light), var(--peace-blue), var(--teal), var(--peace-gold), var(--peace-sky));
+      background-size: 300% 300%;
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: gradientShift 6s ease infinite;
+    }
+    @keyframes gradientShift {
+      0%   { background-position: 0% 50%; }
+      50%  { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    .hero-subtitle {
+      font-family: 'Lora', serif;
+      font-style: italic;
+      font-size: 1.1rem;
+      color: var(--peace-sky);
+      opacity: .85;
+      margin-bottom: 2.5rem;
+    }
+
+    /* ─── DESCRIPTION CARD ─── */
+    .desc-card {
+      position: relative;
+      z-index: 2;
+      max-width: 640px;
+      margin: 0 auto 3rem;
+      background: linear-gradient(145deg, rgba(14,31,56,.85), rgba(13,40,71,.7));
+      border: 1px solid rgba(108,180,238,.2);
+      border-radius: 20px;
+      padding: 2.5rem 2.5rem;
+      backdrop-filter: blur(12px);
+      box-shadow: 0 8px 40px rgba(0,0,0,.3), inset 0 1px 0 rgba(108,180,238,.1);
+      transition: transform .4s ease, box-shadow .4s ease;
+    }
+    .desc-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 16px 60px rgba(108,180,238,.15), 0 0 0 1px rgba(94,234,212,.15);
+    }
+    .desc-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      border-radius: 20px 20px 0 0;
+      background: linear-gradient(90deg, var(--peace-blue), var(--teal), var(--peace-gold), var(--peace-teal));
+      background-size: 200% 100%;
+      animation: gradientSlide 4s linear infinite;
+    }
+    @keyframes gradientSlide {
+      0%   { background-position: 0% 50%; }
+      100% { background-position: 200% 50%; }
+    }
+
+    .desc-card p {
+      font-size: 1.05rem;
+      line-height: 1.85;
+      color: var(--peace-light);
+      opacity: .9;
+    }
+
+    /* ─── COMING SOON ─── */
+    .coming-soon {
+      position: relative;
+      z-index: 2;
+      display: inline-flex;
+      align-items: center;
+      gap: .75rem;
+      background: linear-gradient(135deg, rgba(108,180,238,.12), rgba(247,220,111,.08));
+      border: 1px solid rgba(108,180,238,.2);
+      border-radius: 60px;
+      padding: .85rem 2.2rem;
+      font-family: 'Syne', sans-serif;
+      font-weight: 600;
+      font-size: 1rem;
+      color: var(--peace-blue);
+      letter-spacing: .3px;
+      animation: pulseBadge 3s ease-in-out infinite;
+      margin-bottom: 2rem;
+    }
+    @keyframes pulseBadge {
+      0%,100% { box-shadow: 0 0 20px rgba(108,180,238,.15), 0 0 40px rgba(94,234,212,.08); transform: scale(1); }
+      50%     { box-shadow: 0 0 35px rgba(108,180,238,.25), 0 0 70px rgba(94,234,212,.15); transform: scale(1.03); }
+    }
+    .coming-icon {
+      font-size: 1.3rem;
+      animation: emojiFloat 3s ease-in-out infinite;
+    }
+
+    /* ─── PEACE SYMBOLS ROW ─── */
+    .peace-symbols {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      gap: 2rem;
+      justify-content: center;
+      margin-top: 1rem;
+      flex-wrap: wrap;
+    }
+    .peace-symbol {
+      font-size: 2rem;
+      opacity: .5;
+      animation: symbolFloat 5s ease-in-out infinite;
+      filter: drop-shadow(0 0 8px rgba(108,180,238,.3));
+    }
+    .peace-symbol:nth-child(2) { animation-delay: -1s; }
+    .peace-symbol:nth-child(3) { animation-delay: -2s; }
+    .peace-symbol:nth-child(4) { animation-delay: -3s; }
+    .peace-symbol:nth-child(5) { animation-delay: -4s; }
+    @keyframes symbolFloat {
+      0%,100% { transform: translateY(0); }
+      50%     { transform: translateY(-10px); }
+    }
+
+    /* ─── SECTION: VALUES ─── */
+    .values-section {
+      position: relative;
+      padding: 5rem 2rem;
+      background: linear-gradient(180deg, var(--navy), var(--deep));
+    }
+    .values-section .section-title {
+      font-family: 'Syne', sans-serif;
+      font-weight: 700;
+      font-size: clamp(1.6rem, 3vw, 2.2rem);
+      text-align: center;
+      margin-bottom: .6rem;
+      color: var(--white);
+    }
+    .values-section .section-sub {
+      font-family: 'Lora', serif;
+      font-style: italic;
+      text-align: center;
+      color: var(--muted);
+      font-size: .95rem;
+      margin-bottom: 3rem;
+    }
+    .values-grid {
+      max-width: 960px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem;
+    }
+    .value-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 2rem 1.8rem;
+      text-align: center;
+      transition: transform .3s ease, box-shadow .3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    .value-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--peace-blue), var(--teal), var(--peace-gold));
+      background-size: 200% 100%;
+      animation: gradientSlide 4s linear infinite;
+    }
+    .value-card:nth-child(2)::before { animation-delay: -1.3s; }
+    .value-card:nth-child(3)::before { animation-delay: -2.6s; }
+    .value-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 12px 40px rgba(108,180,238,.12);
+    }
+    .value-icon {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+      display: block;
+      animation: iconFloat 4s ease-in-out infinite;
+    }
+    .value-card:nth-child(2) .value-icon { animation-delay: -1.3s; }
+    .value-card:nth-child(3) .value-icon { animation-delay: -2.6s; }
+    @keyframes iconFloat {
+      0%,100% { transform: translateY(0); }
+      50%     { transform: translateY(-6px); }
+    }
+    .value-card h3 {
+      font-family: 'Syne', sans-serif;
+      font-weight: 700;
+      font-size: 1.1rem;
+      color: var(--peace-blue);
+      margin-bottom: .5rem;
+    }
+    .value-card p {
+      font-size: .88rem;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    /* ─── REVEAL ─── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity .7s ease, transform .7s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ─── FOOTER ─── */
+    footer {
+      background: var(--deep);
+      border-top: 1px solid var(--border);
+      padding: 3.5rem 2rem 1.5rem;
+    }
+    .footer-grid {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 2rem;
+      margin-bottom: 2.5rem;
+    }
+    .footer-col h4 {
+      font-family: 'Syne', sans-serif;
+      font-weight: 700;
+      font-size: .95rem;
+      margin-bottom: .85rem;
+      color: var(--white);
+    }
+    .footer-col ul { list-style: none; }
+    .footer-col li { margin-bottom: .4rem; }
+    .footer-col a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: .85rem;
+      transition: color .2s;
+    }
+    .footer-col a:hover { color: var(--teal); }
+    .footer-bottom {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--border);
+      flex-wrap: wrap;
+      gap: .5rem;
+    }
+    .footer-bottom p {
+      font-size: .78rem;
+      color: var(--muted);
+    }
+    .footer-bottom-links {
+      display: flex;
+      gap: 1.2rem;
+    }
+    .footer-bottom-links a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: .78rem;
+      transition: color .2s;
+    }
+    .footer-bottom-links a:hover { color: var(--teal); }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 768px) {
+      .main-nav { flex-direction: column; gap: .8rem; padding: .7rem 1rem; }
+      .nav-left, .nav-right { flex-wrap: wrap; justify-content: center; gap: .2rem; }
+      .nav-center { order: -1; }
+      .hero { padding: 7rem 1.2rem 3rem; min-height: auto; }
+      .hero-emoji { font-size: 3.5rem; }
+      .hero-title { font-size: 2.2rem; }
+      .desc-card { padding: 1.8rem 1.5rem; margin: 0 1rem 2rem; }
+      .values-section { padding: 3rem 1.2rem; }
+      .values-grid { grid-template-columns: 1fr; }
+      .footer-grid { grid-template-columns: repeat(2, 1fr); }
+      .footer-bottom { flex-direction: column; text-align: center; }
+    }
+    @media (max-width: 480px) {
+      .hero-title { font-size: 1.9rem; }
+      .desc-card p { font-size: .95rem; }
+      .coming-soon { font-size: .88rem; padding: .7rem 1.6rem; }
+      .footer-grid { grid-template-columns: 1fr; }
+      .peace-symbols { gap: 1.2rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ─── HEADER ─── -->
+<header>
+  <nav class="main-nav">
+    <div class="nav-left">
+      <a href="../../miembros/">Miembros</a>
+      <div class="nav-dropdown">
+        <a href="../../investigaciones/">Investigaciones ▾</a>
+        <div class="dropdown-menu">
+          <a href="../../investigaciones/lineas-de-investigacion/">Líneas de Investigación</a>
+          <a href="../../investigaciones/publicaciones/">Publicaciones</a>
+          <div class="dropdown-submenu">
+            <a href="../../investigaciones/programas/">Programas ▸</a>
+            <div class="dropdown-submenu-menu">
+              <a href="../../investigaciones/programas/bienestar/">BienEstar</a>
+              <a href="../../investigaciones/programas/espacio-mental/">Espacio Mental</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="nav-dropdown">
+        <a href="../../proyectos-sociales/" class="active">Proyectos Sociales ▾</a>
+        <div class="dropdown-menu">
+          <div class="dropdown-submenu">
+            <a href="../../proyectos-sociales/eventos/">Eventos ▸</a>
+            <div class="dropdown-submenu-menu">
+              <a href="../../proyectos-sociales/eventos/eventos-pasados/">Eventos Pasados</a>
+              <a href="../../proyectos-sociales/eventos/eventos-proximos/">Eventos Próximos</a>
+            </div>
+          </div>
+          <a href="../../proyectos-sociales/psinet-escool/">PsiNet EsCool</a>
+          <a href="../../proyectos-sociales/psipaz/">PsiPaz</a>
+        </div>
+      </div>
+    </div>
+    <div class="nav-center">
+      <a href="../../index.html">
+        <img src="../../assets/images/logo.png" alt="PsiNet LAB" onerror="this.style.display='none'" />
+      </a>
+    </div>
+    <div class="nav-right">
+      <a href="../../blog/">Blog</a>
+      <a href="https://psinetlab.wordpress.com/contacto/" target="_blank">Contacto</a>
+      <a href="../../index.html#apoyanos">Apóyanos</a>
+      <a href="../../index.html#colaboraciones">Colaboraciones</a>
+    </div>
+  </nav>
+</header>
+
+<!-- ─── HERO ─── -->
+<section class="hero">
+  <div class="hero-bg"></div>
+
+  <!-- Floating orbs -->
+  <div class="orb orb-1"></div>
+  <div class="orb orb-2"></div>
+  <div class="orb orb-3"></div>
+  <div class="orb orb-4"></div>
+  <div class="orb orb-5"></div>
+  <div class="orb orb-6"></div>
+
+  <!-- Rising particles -->
+  <div class="particle particle-1"></div>
+  <div class="particle particle-2"></div>
+  <div class="particle particle-3"></div>
+  <div class="particle particle-4"></div>
+  <div class="particle particle-5"></div>
+  <div class="particle particle-6"></div>
+  <div class="particle particle-7"></div>
+  <div class="particle particle-8"></div>
+  <div class="particle particle-9"></div>
+  <div class="particle particle-10"></div>
+  <div class="particle particle-11"></div>
+  <div class="particle particle-12"></div>
+
+  <div class="hero-content reveal">
+    <div class="hero-badge"><span class="badge-dot"></span> Proyecto Social</div>
+    <span class="hero-emoji" aria-hidden="true">🕊️</span>
+    <h1 class="hero-title">PsiPaz</h1>
+    <p class="hero-subtitle">Construyendo paz desde la psicología</p>
+  </div>
+
+  <div class="desc-card reveal">
+    <p>Proyecto dedicado a la construcción de paz y resolución de conflictos desde la perspectiva de la psicología, promoviendo el bienestar comunitario y la convivencia pacífica.</p>
+  </div>
+
+  <div class="coming-soon reveal">
+    <span class="coming-icon">🌿</span>
+    Próximamente más información
+  </div>
+
+  <div class="peace-symbols reveal">
+    <span class="peace-symbol">☮️</span>
+    <span class="peace-symbol">🤝</span>
+    <span class="peace-symbol">🌍</span>
+    <span class="peace-symbol">💚</span>
+    <span class="peace-symbol">✨</span>
+  </div>
+</section>
+
+<!-- ─── VALUES SECTION ─── -->
+<section class="values-section">
+  <h2 class="section-title reveal">Nuestros Pilares</h2>
+  <p class="section-sub reveal">Principios que guían nuestro camino hacia la paz</p>
+
+  <div class="values-grid">
+    <div class="value-card reveal">
+      <span class="value-icon">🤝</span>
+      <h3>Resolución de Conflictos</h3>
+      <p>Estrategias psicológicas para la mediación y el diálogo constructivo en comunidades.</p>
+    </div>
+    <div class="value-card reveal">
+      <span class="value-icon">🧠</span>
+      <h3>Bienestar Comunitario</h3>
+      <p>Intervenciones que promueven la salud mental colectiva y el fortalecimiento del tejido social.</p>
+    </div>
+    <div class="value-card reveal">
+      <span class="value-icon">🌱</span>
+      <h3>Convivencia Pacífica</h3>
+      <p>Programas educativos que fomentan la empatía, la tolerancia y la cultura de paz.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ─── FOOTER ─── -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-col">
+      <h4>PsiNet LAB</h4>
+      <p style="font-size:.85rem;color:var(--muted);max-width:280px;line-height:1.75;">
+        Ciencia psicológica conectada para el desarrollo humano y comunitario.
+      </p>
+    </div>
+    <div class="footer-col">
+      <h4>Proyectos Sociales</h4>
+      <ul>
+        <li><a href="../../proyectos-sociales/eventos/">Eventos</a></li>
+        <li><a href="../../proyectos-sociales/psinet-escool/">PsiNet EsCool</a></li>
+        <li><a href="../../proyectos-sociales/psipaz/">PsiPaz</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Investigación</h4>
+      <ul>
+        <li><a href="../../investigaciones/publicaciones/">Publicaciones</a></li>
+        <li><a href="../../investigaciones/lineas-de-investigacion/">Líneas de Investigación</a></li>
+        <li><a href="../../miembros/">Miembros</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Organización</h4>
+      <ul>
+        <li><a href="https://psinetlab.wordpress.com/contacto/" target="_blank">Contacto</a></li>
+        <li><a href="https://psinetlab.wordpress.com/apoyanos/" target="_blank">Apóyanos</a></li>
+        <li><a href="../../blog/">Blog</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>&copy; 2025 PsiNet LAB. Todos los derechos reservados.</p>
+    <div class="footer-bottom-links">
+      <a href="#">Cookie Policy</a>
+      <a href="#">Privacy Policy</a>
+      <a href="#">Policies</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Header scroll effect
+  window.addEventListener('scroll', () => {
+    document.querySelector('header').classList.toggle('scrolled', window.scrollY > 30);
+  });
+
+  // IntersectionObserver reveal
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+</script>
+</body>
+</html>

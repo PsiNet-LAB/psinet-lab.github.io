@@ -1,0 +1,855 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Eventos Pasados – Proyectos Sociales | PsiNet LAB</title>
+
+  <link rel="icon" type="image/x-icon" href="../../../favicon.ico" />
+  <link rel="icon" type="image/png" sizes="32x32" href="../../../assets/images/favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="192x192" href="../../../assets/images/favicon-192x192.png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Lora:ital,wght@0,400;0,500;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ── Reset & Variables ── */
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --navy:   #0b1629;
+      --deep:   #0d1f3c;
+      --mid:    #112240;
+      --teal:   #5eead4;
+      --teal2:  #2dd4bf;
+      --gold:   #f0b429;
+      --white:  #f0f4ff;
+      --muted:  #8892b0;
+      --card-bg:#0e1f38;
+      --border: rgba(94,234,212,.15);
+      --orange: #f97316;
+      --purple: #a855f7;
+      --pink:   #ec4899;
+    }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--navy);
+      color: var(--white);
+      overflow-x: hidden;
+      line-height: 1.6;
+    }
+    a { text-decoration: none; color: inherit; }
+    ul { list-style: none; }
+
+    /* ── Noise texture overlay ── */
+    body::before {
+      content: '';
+      position: fixed; inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 9999;
+      opacity: .5;
+    }
+
+    /* ── Header / Nav ── */
+    header {
+      position: fixed; top: 0; left: 0; width: 100%; z-index: 1000;
+      background: rgba(11,22,41,.6);
+      backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+      transition: background .4s ease, box-shadow .4s ease;
+    }
+    header.scrolled {
+      background: rgba(11,22,41,.92);
+      box-shadow: 0 4px 30px rgba(0,0,0,.35);
+    }
+    nav.main-nav {
+      max-width: 1260px; margin: auto;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1rem 2rem;
+      position: relative;
+    }
+    .nav-left, .nav-right { display: flex; gap: 2rem; align-items: center; }
+    .nav-center {
+      position: absolute; left: 50%; transform: translateX(-50%);
+      display: flex; flex-direction: column; align-items: center; gap: .15rem;
+    }
+    .nav-center img { height: 80px; }
+
+    nav.main-nav a {
+      font-size: .82rem; font-family: 'DM Sans', sans-serif;
+      color: rgba(240,244,255,.85); font-weight: 500;
+      letter-spacing: .02em; text-transform: uppercase;
+      transition: color .3s ease, text-shadow .3s ease;
+      position: relative;
+    }
+    nav.main-nav a::after {
+      content: ''; position: absolute; left: 0; bottom: -4px;
+      width: 0; height: 2px;
+      background: linear-gradient(90deg, var(--teal), var(--teal2));
+      border-radius: 1px; transition: width .3s ease;
+    }
+    nav.main-nav a:hover { color: #fff; text-shadow: 0 0 8px rgba(94,234,212,.35); }
+    nav.main-nav a:hover::after { width: 100%; }
+    nav.main-nav a.active { color: var(--teal); }
+    nav.main-nav a.active::after { width: 100%; }
+
+    /* Dropdown */
+    .nav-dropdown { position: relative; }
+    .dropdown-menu {
+      position: absolute; top: 100%; left: 50%; transform: translateX(-50%);
+      background: rgba(13,31,60,.97); backdrop-filter: blur(14px);
+      border: 1px solid var(--border); border-radius: 10px;
+      padding: .6rem 0; min-width: 210px;
+      opacity: 0; visibility: hidden; pointer-events: none;
+      transition: opacity .25s ease, transform .25s ease;
+      transform: translateX(-50%) translateY(8px);
+      box-shadow: 0 8px 32px rgba(0,0,0,.45);
+    }
+    .nav-dropdown:hover > .dropdown-menu {
+      opacity: 1; visibility: visible; pointer-events: auto;
+      transform: translateX(-50%) translateY(0);
+    }
+    .dropdown-menu a {
+      display: block; padding: .55rem 1.3rem; font-size: .78rem;
+      white-space: nowrap; transition: background .2s, color .2s;
+    }
+    .dropdown-menu a:hover { background: rgba(94,234,212,.08); color: var(--teal); }
+    .dropdown-menu a::after { display: none; }
+
+    /* Sub-dropdown */
+    .dropdown-submenu { position: relative; }
+    .dropdown-submenu-menu {
+      position: absolute; left: 100%; top: 0;
+      background: rgba(13,31,60,.97); backdrop-filter: blur(14px);
+      border: 1px solid var(--border); border-radius: 10px;
+      padding: .6rem 0; min-width: 200px;
+      opacity: 0; visibility: hidden; pointer-events: none;
+      transition: opacity .25s ease, transform .25s ease;
+      transform: translateX(8px);
+      box-shadow: 0 8px 32px rgba(0,0,0,.45);
+    }
+    .dropdown-submenu:hover > .dropdown-submenu-menu {
+      opacity: 1; visibility: visible; pointer-events: auto;
+      transform: translateX(0);
+    }
+
+    /* ── Hero ── */
+    .hero {
+      position: relative; min-height: 72vh;
+      display: flex; align-items: center; justify-content: center;
+      text-align: center; overflow: hidden;
+      padding: 8rem 2rem 4rem;
+    }
+    .hero-bg {
+      position: absolute; inset: 0; z-index: 0;
+      background:
+        radial-gradient(ellipse 60% 50% at 25% 35%, rgba(240,180,41,.14) 0%, transparent 60%),
+        radial-gradient(ellipse 55% 45% at 75% 60%, rgba(249,115,22,.10) 0%, transparent 55%),
+        radial-gradient(ellipse 90% 80% at 50% 50%, rgba(13,31,60,.9) 0%, var(--navy) 100%);
+      animation: heroPulse 12s ease-in-out infinite alternate;
+    }
+    @keyframes heroPulse {
+      0%   { filter: hue-rotate(0deg) brightness(1); }
+      50%  { filter: hue-rotate(8deg) brightness(1.08); }
+      100% { filter: hue-rotate(-5deg) brightness(1.03); }
+    }
+
+    /* Floating orbs */
+    .orb {
+      position: absolute; border-radius: 50%;
+      pointer-events: none; z-index: 0;
+      filter: blur(60px); opacity: .3;
+    }
+    .orb-1 {
+      width: 280px; height: 280px;
+      background: radial-gradient(circle, rgba(240,180,41,.5), transparent 70%);
+      top: 12%; left: -4%;
+      animation: orbFloat1 16s ease-in-out infinite;
+    }
+    .orb-2 {
+      width: 220px; height: 220px;
+      background: radial-gradient(circle, rgba(249,115,22,.45), transparent 70%);
+      bottom: 18%; right: -2%;
+      animation: orbFloat2 20s ease-in-out infinite;
+    }
+    .orb-3 {
+      width: 180px; height: 180px;
+      background: radial-gradient(circle, rgba(168,85,247,.4), transparent 70%);
+      top: 55%; left: 65%;
+      animation: orbFloat3 14s ease-in-out infinite;
+    }
+    .orb-4 {
+      width: 140px; height: 140px;
+      background: radial-gradient(circle, rgba(94,234,212,.35), transparent 70%);
+      bottom: 35%; left: 20%;
+      animation: orbFloat1 18s ease-in-out infinite reverse;
+    }
+    @keyframes orbFloat1 {
+      0%, 100% { transform: translate(0, 0) scale(1); }
+      33%      { transform: translate(40px, -30px) scale(1.12); }
+      66%      { transform: translate(-20px, 20px) scale(.92); }
+    }
+    @keyframes orbFloat2 {
+      0%, 100% { transform: translate(0, 0) scale(1); }
+      40%      { transform: translate(-50px, -25px) scale(1.1); }
+      70%      { transform: translate(30px, 15px) scale(.95); }
+    }
+    @keyframes orbFloat3 {
+      0%, 100% { transform: translate(0, 0) scale(1); }
+      50%      { transform: translate(-35px, 40px) scale(1.15); }
+    }
+
+    /* Particle sparkles in hero */
+    .hero-particles {
+      position: absolute; inset: 0; z-index: 0; overflow: hidden;
+    }
+    .hero-particles span {
+      position: absolute; width: 3px; height: 3px;
+      background: var(--gold); border-radius: 50%;
+      opacity: 0; animation: sparkle 4s ease-in-out infinite;
+    }
+    @keyframes sparkle {
+      0%, 100% { opacity: 0; transform: scale(.5) translateY(0); }
+      50%      { opacity: .7; transform: scale(1.2) translateY(-15px); }
+    }
+
+    .hero-content {
+      position: relative; z-index: 2;
+      max-width: 700px;
+    }
+    .hero-badge {
+      display: inline-block;
+      font-family: 'DM Sans', sans-serif;
+      font-size: .72rem; font-weight: 500;
+      letter-spacing: .15em; text-transform: uppercase;
+      color: var(--gold);
+      background: rgba(240,180,41,.08);
+      border: 1px solid rgba(240,180,41,.2);
+      padding: .45rem 1.2rem; border-radius: 50px;
+      margin-bottom: 1.5rem;
+      animation: badgePulse 3s ease-in-out infinite;
+    }
+    @keyframes badgePulse {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(240,180,41,.2); }
+      50%      { box-shadow: 0 0 20px 4px rgba(240,180,41,.15); }
+    }
+    .hero h1 {
+      font-family: 'Syne', sans-serif;
+      font-weight: 800; font-size: clamp(2.4rem, 5.5vw, 3.8rem);
+      line-height: 1.1; margin-bottom: 1.2rem;
+      background: linear-gradient(135deg, var(--white) 0%, var(--gold) 50%, var(--orange) 100%);
+      background-size: 200% 200%;
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: titleShimmer 6s ease-in-out infinite;
+    }
+    @keyframes titleShimmer {
+      0%, 100% { background-position: 0% 50%; }
+      50%      { background-position: 100% 50%; }
+    }
+    .hero p {
+      font-family: 'Lora', serif;
+      font-style: italic; font-size: 1.1rem;
+      color: var(--muted); max-width: 520px;
+      margin: 0 auto; line-height: 1.8;
+    }
+    .hero-line {
+      width: 80px; height: 3px; margin: 2rem auto 0;
+      background: linear-gradient(90deg, var(--gold), var(--orange));
+      border-radius: 2px;
+      animation: lineExpand 3s ease-in-out infinite alternate;
+    }
+    @keyframes lineExpand {
+      0%   { width: 60px; opacity: .6; }
+      100% { width: 120px; opacity: 1; }
+    }
+
+    /* ── Background floating orbs for body ── */
+    .bg-orbs {
+      position: fixed; inset: 0; z-index: -1;
+      pointer-events: none; overflow: hidden;
+    }
+    .bg-orb {
+      position: absolute; border-radius: 50%;
+      filter: blur(80px); opacity: .12;
+      animation: bgOrbDrift 20s ease-in-out infinite;
+    }
+    .bg-orb-1 {
+      width: 400px; height: 400px;
+      background: radial-gradient(circle, var(--gold), transparent 70%);
+      top: 30%; left: -8%;
+      animation-duration: 22s;
+    }
+    .bg-orb-2 {
+      width: 350px; height: 350px;
+      background: radial-gradient(circle, var(--purple), transparent 70%);
+      top: 60%; right: -6%;
+      animation-duration: 26s; animation-delay: -5s;
+    }
+    .bg-orb-3 {
+      width: 300px; height: 300px;
+      background: radial-gradient(circle, var(--teal), transparent 70%);
+      bottom: 10%; left: 40%;
+      animation-duration: 18s; animation-delay: -10s;
+    }
+    @keyframes bgOrbDrift {
+      0%, 100% { transform: translate(0, 0) scale(1); }
+      25%      { transform: translate(60px, -40px) scale(1.08); }
+      50%      { transform: translate(-30px, 50px) scale(.94); }
+      75%      { transform: translate(40px, 20px) scale(1.05); }
+    }
+
+    /* ── Events Blog Section ── */
+    .events-section {
+      position: relative;
+      max-width: 860px; margin: 0 auto;
+      padding: 2rem 2rem 6rem;
+    }
+    .section-intro {
+      text-align: center; margin-bottom: 4rem;
+    }
+    .section-intro h2 {
+      font-family: 'Syne', sans-serif;
+      font-weight: 700; font-size: 1.6rem;
+      color: var(--white); margin-bottom: .8rem;
+    }
+    .section-intro p {
+      font-size: .95rem; color: var(--muted);
+      max-width: 540px; margin: 0 auto; line-height: 1.7;
+    }
+    .section-intro .counter {
+      display: inline-block; margin-top: 1.2rem;
+      font-family: 'Syne', sans-serif; font-weight: 700;
+      font-size: .8rem; letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--gold);
+      background: rgba(240,180,41,.08);
+      border: 1px solid rgba(240,180,41,.15);
+      padding: .4rem 1rem; border-radius: 50px;
+    }
+
+    /* ── Event Card (blog-style with left accent) ── */
+    .event-list {
+      display: flex; flex-direction: column;
+      gap: 2.5rem;
+    }
+
+    .event-card {
+      position: relative;
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 2.5rem 2.5rem 2.5rem 3rem;
+      border-left: 5px solid var(--teal);
+      overflow: hidden;
+      transition:
+        transform .4s cubic-bezier(.25,.8,.25,1),
+        box-shadow .4s ease,
+        border-color .4s ease;
+    }
+    .event-card:hover {
+      transform: translateY(-6px) scale(1.008);
+      box-shadow:
+        0 16px 50px rgba(0,0,0,.3),
+        0 0 30px rgba(94,234,212,.06);
+    }
+
+    /* Inner glow on hover */
+    .event-card::before {
+      content: ''; position: absolute; inset: 0;
+      border-radius: 16px; z-index: 0;
+      opacity: 0; transition: opacity .5s ease;
+      pointer-events: none;
+    }
+    .event-card:hover::before { opacity: 1; }
+
+    .event-card > * { position: relative; z-index: 1; }
+
+    /* Card accent sparkle particles */
+    .event-card .card-sparkles {
+      position: absolute; inset: 0; z-index: 0;
+      pointer-events: none; overflow: hidden;
+    }
+    .event-card .card-sparkles span {
+      position: absolute; width: 3px; height: 3px;
+      border-radius: 50%; opacity: 0;
+      animation: cardSparkleFloat 5s ease-in-out infinite;
+      filter: blur(1px);
+    }
+    @keyframes cardSparkleFloat {
+      0%, 100% { opacity: 0; transform: translateY(0) scale(.5); }
+      50%      { opacity: .45; transform: translateY(-18px) scale(1); }
+    }
+
+    /* ── Card color variants ── */
+
+    /* Event 1: Warm Orange */
+    .event-card.accent-orange {
+      border-left-color: var(--orange);
+    }
+    .event-card.accent-orange::before {
+      background:
+        radial-gradient(ellipse 50% 60% at 0% 50%, rgba(249,115,22,.1) 0%, transparent 70%);
+    }
+    .event-card.accent-orange:hover {
+      box-shadow:
+        0 16px 50px rgba(0,0,0,.3),
+        0 0 35px rgba(249,115,22,.08);
+      border-left-color: #fb923c;
+    }
+    .event-card.accent-orange .card-sparkles span { background: var(--orange); }
+    .event-card.accent-orange .event-collab-tag { border-color: rgba(249,115,22,.3); color: var(--orange); background: rgba(249,115,22,.08); }
+    .event-card.accent-orange .event-title { color: var(--orange); }
+
+    /* Event 2: Purple */
+    .event-card.accent-purple {
+      border-left-color: var(--purple);
+    }
+    .event-card.accent-purple::before {
+      background:
+        radial-gradient(ellipse 50% 60% at 0% 50%, rgba(168,85,247,.1) 0%, transparent 70%);
+    }
+    .event-card.accent-purple:hover {
+      box-shadow:
+        0 16px 50px rgba(0,0,0,.3),
+        0 0 35px rgba(168,85,247,.08);
+      border-left-color: #c084fc;
+    }
+    .event-card.accent-purple .card-sparkles span { background: var(--purple); }
+    .event-card.accent-purple .event-collab-tag { border-color: rgba(168,85,247,.3); color: var(--purple); background: rgba(168,85,247,.08); }
+    .event-card.accent-purple .event-title { color: var(--purple); }
+
+    /* Event 3: Teal */
+    .event-card.accent-teal {
+      border-left-color: var(--teal);
+    }
+    .event-card.accent-teal::before {
+      background:
+        radial-gradient(ellipse 50% 60% at 0% 50%, rgba(94,234,212,.1) 0%, transparent 70%);
+    }
+    .event-card.accent-teal:hover {
+      box-shadow:
+        0 16px 50px rgba(0,0,0,.3),
+        0 0 35px rgba(94,234,212,.08);
+      border-left-color: #6ee7b7;
+    }
+    .event-card.accent-teal .card-sparkles span { background: var(--teal); }
+    .event-card.accent-teal .event-collab-tag { border-color: rgba(94,234,212,.3); color: var(--teal); background: rgba(94,234,212,.08); }
+    .event-card.accent-teal .event-title { color: var(--teal); }
+
+    /* ── Card inner elements ── */
+    .event-header {
+      display: flex; align-items: center; gap: 1rem;
+      flex-wrap: wrap; margin-bottom: .6rem;
+    }
+    .event-title {
+      font-family: 'Syne', sans-serif;
+      font-weight: 700; font-size: .85rem;
+      letter-spacing: .06em; text-transform: uppercase;
+    }
+    .event-collab-tag {
+      display: inline-flex; align-items: center; gap: .35rem;
+      font-family: 'DM Sans', sans-serif;
+      font-size: .68rem; font-weight: 500;
+      letter-spacing: .08em; text-transform: uppercase;
+      padding: .3rem .8rem; border-radius: 50px;
+      border: 1px solid var(--border);
+      white-space: nowrap;
+    }
+    .event-collab-tag .tag-dot {
+      width: 6px; height: 6px; border-radius: 50%;
+      background: currentColor;
+      animation: tagDotPulse 2s ease-in-out infinite;
+    }
+    @keyframes tagDotPulse {
+      0%, 100% { opacity: .6; transform: scale(1); }
+      50%      { opacity: 1; transform: scale(1.3); }
+    }
+
+    .event-name {
+      font-family: 'Syne', sans-serif;
+      font-weight: 800; font-size: 1.4rem;
+      line-height: 1.3; color: var(--white);
+      margin-bottom: .8rem;
+    }
+    .event-desc {
+      font-family: 'Lora', serif;
+      font-size: .95rem; color: var(--muted);
+      line-height: 1.8; max-width: 660px;
+    }
+    .event-meta {
+      display: flex; align-items: center; gap: 1.2rem;
+      margin-top: 1.2rem; flex-wrap: wrap;
+    }
+    .event-meta-item {
+      display: inline-flex; align-items: center; gap: .4rem;
+      font-size: .78rem; color: var(--muted);
+      font-weight: 400;
+    }
+    .event-meta-item svg {
+      width: 14px; height: 14px; stroke: currentColor;
+      fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round;
+    }
+
+    /* ── Decorative divider between cards ── */
+    .event-divider {
+      width: 60px; height: 2px; margin: 0 auto;
+      background: linear-gradient(90deg, transparent, var(--border), transparent);
+      border-radius: 1px;
+    }
+
+    /* ── Reveal animation ── */
+    .reveal {
+      opacity: 0; transform: translateY(35px);
+      transition: opacity .8s cubic-bezier(.16,1,.3,1), transform .8s cubic-bezier(.16,1,.3,1);
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .reveal-delay-1 { transition-delay: .15s; }
+    .reveal-delay-2 { transition-delay: .3s; }
+    .reveal-delay-3 { transition-delay: .45s; }
+
+    /* ── Wave divider ── */
+    .section-wave {
+      position: relative; height: 80px; overflow: hidden;
+    }
+    .section-wave svg {
+      position: absolute; bottom: 0; left: 0; width: 100%;
+      fill: var(--deep);
+    }
+
+    /* ── Footer ── */
+    footer {
+      background: var(--deep);
+      padding: 4rem 2rem 2rem;
+    }
+    .footer-grid {
+      display: grid; grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 3rem; margin-bottom: 3rem;
+      max-width: 1160px; margin-left: auto; margin-right: auto;
+    }
+    .footer-col h4 {
+      font-family: 'Syne', sans-serif; font-weight: 700;
+      font-size: .8rem; letter-spacing: .1em;
+      text-transform: uppercase; color: var(--white);
+      margin-bottom: 1.2rem;
+    }
+    .footer-col ul { display: flex; flex-direction: column; gap: .6rem; }
+    .footer-col ul li a {
+      font-size: .85rem; color: var(--muted); transition: color .2s;
+    }
+    .footer-col ul li a:hover { color: var(--teal); }
+
+    .footer-bottom {
+      border-top: 1px solid var(--border); padding-top: 2rem;
+      display: flex; justify-content: space-between; align-items: center;
+      flex-wrap: wrap; gap: 1rem;
+      max-width: 1160px; margin: 0 auto;
+    }
+    .footer-bottom p { font-size: .8rem; color: var(--muted); }
+    .footer-bottom-links { display: flex; gap: 1.5rem; }
+    .footer-bottom-links a {
+      font-size: .78rem; color: var(--muted); transition: color .2s;
+    }
+    .footer-bottom-links a:hover { color: var(--teal); }
+
+    /* ── Responsive ── */
+    @media (max-width: 860px) {
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 640px) {
+      nav.main-nav { flex-wrap: wrap; justify-content: center; gap: 1rem; padding: 1rem; }
+      .nav-left, .nav-right { gap: 1rem; flex-wrap: wrap; justify-content: center; }
+      .nav-center { position: static; transform: none; order: -1; width: 100%; justify-content: center; }
+      .hero { min-height: 60vh; padding: 7rem 1.5rem 3rem; }
+      .events-section { padding: 2rem 1.2rem 4rem; }
+      .event-card { padding: 2rem 1.5rem 2rem 1.8rem; }
+      .event-name { font-size: 1.15rem; }
+      .footer-grid { grid-template-columns: 1fr; gap: 2rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── Background floating orbs ── -->
+<div class="bg-orbs">
+  <div class="bg-orb bg-orb-1"></div>
+  <div class="bg-orb bg-orb-2"></div>
+  <div class="bg-orb bg-orb-3"></div>
+</div>
+
+<!-- ── Header / Nav ── -->
+<header>
+  <nav class="main-nav">
+    <div class="nav-left">
+      <a href="../../../miembros/">Miembros</a>
+      <div class="nav-dropdown">
+        <a href="../../../investigaciones/">Investigaciones ▾</a>
+        <div class="dropdown-menu">
+          <a href="../../../investigaciones/lineas-de-investigacion/">Líneas de Investigación</a>
+          <a href="../../../investigaciones/publicaciones/">Publicaciones</a>
+          <div class="dropdown-submenu">
+            <a href="../../../investigaciones/programas/">Programas ▸</a>
+            <div class="dropdown-submenu-menu">
+              <a href="../../../investigaciones/programas/bienestar/">BienEstar</a>
+              <a href="../../../investigaciones/programas/espacio-mental/">Espacio Mental</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="nav-dropdown">
+        <a href="../../../proyectos-sociales/" class="active">Proyectos Sociales ▾</a>
+        <div class="dropdown-menu">
+          <div class="dropdown-submenu">
+            <a href="../../../proyectos-sociales/eventos/">Eventos ▸</a>
+            <div class="dropdown-submenu-menu">
+              <a href="../../../proyectos-sociales/eventos/eventos-pasados/">Eventos Pasados</a>
+              <a href="../../../proyectos-sociales/eventos/eventos-proximos/">Eventos Próximos</a>
+            </div>
+          </div>
+          <a href="../../../proyectos-sociales/psinet-escool/">PsiNet EsCool</a>
+          <a href="../../../proyectos-sociales/psipaz/">PsiPaz</a>
+        </div>
+      </div>
+    </div>
+    <div class="nav-center">
+      <a href="../../../index.html">
+        <img src="../../../assets/images/logo.png" alt="PsiNet LAB" onerror="this.style.display='none'" />
+      </a>
+    </div>
+    <div class="nav-right">
+      <a href="../../../blog/">Blog</a>
+      <a href="https://psinetlab.wordpress.com/contacto/" target="_blank">Contacto</a>
+      <a href="../../../index.html#apoyanos">Apóyanos</a>
+      <a href="../../../index.html#colaboraciones">Colaboraciones</a>
+    </div>
+  </nav>
+</header>
+
+<!-- ── Hero ── -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="orb orb-1"></div>
+  <div class="orb orb-2"></div>
+  <div class="orb orb-3"></div>
+  <div class="orb orb-4"></div>
+  <div class="hero-particles" id="heroParticles"></div>
+
+  <div class="hero-content">
+    <span class="hero-badge">Proyectos Sociales · Eventos</span>
+    <h1>Eventos Pasados</h1>
+    <p>Un registro orgulloso de las acciones que dejaron huella. Cada evento refleja nuestro compromiso con el bienestar comunitario.</p>
+    <div class="hero-line"></div>
+  </div>
+</section>
+
+<!-- ── Events Blog Section ── -->
+<section class="events-section">
+  <div class="section-intro reveal">
+    <h2>Nuestra historia en acción</h2>
+    <p>Talleres, jornadas y colaboraciones que transformaron ideas en impacto real. Revive cada momento que marcó la diferencia.</p>
+    <span class="counter">📖 3 eventos realizados</span>
+  </div>
+
+  <div class="event-list">
+
+    <!-- ══════════════════════════════════════════════
+         EVENT 1: PsiNet × DREA
+         ══════════════════════════════════════════════ -->
+    <article class="event-card accent-orange reveal reveal-delay-1">
+      <div class="card-sparkles">
+        <span style="top:15%;left:10%;animation-delay:0s"></span>
+        <span style="top:65%;left:80%;animation-delay:1.4s"></span>
+        <span style="top:35%;left:50%;animation-delay:2.8s"></span>
+        <span style="top:80%;left:25%;animation-delay:3.8s"></span>
+      </div>
+      <div class="event-header">
+        <span class="event-title">PsiNet × DREA</span>
+        <span class="event-collab-tag">
+          <span class="tag-dot"></span>
+          Colaboración con DREA
+        </span>
+      </div>
+      <h3 class="event-name">Taller de Contención Socioemocional ante Desastres Naturales</h3>
+      <p class="event-desc">
+        Un taller diseñado para brindar herramientas de contención socioemocional frente a situaciones de desastres naturales. En colaboración con la Dirección Regional de Educación de Arequipa (DREA), se abordaron estrategias prácticas para el acompañamiento psicológico en contextos de emergencia, fortaleciendo la capacidad de respuesta emocional de los participantes.
+      </p>
+      <div class="event-meta">
+        <span class="event-meta-item">
+          <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          Taller comunitario
+        </span>
+        <span class="event-meta-item">
+          <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          Arequipa
+        </span>
+      </div>
+    </article>
+
+    <div class="event-divider reveal"></div>
+
+    <!-- ══════════════════════════════════════════════
+         EVENT 2: PsiNet × SENAJU × ADRA
+         ══════════════════════════════════════════════ -->
+    <article class="event-card accent-purple reveal reveal-delay-2">
+      <div class="card-sparkles">
+        <span style="top:20%;left:85%;animation-delay:0s"></span>
+        <span style="top:55%;left:15%;animation-delay:1.2s"></span>
+        <span style="top:40%;left:60%;animation-delay:2.4s"></span>
+        <span style="top:75%;left:40%;animation-delay:3.2s"></span>
+      </div>
+      <div class="event-header">
+        <span class="event-title">PsiNet × SENAJU × ADRA</span>
+        <span class="event-collab-tag">
+          <span class="tag-dot"></span>
+          Colaboración con SENAJU y ADRA
+        </span>
+      </div>
+      <h3 class="event-name">Apoyo de primeros auxilios psicológicos para los niños tras el incendio en Pamplona (San Juan de Miraflores)</h3>
+      <p class="event-desc">
+        Intervención de primeros auxilios psicológicos dirigida a niños y niñas afectados por el incendio ocurrido en Pamplona, San Juan de Miraflores. En alianza con la Secretaría Nacional de la Juventud (SENAJU) y la Agencia Adventista de Desarrollo y Recursos Asistenciales (ADRA), se brindó acompañamiento emocional inmediato, actividades lúdicas terapéuticas y espacios seguros de expresión para los menores impactados por la emergencia.
+      </p>
+      <div class="event-meta">
+        <span class="event-meta-item">
+          <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+          Primeros auxilios psicológicos
+        </span>
+        <span class="event-meta-item">
+          <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          San Juan de Miraflores, Lima
+        </span>
+      </div>
+    </article>
+
+    <div class="event-divider reveal"></div>
+
+    <!-- ══════════════════════════════════════════════
+         EVENT 3: PsiNet × Hazla por tu playa
+         ══════════════════════════════════════════════ -->
+    <article class="event-card accent-teal reveal reveal-delay-3">
+      <div class="card-sparkles">
+        <span style="top:10%;left:70%;animation-delay:0s"></span>
+        <span style="top:50%;left:20%;animation-delay:1s"></span>
+        <span style="top:30%;left:45%;animation-delay:2s"></span>
+        <span style="top:70%;left:75%;animation-delay:3s"></span>
+      </div>
+      <div class="event-header">
+        <span class="event-title">PsiNet × Hazla por tu playa</span>
+        <span class="event-collab-tag">
+          <span class="tag-dot"></span>
+          Colaboración con Hazla por tu playa
+        </span>
+      </div>
+      <h3 class="event-name">Limpieza de playa de Chorrillos</h3>
+      <p class="event-desc">
+        Jornada de limpieza costera en las playas de Chorrillos, organizada junto a la iniciativa Hazla por tu playa. Esta actividad de voluntariado ambiental integró la perspectiva psicológica del bienestar comunitario con la acción ecológica directa, promoviendo la conexión entre salud mental y cuidado del medio ambiente mientras se fortalecieron los lazos comunitarios entre los participantes.
+      </p>
+      <div class="event-meta">
+        <span class="event-meta-item">
+          <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          Voluntariado ambiental
+        </span>
+        <span class="event-meta-item">
+          <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          Chorrillos, Lima
+        </span>
+      </div>
+    </article>
+
+    <!-- ══════════════════════════════════════════════
+         To add a new event, copy an <article> block above,
+         change the accent class (accent-orange / accent-purple / accent-teal),
+         and update the event-title, event-name, event-desc,
+         event-collab-tag, and event-meta content.
+         ══════════════════════════════════════════════ -->
+
+  </div>
+</section>
+
+<!-- ── Wave divider ── -->
+<div class="section-wave">
+  <svg viewBox="0 0 1440 80" preserveAspectRatio="none">
+    <path d="M0,40 C360,80 720,0 1080,40 C1260,60 1380,50 1440,40 L1440,80 L0,80 Z" />
+  </svg>
+</div>
+
+<!-- ── Footer ── -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-col">
+      <h4>PsiNet LAB</h4>
+      <p style="font-size:.85rem;color:var(--muted);max-width:280px;line-height:1.75;">
+        Ciencia psicológica conectada para el desarrollo humano y comunitario.
+      </p>
+    </div>
+    <div class="footer-col">
+      <h4>Proyectos Sociales</h4>
+      <ul>
+        <li><a href="../../../proyectos-sociales/eventos/">Eventos</a></li>
+        <li><a href="../../../proyectos-sociales/psinet-escool/">PsiNet EsCool</a></li>
+        <li><a href="../../../proyectos-sociales/psipaz/">PsiPaz</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Investigación</h4>
+      <ul>
+        <li><a href="../../../investigaciones/publicaciones/">Publicaciones</a></li>
+        <li><a href="../../../investigaciones/lineas-de-investigacion/">Líneas de Investigación</a></li>
+        <li><a href="../../../miembros/">Miembros</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Organización</h4>
+      <ul>
+        <li><a href="https://psinetlab.wordpress.com/contacto/" target="_blank">Contacto</a></li>
+        <li><a href="https://psinetlab.wordpress.com/apoyanos/" target="_blank">Apóyanos</a></li>
+        <li><a href="../../../blog/">Blog</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>&copy; 2025 PsiNet LAB. Todos los derechos reservados.</p>
+    <div class="footer-bottom-links">
+      <a href="#">Cookie Policy</a>
+      <a href="#">Privacy Policy</a>
+      <a href="#">Policies</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // ── IntersectionObserver for reveal animations ──
+  const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        revealObserver.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+  // ── Header scroll effect ──
+  const header = document.querySelector('header');
+  window.addEventListener('scroll', () => {
+    header.classList.toggle('scrolled', window.scrollY > 50);
+  });
+
+  // ── Generate hero sparkle particles ──
+  (function generateParticles() {
+    const container = document.getElementById('heroParticles');
+    if (!container) return;
+    for (let i = 0; i < 30; i++) {
+      const span = document.createElement('span');
+      span.style.left = Math.random() * 100 + '%';
+      span.style.top  = Math.random() * 100 + '%';
+      span.style.animationDelay = (Math.random() * 5).toFixed(2) + 's';
+      span.style.animationDuration = (3 + Math.random() * 4).toFixed(2) + 's';
+      container.appendChild(span);
+    }
+  })();
+</script>
+
+</body>
+</html>
