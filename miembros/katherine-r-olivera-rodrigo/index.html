@@ -269,6 +269,31 @@
       margin-bottom: 1.5rem;
     }
 
+    .social-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .8rem;
+      margin-top: .5rem;
+    }
+    .social-link {
+      display: inline-flex;
+      align-items: center;
+      gap: .5rem;
+      background: rgba(94,234,212,.08);
+      border: 1px solid var(--border);
+      color: var(--teal);
+      font-size: .82rem;
+      font-weight: 500;
+      padding: .5rem 1.2rem;
+      border-radius: 8px;
+      letter-spacing: .02em;
+      transition: all .2s;
+    }
+    .social-link:hover {
+      background: rgba(94,234,212,.15);
+      border-color: var(--teal);
+    }
+
     /* ── FOOTER ── */
     footer {
       border-top: 1px solid var(--border);
@@ -397,21 +422,32 @@
       <div class="profile-content">
         <div class="profile-card reveal" style="transition-delay:.1s">
           <h3>Sobre</h3>
-          <p>Miembro Investigadora en PsiNet LAB. Contribuye al desarrollo de conocimiento científico innovador en el campo de la psicología aplicada.</p>
+          <p>Katherine Rosa Olivera Rodrigo holds a Bachelor's degree in Nursing from Universidad Privada César Vallejo (Peru), where she ranked among the top five students in her class based on her cumulative GPA. She also completed a Master's degree in University Teaching at the same institution, earning the academic degree of Magister. Additionally, she is currently pursuing a second specialization in Mental Health and Psychiatry at Universidad Norbert Wiener in Peru. She has also completed updated courses in emergency and urgent care, basic life support, first aid, occupational health, and research methodology, among others.</p>
+          <p>She is currently working as a registered nurse at a private educational institution, Organización Magister, where she provides preventive care and health services to children, adolescents, and teaching staff. In 2019, she received recognition for her outstanding job performance.</p>
         </div>
 
         <div class="profile-card reveal" style="transition-delay:.18s">
           <h3>Áreas de interés</h3>
           <div class="interest-tags">
-              <span class="interest-tag">Psicología aplicada</span>
-              <span class="interest-tag">Salud mental</span>
-              <span class="interest-tag">Investigación participativa</span>
+              <span class="interest-tag">Mental health</span>
+              <span class="interest-tag">Psychiatry</span>
+              <span class="interest-tag">University teaching</span>
+              <span class="interest-tag">Emergency care</span>
+              <span class="interest-tag">Research methodology</span>
           </div>
         </div>
 
         <div class="profile-card reveal" style="transition-delay:.26s">
           <h3>Afiliación</h3>
           <p>Miembro de PsiNet LAB — Laboratorio de investigación psicológica dedicado a generar conocimiento científico innovador, utilizando métodos avanzados y fundamentados en la teoría de la complejidad para contribuir al entendimiento del comportamiento humano.</p>
+        </div>
+
+        <div class="profile-card reveal" style="transition-delay:.34s">
+          <h3>Links</h3>
+          <div class="social-links">
+            <a href="https://www.linkedin.com/in/katherine-r-olivera-r-396497110/" target="_blank" rel="noopener" class="social-link">LinkedIn</a>
+            <a href="https://typecard.com/f565d076" target="_blank" rel="noopener" class="social-link">Typecard</a>
+          </div>
         </div>
       </div>
     </div>
