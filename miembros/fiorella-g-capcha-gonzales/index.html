@@ -269,6 +269,31 @@
       margin-bottom: 1.5rem;
     }
 
+    .social-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .8rem;
+      margin-top: .5rem;
+    }
+    .social-link {
+      display: inline-flex;
+      align-items: center;
+      gap: .5rem;
+      background: rgba(94,234,212,.08);
+      border: 1px solid var(--border);
+      color: var(--teal);
+      font-size: .82rem;
+      font-weight: 500;
+      padding: .5rem 1.2rem;
+      border-radius: 8px;
+      letter-spacing: .02em;
+      transition: all .2s;
+    }
+    .social-link:hover {
+      background: rgba(94,234,212,.15);
+      border-color: var(--teal);
+    }
+
     /* ── FOOTER ── */
     footer {
       border-top: 1px solid var(--border);
@@ -397,21 +422,30 @@
       <div class="profile-content">
         <div class="profile-card reveal" style="transition-delay:.1s">
           <h3>Sobre</h3>
-          <p>Chief Social Work Officer de PsiNet LAB. Lidera los proyectos de intervención social y comunitaria, coordinando iniciativas que buscan generar impacto positivo en la sociedad.</p>
+          <p>Fiorella Grecia Capcha Gonzales holds a degree in Psychology from the Pontifical Catholic University of Peru (PUCP). She is currently pursuing a Second Specialization in Psychoanalytic Clinical Intervention at the same institution. She works as a researcher at PsiNet LAB (Peru), a center specialized in psychological research focused on the development and application of advanced methodologies. Her interests lie in integrating quantitative and qualitative approaches in areas related to social and community psychology, health, education, art, and technology. Through her work, she seeks to explore art and play as forms of individual expression, where connection is built beyond words.</p>
         </div>
 
         <div class="profile-card reveal" style="transition-delay:.18s">
           <h3>Áreas de interés</h3>
           <div class="interest-tags">
-              <span class="interest-tag">Investigación psicológica</span>
-              <span class="interest-tag">Ciencia del comportamiento</span>
-              <span class="interest-tag">Innovación social</span>
+              <span class="interest-tag">Social and community psychology</span>
+              <span class="interest-tag">Health</span>
+              <span class="interest-tag">Education</span>
+              <span class="interest-tag">Art and technology</span>
           </div>
         </div>
 
         <div class="profile-card reveal" style="transition-delay:.26s">
           <h3>Afiliación</h3>
           <p>Miembro de PsiNet LAB — Laboratorio de investigación psicológica dedicado a generar conocimiento científico innovador, utilizando métodos avanzados y fundamentados en la teoría de la complejidad para contribuir al entendimiento del comportamiento humano.</p>
+        </div>
+
+        <div class="profile-card reveal" style="transition-delay:.34s">
+          <h3>Links</h3>
+          <div class="social-links">
+            <a href="https://linkedin.com/in/fiorella-capcha-gonzales-980445246" target="_blank" rel="noopener" class="social-link">LinkedIn</a>
+            <a href="https://typecard.com/1cc3e1a5" target="_blank" rel="noopener" class="social-link">Typecard</a>
+          </div>
         </div>
       </div>
     </div>
