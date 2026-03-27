@@ -42,13 +42,15 @@
     img { max-width:100%; display:block; }
 
     /* ── Header ── */
-    header { position:fixed; top:0; left:0; width:100%; z-index:50; }
+    header { position:fixed; top:0; left:0; width:100%; z-index:50;
+      background:rgba(11,22,41,.55); backdrop-filter:blur(20px); -webkit-backdrop-filter:blur(20px);
+    }
     .header-top {
       display: flex;
       align-items: center;
       justify-content: center;
       padding: .6rem 2.5rem;
-      background:var(--deep);
+      background:transparent;
       border-bottom:1px solid var(--border);
     }
     .social-links {
@@ -85,7 +87,7 @@
     }
     .main-nav {
       display:flex; align-items:center; justify-content:center;
-      background:rgba(11,22,41,.82); backdrop-filter:blur(14px);
+      background:transparent;
       padding:.55rem 2.5rem; gap:2rem;
     }
     .nav-left, .nav-right { display:flex; align-items:center; gap:1.8rem; }

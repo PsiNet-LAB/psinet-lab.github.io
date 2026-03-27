@@ -53,12 +53,13 @@
     header {
       position: fixed; top: 0; left: 0; right: 0;
       z-index: 1000;
-      background: transparent;
+      background: rgba(11,22,41,.55);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
       transition: background .3s ease, backdrop-filter .3s ease;
     }
     header.scrolled {
-      background: rgba(11,22,41,.85);
-      backdrop-filter: blur(20px);
+      background: rgba(11,22,41,.7);
     }
 
     #particles-js {
