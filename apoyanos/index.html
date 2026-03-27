@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Contacto – PsiNet LAB</title>
+  <title>Apóyanos – PsiNet LAB</title>
   <link rel="icon" type="image/x-icon" href="../favicon.ico" />
   <link rel="icon" type="image/png" sizes="32x32" href="../assets/images/favicon-32x32.png" />
   <link rel="icon" type="image/png" sizes="192x192" href="../assets/images/favicon-192x192.png" />
@@ -176,7 +176,7 @@
     }
 
     /* ── HERO SECTION ── */
-    .contact-hero {
+    .support-hero {
       padding-top: 10rem;
       padding-bottom: 4rem;
       position: relative;
@@ -186,7 +186,7 @@
       align-items: center;
     }
 
-    .contact-hero .container {
+    .support-hero .container {
       position: relative;
       z-index: 2;
       text-align: center;
@@ -214,7 +214,7 @@
       opacity: .4;
     }
 
-    .contact-hero h1 {
+    .support-hero h1 {
       font-family: 'Syne', sans-serif;
       font-weight: 800;
       font-size: clamp(2.2rem, 5vw, 3.8rem);
@@ -224,7 +224,7 @@
       margin-bottom: 1.5rem;
     }
 
-    .contact-hero h1 .accent {
+    .support-hero h1 .accent {
       background: linear-gradient(135deg, var(--teal), #38bdf8, #818cf8);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
@@ -235,7 +235,7 @@
       font-family: 'Lora', serif;
       font-size: clamp(1rem, 2vw, 1.25rem);
       color: var(--muted);
-      max-width: 600px;
+      max-width: 650px;
       margin: 0 auto 2rem;
       font-style: italic;
       line-height: 1.7;
@@ -252,7 +252,7 @@
     }
     .orb-1 {
       width: 400px; height: 400px;
-      background: var(--teal);
+      background: var(--gold);
       top: -100px; left: -100px;
       animation: float1 12s ease-in-out infinite;
     }
@@ -264,7 +264,7 @@
     }
     .orb-3 {
       width: 200px; height: 200px;
-      background: var(--gold);
+      background: var(--teal);
       top: 30%; right: 10%;
       animation: float3 10s ease-in-out infinite;
     }
@@ -284,21 +284,21 @@
       50% { transform: translate(-25px, 25px); }
     }
 
-    /* ── CONTACT LAYOUT ── */
-    .contact-section {
+    /* ── SUPPORT GRID ── */
+    .support-section {
       padding-top: 2rem;
       padding-bottom: 6rem;
     }
 
-    .contact-grid {
+    .support-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 4rem;
       align-items: start;
     }
 
-    /* ── LEFT: INVITATION PANEL ── */
-    .contact-invite {
+    /* ── LEFT: WHY SUPPORT PANEL ── */
+    .support-invite {
       position: relative;
     }
 
@@ -317,7 +317,7 @@
       position: absolute;
       top: 0; left: 0; right: 0;
       height: 3px;
-      background: linear-gradient(90deg, var(--teal), #38bdf8, #818cf8);
+      background: linear-gradient(90deg, var(--gold), var(--teal), #818cf8);
     }
 
     .invite-card .card-emoji {
@@ -379,39 +379,8 @@
       font-size: .85rem;
     }
 
-    /* Social strip */
-    .social-strip {
-      display: flex;
-      gap: 1rem;
-      margin-top: 2rem;
-      flex-wrap: wrap;
-    }
-
-    .social-strip a {
-      display: inline-flex;
-      align-items: center;
-      gap: .5rem;
-      padding: .6rem 1.2rem;
-      background: var(--card-bg);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      font-size: .8rem;
-      color: var(--muted);
-      transition: all .25s;
-    }
-    .social-strip a:hover {
-      border-color: var(--teal);
-      color: var(--teal);
-      transform: translateY(-2px);
-    }
-    .social-strip a svg {
-      width: 18px;
-      height: 18px;
-      fill: currentColor;
-    }
-
-    /* ── RIGHT: FORM PANEL ── */
-    .form-panel {
+    /* ── RIGHT: KO-FI PANEL ── */
+    .kofi-panel {
       background: linear-gradient(145deg, var(--card-bg), var(--deep));
       border: 1px solid var(--border);
       border-radius: 16px;
@@ -420,7 +389,7 @@
       overflow: hidden;
     }
 
-    .form-panel::before {
+    .kofi-panel::before {
       content: '';
       position: absolute;
       top: 0; left: 0; right: 0;
@@ -428,11 +397,12 @@
       background: linear-gradient(90deg, #818cf8, #38bdf8, var(--teal));
     }
 
-    .form-header {
+    .kofi-header {
       margin-bottom: 2rem;
+      text-align: center;
     }
 
-    .form-header h2 {
+    .kofi-header h2 {
       font-family: 'Syne', sans-serif;
       font-weight: 700;
       font-size: 1.5rem;
@@ -440,87 +410,39 @@
       margin-bottom: .5rem;
     }
 
-    .form-header p {
+    .kofi-header p {
       font-size: .88rem;
       color: var(--muted);
     }
 
-    .form-group {
-      margin-bottom: 1.5rem;
-    }
-
-    .form-group label {
-      display: block;
-      font-size: .78rem;
-      font-weight: 600;
-      letter-spacing: .08em;
-      text-transform: uppercase;
-      color: var(--teal);
-      margin-bottom: .5rem;
-      font-family: 'DM Sans', sans-serif;
-    }
-
-    .form-group input,
-    .form-group textarea,
-    .form-group select {
-      width: 100%;
-      padding: .85rem 1.1rem;
-      background: rgba(11,22,41,.6);
+    .kofi-widget-wrap {
+      background: rgba(11,22,41,.4);
       border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+      min-height: 400px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .kofi-widget-wrap iframe {
+      border: none;
+      width: 100%;
+      max-width: 100%;
       border-radius: 8px;
-      color: var(--white);
-      font-family: 'DM Sans', sans-serif;
-      font-size: .92rem;
-      transition: border-color .25s, box-shadow .25s;
-      outline: none;
     }
 
-    .form-group input::placeholder,
-    .form-group textarea::placeholder {
-      color: rgba(136,146,176,.5);
-    }
-
-    .form-group input:focus,
-    .form-group textarea:focus,
-    .form-group select:focus {
-      border-color: var(--teal);
-      box-shadow: 0 0 0 3px rgba(94,234,212,.1);
-    }
-
-    .form-group textarea {
-      min-height: 140px;
-      resize: vertical;
-    }
-
-    .form-group select {
-      cursor: pointer;
-      appearance: none;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%238892b0' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
-      background-repeat: no-repeat;
-      background-position: right 1rem center;
-      padding-right: 2.5rem;
-    }
-
-    .form-group select option {
-      background: var(--deep);
-      color: var(--white);
-    }
-
-    .form-row {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 1.2rem;
-    }
-
-    .btn-send {
+    .btn-kofi {
       display: inline-flex;
       align-items: center;
       justify-content: center;
       gap: .6rem;
       width: 100%;
       padding: 1rem 2rem;
-      background: linear-gradient(135deg, var(--teal), var(--teal2));
-      color: var(--navy);
+      background: linear-gradient(135deg, #ff5e5b, #ff9966);
+      color: #fff;
       font-family: 'Syne', sans-serif;
       font-weight: 700;
       font-size: .95rem;
@@ -532,28 +454,26 @@
       transition: all .3s;
       position: relative;
       overflow: hidden;
+      text-decoration: none;
     }
 
-    .btn-send:hover {
+    .btn-kofi:hover {
       transform: translateY(-2px);
-      box-shadow: 0 8px 30px rgba(94,234,212,.25);
+      box-shadow: 0 8px 30px rgba(255,94,91,.3);
+      color: #fff;
     }
 
-    .btn-send:active {
+    .btn-kofi:active {
       transform: translateY(0);
     }
 
-    .btn-send svg {
-      width: 18px;
-      height: 18px;
-      fill: none;
-      stroke: var(--navy);
-      stroke-width: 2;
-      stroke-linecap: round;
-      stroke-linejoin: round;
+    .btn-kofi svg {
+      width: 22px;
+      height: 22px;
+      fill: #fff;
     }
 
-    .form-note {
+    .kofi-note {
       text-align: center;
       font-size: .78rem;
       color: var(--muted);
@@ -561,44 +481,54 @@
       opacity: .7;
     }
 
-    /* ── SUCCESS MESSAGE ── */
-    .form-success {
-      display: none;
+    /* ── IMPACT SECTION ── */
+    .impact-section {
+      padding: 5rem 2.5rem;
+    }
+
+    .impact-section .container {
       text-align: center;
-      padding: 3rem 2rem;
     }
 
-    .form-success.show {
-      display: block;
+    .impact-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+      margin-top: 3rem;
     }
 
-    .form-success .success-icon {
-      font-size: 3.5rem;
+    .impact-card {
+      background: linear-gradient(145deg, var(--card-bg), var(--deep));
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 2rem;
+      text-align: center;
+      transition: transform .3s, border-color .3s;
+    }
+
+    .impact-card:hover {
+      transform: translateY(-4px);
+      border-color: var(--teal);
+    }
+
+    .impact-card .impact-icon {
+      font-size: 2.5rem;
       margin-bottom: 1rem;
       display: block;
-      animation: popIn .5s ease;
     }
 
-    .form-success h3 {
+    .impact-card h3 {
       font-family: 'Syne', sans-serif;
       font-weight: 700;
-      font-size: 1.4rem;
-      color: var(--teal);
-      margin-bottom: .75rem;
+      font-size: 1.05rem;
+      color: var(--white);
+      margin-bottom: .5rem;
     }
 
-    .form-success p {
-      font-size: .92rem;
+    .impact-card p {
+      font-size: .85rem;
       color: var(--muted);
-      max-width: 400px;
-      margin: 0 auto;
-      line-height: 1.7;
-    }
-
-    @keyframes popIn {
-      0% { transform: scale(0); opacity: 0; }
-      50% { transform: scale(1.2); }
-      100% { transform: scale(1); opacity: 1; }
+      line-height: 1.6;
     }
 
     /* ── BOTTOM CTA ── */
@@ -695,23 +625,24 @@
 
     /* ── RESPONSIVE ── */
     @media (max-width: 900px) {
-      .contact-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+      .support-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+      .impact-grid { grid-template-columns: 1fr 1fr; }
       .footer-grid { grid-template-columns: 1fr 1fr; }
       .header-top { padding: .6rem 1.2rem; }
       nav.main-nav { padding: .55rem 1.2rem; }
       .nav-left, .nav-right { gap: 1rem; }
       section { padding: 4rem 1.5rem; }
-      .contact-hero { padding-top: 8rem; min-height: auto; }
+      .support-hero { padding-top: 8rem; min-height: auto; }
+      .impact-section { padding: 4rem 1.5rem; }
     }
 
     @media (max-width: 600px) {
-      .contact-grid { grid-template-columns: 1fr; }
-      .form-row { grid-template-columns: 1fr; }
+      .support-grid { grid-template-columns: 1fr; }
+      .impact-grid { grid-template-columns: 1fr; }
       .footer-grid { grid-template-columns: 1fr; gap: 2rem; }
       .nav-right { display: none; }
-      .contact-hero { padding-top: 7rem; }
-      .social-strip { justify-content: center; }
-      .form-panel { padding: 1.8rem; }
+      .support-hero { padding-top: 7rem; }
+      .kofi-panel { padding: 1.8rem; }
       .invite-card { padding: 1.8rem; }
     }
   </style>
@@ -760,147 +691,136 @@
 
     <div class="nav-right">
       <a href="../blog/">Blog</a>
-      <a href="../contacto/" class="active">Contacto</a>
-      <a href="../apoyanos/">Apóyanos</a>
+      <a href="../contacto/">Contacto</a>
+      <a href="../apoyanos/" class="active">Apóyanos</a>
       <a href="../index.html#colaboraciones">Colaboraciones</a>
     </div>
   </nav>
 </header>
 
 <!-- ═══════ HERO ═══════ -->
-<section class="contact-hero">
+<section class="support-hero">
   <div class="orb orb-1"></div>
   <div class="orb orb-2"></div>
   <div class="orb orb-3"></div>
   <div class="container">
     <div class="reveal">
-      <span class="hero-eyebrow">Conectemos</span>
-      <h1>Cada gran idea empieza<br>con una <span class="accent">conversación</span></h1>
+      <span class="hero-eyebrow">Apóyanos</span>
+      <h1>Tu apoyo impulsa la<br><span class="accent">ciencia que transforma</span></h1>
       <p class="hero-subtitle">
-        Detrás de cada descubrimiento científico hay un mensaje que alguien decidió enviar.
-        El tuyo podría ser el inicio de algo extraordinario.
+        Cada contribución, grande o pequeña, nos permite seguir investigando, educando
+        y creando impacto social desde la psicología.
       </p>
     </div>
   </div>
 </section>
 
-<!-- ═══════ CONTACT GRID ═══════ -->
-<section class="contact-section">
+<!-- ═══════ SUPPORT GRID ═══════ -->
+<section class="support-section">
   <div class="container">
-    <div class="contact-grid">
+    <div class="support-grid">
 
-      <!-- LEFT: Invitation panel -->
-      <div class="contact-invite reveal">
+      <!-- LEFT: Why support panel -->
+      <div class="support-invite reveal">
         <div class="invite-card">
-          <span class="card-emoji">💬</span>
-          <h3>¿Por qué escribirnos?</h3>
-          <p>En PsiNet LAB creemos que las conexiones humanas son el motor de la ciencia. No importa si eres estudiante, investigador, profesional o simplemente alguien curioso — queremos escucharte.</p>
+          <span class="card-emoji">💛</span>
+          <h3>¿Por qué apoyar a PsiNet LAB?</h3>
+          <p>Somos un laboratorio de investigación conformado por jóvenes científicos comprometidos con el desarrollo humano. Tu apoyo nos permite seguir adelante con nuestros proyectos e investigaciones.</p>
 
           <ul class="reasons-list">
             <li>
               <span class="reason-icon">🔬</span>
               <div>
-                <strong>Colaboración en investigación</strong>
-                ¿Tienes una idea de estudio o quieres sumarte a nuestros proyectos? Platiquemos.
+                <strong>Investigación de calidad</strong>
+                Financias estudios que generan conocimiento psicológico con impacto real en comunidades.
               </div>
             </li>
             <li>
               <span class="reason-icon">🎓</span>
               <div>
-                <strong>Membresía y formación</strong>
-                Únete a nuestro equipo de jóvenes investigadores y desarrolla tus habilidades.
+                <strong>Formación de jóvenes científicos</strong>
+                Ayudas a capacitar a la próxima generación de investigadores en psicología.
               </div>
             </li>
             <li>
               <span class="reason-icon">🤝</span>
               <div>
-                <strong>Alianzas institucionales</strong>
-                Trabajemos juntos para crear impacto social desde la psicología.
+                <strong>Proyectos sociales</strong>
+                Impulsas programas como PsiPaz, PsiNet EsCool y nuestros eventos comunitarios.
               </div>
             </li>
             <li>
-              <span class="reason-icon">💡</span>
+              <span class="reason-icon">🌍</span>
               <div>
-                <strong>Ideas y sugerencias</strong>
-                Toda voz cuenta. Comparte tus ideas para mejorar lo que hacemos.
+                <strong>Ciencia abierta y accesible</strong>
+                Contribuyes a que nuestras publicaciones y recursos sigan siendo gratuitos para todos.
               </div>
             </li>
           </ul>
         </div>
 
-        <!-- Social strip -->
-        <p style="font-size:.8rem;color:var(--muted);margin-bottom:.6rem;letter-spacing:.05em;">TAMBIÉN NOS ENCUENTRAS EN</p>
-        <div class="social-strip">
-          <a href="https://www.facebook.com/psinetlab.of" target="_blank" rel="noopener">
-            <svg viewBox="0 0 24 24"><path d="M22 12A10 10 0 1 0 12 22v-7.09H9.27V12H12V9.8c0-2.7 1.6-4.19 4.07-4.19 1.18 0 2.41.21 2.41.21v2.65h-1.36c-1.34 0-1.75.83-1.75 1.68V12h2.98l-.48 2.91H15.37V22A10 10 0 0 0 22 12z"/></svg>
-            Facebook
-          </a>
-          <a href="https://www.instagram.com/psinetlab/" target="_blank" rel="noopener">
-            <svg viewBox="0 0 24 24"><path d="M7.75 2h8.5A5.75 5.75 0 0 1 22 7.75v8.5A5.75 5.75 0 0 1 16.25 22h-8.5A5.75 5.75 0 0 1 2 16.25v-8.5A5.75 5.75 0 0 1 7.75 2Zm0 1.5A4.25 4.25 0 0 0 3.5 7.75v8.5A4.25 4.25 0 0 0 7.75 20.5h8.5A4.25 4.25 0 0 0 20.5 16.25v-8.5A4.25 4.25 0 0 0 16.25 3.5ZM12 7a5 5 0 1 1 0 10 5 5 0 0 1 0-10Zm0 1.5a3.5 3.5 0 1 0 0 7 3.5 3.5 0 0 0 0-7Zm5.25-2.5a1 1 0 1 1 0 2 1 1 0 0 1 0-2Z"/></svg>
-            Instagram
-          </a>
-          <a href="https://www.linkedin.com/company/psinet-lab" target="_blank" rel="noopener">
-            <svg viewBox="0 0 24 24"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.32 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.79M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77Z"/></svg>
-            LinkedIn
-          </a>
-          <a href="https://www.youtube.com/@PsiNetLAB" target="_blank" rel="noopener">
-            <svg viewBox="0 0 24 24"><path d="M10 15l5.19-3L10 9v6m11.56-7.83c.13.47.22 1.1.28 1.9.07.8.1 1.49.1 2.09L22 12c0 2.19-.16 3.8-.44 4.83-.25.9-.83 1.48-1.73 1.73-.47.13-1.33.22-2.65.28-1.3.07-2.49.1-3.59.1L12 19c-4.19 0-6.8-.16-7.83-.44-.9-.25-1.48-.83-1.73-1.73-.13-.47-.22-1.1-.28-1.9-.07-.8-.1-1.49-.1-2.09L2 12c0-2.19.16-3.8.44-4.83.25-.9.83-1.48 1.73-1.73.47-.13 1.33-.22 2.65-.28 1.3-.07 2.49-.1 3.59-.1L12 5c4.19 0 6.8.16 7.83.44.9.25 1.48.83 1.73 1.73Z"/></svg>
-            YouTube
-          </a>
+        <!-- Transparency note -->
+        <div class="invite-card" style="margin-bottom:0">
+          <span class="card-emoji">🔍</span>
+          <h3>Transparencia total</h3>
+          <p>Cada donación se destina directamente a nuestros proyectos de investigación, eventos educativos y programas sociales. Publicamos reportes periódicos sobre cómo utilizamos los fondos.</p>
         </div>
       </div>
 
-      <!-- RIGHT: Form panel -->
-      <div class="form-panel reveal" style="transition-delay:.15s">
-        <div class="form-header">
-          <h2>Envíanos un mensaje ✉️</h2>
-          <p>Completa el formulario y te responderemos lo antes posible.</p>
+      <!-- RIGHT: Ko-fi panel -->
+      <div class="kofi-panel reveal" style="transition-delay:.15s">
+        <div class="kofi-header">
+          <h2>Haz tu aporte ☕</h2>
+          <p>Apóyanos a través de Ko-fi con una donación única o recurrente.</p>
         </div>
 
-        <form id="contact-form" action="https://formspree.io/f/xojpvkbq" method="POST">
-          <div class="form-row">
-            <div class="form-group">
-              <label for="name">Nombre</label>
-              <input type="text" id="name" name="name" placeholder="Tu nombre completo" required />
-            </div>
-            <div class="form-group">
-              <label for="email">Correo electrónico</label>
-              <input type="email" id="email" name="email" placeholder="correo@ejemplo.com" required />
-            </div>
-          </div>
-
-          <div class="form-group">
-            <label for="subject">Asunto</label>
-            <select id="subject" name="subject" required>
-              <option value="" disabled selected>Selecciona un tema</option>
-              <option value="Colaboración en investigación">🔬 Colaboración en investigación</option>
-              <option value="Membresía">🎓 Quiero ser miembro</option>
-              <option value="Alianza institucional">🤝 Alianza institucional</option>
-              <option value="Eventos">📅 Información sobre eventos</option>
-              <option value="Sugerencia">💡 Sugerencia o idea</option>
-              <option value="Otro">📝 Otro tema</option>
-            </select>
-          </div>
-
-          <div class="form-group">
-            <label for="message">Mensaje</label>
-            <textarea id="message" name="message" placeholder="Cuéntanos... ¿qué tienes en mente? Nos encantaría saberlo." required></textarea>
-          </div>
-
-          <button type="submit" class="btn-send">
-            Enviar mensaje
-            <svg viewBox="0 0 24 24"><path d="M22 2L11 13"/><path d="M22 2l-7 20-4-9-9-4 20-7z"/></svg>
-          </button>
-          <p class="form-note">🔒 Tu información está segura. No compartimos tus datos con terceros.</p>
-        </form>
-
-        <div class="form-success" id="form-success">
-          <span class="success-icon">🎉</span>
-          <h3>¡Mensaje enviado!</h3>
-          <p>Gracias por escribirnos. Nuestro equipo revisará tu mensaje y te responderá pronto. Mientras tanto, síguenos en redes sociales para estar al día.</p>
+        <div class="kofi-widget-wrap">
+          <iframe id="kofiframe"
+                  src="https://ko-fi.com/psinetlab/?hidefeed=true&widget=true&embed=true&preview=true"
+                  style="border:none;width:100%;padding:4px;background:var(--card-bg);"
+                  height="712"
+                  title="psinetlab"></iframe>
         </div>
+
+        <a href="https://ko-fi.com/psinetlab" target="_blank" rel="noopener" class="btn-kofi">
+          <svg viewBox="0 0 24 24"><path d="M23.881 8.948c-.773-4.085-4.859-4.593-4.859-4.593H.723c-.604 0-.679.798-.679.798s-.082 7.324-.022 11.822c.164 2.424 2.586 2.672 2.586 2.672s8.267-.023 11.966-.049c2.438-.426 2.683-2.566 2.658-3.734 4.352.24 7.422-2.831 6.649-6.916zm-11.062 3.511c-1.246 1.453-4.011 3.976-4.011 3.976s-.121.119-.31.023c-.076-.057-.108-.09-.108-.09-.443-.441-3.368-3.049-4.034-3.954-.709-.965-1.041-2.7-.091-3.71.951-1.01 3.005-1.086 4.363.407 0 0 1.565-1.782 3.468-.963 1.904.82 1.832 3.011.723 4.311zm6.173.478c-.928.116-1.682.028-1.682.028V7.284h1.77s1.971.551 1.971 2.638c0 1.913-.985 2.667-2.059 3.015z"/></svg>
+          Visítanos en Ko-fi
+        </a>
+        <p class="kofi-note">☕ Con un café nos ayudas a seguir investigando. ¡Cada aporte cuenta!</p>
       </div>
 
+    </div>
+  </div>
+</section>
+
+<!-- ═══════ IMPACT SECTION ═══════ -->
+<section class="impact-section">
+  <div class="container">
+    <div class="reveal" style="text-align:center">
+      <p class="section-tag">Impacto</p>
+      <h2 class="section-title">¿A dónde va tu apoyo?</h2>
+      <p style="color:var(--muted);max-width:600px;margin:0 auto;font-size:.95rem;line-height:1.7;">
+        Cada contribución se traduce en acciones concretas que transforman vidas
+        a través de la ciencia psicológica.
+      </p>
+    </div>
+
+    <div class="impact-grid">
+      <div class="impact-card reveal">
+        <span class="impact-icon">📚</span>
+        <h3>Publicaciones científicas</h3>
+        <p>Financiamos investigaciones que se publican en revistas académicas, generando conocimiento accesible para la comunidad científica global.</p>
+      </div>
+      <div class="impact-card reveal" style="transition-delay:.1s">
+        <span class="impact-icon">🎤</span>
+        <h3>Eventos y talleres</h3>
+        <p>Organizamos conferencias, seminarios y talleres gratuitos que acercan la ciencia psicológica a estudiantes y profesionales.</p>
+      </div>
+      <div class="impact-card reveal" style="transition-delay:.2s">
+        <span class="impact-icon">🌱</span>
+        <h3>Programas comunitarios</h3>
+        <p>Desarrollamos proyectos sociales como BienEstar, Espacio Mental, PsiPaz y PsiNet EsCool que benefician directamente a las comunidades.</p>
+      </div>
     </div>
   </div>
 </section>
@@ -908,9 +828,9 @@
 <!-- ═══════ BOTTOM QUOTE ═══════ -->
 <section class="cta-bottom reveal">
   <p class="cta-quote">
-    "La ciencia más útil es aquella cuyo fruto es la más <span class="highlight">comunicable</span>."
+    "La <span class="highlight">generosidad</span> consiste en dar antes de que se nos pida."
   </p>
-  <p class="cta-author">— Leonardo da Vinci</p>
+  <p class="cta-author">— Proverbio árabe</p>
 </section>
 
 <!-- ═══════ FOOTER ═══════ -->
@@ -974,35 +894,6 @@
 
   document.querySelectorAll('.reveal').forEach(function(el) {
     revealObserver.observe(el);
-  });
-
-  // ── Form submission with Formspree ──
-  var form = document.getElementById('contact-form');
-  var successMsg = document.getElementById('form-success');
-
-  form.addEventListener('submit', function(e) {
-    e.preventDefault();
-
-    var formData = new FormData(form);
-
-    fetch(form.action, {
-      method: 'POST',
-      body: formData,
-      headers: { 'Accept': 'application/json' }
-    })
-    .then(function(response) {
-      if (response.ok) {
-        form.style.display = 'none';
-        document.querySelector('.form-header').style.display = 'none';
-        successMsg.classList.add('show');
-        form.reset();
-      } else {
-        alert('Hubo un error al enviar el mensaje. Por favor, inténtalo de nuevo.');
-      }
-    })
-    .catch(function() {
-      alert('Error de conexión. Verifica tu conexión a internet e inténtalo de nuevo.');
-    });
   });
 </script>
 
