@@ -56,14 +56,15 @@
       left: 0;
       width: 100%;
       z-index: 1000;
-      background: rgba(11,22,41,.55);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      border-bottom: 1px solid var(--border);
-      transition: background .3s, box-shadow .3s;
+      background: transparent;
+      border-bottom: 1px solid transparent;
+      transition: background .3s, box-shadow .3s, border-bottom .3s, backdrop-filter .3s, -webkit-backdrop-filter .3s;
     }
     header.scrolled {
       background: rgba(11,22,41,.7);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
       box-shadow: 0 4px 30px rgba(0,0,0,.3);
     }
 
@@ -297,9 +298,11 @@
     }
 
     .hero-emoji {
-      font-size: 5rem;
       display: block;
-      margin-bottom: 1.5rem;
+      width: 5rem;
+      height: 5rem;
+      margin: 0 auto 1.5rem;
+      object-fit: contain;
       animation: emojiFloat 4s ease-in-out infinite;
       filter: drop-shadow(0 0 30px rgba(108,180,238,.4)) drop-shadow(0 0 60px rgba(94,234,212,.2));
     }
@@ -587,7 +590,7 @@
       .nav-left, .nav-right { flex-wrap: wrap; justify-content: center; gap: .2rem; }
       .nav-center { order: -1; }
       .hero { padding: 7rem 1.2rem 3rem; min-height: auto; }
-      .hero-emoji { font-size: 3.5rem; }
+      .hero-emoji { width: 3.5rem; height: 3.5rem; }
       .hero-title { font-size: 2.2rem; }
       .desc-card { padding: 1.8rem 1.5rem; margin: 0 1rem 2rem; }
       .values-section { padding: 3rem 1.2rem; }
@@ -711,7 +714,7 @@
 
   <div class="hero-content reveal">
     <div class="hero-badge"><span class="badge-dot"></span> Proyecto Social</div>
-    <span class="hero-emoji" aria-hidden="true">🕊️</span>
+    <img class="hero-emoji" src="../../assets/images/logos/psipaz.png" alt="" aria-hidden="true">
     <h1 class="hero-title">PsiPaz</h1>
     <p class="hero-subtitle">Construyendo paz desde la psicología</p>
   </div>
@@ -804,10 +807,17 @@
 </footer>
 
 <script>
-  // Header scroll effect
-  window.addEventListener('scroll', () => {
-    document.querySelector('header').classList.toggle('scrolled', window.scrollY > 30);
-  });
+  // Header scroll effect — mica activates when values-section is reached
+  (function() {
+    const hdr = document.querySelector('header');
+    const valuesSection = document.querySelector('.values-section');
+    if (valuesSection) {
+      window.addEventListener('scroll', () => {
+        const trigger = valuesSection.offsetTop - hdr.offsetHeight;
+        hdr.classList.toggle('scrolled', window.scrollY >= trigger);
+      });
+    }
+  })();
 
   // IntersectionObserver reveal
   const obs = new IntersectionObserver((entries) => {
