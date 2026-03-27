@@ -974,6 +974,7 @@
 
     <div class="nav-right">
       <a href="blog/">Blog</a>
+      <a href="podcast/">Podcast</a>
       <a href="contacto/">Contacto</a>
       <a href="apoyanos/">Apóyanos</a>
       <a href="colaboraciones/">Colaboraciones</a>
@@ -1220,6 +1221,7 @@
           <li><a href="contacto/">Contacto</a></li>
           <li><a href="apoyanos/">Apóyanos</a></li>
           <li><a href="blog/">Blog</a></li>
+          <li><a href="podcast/">Podcast</a></li>
         </ul>
       </div>
     </div>
@@ -1235,6 +1237,36 @@
   </div>
 </footer>
 
+<!-- ═══════ FLOATING PODCAST BUTTON ═══════ -->
+<a href="podcast/" class="podcast-fab" aria-label="La Ciencia de la Mente – Podcast">
+  <svg viewBox="0 0 24 24" width="26" height="26" fill="currentColor"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3zm-1 14.93A5.002 5.002 0 0 1 7 11h-1a6.002 6.002 0 0 0 5 5.917V20H9v2h6v-2h-2v-3.083A6.002 6.002 0 0 0 18 11h-1a5.002 5.002 0 0 1-4 4.93V15.93z"/></svg>
+  <span class="fab-label">Podcast</span>
+</a>
+<style>
+  .podcast-fab {
+    position:fixed; bottom:2rem; right:2rem; z-index:999;
+    display:flex; align-items:center; gap:.5rem;
+    background:linear-gradient(135deg,#1DB954,#1ed760); color:#000;
+    font-family:'DM Sans',sans-serif; font-weight:700; font-size:.85rem;
+    padding:.8rem 1.4rem; border-radius:50px;
+    box-shadow:0 6px 24px rgba(29,185,84,.35);
+    text-decoration:none; transition:transform .3s, box-shadow .3s;
+    animation:fab-pulse 3s ease-in-out infinite;
+  }
+  .podcast-fab:hover {
+    transform:translateY(-3px) scale(1.05);
+    box-shadow:0 10px 30px rgba(29,185,84,.45);
+    color:#000;
+  }
+  .fab-label { letter-spacing:.03em; }
+  @keyframes fab-pulse {
+    0%, 100% { box-shadow:0 6px 24px rgba(29,185,84,.35); }
+    50% { box-shadow:0 6px 30px rgba(29,185,84,.55); }
+  }
+  @media (max-width:600px) {
+    .podcast-fab { bottom:1.2rem; right:1.2rem; padding:.7rem 1.1rem; font-size:.8rem; }
+  }
+</style>
 
 <script src="assets/js/blog-data.js"></script>
 <script>
