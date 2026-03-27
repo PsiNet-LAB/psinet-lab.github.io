@@ -53,13 +53,15 @@
     header {
       position: fixed; top: 0; left: 0; right: 0;
       z-index: 1000;
-      background: rgba(11,22,41,.55);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
+      background: transparent;
+      backdrop-filter: none;
+      -webkit-backdrop-filter: none;
       transition: background .3s ease, backdrop-filter .3s ease;
     }
     header.scrolled {
       background: rgba(11,22,41,.7);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
     }
 
     #particles-js {
@@ -1306,10 +1308,15 @@
 
   document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
 
-  // Header background on scroll
+  // Header mica effect on scroll (activates at the mission section)
   const header = document.querySelector('header');
+  const bienvenidaSection = document.getElementById('bienvenida');
+  let micaThreshold = bienvenidaSection ? bienvenidaSection.offsetTop - header.offsetHeight : 50;
+  window.addEventListener('resize', () => {
+    micaThreshold = bienvenidaSection ? bienvenidaSection.offsetTop - header.offsetHeight : 50;
+  });
   window.addEventListener('scroll', () => {
-    header.classList.toggle('scrolled', window.scrollY > 50);
+    header.classList.toggle('scrolled', window.scrollY > micaThreshold);
   });
 
   // ─ Canvas honeycomb breathing grid on logo card ─
