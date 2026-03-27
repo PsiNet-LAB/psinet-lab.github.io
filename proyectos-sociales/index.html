@@ -54,7 +54,11 @@
     header {
       position: fixed; top: 0; left: 0; right: 0;
       z-index: 1000;
-      background: rgba(11,22,41,.55);
+      background: transparent;
+      transition: background .4s, backdrop-filter .4s, -webkit-backdrop-filter .4s;
+    }
+    header.scrolled {
+      background: rgba(11,22,41,.7);
       backdrop-filter: blur(20px);
       -webkit-backdrop-filter: blur(20px);
     }
@@ -1080,6 +1084,17 @@
 
   document.querySelectorAll('.reveal').forEach(function(el) {
     revealObserver.observe(el);
+  });
+
+  // Header mica effect on scroll (activates at the projects section)
+  var header = document.querySelector('header');
+  var proyectosSection = document.getElementById('proyectos');
+  var micaThreshold = proyectosSection ? proyectosSection.offsetTop - header.offsetHeight : 50;
+  window.addEventListener('resize', function() {
+    micaThreshold = proyectosSection ? proyectosSection.offsetTop - header.offsetHeight : 50;
+  });
+  window.addEventListener('scroll', function() {
+    header.classList.toggle('scrolled', window.scrollY > micaThreshold);
   });
 </script>
 
