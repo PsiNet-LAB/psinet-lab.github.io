@@ -331,125 +331,70 @@
       padding: .4rem 1rem; border-radius: 50px;
     }
 
-    /* ── Event Card (blog-style with left accent) ── */
+    /* ── Compact Event Cards ── */
     .event-list {
-      display: flex; flex-direction: column;
-      gap: 2.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
     }
 
     .event-card {
       position: relative;
+      display: grid;
+      grid-template-columns: 220px 1fr;
       background: var(--card-bg);
       border: 1px solid var(--border);
       border-radius: 16px;
-      padding: 2.5rem 2.5rem 2.5rem 3rem;
-      border-left: 5px solid var(--teal);
       overflow: hidden;
-      transition:
-        transform .4s cubic-bezier(.25,.8,.25,1),
-        box-shadow .4s ease,
-        border-color .4s ease;
+      border-left: 5px solid var(--teal);
+      transition: transform .4s cubic-bezier(.25,.8,.25,1), box-shadow .4s ease, border-color .4s ease;
+      text-decoration: none;
+      color: inherit;
     }
     .event-card:hover {
-      transform: translateY(-6px) scale(1.008);
-      box-shadow:
-        0 16px 50px rgba(0,0,0,.3),
-        0 0 30px rgba(94,234,212,.06);
+      transform: translateY(-4px);
+      box-shadow: 0 12px 40px rgba(0,0,0,.3), 0 0 25px rgba(94,234,212,.06);
+    }
+    .event-card::after { display: none; }
+
+    .event-thumb {
+      width: 100%;
+      height: 100%;
+      min-height: 200px;
+      object-fit: cover;
     }
 
-    /* Inner glow on hover */
-    .event-card::before {
-      content: ''; position: absolute; inset: 0;
-      border-radius: 16px; z-index: 0;
-      opacity: 0; transition: opacity .5s ease;
-      pointer-events: none;
-    }
-    .event-card:hover::before { opacity: 1; }
-
-    .event-card > * { position: relative; z-index: 1; }
-
-    /* Card accent sparkle particles */
-    .event-card .card-sparkles {
-      position: absolute; inset: 0; z-index: 0;
-      pointer-events: none; overflow: hidden;
-    }
-    .event-card .card-sparkles span {
-      position: absolute; width: 3px; height: 3px;
-      border-radius: 50%; opacity: 0;
-      animation: cardSparkleFloat 5s ease-in-out infinite;
-      filter: blur(1px);
-    }
-    @keyframes cardSparkleFloat {
-      0%, 100% { opacity: 0; transform: translateY(0) scale(.5); }
-      50%      { opacity: .45; transform: translateY(-18px) scale(1); }
+    .event-body {
+      padding: 1.5rem 1.8rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: .5rem;
     }
 
-    /* ── Card color variants ── */
-
-    /* Event 1: Warm Orange */
-    .event-card.accent-orange {
-      border-left-color: var(--orange);
-    }
-    .event-card.accent-orange::before {
-      background:
-        radial-gradient(ellipse 50% 60% at 0% 50%, rgba(249,115,22,.1) 0%, transparent 70%);
-    }
-    .event-card.accent-orange:hover {
-      box-shadow:
-        0 16px 50px rgba(0,0,0,.3),
-        0 0 35px rgba(249,115,22,.08);
-      border-left-color: #fb923c;
-    }
-    .event-card.accent-orange .card-sparkles span { background: var(--orange); }
-    .event-card.accent-orange .event-collab-tag { border-color: rgba(249,115,22,.3); color: var(--orange); background: rgba(249,115,22,.08); }
-    .event-card.accent-orange .event-title { color: var(--orange); }
-
-    /* Event 2: Purple */
-    .event-card.accent-purple {
-      border-left-color: var(--purple);
-    }
-    .event-card.accent-purple::before {
-      background:
-        radial-gradient(ellipse 50% 60% at 0% 50%, rgba(168,85,247,.1) 0%, transparent 70%);
-    }
-    .event-card.accent-purple:hover {
-      box-shadow:
-        0 16px 50px rgba(0,0,0,.3),
-        0 0 35px rgba(168,85,247,.08);
-      border-left-color: #c084fc;
-    }
-    .event-card.accent-purple .card-sparkles span { background: var(--purple); }
-    .event-card.accent-purple .event-collab-tag { border-color: rgba(168,85,247,.3); color: var(--purple); background: rgba(168,85,247,.08); }
-    .event-card.accent-purple .event-title { color: var(--purple); }
-
-    /* Event 3: Teal */
-    .event-card.accent-teal {
-      border-left-color: var(--teal);
-    }
-    .event-card.accent-teal::before {
-      background:
-        radial-gradient(ellipse 50% 60% at 0% 50%, rgba(94,234,212,.1) 0%, transparent 70%);
-    }
-    .event-card.accent-teal:hover {
-      box-shadow:
-        0 16px 50px rgba(0,0,0,.3),
-        0 0 35px rgba(94,234,212,.08);
-      border-left-color: #6ee7b7;
-    }
-    .event-card.accent-teal .card-sparkles span { background: var(--teal); }
-    .event-card.accent-teal .event-collab-tag { border-color: rgba(94,234,212,.3); color: var(--teal); background: rgba(94,234,212,.08); }
+    /* accent variants */
+    .event-card.accent-teal { border-left-color: var(--teal); }
+    .event-card.accent-teal:hover { box-shadow: 0 12px 40px rgba(0,0,0,.3), 0 0 30px rgba(94,234,212,.08); border-left-color: #6ee7b7; }
     .event-card.accent-teal .event-title { color: var(--teal); }
+    .event-card.accent-teal .event-collab-tag { border-color: rgba(94,234,212,.3); color: var(--teal); background: rgba(94,234,212,.08); }
+    .event-card.accent-teal .event-cta { color: var(--teal); border-color: rgba(94,234,212,.25); }
+    .event-card.accent-teal .event-cta:hover { background: rgba(94,234,212,.12); }
+
+    .event-card.accent-purple { border-left-color: var(--purple); }
+    .event-card.accent-purple:hover { box-shadow: 0 12px 40px rgba(0,0,0,.3), 0 0 30px rgba(168,85,247,.08); border-left-color: #c084fc; }
+    .event-card.accent-purple .event-title { color: var(--purple); }
+    .event-card.accent-purple .event-collab-tag { border-color: rgba(168,85,247,.3); color: var(--purple); background: rgba(168,85,247,.08); }
+    .event-card.accent-purple .event-cta { color: var(--purple); border-color: rgba(168,85,247,.25); }
+    .event-card.accent-purple .event-cta:hover { background: rgba(168,85,247,.12); }
+
+    .event-card.accent-orange { border-left-color: var(--orange); }
+    .event-card.accent-orange:hover { box-shadow: 0 12px 40px rgba(0,0,0,.3), 0 0 30px rgba(249,115,22,.08); border-left-color: #fb923c; }
+    .event-card.accent-orange .event-title { color: var(--orange); }
+    .event-card.accent-orange .event-collab-tag { border-color: rgba(249,115,22,.3); color: var(--orange); background: rgba(249,115,22,.08); }
+    .event-card.accent-orange .event-cta { color: var(--orange); border-color: rgba(249,115,22,.25); }
+    .event-card.accent-orange .event-cta:hover { background: rgba(249,115,22,.12); }
 
     /* ── Card inner elements ── */
-    .event-header {
-      display: flex; align-items: center; gap: 1rem;
-      flex-wrap: wrap; margin-bottom: .6rem;
-    }
-    .event-title {
-      font-family: 'Syne', sans-serif;
-      font-weight: 700; font-size: .85rem;
-      letter-spacing: .06em; text-transform: uppercase;
-    }
     .event-collab-tag {
       display: inline-flex; align-items: center; gap: .35rem;
       font-family: 'DM Sans', sans-serif;
@@ -458,6 +403,7 @@
       padding: .3rem .8rem; border-radius: 50px;
       border: 1px solid var(--border);
       white-space: nowrap;
+      width: fit-content;
     }
     .event-collab-tag .tag-dot {
       width: 6px; height: 6px; border-radius: 50%;
@@ -469,75 +415,53 @@
       50%      { opacity: 1; transform: scale(1.3); }
     }
 
+    .event-title {
+      font-family: 'Syne', sans-serif;
+      font-weight: 700; font-size: .75rem;
+      letter-spacing: .06em; text-transform: uppercase;
+    }
+
     .event-name {
       font-family: 'Syne', sans-serif;
-      font-weight: 800; font-size: 1.4rem;
+      font-weight: 800; font-size: 1.2rem;
       line-height: 1.3; color: var(--white);
-      margin-bottom: .8rem;
     }
     .event-desc {
       font-family: 'Lora', serif;
-      font-size: .95rem; color: var(--muted);
-      line-height: 1.8; max-width: 660px;
+      font-style: italic;
+      font-size: .9rem; color: var(--muted);
+      line-height: 1.7;
+      display: -webkit-box; -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical; overflow: hidden;
+    }
+
+    .event-footer {
+      display: flex; justify-content: space-between;
+      align-items: center; margin-top: auto;
+      gap: 1rem;
     }
     .event-meta {
-      display: flex; align-items: center; gap: 1.2rem;
-      margin-top: 1.2rem; flex-wrap: wrap;
+      display: flex; align-items: center; gap: 1rem;
+      flex-wrap: wrap;
     }
     .event-meta-item {
-      display: inline-flex; align-items: center; gap: .4rem;
-      font-size: .78rem; color: var(--muted);
+      display: inline-flex; align-items: center; gap: .35rem;
+      font-size: .75rem; color: var(--muted);
       font-weight: 400;
     }
     .event-meta-item svg {
       width: 14px; height: 14px; stroke: currentColor;
       fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round;
     }
-
-    /* ── Event social links ── */
-    .event-links {
-      margin-top: 1.4rem;
-      display: flex; flex-direction: column;
-      gap: .7rem;
-    }
-    .event-links-group {
-      display: flex; align-items: center;
-      gap: .5rem; flex-wrap: wrap;
-    }
-    .event-links-label {
+    .event-cta {
       font-family: 'DM Sans', sans-serif;
-      font-size: .72rem; font-weight: 500;
-      color: var(--muted);
-      text-transform: uppercase; letter-spacing: .06em;
+      font-size: .78rem; font-weight: 500;
+      padding: .35rem .9rem; border-radius: 50px;
+      border: 1px solid var(--border);
+      transition: background .2s, color .2s;
       white-space: nowrap;
     }
-    .event-link {
-      display: inline-flex; align-items: center; gap: .35rem;
-      font-family: 'DM Sans', sans-serif;
-      font-size: .74rem; font-weight: 500;
-      color: var(--teal);
-      background: rgba(94,234,212,.06);
-      border: 1px solid rgba(94,234,212,.15);
-      padding: .3rem .85rem; border-radius: 50px;
-      transition: background .2s, color .2s, border-color .2s;
-      white-space: nowrap;
-    }
-    .event-link:hover {
-      background: rgba(94,234,212,.14);
-      border-color: rgba(94,234,212,.35);
-      color: #fff;
-    }
-    .event-link::after { display: none; }
-    .event-link svg {
-      width: 14px; height: 14px; fill: currentColor;
-    }
-
-    /* ── Decorative divider between cards ── */
-    .event-divider {
-      width: 60px; height: 2px; margin: 0 auto;
-      background: linear-gradient(90deg, transparent, var(--border), transparent);
-      border-radius: 1px;
-    }
+    .event-cta::after { display: none; }
 
     /* ── Reveal animation ── */
     .reveal {
@@ -596,6 +520,7 @@
     /* ── Responsive ── */
     @media (max-width: 860px) {
       .footer-grid { grid-template-columns: 1fr 1fr; }
+      .event-card { grid-template-columns: 180px 1fr; }
     }
     @media (max-width: 640px) {
       nav.main-nav { flex-wrap: wrap; justify-content: center; gap: 1rem; padding: 1rem; }
@@ -603,8 +528,11 @@
       .nav-center { position: static; transform: none; order: -1; width: 100%; justify-content: center; }
       .hero { min-height: 60vh; padding: 7rem 1.5rem 3rem; }
       .events-section { padding: 2rem 1.2rem 4rem; }
-      .event-card { padding: 2rem 1.5rem 2rem 1.8rem; }
-      .event-name { font-size: 1.15rem; }
+      .event-card { grid-template-columns: 1fr; }
+      .event-thumb { min-height: 180px; max-height: 220px; }
+      .event-body { padding: 1.2rem 1.4rem; }
+      .event-name { font-size: 1.05rem; }
+      .event-footer { flex-direction: column; align-items: flex-start; gap: .6rem; }
       .footer-grid { grid-template-columns: 1fr; gap: 2rem; }
     }
   </style>
@@ -701,158 +629,86 @@
 
   <div class="event-list">
 
-    <!-- ══════════════════════════════════════════════
-         EVENT 1: PsiNet × Hazla por tu playa (más reciente)
-         Publicaciones pendientes — agregar event-links aquí
-         cuando los materiales estén disponibles.
-         ══════════════════════════════════════════════ -->
-    <article class="event-card accent-teal reveal reveal-delay-1">
-      <div class="card-sparkles">
-        <span style="top:10%;left:70%;animation-delay:0s"></span>
-        <span style="top:50%;left:20%;animation-delay:1s"></span>
-        <span style="top:30%;left:45%;animation-delay:2s"></span>
-        <span style="top:70%;left:75%;animation-delay:3s"></span>
-      </div>
-      <div class="event-header">
+    <!-- Event 1: Limpieza de Playa (más reciente) -->
+    <a class="event-card accent-teal reveal reveal-delay-1" href="limpieza-playa-chorrillos/" style="text-decoration:none;color:inherit">
+      <img class="event-thumb" src="../../../assets/images/eventos/hazla/03-2026/1.jpeg" alt="Limpieza de playa de Chorrillos" loading="lazy" />
+      <div class="event-body">
         <span class="event-title">PsiNet × Hazla por tu playa</span>
         <span class="event-collab-tag">
           <span class="tag-dot"></span>
           Colaboración con Hazla por tu playa
         </span>
+        <h3 class="event-name">Limpieza de playa de Chorrillos</h3>
+        <p class="event-desc">Jornada de voluntariado ambiental en las playas de Chorrillos, integrando bienestar comunitario con acción ecológica directa.</p>
+        <div class="event-footer">
+          <div class="event-meta">
+            <span class="event-meta-item">
+              <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+              Voluntariado ambiental
+            </span>
+            <span class="event-meta-item">
+              <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              Chorrillos, Lima
+            </span>
+          </div>
+          <span class="event-cta">Ver más →</span>
+        </div>
       </div>
-      <h3 class="event-name">Limpieza de playa de Chorrillos</h3>
-      <p class="event-desc">
-        Jornada de limpieza costera en las playas de Chorrillos, organizada junto a la iniciativa Hazla por tu playa. Esta actividad de voluntariado ambiental integró la perspectiva psicológica del bienestar comunitario con la acción ecológica directa, promoviendo la conexión entre salud mental y cuidado del medio ambiente mientras se fortalecieron los lazos comunitarios entre los participantes.
-      </p>
-      <div class="event-meta">
-        <span class="event-meta-item">
-          <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-          Voluntariado ambiental
-        </span>
-        <span class="event-meta-item">
-          <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-          Chorrillos, Lima
-        </span>
-      </div>
-    </article>
+    </a>
 
-    <div class="event-divider reveal"></div>
-
-    <!-- ══════════════════════════════════════════════
-         EVENT 2: PsiNet × SENAJU × ADRA × Espiral de los Cuerpos Libres
-         ══════════════════════════════════════════════ -->
-    <article class="event-card accent-purple reveal reveal-delay-2">
-      <div class="card-sparkles">
-        <span style="top:20%;left:85%;animation-delay:0s"></span>
-        <span style="top:55%;left:15%;animation-delay:1.2s"></span>
-        <span style="top:40%;left:60%;animation-delay:2.4s"></span>
-        <span style="top:75%;left:40%;animation-delay:3.2s"></span>
-      </div>
-      <div class="event-header">
+    <!-- Event 2: Primeros Auxilios Pamplona -->
+    <a class="event-card accent-purple reveal reveal-delay-2" href="primeros-auxilios-pamplona/" style="text-decoration:none;color:inherit">
+      <img class="event-thumb" src="../../../assets/images/eventos/otros/pamplona-2025/1.webp" alt="Apoyo de primeros auxilios psicológicos para los niños tras el incendio en Pamplona" loading="lazy" />
+      <div class="event-body">
         <span class="event-title">PsiNet × SENAJU × ADRA × Espiral de los Cuerpos Libres</span>
         <span class="event-collab-tag">
           <span class="tag-dot"></span>
-          Colaboración con SENAJU, ADRA y Espiral de los Cuerpos Libres
+          Colaboración con SENAJU, ADRA, Espiral de los Cuerpos Libres
         </span>
-      </div>
-      <h3 class="event-name">Apoyo de primeros auxilios psicológicos para los niños tras el incendio en Pamplona (San Juan de Miraflores)</h3>
-      <p class="event-desc">
-        Intervención de primeros auxilios psicológicos dirigida a niños y niñas afectados por el incendio ocurrido en Pamplona, San Juan de Miraflores. En alianza con la Secretaría Nacional de la Juventud (SENAJU), la Agencia Adventista de Desarrollo y Recursos Asistenciales (ADRA) y Espiral de los Cuerpos Libres, se brindó acompañamiento emocional inmediato, actividades lúdicas terapéuticas y espacios seguros de expresión para los menores impactados por la emergencia.
-      </p>
-      <div class="event-meta">
-        <span class="event-meta-item">
-          <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
-          Primeros auxilios psicológicos
-        </span>
-        <span class="event-meta-item">
-          <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-          San Juan de Miraflores, Lima
-        </span>
-      </div>
-      <div class="event-links">
-        <div class="event-links-group">
-          <span class="event-links-label">Espiral de los Cuerpos Libres:</span>
-          <a class="event-link" href="https://www.instagram.com/p/DUYK2vjjrpY/?img_index=1" target="_blank" rel="noopener">
-            <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 1.17.054 1.97.24 2.43.403a4.08 4.08 0 0 1 1.47.957c.453.454.78.898.957 1.47.163.46.35 1.26.403 2.43.058 1.266.07 1.646.07 4.85s-.012 3.584-.07 4.85c-.054 1.17-.24 1.97-.403 2.43a4.08 4.08 0 0 1-.957 1.47 4.08 4.08 0 0 1-1.47.957c-.46.163-1.26.35-2.43.403-1.266.058-1.646.07-4.85.07s-3.584-.012-4.85-.07c-1.17-.054-1.97-.24-2.43-.403a4.08 4.08 0 0 1-1.47-.957 4.08 4.08 0 0 1-.957-1.47c-.163-.46-.35-1.26-.403-2.43C2.175 15.584 2.163 15.204 2.163 12s.012-3.584.07-4.85c.054-1.17.24-1.97.403-2.43a4.08 4.08 0 0 1 .957-1.47A4.08 4.08 0 0 1 5.063 2.293c.46-.163 1.26-.35 2.43-.403C8.759 1.832 9.139 1.82 12 1.82zM12 0C8.741 0 8.333.014 7.053.072 5.775.131 4.902.333 4.14.63a6.21 6.21 0 0 0-2.246 1.463A6.21 6.21 0 0 0 .43 4.34C.133 5.102-.07 5.975-.012 7.253-.014 8.533 0 8.941 0 12s.014 3.467.072 4.747c.058 1.278.26 2.15.558 2.913a6.21 6.21 0 0 0 1.463 2.246 6.21 6.21 0 0 0 2.246 1.463c.762.297 1.636.5 2.913.558C8.533 23.986 8.941 24 12 24s3.467-.014 4.747-.072c1.278-.058 2.15-.26 2.913-.558a6.21 6.21 0 0 0 2.246-1.463 6.21 6.21 0 0 0 1.463-2.246c.297-.762.5-1.636.558-2.913.058-1.28.072-1.688.072-4.947s-.014-3.667-.072-4.947c-.058-1.278-.26-2.15-.558-2.913a6.21 6.21 0 0 0-1.463-2.246A6.21 6.21 0 0 0 19.66.63C18.898.333 18.025.131 16.747.072 15.467.014 15.059 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.88 1.44 1.44 0 0 0 0-2.88z"/></svg>
-            Publicación
-          </a>
-          <a class="event-link" href="https://www.instagram.com/espiraldeloscuerposlibres/" target="_blank" rel="noopener">
-            <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 1.17.054 1.97.24 2.43.403a4.08 4.08 0 0 1 1.47.957c.453.454.78.898.957 1.47.163.46.35 1.26.403 2.43.058 1.266.07 1.646.07 4.85s-.012 3.584-.07 4.85c-.054 1.17-.24 1.97-.403 2.43a4.08 4.08 0 0 1-.957 1.47 4.08 4.08 0 0 1-1.47.957c-.46.163-1.26.35-2.43.403-1.266.058-1.646.07-4.85.07s-3.584-.012-4.85-.07c-1.17-.054-1.97-.24-2.43-.403a4.08 4.08 0 0 1-1.47-.957 4.08 4.08 0 0 1-.957-1.47c-.163-.46-.35-1.26-.403-2.43C2.175 15.584 2.163 15.204 2.163 12s.012-3.584.07-4.85c.054-1.17.24-1.97.403-2.43a4.08 4.08 0 0 1 .957-1.47A4.08 4.08 0 0 1 5.063 2.293c.46-.163 1.26-.35 2.43-.403C8.759 1.832 9.139 1.82 12 1.82zM12 0C8.741 0 8.333.014 7.053.072 5.775.131 4.902.333 4.14.63a6.21 6.21 0 0 0-2.246 1.463A6.21 6.21 0 0 0 .43 4.34C.133 5.102-.07 5.975-.012 7.253-.014 8.533 0 8.941 0 12s.014 3.467.072 4.747c.058 1.278.26 2.15.558 2.913a6.21 6.21 0 0 0 1.463 2.246 6.21 6.21 0 0 0 2.246 1.463c.762.297 1.636.5 2.913.558C8.533 23.986 8.941 24 12 24s3.467-.014 4.747-.072c1.278-.058 2.15-.26 2.913-.558a6.21 6.21 0 0 0 2.246-1.463 6.21 6.21 0 0 0 1.463-2.246c.297-.762.5-1.636.558-2.913.058-1.28.072-1.688.072-4.947s-.014-3.667-.072-4.947c-.058-1.278-.26-2.15-.558-2.913a6.21 6.21 0 0 0-1.463-2.246A6.21 6.21 0 0 0 19.66.63C18.898.333 18.025.131 16.747.072 15.467.014 15.059 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.88 1.44 1.44 0 0 0 0-2.88z"/></svg>
-            @espiraldeloscuerposlibres
-          </a>
-        </div>
-        <div class="event-links-group">
-          <span class="event-links-label">PsiNet LAB:</span>
-          <a class="event-link" href="https://www.instagram.com/p/DUYK2vjjrpY/?img_index=1" target="_blank" rel="noopener">
-            <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 1.17.054 1.97.24 2.43.403a4.08 4.08 0 0 1 1.47.957c.453.454.78.898.957 1.47.163.46.35 1.26.403 2.43.058 1.266.07 1.646.07 4.85s-.012 3.584-.07 4.85c-.054 1.17-.24 1.97-.403 2.43a4.08 4.08 0 0 1-.957 1.47 4.08 4.08 0 0 1-1.47.957c-.46.163-1.26.35-2.43.403-1.266.058-1.646.07-4.85.07s-3.584-.012-4.85-.07c-1.17-.054-1.97-.24-2.43-.403a4.08 4.08 0 0 1-1.47-.957 4.08 4.08 0 0 1-.957-1.47c-.163-.46-.35-1.26-.403-2.43C2.175 15.584 2.163 15.204 2.163 12s.012-3.584.07-4.85c.054-1.17.24-1.97.403-2.43a4.08 4.08 0 0 1 .957-1.47A4.08 4.08 0 0 1 5.063 2.293c.46-.163 1.26-.35 2.43-.403C8.759 1.832 9.139 1.82 12 1.82zM12 0C8.741 0 8.333.014 7.053.072 5.775.131 4.902.333 4.14.63a6.21 6.21 0 0 0-2.246 1.463A6.21 6.21 0 0 0 .43 4.34C.133 5.102-.07 5.975-.012 7.253-.014 8.533 0 8.941 0 12s.014 3.467.072 4.747c.058 1.278.26 2.15.558 2.913a6.21 6.21 0 0 0 1.463 2.246 6.21 6.21 0 0 0 2.246 1.463c.762.297 1.636.5 2.913.558C8.533 23.986 8.941 24 12 24s3.467-.014 4.747-.072c1.278-.058 2.15-.26 2.913-.558a6.21 6.21 0 0 0 2.246-1.463 6.21 6.21 0 0 0 1.463-2.246c.297-.762.5-1.636.558-2.913.058-1.28.072-1.688.072-4.947s-.014-3.667-.072-4.947c-.058-1.278-.26-2.15-.558-2.913a6.21 6.21 0 0 0-1.463-2.246A6.21 6.21 0 0 0 19.66.63C18.898.333 18.025.131 16.747.072 15.467.014 15.059 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.88 1.44 1.44 0 0 0 0-2.88z"/></svg>
-            Publicación
-          </a>
-          <a class="event-link" href="https://www.instagram.com/psinetlab.pe/" target="_blank" rel="noopener">
-            <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 1.17.054 1.97.24 2.43.403a4.08 4.08 0 0 1 1.47.957c.453.454.78.898.957 1.47.163.46.35 1.26.403 2.43.058 1.266.07 1.646.07 4.85s-.012 3.584-.07 4.85c-.054 1.17-.24 1.97-.403 2.43a4.08 4.08 0 0 1-.957 1.47 4.08 4.08 0 0 1-1.47.957c-.46.163-1.26.35-2.43.403-1.266.058-1.646.07-4.85.07s-3.584-.012-4.85-.07c-1.17-.054-1.97-.24-2.43-.403a4.08 4.08 0 0 1-1.47-.957 4.08 4.08 0 0 1-.957-1.47c-.163-.46-.35-1.26-.403-2.43C2.175 15.584 2.163 15.204 2.163 12s.012-3.584.07-4.85c.054-1.17.24-1.97.403-2.43a4.08 4.08 0 0 1 .957-1.47A4.08 4.08 0 0 1 5.063 2.293c.46-.163 1.26-.35 2.43-.403C8.759 1.832 9.139 1.82 12 1.82zM12 0C8.741 0 8.333.014 7.053.072 5.775.131 4.902.333 4.14.63a6.21 6.21 0 0 0-2.246 1.463A6.21 6.21 0 0 0 .43 4.34C.133 5.102-.07 5.975-.012 7.253-.014 8.533 0 8.941 0 12s.014 3.467.072 4.747c.058 1.278.26 2.15.558 2.913a6.21 6.21 0 0 0 1.463 2.246 6.21 6.21 0 0 0 2.246 1.463c.762.297 1.636.5 2.913.558C8.533 23.986 8.941 24 12 24s3.467-.014 4.747-.072c1.278-.058 2.15-.26 2.913-.558a6.21 6.21 0 0 0 2.246-1.463 6.21 6.21 0 0 0 1.463-2.246c.297-.762.5-1.636.558-2.913.058-1.28.072-1.688.072-4.947s-.014-3.667-.072-4.947c-.058-1.278-.26-2.15-.558-2.913a6.21 6.21 0 0 0-1.463-2.246A6.21 6.21 0 0 0 19.66.63C18.898.333 18.025.131 16.747.072 15.467.014 15.059 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.88 1.44 1.44 0 0 0 0-2.88z"/></svg>
-            @psinetlab.pe
-          </a>
+        <h3 class="event-name">Apoyo de primeros auxilios psicológicos para los niños tras el incendio en Pamplona</h3>
+        <p class="event-desc">Intervención de primeros auxilios psicológicos para niños afectados por el incendio en Pamplona, San Juan de Miraflores.</p>
+        <div class="event-footer">
+          <div class="event-meta">
+            <span class="event-meta-item">
+              <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+              Primeros auxilios psicológicos
+            </span>
+            <span class="event-meta-item">
+              <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              San Juan de Miraflores, Lima
+            </span>
+          </div>
+          <span class="event-cta">Ver más →</span>
         </div>
       </div>
-    </article>
+    </a>
 
-    <div class="event-divider reveal"></div>
-
-    <!-- ══════════════════════════════════════════════
-         EVENT 3: PsiNet × DREA (más antiguo)
-         ══════════════════════════════════════════════ -->
-    <article class="event-card accent-orange reveal reveal-delay-3">
-      <div class="card-sparkles">
-        <span style="top:15%;left:10%;animation-delay:0s"></span>
-        <span style="top:65%;left:80%;animation-delay:1.4s"></span>
-        <span style="top:35%;left:50%;animation-delay:2.8s"></span>
-        <span style="top:80%;left:25%;animation-delay:3.8s"></span>
-      </div>
-      <div class="event-header">
+    <!-- Event 3: Taller Ayacucho (más antiguo) -->
+    <a class="event-card accent-orange reveal reveal-delay-3" href="taller-contencion-ayacucho/" style="text-decoration:none;color:inherit">
+      <img class="event-thumb" src="../../../assets/images/eventos/CSSE/1.jpg" alt="Taller de Contención Socioemocional ante Desastres Naturales" loading="lazy" />
+      <div class="event-body">
         <span class="event-title">PsiNet × DREA</span>
         <span class="event-collab-tag">
           <span class="tag-dot"></span>
           Colaboración con DREA
         </span>
-      </div>
-      <h3 class="event-name">Taller de Contención Socioemocional ante Desastres Naturales</h3>
-      <p class="event-desc">
-        Un taller diseñado para brindar herramientas de contención socioemocional frente a situaciones de desastres naturales. En colaboración con la Dirección Regional de Educación de Ayacucho (DREA), se abordaron estrategias prácticas para el acompañamiento psicológico en contextos de emergencia, fortaleciendo la capacidad de respuesta emocional de los participantes.
-      </p>
-      <div class="event-meta">
-        <span class="event-meta-item">
-          <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-          Taller comunitario
-        </span>
-        <span class="event-meta-item">
-          <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-          Ayacucho
-        </span>
-      </div>
-      <div class="event-links">
-        <div class="event-links-group">
-          <span class="event-links-label">PsiNet LAB:</span>
-          <a class="event-link" href="https://www.instagram.com/p/DPaBA-sjaey/?img_index=1" target="_blank" rel="noopener">
-            <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 1.17.054 1.97.24 2.43.403a4.08 4.08 0 0 1 1.47.957c.453.454.78.898.957 1.47.163.46.35 1.26.403 2.43.058 1.266.07 1.646.07 4.85s-.012 3.584-.07 4.85c-.054 1.17-.24 1.97-.403 2.43a4.08 4.08 0 0 1-.957 1.47 4.08 4.08 0 0 1-1.47.957c-.46.163-1.26.35-2.43.403-1.266.058-1.646.07-4.85.07s-3.584-.012-4.85-.07c-1.17-.054-1.97-.24-2.43-.403a4.08 4.08 0 0 1-1.47-.957 4.08 4.08 0 0 1-.957-1.47c-.163-.46-.35-1.26-.403-2.43C2.175 15.584 2.163 15.204 2.163 12s.012-3.584.07-4.85c.054-1.17.24-1.97.403-2.43a4.08 4.08 0 0 1 .957-1.47A4.08 4.08 0 0 1 5.063 2.293c.46-.163 1.26-.35 2.43-.403C8.759 1.832 9.139 1.82 12 1.82zM12 0C8.741 0 8.333.014 7.053.072 5.775.131 4.902.333 4.14.63a6.21 6.21 0 0 0-2.246 1.463A6.21 6.21 0 0 0 .43 4.34C.133 5.102-.07 5.975-.012 7.253-.014 8.533 0 8.941 0 12s.014 3.467.072 4.747c.058 1.278.26 2.15.558 2.913a6.21 6.21 0 0 0 1.463 2.246 6.21 6.21 0 0 0 2.246 1.463c.762.297 1.636.5 2.913.558C8.533 23.986 8.941 24 12 24s3.467-.014 4.747-.072c1.278-.058 2.15-.26 2.913-.558a6.21 6.21 0 0 0 2.246-1.463 6.21 6.21 0 0 0 1.463-2.246c.297-.762.5-1.636.558-2.913.058-1.28.072-1.688.072-4.947s-.014-3.667-.072-4.947c-.058-1.278-.26-2.15-.558-2.913a6.21 6.21 0 0 0-1.463-2.246A6.21 6.21 0 0 0 19.66.63C18.898.333 18.025.131 16.747.072 15.467.014 15.059 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.88 1.44 1.44 0 0 0 0-2.88z"/></svg>
-            Publicación 1
-          </a>
-          <a class="event-link" href="https://www.instagram.com/p/DQfXaSrARXA/?img_index=1" target="_blank" rel="noopener">
-            <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 1.17.054 1.97.24 2.43.403a4.08 4.08 0 0 1 1.47.957c.453.454.78.898.957 1.47.163.46.35 1.26.403 2.43.058 1.266.07 1.646.07 4.85s-.012 3.584-.07 4.85c-.054 1.17-.24 1.97-.403 2.43a4.08 4.08 0 0 1-.957 1.47 4.08 4.08 0 0 1-1.47.957c-.46.163-1.26.35-2.43.403-1.266.058-1.646.07-4.85.07s-3.584-.012-4.85-.07c-1.17-.054-1.97-.24-2.43-.403a4.08 4.08 0 0 1-1.47-.957 4.08 4.08 0 0 1-.957-1.47c-.163-.46-.35-1.26-.403-2.43C2.175 15.584 2.163 15.204 2.163 12s.012-3.584.07-4.85c.054-1.17.24-1.97.403-2.43a4.08 4.08 0 0 1 .957-1.47A4.08 4.08 0 0 1 5.063 2.293c.46-.163 1.26-.35 2.43-.403C8.759 1.832 9.139 1.82 12 1.82zM12 0C8.741 0 8.333.014 7.053.072 5.775.131 4.902.333 4.14.63a6.21 6.21 0 0 0-2.246 1.463A6.21 6.21 0 0 0 .43 4.34C.133 5.102-.07 5.975-.012 7.253-.014 8.533 0 8.941 0 12s.014 3.467.072 4.747c.058 1.278.26 2.15.558 2.913a6.21 6.21 0 0 0 1.463 2.246 6.21 6.21 0 0 0 2.246 1.463c.762.297 1.636.5 2.913.558C8.533 23.986 8.941 24 12 24s3.467-.014 4.747-.072c1.278-.058 2.15-.26 2.913-.558a6.21 6.21 0 0 0 2.246-1.463 6.21 6.21 0 0 0 1.463-2.246c.297-.762.5-1.636.558-2.913.058-1.28.072-1.688.072-4.947s-.014-3.667-.072-4.947c-.058-1.278-.26-2.15-.558-2.913a6.21 6.21 0 0 0-1.463-2.246A6.21 6.21 0 0 0 19.66.63C18.898.333 18.025.131 16.747.072 15.467.014 15.059 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.88 1.44 1.44 0 0 0 0-2.88z"/></svg>
-            Publicación 2
-          </a>
-          <a class="event-link" href="https://www.instagram.com/p/DQ0EHw7jXQc/?img_index=1" target="_blank" rel="noopener">
-            <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 1.17.054 1.97.24 2.43.403a4.08 4.08 0 0 1 1.47.957c.453.454.78.898.957 1.47.163.46.35 1.26.403 2.43.058 1.266.07 1.646.07 4.85s-.012 3.584-.07 4.85c-.054 1.17-.24 1.97-.403 2.43a4.08 4.08 0 0 1-.957 1.47 4.08 4.08 0 0 1-1.47.957c-.46.163-1.26.35-2.43.403-1.266.058-1.646.07-4.85.07s-3.584-.012-4.85-.07c-1.17-.054-1.97-.24-2.43-.403a4.08 4.08 0 0 1-1.47-.957 4.08 4.08 0 0 1-.957-1.47c-.163-.46-.35-1.26-.403-2.43C2.175 15.584 2.163 15.204 2.163 12s.012-3.584.07-4.85c.054-1.17.24-1.97.403-2.43a4.08 4.08 0 0 1 .957-1.47A4.08 4.08 0 0 1 5.063 2.293c.46-.163 1.26-.35 2.43-.403C8.759 1.832 9.139 1.82 12 1.82zM12 0C8.741 0 8.333.014 7.053.072 5.775.131 4.902.333 4.14.63a6.21 6.21 0 0 0-2.246 1.463A6.21 6.21 0 0 0 .43 4.34C.133 5.102-.07 5.975-.012 7.253-.014 8.533 0 8.941 0 12s.014 3.467.072 4.747c.058 1.278.26 2.15.558 2.913a6.21 6.21 0 0 0 1.463 2.246 6.21 6.21 0 0 0 2.246 1.463c.762.297 1.636.5 2.913.558C8.533 23.986 8.941 24 12 24s3.467-.014 4.747-.072c1.278-.058 2.15-.26 2.913-.558a6.21 6.21 0 0 0 2.246-1.463 6.21 6.21 0 0 0 1.463-2.246c.297-.762.5-1.636.558-2.913.058-1.28.072-1.688.072-4.947s-.014-3.667-.072-4.947c-.058-1.278-.26-2.15-.558-2.913a6.21 6.21 0 0 0-1.463-2.246A6.21 6.21 0 0 0 19.66.63C18.898.333 18.025.131 16.747.072 15.467.014 15.059 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.88 1.44 1.44 0 0 0 0-2.88z"/></svg>
-            Publicación 3
-          </a>
+        <h3 class="event-name">Taller de Contención Socioemocional ante Desastres Naturales</h3>
+        <p class="event-desc">Taller de herramientas de contención socioemocional frente a desastres naturales, en colaboración con la DREA.</p>
+        <div class="event-footer">
+          <div class="event-meta">
+            <span class="event-meta-item">
+              <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+              Taller comunitario
+            </span>
+            <span class="event-meta-item">
+              <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              Ayacucho
+            </span>
+          </div>
+          <span class="event-cta">Ver más →</span>
         </div>
       </div>
-    </article>
-
-    <!-- ══════════════════════════════════════════════
-         To add a new event, copy an <article> block above,
-         change the accent class (accent-orange / accent-purple / accent-teal),
-         and update the event-title, event-name, event-desc,
-         event-collab-tag, and event-meta content.
-         ══════════════════════════════════════════════ -->
+    </a>
 
   </div>
 </section>
