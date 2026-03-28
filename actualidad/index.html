@@ -631,6 +631,44 @@
     }
     .embed-link::after { display: none; }
 
+    .embed-link-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform .35s ease;
+    }
+    .embed-link:hover .embed-link-img {
+      transform: scale(1.06);
+    }
+    .embed-link-overlay {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: .3rem;
+      background: rgba(11,22,41,.55);
+      opacity: 0;
+      transition: opacity .3s;
+    }
+    .embed-link:hover .embed-link-overlay {
+      opacity: 1;
+    }
+    .embed-link-overlay svg {
+      width: 22px; height: 22px;
+      stroke: var(--teal); fill: none;
+      stroke-width: 2; stroke-linecap: round; stroke-linejoin: round;
+    }
+    .embed-link-label {
+      font-family: 'DM Sans', sans-serif;
+      font-size: .6rem;
+      color: var(--white);
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+    /* Fallback when image fails to load */
     .embed-link-inner {
       display: flex;
       flex-direction: column;
@@ -646,9 +684,7 @@
       stroke: var(--teal); fill: none;
       stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round;
       opacity: .7;
-      transition: opacity .3s;
     }
-    .embed-link:hover .embed-link-icon { opacity: 1; }
     .embed-link-num {
       font-family: 'Syne', sans-serif;
       font-weight: 700;
@@ -656,16 +692,6 @@
       color: var(--muted);
       letter-spacing: .05em;
     }
-    .embed-link-label {
-      font-family: 'DM Sans', sans-serif;
-      font-size: .6rem;
-      color: var(--muted);
-      letter-spacing: .08em;
-      text-transform: uppercase;
-      opacity: 0;
-      transition: opacity .3s;
-    }
-    .embed-link:hover .embed-link-label { opacity: 1; }
 
     /* ── News card footer ── */
     .news-card-footer {
@@ -955,9 +981,9 @@
               <div class="highlight-value">Sociales</div>
             </div>
             <div class="highlight-item">
-              <div class="highlight-icon">⚙️</div>
-              <div class="highlight-label">Apoyo</div>
-              <div class="highlight-value">Operativo</div>
+              <div class="highlight-icon">📣</div>
+              <div class="highlight-label">Gestión</div>
+              <div class="highlight-value">Institucional</div>
             </div>
           </div>
 
@@ -966,20 +992,24 @@
             <p class="areas-title">Áreas de incorporación</p>
             <div class="areas-grid">
               <span class="area-tag">
-                <svg viewBox="0 0 24 24"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
-                Líneas de Investigación
-              </span>
-              <span class="area-tag">
                 <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-                Proyectos Sociales
+                Talento Humano
               </span>
               <span class="area-tag">
                 <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
                 Comunicaciones
               </span>
               <span class="area-tag">
-                <svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
-                Diseño &amp; Tecnología
+                <svg viewBox="0 0 24 24"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+                Aprendizaje
+              </span>
+              <span class="area-tag">
+                <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+                Investigación
+              </span>
+              <span class="area-tag">
+                <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+                Proyectos Sociales
               </span>
             </div>
           </div>
@@ -1010,68 +1040,100 @@
           </p>
           <div class="embeds-grid">
             <a class="embed-link" href="https://www.instagram.com/p/DU01ZCdDpLR/" target="_blank" rel="noopener noreferrer">
-              <div class="embed-link-inner">
+              <img class="embed-link-img" src="https://www.instagram.com/p/DU01ZCdDpLR/media/?size=m" alt="Publicación 1 de la convocatoria" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='none';this.closest('.embed-link').querySelector('.embed-link-inner').style.display='flex'" />
+              <div class="embed-link-overlay">
+                <svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                <span class="embed-link-label">Ver en IG →</span>
+              </div>
+              <div class="embed-link-inner" style="display:none">
                 <svg class="embed-link-icon" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
                 <span class="embed-link-num">Post 1</span>
-                <span class="embed-link-label">Ver en IG →</span>
               </div>
             </a>
             <a class="embed-link" href="https://www.instagram.com/p/DU016lXjt7Q/" target="_blank" rel="noopener noreferrer">
-              <div class="embed-link-inner">
+              <img class="embed-link-img" src="https://www.instagram.com/p/DU016lXjt7Q/media/?size=m" alt="Publicación 2 de la convocatoria" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='none';this.closest('.embed-link').querySelector('.embed-link-inner').style.display='flex'" />
+              <div class="embed-link-overlay">
+                <svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                <span class="embed-link-label">Ver en IG →</span>
+              </div>
+              <div class="embed-link-inner" style="display:none">
                 <svg class="embed-link-icon" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
                 <span class="embed-link-num">Post 2</span>
-                <span class="embed-link-label">Ver en IG →</span>
               </div>
             </a>
             <a class="embed-link" href="https://www.instagram.com/p/DU03AySDoDf/" target="_blank" rel="noopener noreferrer">
-              <div class="embed-link-inner">
+              <img class="embed-link-img" src="https://www.instagram.com/p/DU03AySDoDf/media/?size=m" alt="Publicación 3 de la convocatoria" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='none';this.closest('.embed-link').querySelector('.embed-link-inner').style.display='flex'" />
+              <div class="embed-link-overlay">
+                <svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                <span class="embed-link-label">Ver en IG →</span>
+              </div>
+              <div class="embed-link-inner" style="display:none">
                 <svg class="embed-link-icon" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
                 <span class="embed-link-num">Post 3</span>
-                <span class="embed-link-label">Ver en IG →</span>
               </div>
             </a>
             <a class="embed-link" href="https://www.instagram.com/p/DU04Sp9DohA/" target="_blank" rel="noopener noreferrer">
-              <div class="embed-link-inner">
+              <img class="embed-link-img" src="https://www.instagram.com/p/DU04Sp9DohA/media/?size=m" alt="Publicación 4 de la convocatoria" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='none';this.closest('.embed-link').querySelector('.embed-link-inner').style.display='flex'" />
+              <div class="embed-link-overlay">
+                <svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                <span class="embed-link-label">Ver en IG →</span>
+              </div>
+              <div class="embed-link-inner" style="display:none">
                 <svg class="embed-link-icon" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
                 <span class="embed-link-num">Post 4</span>
-                <span class="embed-link-label">Ver en IG →</span>
               </div>
             </a>
             <a class="embed-link" href="https://www.instagram.com/p/DU05HVIDkBV/" target="_blank" rel="noopener noreferrer">
-              <div class="embed-link-inner">
+              <img class="embed-link-img" src="https://www.instagram.com/p/DU05HVIDkBV/media/?size=m" alt="Publicación 5 de la convocatoria" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='none';this.closest('.embed-link').querySelector('.embed-link-inner').style.display='flex'" />
+              <div class="embed-link-overlay">
+                <svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                <span class="embed-link-label">Ver en IG →</span>
+              </div>
+              <div class="embed-link-inner" style="display:none">
                 <svg class="embed-link-icon" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
                 <span class="embed-link-num">Post 5</span>
-                <span class="embed-link-label">Ver en IG →</span>
               </div>
             </a>
             <a class="embed-link" href="https://www.instagram.com/p/DU06YRODjCY/" target="_blank" rel="noopener noreferrer">
-              <div class="embed-link-inner">
+              <img class="embed-link-img" src="https://www.instagram.com/p/DU06YRODjCY/media/?size=m" alt="Publicación 6 de la convocatoria" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='none';this.closest('.embed-link').querySelector('.embed-link-inner').style.display='flex'" />
+              <div class="embed-link-overlay">
+                <svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                <span class="embed-link-label">Ver en IG →</span>
+              </div>
+              <div class="embed-link-inner" style="display:none">
                 <svg class="embed-link-icon" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
                 <span class="embed-link-num">Post 6</span>
-                <span class="embed-link-label">Ver en IG →</span>
               </div>
             </a>
             <a class="embed-link" href="https://www.instagram.com/p/DU06uwFjr--/" target="_blank" rel="noopener noreferrer">
-              <div class="embed-link-inner">
+              <img class="embed-link-img" src="https://www.instagram.com/p/DU06uwFjr--/media/?size=m" alt="Publicación 7 de la convocatoria" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='none';this.closest('.embed-link').querySelector('.embed-link-inner').style.display='flex'" />
+              <div class="embed-link-overlay">
+                <svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                <span class="embed-link-label">Ver en IG →</span>
+              </div>
+              <div class="embed-link-inner" style="display:none">
                 <svg class="embed-link-icon" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
                 <span class="embed-link-num">Post 7</span>
-                <span class="embed-link-label">Ver en IG →</span>
               </div>
             </a>
             <a class="embed-link" href="https://www.instagram.com/p/DVBlzYDDp7c/" target="_blank" rel="noopener noreferrer">
-              <div class="embed-link-inner">
+              <img class="embed-link-img" src="https://www.instagram.com/p/DVBlzYDDp7c/media/?size=m" alt="Publicación 8 de la convocatoria" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='none';this.closest('.embed-link').querySelector('.embed-link-inner').style.display='flex'" />
+              <div class="embed-link-overlay">
+                <svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                <span class="embed-link-label">Ver en IG →</span>
+              </div>
+              <div class="embed-link-inner" style="display:none">
                 <svg class="embed-link-icon" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
                 <span class="embed-link-num">Post 8</span>
-                <span class="embed-link-label">Ver en IG →</span>
               </div>
             </a>
           </div>
         </div>
 
         <div class="news-card-footer">
-          <span class="news-status status-active">
-            <span class="status-dot"></span>
-            Convocatoria abierta
+          <span class="news-status status-closed">
+            <span class="status-dot no-pulse"></span>
+            Convocatoria cerrada
           </span>
           <a href="https://www.instagram.com/p/DU01ZCdDpLR/" target="_blank" rel="noopener noreferrer" class="news-read-more">
             Ver convocatoria →
