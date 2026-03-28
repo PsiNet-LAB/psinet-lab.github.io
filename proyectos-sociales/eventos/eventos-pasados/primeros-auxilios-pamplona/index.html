@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Primeros Auxilios Psicológicos — Pamplona — PsiNet LAB</title>
+  <link rel="icon" href="../../../../favicon.ico" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Lora:ital@0;1&family=Syne:wght@600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    /* ── Reset & Variables ── */
+    *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+    :root{
+      --navy:#0b1629;--deep:#0d1f3c;--mid:#112240;
+      --teal:#5eead4;--teal2:#2dd4bf;--gold:#f0b429;
+      --white:#f0f4ff;--muted:#8892b0;--card-bg:#0e1f38;
+      --border:rgba(94,234,212,.15);--orange:#f97316;
+      --purple:#a855f7;--pink:#ec4899;
+      --accent:#a855f7;--accent-rgb:168,85,247;
+      --accent2:#c084fc;
+    }
+    html{scroll-behavior:smooth}
+    body{font-family:'DM Sans',sans-serif;background:var(--navy);color:var(--white);overflow-x:hidden;line-height:1.6}
+    a{text-decoration:none;color:inherit}
+    ul{list-style:none}
+
+    /* Noise */
+    body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.04'/%3E%3C/svg%3E");pointer-events:none;z-index:9999;opacity:.5}
+
+    /* Header */
+    header{position:fixed;top:0;left:0;width:100%;z-index:1000;background:rgba(11,22,41,.55);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid var(--border);transition:background .4s ease,box-shadow .4s ease}
+    header.scrolled{background:rgba(11,22,41,.7);box-shadow:0 4px 30px rgba(0,0,0,.35)}
+    nav.main-nav{max-width:1260px;margin:auto;display:flex;align-items:center;justify-content:space-between;padding:1rem 2rem;position:relative}
+    .nav-left,.nav-right{display:flex;gap:2rem;align-items:center}
+    .nav-center{position:absolute;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:.15rem}
+    .nav-center img{height:44px}
+    nav.main-nav a{font-size:.82rem;font-family:'DM Sans',sans-serif;color:rgba(240,244,255,.85);font-weight:500;letter-spacing:.02em;text-transform:uppercase;transition:color .3s ease,text-shadow .3s ease;position:relative}
+    nav.main-nav a::after{content:'';position:absolute;left:0;bottom:-4px;width:0;height:2px;background:linear-gradient(90deg,var(--teal),var(--teal2));border-radius:1px;transition:width .3s ease}
+    nav.main-nav a:hover{color:#fff;text-shadow:0 0 8px rgba(94,234,212,.35)}
+    nav.main-nav a:hover::after{width:100%}
+    nav.main-nav a.active{color:var(--teal)}
+    nav.main-nav a.active::after{width:100%}
+    .nav-dropdown{position:relative}
+    .dropdown-menu{position:absolute;top:100%;left:50%;transform:translateX(-50%);background:rgba(13,31,60,.97);backdrop-filter:blur(14px);border:1px solid var(--border);border-radius:10px;padding:.6rem 0;min-width:210px;opacity:0;visibility:hidden;pointer-events:none;transition:opacity .25s ease,transform .25s ease;transform:translateX(-50%) translateY(8px);box-shadow:0 8px 32px rgba(0,0,0,.45)}
+    .nav-dropdown:hover>.dropdown-menu{opacity:1;visibility:visible;pointer-events:auto;transform:translateX(-50%) translateY(0)}
+    .dropdown-menu a{display:block;padding:.55rem 1.3rem;font-size:.78rem;white-space:nowrap;transition:background .2s,color .2s}
+    .dropdown-menu a:hover{background:rgba(94,234,212,.08);color:var(--teal)}
+    .dropdown-menu a::after{display:none}
+    .dropdown-submenu{position:relative}
+    .dropdown-submenu-menu{position:absolute;left:100%;top:0;background:rgba(13,31,60,.97);backdrop-filter:blur(14px);border:1px solid var(--border);border-radius:10px;padding:.6rem 0;min-width:200px;opacity:0;visibility:hidden;pointer-events:none;transition:opacity .25s ease,transform .25s ease;transform:translateX(8px);box-shadow:0 8px 32px rgba(0,0,0,.45)}
+    .dropdown-submenu:hover>.dropdown-submenu-menu{opacity:1;visibility:visible;pointer-events:auto;transform:translateX(0)}
+
+    /* ── Hero ── */
+    .hero{position:relative;min-height:62vh;display:flex;align-items:center;justify-content:center;text-align:center;overflow:hidden;padding:8rem 2rem 4rem}
+    .hero-bg{position:absolute;inset:0;z-index:0;background:radial-gradient(ellipse 60% 50% at 25% 35%,rgba(var(--accent-rgb),.18) 0%,transparent 60%),radial-gradient(ellipse 55% 45% at 75% 60%,rgba(192,132,252,.12) 0%,transparent 55%),radial-gradient(ellipse 90% 80% at 50% 50%,rgba(13,31,60,.9) 0%,var(--navy) 100%);animation:heroPulse 12s ease-in-out infinite alternate}
+    @keyframes heroPulse{0%{filter:hue-rotate(0deg) brightness(1)}50%{filter:hue-rotate(8deg) brightness(1.08)}100%{filter:hue-rotate(-5deg) brightness(1.03)}}
+
+    .orb{position:absolute;border-radius:50%;pointer-events:none;z-index:0;filter:blur(60px);opacity:.3}
+    .orb-1{width:280px;height:280px;background:radial-gradient(circle,rgba(var(--accent-rgb),.5),transparent 70%);top:12%;left:-4%;animation:orbFloat1 16s ease-in-out infinite}
+    .orb-2{width:220px;height:220px;background:radial-gradient(circle,rgba(192,132,252,.45),transparent 70%);bottom:18%;right:-2%;animation:orbFloat2 20s ease-in-out infinite}
+    .orb-3{width:180px;height:180px;background:radial-gradient(circle,rgba(var(--accent-rgb),.35),transparent 70%);top:55%;left:65%;animation:orbFloat3 14s ease-in-out infinite}
+    @keyframes orbFloat1{0%,100%{transform:translate(0,0) scale(1)}33%{transform:translate(40px,-30px) scale(1.12)}66%{transform:translate(-20px,20px) scale(.92)}}
+    @keyframes orbFloat2{0%,100%{transform:translate(0,0) scale(1)}40%{transform:translate(-50px,-25px) scale(1.1)}70%{transform:translate(30px,15px) scale(.95)}}
+    @keyframes orbFloat3{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(-35px,40px) scale(1.15)}}
+
+    .hero-particles{position:absolute;inset:0;z-index:0;overflow:hidden}
+    .hero-particles span{position:absolute;width:3px;height:3px;background:var(--accent);border-radius:50%;opacity:0;animation:sparkle 4s ease-in-out infinite}
+    @keyframes sparkle{0%,100%{opacity:0;transform:scale(.5) translateY(0)}50%{opacity:.7;transform:scale(1.2) translateY(-15px)}}
+
+    .hero-content{position:relative;z-index:2;max-width:700px}
+    .hero-badge{display:inline-block;font-family:'DM Sans',sans-serif;font-size:.72rem;font-weight:500;letter-spacing:.15em;text-transform:uppercase;color:var(--accent);background:rgba(var(--accent-rgb),.08);border:1px solid rgba(var(--accent-rgb),.2);padding:.45rem 1.2rem;border-radius:50px;margin-bottom:1.5rem;animation:badgePulse 3s ease-in-out infinite}
+    @keyframes badgePulse{0%,100%{box-shadow:0 0 0 0 rgba(var(--accent-rgb),.2)}50%{box-shadow:0 0 20px 4px rgba(var(--accent-rgb),.15)}}
+    .hero h1{font-family:'Syne',sans-serif;font-weight:800;font-size:clamp(1.8rem,4.5vw,3rem);line-height:1.1;margin-bottom:1.2rem;background:linear-gradient(135deg,var(--white) 0%,var(--accent) 50%,var(--accent2) 100%);background-size:200% 200%;-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;animation:titleShimmer 6s ease-in-out infinite}
+    @keyframes titleShimmer{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
+    .hero p{font-family:'Lora',serif;font-style:italic;font-size:1.05rem;color:var(--muted);max-width:520px;margin:0 auto;line-height:1.8}
+    .hero-line{width:80px;height:3px;margin:2rem auto 0;background:linear-gradient(90deg,var(--accent),var(--accent2));border-radius:2px;animation:lineExpand 3s ease-in-out infinite alternate}
+    @keyframes lineExpand{0%{width:60px;opacity:.6}100%{width:120px;opacity:1}}
+
+    /* ── Background orbs ── */
+    .bg-orbs{position:fixed;inset:0;z-index:-1;pointer-events:none;overflow:hidden}
+    .bg-orb{position:absolute;border-radius:50%;filter:blur(80px);opacity:.12;animation:bgOrbDrift 20s ease-in-out infinite}
+    .bg-orb-1{width:400px;height:400px;background:radial-gradient(circle,var(--accent),transparent 70%);top:30%;left:-8%;animation-duration:22s}
+    .bg-orb-2{width:350px;height:350px;background:radial-gradient(circle,var(--accent2),transparent 70%);top:60%;right:-6%;animation-duration:26s;animation-delay:-5s}
+    .bg-orb-3{width:300px;height:300px;background:radial-gradient(circle,var(--pink),transparent 70%);bottom:10%;left:40%;animation-duration:18s;animation-delay:-10s}
+    @keyframes bgOrbDrift{0%,100%{transform:translate(0,0) scale(1)}25%{transform:translate(60px,-40px) scale(1.08)}50%{transform:translate(-30px,50px) scale(.94)}75%{transform:translate(40px,20px) scale(1.05)}}
+
+    /* ── Breadcrumb ── */
+    .breadcrumb-bar{background:var(--deep);border-bottom:1px solid var(--border);padding:1rem 2rem;margin-top:0}
+    .breadcrumb-inner{max-width:1060px;margin:auto;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:.5rem}
+    .breadcrumb-nav{font-size:.82rem;color:var(--muted);display:flex;align-items:center;gap:.5rem}
+    .breadcrumb-nav a{color:var(--accent);transition:color .3s}
+    .breadcrumb-nav a:hover{color:var(--white)}
+    .breadcrumb-sep{color:var(--muted);opacity:.5}
+    .back-link{font-size:.82rem;color:var(--accent);display:flex;align-items:center;gap:.4rem;transition:color .3s,transform .3s}
+    .back-link:hover{color:var(--white);transform:translateX(-3px)}
+
+    /* ── Event Content ── */
+    .event-layout{max-width:1060px;margin:0 auto;padding:3rem 2rem 2rem;display:grid;grid-template-columns:300px 1fr;gap:3rem;align-items:start}
+    .event-sidebar{position:sticky;top:100px}
+    .info-card{background:var(--card-bg);border:1px solid var(--border);border-radius:16px;padding:2rem;border-top:4px solid var(--accent)}
+    .info-card h3{font-family:'Syne',sans-serif;font-size:1rem;font-weight:700;color:var(--accent);margin-bottom:1.5rem;text-transform:uppercase;letter-spacing:.08em}
+    .info-item{margin-bottom:1.4rem}
+    .info-item:last-child{margin-bottom:0}
+    .info-label{font-size:.7rem;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);margin-bottom:.3rem;font-weight:500}
+    .info-value{font-size:.92rem;color:var(--white);line-height:1.5}
+    .info-value .collab-tag{display:inline-block;background:rgba(var(--accent-rgb),.1);border:1px solid rgba(var(--accent-rgb),.2);padding:.2rem .7rem;border-radius:20px;font-size:.78rem;margin:.2rem .3rem .2rem 0;color:var(--accent)}
+
+    .event-main h2{font-family:'Syne',sans-serif;font-weight:700;font-size:1.5rem;color:var(--white);margin-bottom:1rem}
+    .event-main h2 .accent{color:var(--accent)}
+    .event-main p{font-family:'DM Sans',sans-serif;font-size:.95rem;color:var(--muted);line-height:1.85;margin-bottom:1.5rem}
+    .event-main p.lead{font-family:'Lora',serif;font-style:italic;font-size:1.05rem;color:rgba(240,244,255,.8);line-height:1.9;border-left:3px solid var(--accent);padding-left:1.2rem;margin-bottom:2rem}
+
+    /* ── Gallery ── */
+    .gallery-section{max-width:1060px;margin:0 auto;padding:2rem 2rem 3rem}
+    .gallery-section h2{font-family:'Syne',sans-serif;font-weight:700;font-size:1.5rem;color:var(--white);margin-bottom:.5rem;text-align:center}
+    .gallery-section .section-line{width:60px;height:3px;background:linear-gradient(90deg,var(--accent),var(--accent2));border-radius:2px;margin:0 auto 2.5rem}
+    .gallery-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}
+    .gallery-item{position:relative;border-radius:12px;overflow:hidden;border:1px solid var(--border);aspect-ratio:4/3;background:var(--card-bg)}
+    .gallery-item img{width:100%;height:100%;object-fit:cover;transition:transform .5s cubic-bezier(.25,.8,.25,1),filter .5s ease}
+    .gallery-item:hover img{transform:scale(1.08);filter:brightness(1.1)}
+    .gallery-item::after{content:'';position:absolute;inset:0;background:linear-gradient(to top,rgba(var(--accent-rgb),.1),transparent 50%);opacity:0;transition:opacity .4s ease;pointer-events:none}
+    .gallery-item:hover::after{opacity:1}
+
+    /* ── Instagram Section ── */
+    .instagram-section{max-width:700px;margin:0 auto;padding:2rem 2rem 3rem;text-align:center}
+    .instagram-section h2{font-family:'Syne',sans-serif;font-weight:700;font-size:1.5rem;color:var(--white);margin-bottom:.5rem}
+    .instagram-section .section-line{width:60px;height:3px;background:linear-gradient(90deg,var(--accent),var(--accent2));border-radius:2px;margin:0 auto 2rem}
+    .instagram-grid{display:flex;flex-direction:column;align-items:center;gap:2rem}
+
+    /* ── Back Link Bottom ── */
+    .bottom-back{max-width:1060px;margin:0 auto;padding:1rem 2rem 4rem;text-align:center}
+    .bottom-back a{display:inline-flex;align-items:center;gap:.5rem;font-size:.9rem;color:var(--accent);border:1px solid rgba(var(--accent-rgb),.25);padding:.7rem 1.8rem;border-radius:50px;transition:all .3s ease;font-weight:500}
+    .bottom-back a:hover{background:rgba(var(--accent-rgb),.1);border-color:var(--accent);transform:translateY(-2px);box-shadow:0 4px 20px rgba(var(--accent-rgb),.15)}
+
+    /* ── Reveal ── */
+    .reveal{opacity:0;transform:translateY(35px);transition:opacity .8s cubic-bezier(.16,1,.3,1),transform .8s cubic-bezier(.16,1,.3,1)}
+    .reveal.visible{opacity:1;transform:translateY(0)}
+    .reveal-delay-1{transition-delay:.15s}
+    .reveal-delay-2{transition-delay:.3s}
+    .reveal-delay-3{transition-delay:.45s}
+
+    /* ── Footer ── */
+    footer{background:var(--deep);padding:4rem 2rem 2rem;border-top:1px solid var(--border)}
+    .footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:3rem;max-width:1160px;margin:auto}
+    .footer-col h4{font-family:'Syne',sans-serif;font-size:.85rem;font-weight:700;color:var(--white);margin-bottom:1rem;text-transform:uppercase;letter-spacing:.06em}
+    .footer-col ul{display:flex;flex-direction:column;gap:.5rem}
+    .footer-col a{font-size:.82rem;color:var(--muted);transition:color .3s}
+    .footer-col a:hover{color:var(--teal)}
+    .footer-bottom{max-width:1160px;margin:2.5rem auto 0;padding-top:1.5rem;border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
+    .footer-bottom p{font-size:.78rem;color:var(--muted)}
+    .footer-bottom-links{display:flex;gap:1.5rem}
+    .footer-bottom-links a{font-size:.75rem;color:var(--muted);transition:color .3s}
+    .footer-bottom-links a:hover{color:var(--teal)}
+
+    /* ── Responsive ── */
+    @media(max-width:900px){
+      .event-layout{grid-template-columns:1fr;gap:2rem}
+      .event-sidebar{position:static}
+      .gallery-grid{grid-template-columns:repeat(2,1fr)}
+      .footer-grid{grid-template-columns:1fr 1fr}
+    }
+    @media(max-width:700px){
+      nav.main-nav{flex-wrap:wrap;justify-content:center;gap:.8rem;padding:.8rem 1rem}
+      .nav-left,.nav-right{gap:1rem;flex-wrap:wrap;justify-content:center}
+      .nav-center{position:static;transform:none;order:-1;width:100%;text-align:center}
+      .hero{min-height:50vh;padding:7rem 1.5rem 3rem}
+      .gallery-grid{grid-template-columns:1fr}
+      .footer-grid{grid-template-columns:1fr}
+      .footer-bottom{flex-direction:column;text-align:center}
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Background orbs -->
+  <div class="bg-orbs">
+    <div class="bg-orb bg-orb-1"></div>
+    <div class="bg-orb bg-orb-2"></div>
+    <div class="bg-orb bg-orb-3"></div>
+  </div>
+
+  <!-- Header -->
+  <header>
+    <nav class="main-nav">
+      <div class="nav-left">
+        <div class="nav-dropdown">
+          <a href="#">Institucional ▾</a>
+          <div class="dropdown-menu">
+            <a href="../../../../conocenos/">Identidad y Gobernanza</a>
+            <a href="../../../../miembros/">Directorio de Miembros</a>
+            <a href="#">Actualidad Institucional</a>
+          </div>
+        </div>
+        <div class="nav-dropdown">
+          <a href="../../../../investigaciones/">Investigaciones ▾</a>
+          <div class="dropdown-menu">
+            <a href="../../../../investigaciones/lineas-de-investigacion/">Líneas de Investigación</a>
+            <a href="../../../../investigaciones/publicaciones/">Publicaciones</a>
+            <div class="dropdown-submenu">
+              <a href="../../../../investigaciones/programas/">Programas ▸</a>
+              <div class="dropdown-submenu-menu">
+                <a href="../../../../investigaciones/programas/bienestar/">BienEstar</a>
+                <a href="../../../../investigaciones/programas/espacio-mental/">Espacio Mental</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="nav-dropdown">
+          <a href="../../../../proyectos-sociales/" class="active">Proyectos Sociales ▾</a>
+          <div class="dropdown-menu">
+            <div class="dropdown-submenu">
+              <a href="../../../../proyectos-sociales/eventos/">Eventos ▸</a>
+              <div class="dropdown-submenu-menu">
+                <a href="../../../../proyectos-sociales/eventos/eventos-pasados/">Eventos Pasados</a>
+                <a href="../../../../proyectos-sociales/eventos/eventos-proximos/">Eventos Próximos</a>
+              </div>
+            </div>
+            <a href="../../../../proyectos-sociales/psinet-escool/">PsiNet EsCool</a>
+            <a href="../../../../proyectos-sociales/psipaz/">PsiPaz</a>
+          </div>
+        </div>
+      </div>
+      <div class="nav-center">
+        <a href="../../../../index.html">
+          <img src="../../../../assets/images/logo.png" alt="PsiNet LAB" onerror="this.style.display='none'" />
+        </a>
+      </div>
+      <div class="nav-right">
+        <a href="../../../../blog/">Blog</a>
+        <a href="../../../../podcast/">Podcast</a>
+        <a href="../../../../contacto/">Contacto</a>
+        <a href="../../../../apoyanos/">Apóyanos</a>
+        <a href="../../../../colaboraciones/">Colaboraciones</a>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-bg"></div>
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+    <div class="hero-particles">
+      <span style="top:18%;left:12%;animation-delay:0s"></span>
+      <span style="top:32%;left:78%;animation-delay:1.2s"></span>
+      <span style="top:65%;left:35%;animation-delay:2.4s"></span>
+      <span style="top:45%;left:55%;animation-delay:.8s"></span>
+      <span style="top:75%;left:85%;animation-delay:1.8s"></span>
+      <span style="top:22%;left:48%;animation-delay:3s"></span>
+    </div>
+    <div class="hero-content">
+      <div class="hero-badge">Primeros Auxilios Psicológicos</div>
+      <h1>Primeros Auxilios Psicológicos para los Niños tras el Incendio en Pamplona</h1>
+      <p>Intervención de acompañamiento emocional para menores afectados por la emergencia en Pamplona, San Juan de Miraflores.</p>
+      <div class="hero-line"></div>
+    </div>
+  </section>
+
+  <!-- Breadcrumb -->
+  <div class="breadcrumb-bar">
+    <div class="breadcrumb-inner">
+      <nav class="breadcrumb-nav">
+        <a href="../../../../proyectos-sociales/eventos/eventos-pasados/">Eventos Pasados</a>
+        <span class="breadcrumb-sep">→</span>
+        <span>Primeros Auxilios Psicológicos — Pamplona</span>
+      </nav>
+      <a href="../../../../proyectos-sociales/eventos/eventos-pasados/" class="back-link">← Volver a Eventos Pasados</a>
+    </div>
+  </div>
+
+  <!-- Event Content -->
+  <article class="event-layout">
+    <!-- Sidebar -->
+    <aside class="event-sidebar reveal">
+      <div class="info-card">
+        <h3>Detalles del Evento</h3>
+        <div class="info-item">
+          <div class="info-label">Tipo de evento</div>
+          <div class="info-value">Primeros auxilios psicológicos</div>
+        </div>
+        <div class="info-item">
+          <div class="info-label">Ubicación</div>
+          <div class="info-value">San Juan de Miraflores, Lima</div>
+        </div>
+        <div class="info-item">
+          <div class="info-label">Colaboración</div>
+          <div class="info-value">
+            <span class="collab-tag">SENAJU</span>
+            <span class="collab-tag">ADRA</span>
+            <span class="collab-tag">Espiral de los Cuerpos Libres</span>
+          </div>
+        </div>
+        <div class="info-item">
+          <div class="info-label">Fecha</div>
+          <div class="info-value">2025</div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <div class="event-main">
+      <h2 class="reveal">Sobre <span class="accent">el Evento</span></h2>
+
+      <p class="lead reveal">Intervención de primeros auxilios psicológicos dirigida a niños y niñas afectados por el incendio ocurrido en Pamplona, San Juan de Miraflores. En alianza con la Secretaría Nacional de la Juventud (SENAJU), la Agencia Adventista de Desarrollo y Recursos Asistenciales (ADRA) y Espiral de los Cuerpos Libres, se brindó acompañamiento emocional inmediato, actividades lúdicas terapéuticas y espacios seguros de expresión para los menores impactados por la emergencia.</p>
+
+      <h2 class="reveal">El Contexto de <span class="accent">la Emergencia</span></h2>
+      <p class="reveal">El incendio que devastó parte del asentamiento humano de Pamplona, en San Juan de Miraflores, dejó a decenas de familias en situación de vulnerabilidad extrema. Las llamas consumieron viviendas precarias, destruyendo no solo bienes materiales sino también la sensación de seguridad y estabilidad de quienes habitaban la zona. Los niños y niñas, como población especialmente vulnerable, se vieron expuestos a escenas traumáticas que requerían una respuesta inmediata y especializada en salud mental.</p>
+
+      <p class="reveal">En este contexto de crisis, la necesidad de intervención psicológica temprana se hizo urgente. Las investigaciones en psicología de emergencias demuestran que las primeras horas y días posteriores a un evento traumático son cruciales para prevenir el desarrollo de trastornos de estrés postraumático y otras secuelas emocionales a largo plazo, especialmente en la población infantil.</p>
+
+      <h2 class="reveal">Movilización <span class="accent">Rápida</span></h2>
+      <p class="reveal">Ante la magnitud de la emergencia, PsiNet LAB activó sus protocolos de respuesta rápida y se coordinó con las organizaciones aliadas para desplegar un equipo interdisciplinario en la zona afectada. La Secretaría Nacional de la Juventud (SENAJU) facilitó la articulación institucional y el acceso a la comunidad, mientras que ADRA aportó su vasta experiencia en asistencia humanitaria y logística de emergencia. Espiral de los Cuerpos Libres contribuyó con su expertise en trabajo corporal y expresión emocional a través del movimiento.</p>
+
+      <p class="reveal">La rapidez de la movilización fue posible gracias a las redes de colaboración previamente establecidas entre las organizaciones participantes, lo que permitió una respuesta coordinada y eficiente en un momento donde cada hora contaba para el bienestar emocional de los menores afectados.</p>
+
+      <h2 class="reveal">Técnicas de <span class="accent">Intervención</span></h2>
+      <p class="reveal">La intervención con los niños y niñas se diseñó siguiendo los principios de los Primeros Auxilios Psicológicos (PAP) adaptados a la población infantil. Se implementaron actividades lúdicas terapéuticas que permitieron a los menores procesar sus emociones de manera segura y apropiada para su edad. A través del juego, el dibujo y la narración de cuentos, los niños pudieron expresar sus miedos, confusión y tristeza sin sentirse presionados.</p>
+
+      <p class="reveal">Se crearon espacios seguros de expresión donde los menores podían hablar libremente sobre lo que habían vivido, siempre acompañados por profesionales capacitados que validaban sus emociones y les brindaban contención. Las técnicas de regulación emocional se enseñaron de forma lúdica, utilizando ejercicios de respiración convertidos en juegos y técnicas de grounding adaptadas al lenguaje infantil.</p>
+
+      <h2 class="reveal">Acompañamiento Emocional <span class="accent">Inmediato</span></h2>
+      <p class="reveal">La importancia del acompañamiento emocional inmediato tras un desastre no puede subestimarse. Los primeros auxilios psicológicos buscan restablecer la sensación de seguridad, promover la calma, fomentar la autoeficacia y la eficacia comunitaria, promover la conexión social y cultivar la esperanza. En el caso de los niños de Pamplona, cada uno de estos objetivos fue abordado con estrategias específicas y sensibles a su etapa de desarrollo.</p>
+
+      <p class="reveal">El equipo de intervención se aseguró de que cada niño y niña recibiera atención individualizada, identificando aquellos casos que requerían derivación a servicios de salud mental más especializados. Se trabajó también con los cuidadores y padres de familia, brindándoles orientación sobre cómo acompañar emocionalmente a sus hijos en los días y semanas posteriores al evento traumático.</p>
+
+      <h2 class="reveal">Modelo de Colaboración <span class="accent">Multiorganizacional</span></h2>
+      <p class="reveal">Esta intervención representó un ejemplo exitoso de colaboración multiorganizacional en contextos de emergencia. La sinergia entre PsiNet LAB, SENAJU, ADRA y Espiral de los Cuerpos Libres permitió una respuesta integral que combinó la expertise psicológica, la capacidad logística, el respaldo institucional y las metodologías corporales expresivas. Este modelo de trabajo colaborativo demostró que las emergencias requieren respuestas articuladas donde cada organización aporta sus fortalezas únicas.</p>
+
+      <p class="reveal">La experiencia en Pamplona reforzó la convicción de PsiNet LAB sobre la necesidad de construir y mantener redes de colaboración sólidas, capaces de activarse rápidamente ante situaciones de crisis. El impacto de esta intervención se multiplicó gracias a la complementariedad de los saberes y recursos de cada organización participante, sentando un precedente valioso para futuras respuestas ante emergencias.</p>
+    </div>
+  </article>
+
+  <!-- Gallery -->
+  <section class="gallery-section reveal">
+    <h2>Galería <span style="color:var(--accent)">Fotográfica</span></h2>
+    <div class="section-line"></div>
+    <div class="gallery-grid">
+      <div class="gallery-item reveal reveal-delay-1"><img src="../../../../assets/images/eventos/otros/pamplona-2025/1.webp" alt="Intervención en Pamplona 1" loading="lazy" /></div>
+      <div class="gallery-item reveal reveal-delay-2"><img src="../../../../assets/images/eventos/otros/pamplona-2025/2.webp" alt="Intervención en Pamplona 2" loading="lazy" /></div>
+      <div class="gallery-item reveal reveal-delay-3"><img src="../../../../assets/images/eventos/otros/pamplona-2025/3.webp" alt="Intervención en Pamplona 3" loading="lazy" /></div>
+    </div>
+  </section>
+
+  <!-- Instagram Section -->
+  <section class="instagram-section reveal">
+    <h2>Publicaciones en <span style="color:var(--accent)">Redes Sociales</span></h2>
+    <div class="section-line"></div>
+    <div class="instagram-grid">
+      <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/DUYK2vjjrpY/" data-instgrm-version="14" style="background:#FFF; border:0; border-radius:3px; box-shadow:0 0 1px 0 rgba(0,0,0,0.5),0 1px 10px 0 rgba(0,0,0,0.15); margin: 1px; max-width:540px; min-width:326px; padding:0; width:calc(100% - 2px);">
+      </blockquote>
+    </div>
+  </section>
+
+  <!-- Bottom Back Link -->
+  <div class="bottom-back reveal">
+    <a href="../../../../proyectos-sociales/eventos/eventos-pasados/">← Volver a Eventos Pasados</a>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-grid">
+      <div class="footer-col">
+        <h4>PsiNet LAB</h4>
+        <p style="font-size:.85rem;color:var(--muted);max-width:280px;line-height:1.75;">
+          Ciencia psicológica conectada para el desarrollo humano y comunitario.
+        </p>
+      </div>
+      <div class="footer-col">
+        <h4>Proyectos Sociales</h4>
+        <ul>
+          <li><a href="../../../../proyectos-sociales/eventos/">Eventos</a></li>
+          <li><a href="../../../../proyectos-sociales/psinet-escool/">PsiNet EsCool</a></li>
+          <li><a href="../../../../proyectos-sociales/psipaz/">PsiPaz</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Investigación</h4>
+        <ul>
+          <li><a href="../../../../investigaciones/publicaciones/">Publicaciones</a></li>
+          <li><a href="../../../../investigaciones/lineas-de-investigacion/">Líneas de Investigación</a></li>
+          <li><a href="../../../../miembros/">Miembros</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Organización</h4>
+        <ul>
+          <li><a href="../../../../contacto/">Contacto</a></li>
+          <li><a href="../../../../apoyanos/">Apóyanos</a></li>
+          <li><a href="../../../../blog/">Blog</a></li>
+          <li><a href="../../../../podcast/">Podcast</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 PsiNet LAB. Todos los derechos reservados.</p>
+      <div class="footer-bottom-links">
+        <a href="#">Cookie Policy</a>
+        <a href="#">Privacy Policy</a>
+        <a href="#">Policies</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script async src="https://www.instagram.com/embed.js"></script>
+  <script>
+    window.addEventListener('scroll', () => {
+      document.querySelector('header').classList.toggle('scrolled', window.scrollY > 50);
+    });
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.12 });
+    document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+  </script>
+
+</body>
+</html>
