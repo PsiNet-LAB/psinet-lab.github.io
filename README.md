@@ -79,23 +79,6 @@ psinet-lab.github.io/
 - Widget de donaciones con [Ko-fi](https://ko-fi.com/psinetlab)
 - Diseño responsive y accesible
 
-## Uso local
-
-Este es un sitio estático puro, sin dependencias de compilación ni gestores de paquetes. Para ejecutarlo localmente:
-
-```bash
-# Clonar el repositorio
-git clone https://github.com/PsiNet-LAB/psinet-lab.github.io.git
-cd psinet-lab.github.io
-
-# Servir con cualquier servidor estático, por ejemplo:
-python -m http.server 8000
-# o
-npx serve .
-```
-
-Luego abre [http://localhost:8000](http://localhost:8000) en tu navegador.
-
 ## Valores
 
 | Valor | Descripción |
@@ -106,16 +89,6 @@ Luego abre [http://localhost:8000](http://localhost:8000) en tu navegador.
 | 🤝 **Redes Colaborativas** | Co-creación de iniciativas con comunidades y aliados |
 | 📖 **Accesibilidad del Conocimiento** | Democratización del conocimiento psicológico |
 | 🌍 **Humanidad Compartida** | Dignidad, empatía y respeto mutuo |
-
-## Contribuciones
-
-¡Las contribuciones son bienvenidas! Si deseas colaborar:
-
-1. Haz un *fork* del repositorio
-2. Crea una rama para tu cambio (`git checkout -b mi-cambio`)
-3. Realiza tus modificaciones y haz *commit* (`git commit -m "Descripción del cambio"`)
-4. Sube tu rama (`git push origin mi-cambio`)
-5. Abre un *Pull Request*
 
 ## Licencia
 
