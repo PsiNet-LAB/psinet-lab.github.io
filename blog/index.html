@@ -219,6 +219,7 @@
       border-radius: 10px;
       overflow: hidden;
       transition: border-color .25s, transform .25s;
+      display: block;
     }
     .blog-card:hover { border-color: rgba(94,234,212,.4); transform: translateY(-4px); }
 
@@ -458,15 +459,17 @@
 
   var grid = document.getElementById('blog-grid');
   entries.forEach(function(entry, i) {
-    var card = document.createElement('div');
-    card.className = 'blog-card reveal';
-    if (i > 0) card.style.transitionDelay = (i * 0.05) + 's';
+    var hasLink = entry.url && entry.url !== '#';
+    var wrapper = document.createElement(hasLink ? 'a' : 'div');
+    wrapper.className = 'blog-card reveal';
+    if (hasLink) wrapper.href = '../' + entry.url;
+    if (i > 0) wrapper.style.transitionDelay = (i * 0.05) + 's';
 
     var dateStr = new Date(entry.date).toLocaleDateString('es-ES', {
       year: 'numeric', month: 'long', day: 'numeric'
     });
 
-    card.innerHTML =
+    wrapper.innerHTML =
       '<div class="blog-card-img">' + entry.emoji + '</div>' +
       '<div class="blog-card-body">' +
         '<span class="blog-tag">' + entry.tag + '</span>' +
@@ -475,7 +478,7 @@
         '<p class="blog-card-date">' + dateStr + '</p>' +
       '</div>';
 
-    grid.appendChild(card);
+    grid.appendChild(wrapper);
   });
 
   // Scroll reveal

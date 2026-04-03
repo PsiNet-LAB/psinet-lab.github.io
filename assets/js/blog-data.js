@@ -13,27 +13,11 @@
  */
 var BLOG_ENTRIES = [
   {
-    date: "2025-06-01",
+    date: "2026-04-03",
     tag: "Investigación",
-    emoji: "🧠",
-    title: "Explorando la complejidad del comportamiento humano",
-    excerpt: "Descubre cómo la teoría de la complejidad transforma nuestra comprensión del bienestar psicológico.",
-    url: "#"
-  },
-  {
-    date: "2025-05-15",
-    tag: "Proyectos",
-    emoji: "🌱",
-    title: "BienEstar: impacto comunitario basado en evidencia",
-    excerpt: "Cómo el proyecto BienEstar está transformando comunidades a través de intervenciones psicológicas.",
-    url: "#"
-  },
-  {
-    date: "2025-05-01",
-    tag: "Educación",
-    emoji: "🎓",
-    title: "PsiNet EsCool: ciencia psicológica en las aulas",
-    excerpt: "Llevando el conocimiento psicológico a estudiantes para fomentar una cultura científica desde temprana edad.",
-    url: "#"
+    emoji: "🕸️",
+    title: "Análisis de redes psicométricas en R: un enfoque alternativo para la evaluación psicológica",
+    excerpt: "Descubre cómo el análisis de redes complementa los modelos tradicionales de variables latentes para comprender la estructura de los constructos psicológicos.",
+    url: "blog/analisis-redes-psicometricas/"
   }
 ];
