@@ -368,6 +368,234 @@
       .article-section { padding-top: 7rem; }
       .article-header { flex-direction: column; align-items: flex-start; gap: 1rem; }
     }
+
+    /* ── TUTORIAL STYLES ── */
+    .tutorial-divider {
+      border: none;
+      border-top: 1px solid var(--border);
+      margin: 3.5rem 0 3rem;
+    }
+
+    .tutorial-intro {
+      background: linear-gradient(135deg, rgba(94,234,212,.06) 0%, rgba(94,234,212,.02) 100%);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1.5rem 1.75rem;
+      margin-bottom: 2.5rem;
+    }
+    .tutorial-intro p {
+      margin-bottom: 0 !important;
+      color: var(--muted) !important;
+      font-size: .9rem !important;
+    }
+    .tutorial-intro strong { color: var(--teal) !important; }
+
+    .tutorial-step {
+      position: relative;
+      padding-left: 3.2rem;
+      margin-bottom: 2.5rem;
+    }
+    .tutorial-step::before {
+      content: attr(data-step);
+      position: absolute;
+      left: 0; top: .15rem;
+      width: 2.2rem; height: 2.2rem;
+      display: flex; align-items: center; justify-content: center;
+      background: rgba(94,234,212,.1);
+      border: 1px solid rgba(94,234,212,.25);
+      border-radius: 6px;
+      font-family: 'Syne', sans-serif;
+      font-weight: 700;
+      font-size: .85rem;
+      color: var(--teal);
+    }
+    .tutorial-step h4 {
+      font-family: 'Syne', sans-serif;
+      font-weight: 600;
+      font-size: 1.1rem;
+      color: var(--white);
+      margin-bottom: .75rem;
+      letter-spacing: -.01em;
+    }
+    .tutorial-step p {
+      font-size: .9rem;
+      color: var(--muted);
+      line-height: 1.8;
+      margin-bottom: .75rem;
+    }
+    .tutorial-step p strong { color: var(--white); font-weight: 500; }
+
+    .code-block {
+      background: #0a1628;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      overflow: hidden;
+      margin: 1rem 0 1.25rem;
+    }
+    .code-block-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: .5rem 1rem;
+      background: rgba(94,234,212,.04);
+      border-bottom: 1px solid var(--border);
+    }
+    .code-block-lang {
+      font-size: .68rem;
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 600;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--teal);
+    }
+    .code-block pre {
+      margin: 0;
+      padding: 1rem 1.25rem;
+      overflow-x: auto;
+      font-size: .82rem;
+      line-height: 1.7;
+      font-family: 'SFMono-Regular', 'Cascadia Code', 'Fira Code', 'Consolas', monospace;
+      color: #c9d1d9;
+      tab-size: 2;
+    }
+    .code-block pre .r-comment { color: #6a737d; font-style: italic; }
+    .code-block pre .r-string  { color: #a5d6ff; }
+    .code-block pre .r-func    { color: #d2a8ff; }
+    .code-block pre .r-keyword { color: #ff7b72; }
+    .code-block pre .r-number  { color: #79c0ff; }
+    .code-block pre .r-operator{ color: #ff7b72; }
+    .code-block pre .r-output  { color: #8b949e; }
+
+    .code-output {
+      background: #0d1117;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1rem 1.25rem;
+      margin: -.5rem 0 1.25rem;
+      font-family: 'SFMono-Regular', 'Cascadia Code', 'Consolas', monospace;
+      font-size: .78rem;
+      color: #8b949e;
+      line-height: 1.65;
+      overflow-x: auto;
+      white-space: pre;
+    }
+
+    .figure-container {
+      margin: 1.5rem 0 2rem;
+      text-align: center;
+    }
+    .figure-container img {
+      max-width: 100%;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      background: #fff;
+    }
+    .figure-caption {
+      font-size: .78rem;
+      color: var(--muted);
+      margin-top: .65rem;
+      font-style: italic;
+      line-height: 1.6;
+    }
+
+    .info-box {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-left: 3px solid var(--gold);
+      border-radius: 8px;
+      padding: 1rem 1.25rem;
+      margin: 1rem 0 1.25rem;
+    }
+    .info-box-label {
+      font-size: .7rem;
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 600;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: .4rem;
+    }
+    .info-box p {
+      margin-bottom: 0 !important;
+      font-size: .85rem !important;
+      color: var(--muted) !important;
+      line-height: 1.7 !important;
+    }
+    .info-box p strong { color: var(--white) !important; }
+
+    .metric-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1rem 0 1.25rem;
+      font-size: .85rem;
+    }
+    .metric-table th {
+      text-align: left;
+      padding: .65rem 1rem;
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 600;
+      font-size: .78rem;
+      letter-spacing: .04em;
+      text-transform: uppercase;
+      color: var(--teal);
+      background: rgba(94,234,212,.06);
+      border-bottom: 1px solid var(--border);
+    }
+    .metric-table td {
+      padding: .6rem 1rem;
+      color: var(--muted);
+      border-bottom: 1px solid rgba(94,234,212,.06);
+      line-height: 1.6;
+    }
+    .metric-table tr:last-child td { border-bottom: none; }
+
+    .flow-box {
+      background: #0a1628;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1.5rem 1.75rem;
+      margin: 2rem 0;
+      font-family: 'SFMono-Regular', 'Cascadia Code', 'Consolas', monospace;
+      font-size: .8rem;
+      line-height: 1.9;
+      color: #c9d1d9;
+      white-space: pre;
+      overflow-x: auto;
+    }
+    .flow-box .flow-comment { color: #6a737d; }
+    .flow-box .flow-func    { color: #d2a8ff; }
+    .flow-box .flow-arrow   { color: var(--teal); }
+    .flow-box .flow-desc    { color: #8b949e; }
+
+    .cs-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1rem 0;
+      font-size: .82rem;
+    }
+    .cs-table th {
+      text-align: left;
+      padding: .5rem .75rem;
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 600;
+      font-size: .75rem;
+      color: var(--teal);
+      background: rgba(94,234,212,.06);
+      border-bottom: 1px solid var(--border);
+    }
+    .cs-table td {
+      padding: .5rem .75rem;
+      color: var(--muted);
+      border-bottom: 1px solid rgba(94,234,212,.06);
+    }
+    .cs-table tr:last-child td { border-bottom: none; }
+
+    @media (max-width: 600px) {
+      .tutorial-step { padding-left: 2.6rem; }
+      .tutorial-step::before { width: 1.8rem; height: 1.8rem; font-size: .75rem; }
+      .code-block pre { font-size: .72rem; padding: .75rem 1rem; }
+      .flow-box { font-size: .7rem; padding: 1rem; }
+    }
   </style>
 </head>
 <body>
@@ -490,15 +718,292 @@
         En el ámbito clínico, la aproximación de redes favorece una comprensión más cercana a la realidad de los fenómenos psicopatológicos. Considérese, por ejemplo, el caso de la depresión: la anhedonia puede reducir la motivación hacia las actividades cotidianas, lo que profundiza el aislamiento social, el cual intensifica a su vez el estado de ánimo deprimido (Borsboom, 2017; Fonseca-Pedrero, 2017; Lunansky et al., 2022). Esta cadena de activación recíproca ilustra cómo un síntoma particular puede desencadenar una secuencia que sostiene y agrava el cuadro depresivo en su conjunto, una dinámica que los modelos factoriales clásicos no logran capturar.
       </p>
 
-      <h3>Implementación en R</h3>
+      <h3>Implementación en R: tutorial paso a paso</h3>
 
-      <p>
-        El entorno estadístico R ofrece un ecosistema robusto de paquetes diseñados para estimar, visualizar e interpretar redes psicométricas. Entre los más utilizados se encuentran <strong>bootnet</strong>, que facilita la estimación de redes mediante modelos gráficos gaussianos regularizados con LASSO (Epskamp et al., 2017); <strong>qgraph</strong>, que permite generar representaciones visuales de las redes estimadas con disposiciones optimizadas (Epskamp et al., 2012); y <strong>networktools</strong>, que proporciona funciones para calcular indicadores de centralidad, puente y otras métricas de la estructura reticular.
-      </p>
+      <hr class="tutorial-divider">
 
-      <p>
-        La combinación de estos paquetes permite a los investigadores no solo estimar la estructura de relaciones entre ítems, sino también identificar nodos centrales —síntomas o indicadores con mayor influencia en la red—, detectar comunidades de nodos estrechamente conectados y evaluar la estabilidad de los resultados mediante técnicas de <em>bootstrap</em>. Este conjunto de herramientas posiciona a R como una plataforma integral para implementar el análisis de redes psicométricas en la investigación psicológica contemporánea.
-      </p>
+      <div class="tutorial-intro">
+        <p><strong>¿A quién va dirigido?</strong> A investigadores y estudiantes con conocimientos básicos de R que quieran explorar el análisis de redes como alternativa a los modelos factoriales clásicos. No se requiere experiencia previa con redes psicológicas.</p>
+      </div>
+
+      <!-- ── PASO 1: Paquetes ── -->
+      <div class="tutorial-step" data-step="1">
+        <h4>Cargar los paquetes necesarios</h4>
+        <div class="code-block">
+          <div class="code-block-header"><span class="code-block-lang">R</span></div>
+<pre><span class="r-comment"># Si algún paquete no está instalado, descomenta la siguiente línea:</span>
+<span class="r-comment"># install.packages(c("EGAnet", "bootnet", "qgraph", "networktools", "igraph", "dplyr"))</span>
+
+<span class="r-func">library</span>(EGAnet)       <span class="r-comment"># Dataset wmt2 y Exploratory Graph Analysis</span>
+<span class="r-func">library</span>(bootnet)      <span class="r-comment"># Estimación de redes y análisis de estabilidad</span>
+<span class="r-func">library</span>(qgraph)       <span class="r-comment"># Visualización de redes</span>
+<span class="r-func">library</span>(networktools) <span class="r-comment"># Centralidad puente (bridge centrality)</span>
+<span class="r-func">library</span>(igraph)       <span class="r-comment"># Detección de comunidades</span>
+<span class="r-func">library</span>(dplyr)        <span class="r-comment"># Manipulación de tablas (pipe |&gt; y arrange)</span></pre>
+        </div>
+      </div>
+
+      <!-- ── PASO 2: Dataset ── -->
+      <div class="tutorial-step" data-step="2">
+        <h4>Cargar y explorar el dataset</h4>
+        <p>Usamos <strong>wmt2</strong>, el Wiener Matrizen-Test 2, una prueba de habilidad cognitiva con 18 ítems de matrices aplicada a <em>n</em> = 1 691 participantes. Está incluida directamente en <strong>EGAnet</strong>, sin necesidad de datos externos.</p>
+        <div class="code-block">
+          <div class="code-block-header"><span class="code-block-lang">R</span></div>
+<pre><span class="r-func">data</span>(<span class="r-string">"wmt2"</span>)
+
+<span class="r-comment"># Vista rápida: primeras 6 filas y todas las columnas</span>
+<span class="r-func">head</span>(wmt2)
+
+<span class="r-comment"># Dimensiones: filas (participantes) × columnas (variables)</span>
+<span class="r-func">dim</span>(wmt2)
+
+<span class="r-comment"># Tipos de variables y primeros valores de cada columna</span>
+<span class="r-func">str</span>(wmt2)</pre>
+        </div>
+        <div class="info-box">
+          <div class="info-box-label">💡 Nota</div>
+          <p>Las primeras 6 columnas (<strong>age</strong>, <strong>sex</strong>, etc.) son variables sociodemográficas. Los 18 ítems del test ocupan las columnas 7 a 24, que son los que usaremos para construir la red.</p>
+        </div>
+      </div>
+
+      <!-- ── PASO 3: Estimación ── -->
+      <div class="tutorial-step" data-step="3">
+        <h4>Estimar la red psicométrica</h4>
+        <p>El corazón del análisis es <strong>estimateNetwork()</strong>. Utilizamos el estimador <strong>EBICglasso</strong>, que combina regularización LASSO con el criterio EBIC para eliminar aristas espurias y producir una red parsimoniosa.</p>
+        <div class="code-block">
+          <div class="code-block-header"><span class="code-block-lang">R</span></div>
+<pre>red_cognitiva <span class="r-operator">&lt;-</span> <span class="r-func">estimateNetwork</span>(
+  wmt2[<span class="r-number">7</span>:<span class="r-number">24</span>],          <span class="r-comment"># Seleccionamos solo los 18 ítems cognitivos</span>
+  default   <span class="r-operator">=</span> <span class="r-string">"EBICglasso"</span>,
+  corMethod <span class="r-operator">=</span> <span class="r-string">"npn"</span>,   <span class="r-comment"># Non-paranormal transformation: robusta para ítems ordinales</span>
+  tuning    <span class="r-operator">=</span> <span class="r-number">0.5</span>,     <span class="r-comment"># Parámetro gamma del EBIC; 0.5 es el estándar en la literatura</span>
+  missing   <span class="r-operator">=</span> <span class="r-string">"pairwise"</span>  <span class="r-comment"># Manejo de datos faltantes por pares</span>
+)
+
+<span class="r-func">print</span>(red_cognitiva)</pre>
+        </div>
+        <div class="info-box">
+          <div class="info-box-label">💡 ¿Por qué npn y no spearman?</div>
+          <p>La transformación no-paranormal (<strong>npn</strong>) está diseñada para datos con distribuciones no normales y es más robusta que Spearman para construir modelos gráficos gaussianos regularizados.</p>
+        </div>
+      </div>
+
+      <!-- ── PASO 4: Visualización ── -->
+      <div class="tutorial-step" data-step="4">
+        <h4>Visualizar la red</h4>
+        <p>Cada <strong>nodo</strong> es un ítem y cada <strong>arista</strong> es una correlación parcial entre dos ítems, controlando todos los demás. El grosor de la arista refleja la magnitud de esa asociación.</p>
+        <div class="code-block">
+          <div class="code-block-header"><span class="code-block-lang">R</span></div>
+<pre><span class="r-comment"># Definimos grupos de ítems para colorear la red por bloques del test</span>
+grupos <span class="r-operator">&lt;-</span> <span class="r-func">list</span>(
+  <span class="r-string">"Bloque I"</span>   <span class="r-operator">=</span> <span class="r-number">1</span>:<span class="r-number">6</span>,
+  <span class="r-string">"Bloque II"</span>  <span class="r-operator">=</span> <span class="r-number">7</span>:<span class="r-number">12</span>,
+  <span class="r-string">"Bloque III"</span> <span class="r-operator">=</span> <span class="r-number">13</span>:<span class="r-number">18</span>
+)
+
+<span class="r-func">plot</span>(red_cognitiva,
+     layout      <span class="r-operator">=</span> <span class="r-string">"spring"</span>,   <span class="r-comment"># Algoritmo de Fruchterman-Reingold</span>
+     vsize       <span class="r-operator">=</span> <span class="r-number">7</span>,          <span class="r-comment"># Tamaño de los nodos</span>
+     label.cex   <span class="r-operator">=</span> <span class="r-number">0.85</span>,       <span class="r-comment"># Tamaño de las etiquetas</span>
+     edge.labels <span class="r-operator">=</span> <span class="r-keyword">FALSE</span>,      <span class="r-comment"># Sin etiquetas numéricas en las aristas</span>
+     groups      <span class="r-operator">=</span> grupos,
+     color       <span class="r-operator">=</span> <span class="r-func">c</span>(<span class="r-string">"#4E79A7"</span>,  <span class="r-comment"># Azul    – Bloque I</span>
+                     <span class="r-string">"#F28E2B"</span>,  <span class="r-comment"># Naranja – Bloque II</span>
+                     <span class="r-string">"#59A14F"</span>), <span class="r-comment"># Verde   – Bloque III</span>
+     title       <span class="r-operator">=</span> <span class="r-string">"Red Psicométrica – WMT-2 (EBICglasso)"</span>)</pre>
+        </div>
+        <div class="figure-container">
+          <img src="img/Rplot.png" alt="Red psicométrica del WMT-2 estimada con EBICglasso. Los colores indican el bloque teórico de cada ítem." loading="lazy" />
+          <div class="figure-caption">Figura 1. Red psicométrica del WMT-2 estimada con EBICglasso. Los colores indican el bloque teórico de cada ítem (azul = Bloque I, naranja = Bloque II, verde = Bloque III).</div>
+        </div>
+        <div class="info-box">
+          <div class="info-box-label">📊 Interpretación visual</div>
+          <p>Los nodos con más aristas y aristas más gruesas son los ítems con mayor influencia en la red. Los colores permiten ver si los ítems de un mismo bloque tienden a agruparse o a conectarse con otros bloques, lo que revela la estructura empírica del constructo.</p>
+        </div>
+      </div>
+
+      <!-- ── PASO 5: Centralidad ── -->
+      <div class="tutorial-step" data-step="5">
+        <h4>Índices de centralidad</h4>
+        <p>La centralidad identifica qué ítems son más "importantes" dentro de la red. Calculamos tres índices clásicos:</p>
+        <table class="metric-table">
+          <thead>
+            <tr><th>Índice</th><th>¿Qué mide?</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>Strength</strong></td><td>Suma de los pesos absolutos de las aristas de un nodo</td></tr>
+            <tr><td><strong>Betweenness</strong></td><td>Cuántas veces un nodo actúa como puente en los caminos más cortos</td></tr>
+            <tr><td><strong>Closeness</strong></td><td>Proximidad promedio de un nodo al resto de la red</td></tr>
+          </tbody>
+        </table>
+        <div class="code-block">
+          <div class="code-block-header"><span class="code-block-lang">R</span></div>
+<pre><span class="r-comment"># Gráfico de centralidad estandarizado (z-scores)</span>
+<span class="r-comment"># Cada línea representa un ítem; valores más altos = mayor centralidad</span>
+<span class="r-func">centralityPlot</span>(red_cognitiva,
+               include <span class="r-operator">=</span> <span class="r-func">c</span>(<span class="r-string">"Strength"</span>, <span class="r-string">"Betweenness"</span>, <span class="r-string">"Closeness"</span>),
+               orderBy <span class="r-operator">=</span> <span class="r-string">"Strength"</span>,
+               scale   <span class="r-operator">=</span> <span class="r-string">"z-scores"</span>)</pre>
+        </div>
+        <div class="figure-container">
+          <img src="img/Rplot01.png" alt="Índices de centralidad estandarizados (z-scores) para los 18 ítems del WMT-2." loading="lazy" />
+          <div class="figure-caption">Figura 2. Índices de centralidad estandarizados (z-scores) para los 18 ítems del WMT-2.</div>
+        </div>
+        <div class="code-block">
+          <div class="code-block-header"><span class="code-block-lang">R</span></div>
+<pre><span class="r-comment"># Tabla numérica completa con todos los índices estandarizados</span>
+tabla_central <span class="r-operator">&lt;-</span> <span class="r-func">centralityTable</span>(red_cognitiva, standardized <span class="r-operator">=</span> <span class="r-keyword">TRUE</span>)
+<span class="r-func">print</span>(tabla_central)
+
+<span class="r-comment"># Top 3 ítems con mayor Strength: los nodos más centrales de la red</span>
+tabla_central[tabla_central$measure <span class="r-operator">==</span> <span class="r-string">"Strength"</span>, ] <span class="r-operator">|&gt;</span>
+  <span class="r-func">arrange</span>(<span class="r-func">desc</span>(value)) <span class="r-operator">|&gt;</span>
+  <span class="r-func">head</span>(<span class="r-number">3</span>)</pre>
+        </div>
+        <div class="info-box">
+          <div class="info-box-label">🔬 Relevancia clínica</div>
+          <p>En estudios de psicopatología, los ítems con mayor <strong>Strength</strong> son candidatos a síntomas centrales que mantienen el trastorno. En este contexto cognitivo, identifican los ítems más informativos sobre la habilidad general.</p>
+        </div>
+      </div>
+
+      <!-- ── PASO 6: Bridge centrality ── -->
+      <div class="tutorial-step" data-step="6">
+        <h4>Centralidad puente (Bridge centrality)</h4>
+        <p>Mientras que los índices anteriores miden la importancia global de cada nodo, la <strong>centralidad puente</strong> mide cuánto conecta un ítem con comunidades distintas de la red. Es clave para identificar ítems que enlazan dimensiones diferentes.</p>
+        <div class="code-block">
+          <div class="code-block-header"><span class="code-block-lang">R</span></div>
+<pre><span class="r-comment"># Asignamos cada ítem a su bloque (comunidad teórica)</span>
+membresia <span class="r-operator">&lt;-</span> <span class="r-func">c</span>(<span class="r-func">rep</span>(<span class="r-number">1</span>, <span class="r-number">6</span>),   <span class="r-comment"># Bloque I:   ítems 1–6</span>
+               <span class="r-func">rep</span>(<span class="r-number">2</span>, <span class="r-number">6</span>),   <span class="r-comment"># Bloque II:  ítems 7–12</span>
+               <span class="r-func">rep</span>(<span class="r-number">3</span>, <span class="r-number">6</span>))   <span class="r-comment"># Bloque III: ítems 13–18</span>
+
+bridge_central <span class="r-operator">&lt;-</span> <span class="r-func">bridge</span>(
+  red_cognitiva$graph,
+  communities <span class="r-operator">=</span> membresia
+)
+
+<span class="r-func">plot</span>(bridge_central,
+     order  <span class="r-operator">=</span> <span class="r-string">"value"</span>,
+     zscore <span class="r-operator">=</span> <span class="r-keyword">TRUE</span>)</pre>
+        </div>
+        <div class="figure-container">
+          <img src="img/Rplot02.png" alt="Centralidad puente (z-scores) de los 18 ítems por bloque de pertenencia." loading="lazy" />
+          <div class="figure-caption">Figura 3. Centralidad puente (z-scores) de los 18 ítems por bloque de pertenencia.</div>
+        </div>
+        <div class="info-box">
+          <div class="info-box-label">📊 Interpretación</div>
+          <p>Un ítem con alta centralidad puente tiene conexiones fuertes hacia otras comunidades, no solo hacia la suya. En psicopatología, estos ítems pueden "transportar" activación entre clústeres de síntomas (p.&nbsp;ej., de lo afectivo a lo somático), lo que los convierte en objetivos prioritarios de intervención.</p>
+        </div>
+      </div>
+
+      <!-- ── PASO 7: Bootstrap aristas ── -->
+      <div class="tutorial-step" data-step="7">
+        <h4>Bootstrap de aristas — intervalos de confianza</h4>
+        <p>Antes de interpretar los resultados, debemos verificar que sean estables. <strong>bootnet</strong> ofrece dos tipos de bootstrap complementarios. Este primer bootstrap evalúa la <strong>precisión estimada</strong> de los pesos de cada arista.</p>
+        <div class="code-block">
+          <div class="code-block-header"><span class="code-block-lang">R</span></div>
+<pre><span class="r-func">set.seed</span>(<span class="r-number">2026</span>)  <span class="r-comment"># Reproducibilidad</span>
+
+boot_aristas <span class="r-operator">&lt;-</span> <span class="r-func">bootnet</span>(
+  red_cognitiva,
+  nBoots     <span class="r-operator">=</span> <span class="r-number">500</span>,             <span class="r-comment"># Usar 1000 para publicación final</span>
+  type       <span class="r-operator">=</span> <span class="r-string">"nonparametric"</span>,
+  statistics <span class="r-operator">=</span> <span class="r-string">"edge"</span>
+)
+
+<span class="r-comment"># Gráfico de diferencias: las aristas cuyas barras no se solapan</span>
+<span class="r-comment"># son significativamente distintas entre sí</span>
+<span class="r-func">plot</span>(boot_aristas,
+     plot        <span class="r-operator">=</span> <span class="r-string">"difference"</span>,
+     onlyNonZero <span class="r-operator">=</span> <span class="r-keyword">TRUE</span>,
+     order       <span class="r-operator">=</span> <span class="r-string">"sample"</span>)</pre>
+        </div>
+        <div class="figure-container">
+          <img src="img/Rplot03.png" alt="Diferencias significativas entre pesos de aristas." loading="lazy" />
+          <div class="figure-caption">Figura 4. Diferencias significativas entre pesos de aristas. Las barras que no se solapan indican diferencias estadísticamente distinguibles.</div>
+        </div>
+      </div>
+
+      <!-- ── PASO 8: Bootstrap estabilidad ── -->
+      <div class="tutorial-step" data-step="8">
+        <h4>Bootstrap de casos — estabilidad de centralidad</h4>
+        <p>Evalúa si los índices de centralidad se mantienen al eliminar progresivamente casos de la muestra.</p>
+        <div class="code-block">
+          <div class="code-block-header"><span class="code-block-lang">R</span></div>
+<pre><span class="r-func">set.seed</span>(<span class="r-number">2026</span>)
+
+boot_estab <span class="r-operator">&lt;-</span> <span class="r-func">bootnet</span>(
+  red_cognitiva,
+  nBoots     <span class="r-operator">=</span> <span class="r-number">500</span>,
+  type       <span class="r-operator">=</span> <span class="r-string">"case"</span>,
+  statistics <span class="r-operator">=</span> <span class="r-func">c</span>(<span class="r-string">"strength"</span>, <span class="r-string">"betweenness"</span>, <span class="r-string">"closeness"</span>)
+)
+
+<span class="r-comment"># Coeficiente de estabilidad CS (correlation stability coefficient)</span>
+<span class="r-func">corStability</span>(boot_estab)</pre>
+        </div>
+        <div class="info-box">
+          <div class="info-box-label">📐 Regla de decisión</div>
+          <p>Interpretación del coeficiente CS:</p>
+        </div>
+        <table class="cs-table">
+          <thead>
+            <tr><th>CS</th><th>Interpretación</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>&gt; 0.50</strong></td><td>Estable ✓ — puedes interpretar con confianza</td></tr>
+            <tr><td><strong>0.25 – 0.50</strong></td><td>Aceptable ⚠️ — interpretar con cautela</td></tr>
+            <tr><td><strong>&lt; 0.25</strong></td><td>Inestable ✗ — no interpretar ese índice</td></tr>
+          </tbody>
+        </table>
+        <p>Si el CS de <strong>Strength</strong> es &gt; 0.50, puedes interpretar con confianza el ordenamiento de centralidad. <strong>Betweenness</strong> y <strong>Closeness</strong> suelen ser menos estables; si su CS &lt; 0.25, reporta solo Strength en tu artículo.</p>
+      </div>
+
+      <!-- ── PASO 9: Comunidades ── -->
+      <div class="tutorial-step" data-step="9">
+        <h4>Detección de comunidades con igraph</h4>
+        <p>Como paso final, detectamos comunidades de forma empírica usando el algoritmo <strong>walktrap</strong>, sin imponer los bloques predefinidos del test. Esto permite comparar la estructura teórica (Bloques I–III) con la estructura empírica emergente.</p>
+        <div class="code-block">
+          <div class="code-block-header"><span class="code-block-lang">R</span></div>
+<pre><span class="r-comment"># Convertir la red estimada a un objeto igraph (formato estándar para grafos)</span>
+g <span class="r-operator">&lt;-</span> <span class="r-func">as.igraph</span>(
+  <span class="r-func">qgraph</span>(red_cognitiva$graph, DoNotPlot <span class="r-operator">=</span> <span class="r-keyword">TRUE</span>),
+  attributes <span class="r-operator">=</span> <span class="r-keyword">TRUE</span>
+)
+
+<span class="r-comment"># Algoritmo walktrap: detecta comunidades mediante caminatas aleatorias cortas</span>
+<span class="r-comment"># Ventaja: no requiere especificar el número de comunidades a priori</span>
+comunidades <span class="r-operator">&lt;-</span> <span class="r-func">cluster_walktrap</span>(g)
+
+<span class="r-func">cat</span>(<span class="r-string">"Comunidades detectadas:"</span>, <span class="r-func">length</span>(<span class="r-func">unique</span>(<span class="r-func">membership</span>(comunidades))), <span class="r-string">"\n"</span>)
+<span class="r-func">print</span>(<span class="r-func">membership</span>(comunidades))
+
+<span class="r-func">plot</span>(comunidades, g,
+     main <span class="r-operator">=</span> <span class="r-string">"Comunidades empíricas – WMT-2"</span>)</pre>
+        </div>
+        <div class="figure-container">
+          <img src="img/Rplot04.png" alt="Comunidades detectadas empíricamente por el algoritmo walktrap sobre la red EBICglasso del WMT-2." loading="lazy" />
+          <div class="figure-caption">Figura 5. Comunidades detectadas empíricamente por el algoritmo walktrap sobre la red EBICglasso del WMT-2.</div>
+        </div>
+        <div class="info-box">
+          <div class="info-box-label">🔍 ¿Coinciden con los bloques teóricos?</div>
+          <p>Si la solución empírica reproduce los tres bloques del WMT-2, es evidencia de validez de constructo. Si los agrupa de forma diferente, puede indicar que la estructura cognitiva subyacente no corresponde exactamente al diseño original del test — un hallazgo relevante en sí mismo.</p>
+        </div>
+      </div>
+
+      <!-- ── RESUMEN DEL FLUJO ── -->
+      <h3>Resumen del flujo de análisis</h3>
+      <div class="flow-box"><span class="flow-func">Datos</span> (wmt2[7:24])
+       <span class="flow-arrow">│</span>
+       <span class="flow-arrow">▼</span>
+<span class="flow-func">estimateNetwork()</span>      <span class="flow-desc">← EBICglasso + NPN</span>
+       <span class="flow-arrow">│</span>
+       <span class="flow-arrow">├──►</span> <span class="flow-func">plot()</span>                  <span class="flow-desc">→ Visualización de la red</span>
+       <span class="flow-arrow">├──►</span> <span class="flow-func">centralityPlot()</span>        <span class="flow-desc">→ Strength, Betweenness, Closeness</span>
+       <span class="flow-arrow">├──►</span> <span class="flow-func">bridge()</span>                <span class="flow-desc">→ Centralidad puente entre bloques</span>
+       <span class="flow-arrow">├──►</span> <span class="flow-func">bootnet(nonparametric)</span>  <span class="flow-desc">→ IC de aristas</span>
+       <span class="flow-arrow">├──►</span> <span class="flow-func">bootnet(case)</span>           <span class="flow-desc">→ Estabilidad de centralidad (CS)</span>
+       <span class="flow-arrow">└──►</span> <span class="flow-func">igraph walktrap</span>         <span class="flow-desc">→ Comunidades empíricas</span></div>
 
       <div class="references-section">
         <h3>Referencias</h3>
