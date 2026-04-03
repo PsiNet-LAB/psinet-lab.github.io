@@ -1,7 +1,7 @@
 # PsiNet LAB – Ciencia conectada para el desarrollo
 
 <p align="center">
-  <img src="assets/images/logos/logo.png" alt="PsiNet LAB" width="200">
+  <img src="assets/images/logos/logo-new-tl.png" alt="PsiNet LAB" width="200">
 </p>
 
 <p align="center">
