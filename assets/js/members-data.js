@@ -60,6 +60,16 @@ var MEMBERS = [
     email: ""
   },
   {
+    name: "Dennis S. Calle Huánuco",
+    slug: "dennis-s-calle-huanuco",
+    photo: "dennis-8k.jpg",
+    role: "Chief Research Officer",
+    area: "Dirección",
+    bio: "Dennis Calle Huánuco holds a Bachelor's degree in Psychology, having graduated from César Vallejo University (UCV) with a thesis on individual differences in aversive personality traits and underlying emotions. He is currently completing a Master's degree in Higher Education at UCV, focusing on the heterogeneity and impact of higher educational characteristics and the sociology of education. He is a current member of PsinetLab, where he develops projects in psychology at both theoretical and practical levels, with a strong focus on quantitative methods and high-impact publications using innovative methodologies including network analysis. He is an officially active psychology researcher at the National Council of Science and Technology (CONCYTEC), with publications in clinical psychology, including studies on personality. He has served as a peer reviewer for the journal Interpersona. Additionally he has presented on the state of psychopathology in Latin America, having been invited by the International Society for the Study of Individual Differences, of which he is a member. His main research interests include positive psychology, educational differences, personality, aversive personality traits, nuances of violence, clinical comorbidities in psychology, and cross-cultural psychological research.",
+    interests: ["Positive psychology", "Educational differences", "Personality", "Aversive personality traits", "Violence", "Clinical comorbidities", "Cross-cultural research"],
+    email: ""
+  },
+  {
     name: "Luis E. Viloria Moreno",
     slug: "luis-e-viloria-moreno",
     photo: "luis-6k.jpeg",
@@ -93,20 +103,10 @@ var MEMBERS = [
     name: "Marcelo S. Casa Chicata",
     slug: "marcelo-s-casa-chicata",
     photo: "marcelo-f.jpeg",
-    role: "Chief Financial Officer",
-    area: "Dirección",
+    role: "Miembro Investigador",
+    area: "Investigación",
     bio: "Marcelo Saúl Casa Chicata is a Psychology student at the Universidad Nacional de San Agustín (UNSA) in Arequipa, Peru. He currently serves as the CFO of PsiNet LAB (Peru) and works as a researcher, contributing to projects that utilize advanced methodologies such as network analysis. In addition, he is the director of the Center for Research in Neuroscience and Neuropsychology (CEINPS) at UNSA. His main research interests focus on quantitative methods and digital behavior, with additional emphasis on neuropsychology, social cognition, and interpersonal violence.",
     interests: ["Quantitative methods", "Digital behavior", "Neuropsychology", "Social cognition", "Interpersonal violence"],
-    email: ""
-  },
-  {
-    name: "Dennis S. Calle Huánuco",
-    slug: "dennis-s-calle-huanuco",
-    photo: "dennis-8k.jpg",
-    role: "Chief Research Officer",
-    area: "Dirección",
-    bio: "Dennis Calle Huánuco holds a Bachelor's degree in Psychology, having graduated from César Vallejo University (UCV) with a thesis on individual differences in aversive personality traits and underlying emotions. He is currently completing a Master's degree in Higher Education at UCV, focusing on the heterogeneity and impact of higher educational characteristics and the sociology of education. He is a current member of PsinetLab, where he develops projects in psychology at both theoretical and practical levels, with a strong focus on quantitative methods and high-impact publications using innovative methodologies including network analysis. He is an officially active psychology researcher at the National Council of Science and Technology (CONCYTEC), with publications in clinical psychology, including studies on personality. He has served as a peer reviewer for the journal Interpersona. Additionally he has presented on the state of psychopathology in Latin America, having been invited by the International Society for the Study of Individual Differences, of which he is a member. His main research interests include positive psychology, educational differences, personality, aversive personality traits, nuances of violence, clinical comorbidities in psychology, and cross-cultural psychological research.",
-    interests: ["Positive psychology", "Educational differences", "Personality", "Aversive personality traits", "Violence", "Clinical comorbidities", "Cross-cultural research"],
     email: ""
   },
   {
