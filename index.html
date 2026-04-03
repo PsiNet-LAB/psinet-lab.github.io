@@ -673,6 +673,7 @@
       border-radius: 10px;
       overflow: hidden;
       transition: border-color .25s, transform .25s;
+      display: block;
     }
     .blog-card:hover { border-color: rgba(94,234,212,.4); transform: translateY(-4px); }
 
@@ -1202,17 +1203,19 @@
     }).slice(0, 3);
 
     entries.forEach(function(entry, i) {
-      var card = document.createElement('div');
-      card.className = 'blog-card reveal';
-      if (i > 0) card.style.transitionDelay = (i * 0.1) + 's';
-      card.innerHTML =
+      var hasLink = entry.url && entry.url !== '#';
+      var wrapper = document.createElement(hasLink ? 'a' : 'div');
+      wrapper.className = 'blog-card reveal';
+      if (hasLink) wrapper.href = entry.url;
+      if (i > 0) wrapper.style.transitionDelay = (i * 0.1) + 's';
+      wrapper.innerHTML =
         '<div class="blog-card-img">' + entry.emoji + '</div>' +
         '<div class="blog-card-body">' +
           '<span class="blog-tag">' + entry.tag + '</span>' +
           '<h3>' + entry.title + '</h3>' +
           '<p>' + entry.excerpt + '</p>' +
         '</div>';
-      grid.appendChild(card);
+      grid.appendChild(wrapper);
     });
   })();
 

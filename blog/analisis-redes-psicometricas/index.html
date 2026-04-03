@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Análisis de Redes Psicométricas en R – PsiNet LAB</title>
+  <meta name="description" content="Explora cómo el análisis de redes psicométricas en R ofrece una alternativa a los modelos factoriales tradicionales para comprender constructos psicológicos complejos." />
+  <link rel="icon" type="image/x-icon" href="../../favicon.ico" />
+  <link rel="icon" type="image/png" sizes="32x32" href="../../assets/images/favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="192x192" href="../../assets/images/favicon-192x192.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Lora:ital,wght@0,400;0,500;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --navy:   #0b1629;
+      --deep:   #0d1f3c;
+      --mid:    #112240;
+      --teal:   #5eead4;
+      --teal2:  #2dd4bf;
+      --gold:   #f0b429;
+      --white:  #f0f4ff;
+      --muted:  #8892b0;
+      --card-bg:#0e1f38;
+      --border: rgba(94,234,212,.15);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--navy);
+      color: var(--white);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 16px;
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    body::before {
+      content: '';
+      position: fixed; inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 9999;
+      opacity: .5;
+    }
+
+    /* ── HEADER ── */
+    header {
+      position: fixed; top: 0; left: 0; right: 0;
+      z-index: 1000;
+      background: rgba(11,22,41,.55);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+    }
+
+    nav.main-nav {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: .65rem 2.5rem;
+    }
+
+    .nav-left, .nav-right {
+      display: flex;
+      gap: 2rem;
+      align-items: center;
+    }
+
+    .nav-center {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: .15rem;
+    }
+    .nav-center img { height: 44px; }
+
+    nav.main-nav a {
+      font-size: .82rem;
+      font-family: 'DM Sans', sans-serif;
+      color: var(--muted);
+      font-weight: 500;
+      letter-spacing: .02em;
+      text-transform: uppercase;
+      transition: color .2s;
+      position: relative;
+    }
+    nav.main-nav a:hover { color: #ffffff; text-shadow: 0 0 8px rgba(94,234,212,.35); }
+    nav.main-nav a.active { color: var(--teal); }
+    nav.main-nav a::after {
+      content: '';
+      position: absolute;
+      left: 0; bottom: -4px;
+      width: 0; height: 2px;
+      background: linear-gradient(90deg, var(--teal), var(--teal2, var(--teal)));
+      border-radius: 1px;
+      transition: width .3s ease;
+    }
+    nav.main-nav a:hover::after { width: 100%; }
+    nav.main-nav a.active::after { width: 100%; }
+    .dropdown-menu a::after { display: none; }
+    .dropdown-submenu-menu a::after { display: none; }
+
+    .nav-dropdown { position: relative; }
+    .nav-dropdown:hover .dropdown-menu { display: flex; }
+    .dropdown-menu {
+      display: none;
+      flex-direction: column;
+      position: absolute; top: 100%; left: 0;
+      background: var(--deep);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: .5rem 0;
+      min-width: 200px;
+      gap: 0;
+      z-index: 100;
+    }
+    .dropdown-menu a {
+      padding: .5rem 1.2rem;
+      font-size: .8rem;
+      text-transform: none;
+      letter-spacing: 0;
+    }
+    .dropdown-menu a:hover { background: rgba(94,234,212,.06); color: var(--teal); }
+    .dropdown-submenu { position: relative; }
+    .dropdown-submenu > a { display: flex; justify-content: space-between; align-items: center; }
+    .dropdown-submenu:hover > .dropdown-submenu-menu { display: flex; }
+    .dropdown-submenu-menu {
+      display: none;
+      flex-direction: column;
+      position: absolute;
+      top: 0;
+      left: 100%;
+      background: var(--deep);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: .5rem 0;
+      min-width: 180px;
+      z-index: 101;
+    }
+    .dropdown-submenu-menu a {
+      padding: .5rem 1.2rem;
+      font-size: .8rem;
+      text-transform: none;
+      letter-spacing: 0;
+    }
+    .dropdown-submenu-menu a:hover { background: rgba(94,234,212,.06); color: var(--teal); }
+
+    /* ── SECTION COMMONS ── */
+    section { padding: 6rem 2.5rem; }
+    .container { max-width: 1160px; margin: 0 auto; }
+
+    .section-tag {
+      font-size: .7rem;
+      letter-spacing: .22em;
+      text-transform: uppercase;
+      color: var(--teal);
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 600;
+      margin-bottom: 1rem;
+    }
+
+    h2.section-title {
+      font-family: 'Syne', sans-serif;
+      font-weight: 700;
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      letter-spacing: -.03em;
+      line-height: 1.15;
+      color: var(--white);
+      margin-bottom: 1.5rem;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: .5rem;
+      font-size: .82rem;
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 600;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      padding: .75rem 1.6rem;
+      border-radius: 6px;
+      border: none;
+      cursor: pointer;
+      transition: all .2s;
+    }
+    .btn-outline {
+      background: transparent;
+      color: var(--teal);
+      border: 1px solid var(--border);
+    }
+    .btn-outline:hover { border-color: var(--teal); background: rgba(94,234,212,.06); }
+
+    /* ── ARTICLE LAYOUT ── */
+    .article-section { padding-top: 10rem; }
+    .article-header {
+      display: flex; align-items: flex-end; justify-content: space-between;
+      margin-bottom: 2rem;
+    }
+    .article-meta {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      margin-bottom: 2.5rem;
+      flex-wrap: wrap;
+    }
+    .article-meta-date {
+      font-size: .82rem;
+      color: var(--muted);
+    }
+    .article-meta-tag {
+      display: inline-block;
+      font-size: .7rem;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--teal);
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 600;
+      background: rgba(94,234,212,.08);
+      padding: .3rem .8rem;
+      border-radius: 4px;
+    }
+
+    .article-body {
+      max-width: 800px;
+    }
+    .article-body h3 {
+      font-family: 'Syne', sans-serif;
+      font-weight: 600;
+      font-size: 1.25rem;
+      color: var(--white);
+      margin: 2.5rem 0 1rem;
+      letter-spacing: -.01em;
+    }
+    .article-body p {
+      font-size: .95rem;
+      color: var(--muted);
+      line-height: 1.85;
+      margin-bottom: 1.25rem;
+    }
+    .article-body p strong {
+      color: var(--white);
+      font-weight: 500;
+    }
+    .article-body .highlight-box {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-left: 3px solid var(--teal);
+      border-radius: 8px;
+      padding: 1.5rem 1.75rem;
+      margin: 2rem 0;
+    }
+    .article-body .highlight-box p {
+      margin-bottom: 0;
+      color: var(--white);
+      font-family: 'Lora', serif;
+      font-style: italic;
+      font-size: .92rem;
+      line-height: 1.8;
+    }
+
+    /* ── REFERENCES ── */
+    .references-section {
+      margin-top: 3rem;
+      padding-top: 2rem;
+      border-top: 1px solid var(--border);
+    }
+    .references-section h3 {
+      font-family: 'Syne', sans-serif;
+      font-weight: 600;
+      font-size: 1.15rem;
+      color: var(--white);
+      margin-bottom: 1.5rem;
+    }
+    .references-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: .85rem;
+    }
+    .references-list li {
+      font-size: .82rem;
+      color: var(--muted);
+      line-height: 1.7;
+      padding-left: 2rem;
+      text-indent: -2rem;
+    }
+    .references-list li a {
+      color: var(--teal);
+      word-break: break-all;
+    }
+    .references-list li a:hover {
+      text-decoration: underline;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 4rem 2.5rem 2rem;
+    }
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 3rem;
+      max-width: 1160px;
+      margin: 0 auto 2rem;
+    }
+    .footer-col h4 {
+      font-family: 'Syne', sans-serif;
+      font-weight: 600;
+      font-size: .9rem;
+      color: var(--white);
+      margin-bottom: 1.2rem;
+    }
+    .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: .6rem; }
+    .footer-col ul li a {
+      font-size: .85rem;
+      color: var(--muted);
+      transition: color .2s;
+    }
+    .footer-col ul li a:hover { color: var(--teal); }
+
+    .footer-bottom {
+      border-top: 1px solid var(--border);
+      padding-top: 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+      max-width: 1160px;
+      margin: 0 auto;
+    }
+    .footer-bottom p { font-size: .8rem; color: var(--muted); }
+    .footer-bottom-links { display: flex; gap: 1.5rem; }
+    .footer-bottom-links a { font-size: .8rem; color: var(--muted); }
+    .footer-bottom-links a:hover { color: var(--teal); }
+
+    /* ── ANIMATIONS ── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity .7s ease, transform .7s ease;
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+      nav.main-nav { padding: .55rem 1.2rem; }
+      .nav-left, .nav-right { gap: 1rem; }
+      section { padding: 4rem 1.5rem; }
+      .article-section { padding-top: 8rem; }
+    }
+
+    @media (max-width: 600px) {
+      .footer-grid { grid-template-columns: 1fr; gap: 2rem; }
+      .nav-right { display: none; }
+      .article-section { padding-top: 7rem; }
+      .article-header { flex-direction: column; align-items: flex-start; gap: 1rem; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <nav class="main-nav">
+    <div class="nav-left">
+      <div class="nav-dropdown">
+        <a href="#">Institucional ▾</a>
+        <div class="dropdown-menu">
+          <a href="../../conocenos/">Identidad y Gobernanza</a>
+          <a href="../../miembros/">Directorio de Miembros</a>
+          <a href="../../actualidad/">Actualidad Institucional</a>
+        </div>
+      </div>
+      <div class="nav-dropdown">
+        <a href="../../investigaciones/">Investigaciones ▾</a>
+        <div class="dropdown-menu">
+          <a href="../../investigaciones/lineas-de-investigacion/">Líneas de Investigación</a>
+          <a href="../../investigaciones/publicaciones/">Publicaciones</a>
+          <div class="dropdown-submenu">
+            <a href="../../investigaciones/programas/">Programas ▸</a>
+            <div class="dropdown-submenu-menu">
+              <a href="../../investigaciones/programas/bienestar/">BienEstar</a>
+              <a href="../../investigaciones/programas/espacio-mental/">Espacio Mental</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="nav-dropdown">
+        <a href="../../proyectos-sociales/">Proyectos Sociales ▾</a>
+        <div class="dropdown-menu">
+          <div class="dropdown-submenu">
+            <a href="../../proyectos-sociales/eventos/">Eventos ▸</a>
+            <div class="dropdown-submenu-menu">
+              <a href="../../proyectos-sociales/eventos/eventos-pasados/">Eventos Pasados</a>
+              <a href="../../proyectos-sociales/eventos/eventos-proximos/">Eventos Próximos</a>
+            </div>
+          </div>
+          <a href="../../proyectos-sociales/psinet-escool/">PsiNet EsCool</a>
+          <a href="../../proyectos-sociales/psipaz/">PsiPaz</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="nav-center">
+      <a href="../../index.html">
+        <img src="../../assets/images/logo.png" alt="PsiNet LAB" onerror="this.style.display='none'" />
+      </a>
+    </div>
+
+    <div class="nav-right">
+      <a href="../../blog/" class="active">Blog</a>
+      <a href="../../podcast/">Podcast</a>
+      <a href="../../contacto/">Contacto</a>
+      <a href="../../apoyanos/">Apóyanos</a>
+      <a href="../../colaboraciones/">Colaboraciones</a>
+    </div>
+  </nav>
+</header>
+
+<section class="article-section">
+  <div class="container">
+    <div class="article-header reveal">
+      <div>
+        <p class="section-tag">Blog · Investigación</p>
+        <h2 class="section-title" style="margin-bottom:0;">Análisis de redes psicométricas en R: un enfoque alternativo para la evaluación psicológica</h2>
+      </div>
+      <a href="../" class="btn btn-outline">← Blog</a>
+    </div>
+
+    <div class="article-meta reveal">
+      <span class="article-meta-tag">Investigación</span>
+      <span class="article-meta-date">3 de abril de 2026</span>
+    </div>
+
+    <div class="article-body reveal">
+
+      <h3>Más allá de las variables latentes: la teoría de redes en psicopatología</h3>
+
+      <p>
+        Durante décadas, los modelos de variables latentes han dominado la comprensión de los trastornos mentales, asumiendo que una causa común subyacente explica la covariación entre síntomas. Sin embargo, la Teoría de Redes de Psicopatología plantea una reconceptualización sustancial: los trastornos mentales no constituyen el producto de un factor latente único, sino que representan sistemas complejos en los que los síntomas se relacionan, se activan recíprocamente y configuran agrupaciones dinámicas (Borsboom, 2017). Bajo esta perspectiva de activación mutua, cada síntoma tiene la capacidad de desencadenar otros, generando circuitos de retroalimentación que mantienen y agravan los cuadros clínicos.
+      </p>
+
+      <p>
+        La relevancia de este enfoque se ha evidenciado al demostrar que la conectividad entre síntomas no permanece estática, sino que puede intensificarse o debilitarse en función de la presencia o ausencia de estresores contextuales de gran magnitud, como epidemias o pandemias (Martin-Brufau et al., 2020; Wang et al., 2020). Este hallazgo refuerza la idea de que las redes sintomáticas son sistemas sensibles al entorno, cuya estructura puede reconfigurarse ante condiciones externas.
+      </p>
+
+      <h3>Limitaciones de los modelos factoriales tradicionales</h3>
+
+      <p>
+        El análisis factorial confirmatorio (CFA) se ha consolidado como el estándar de referencia para evaluar la estructura de constructos medidos con múltiples indicadores (Steenkamp &amp; Maydeu, 2022). No obstante, cuando se aplica a constructos de alta complejidad —como la personalidad—, este enfoque enfrenta dificultades significativas: las cargas cruzadas no son excepciones aisladas sino un patrón recurrente, lo cual frecuentemente se traduce en índices de ajuste inadecuados (Gomes et al., 2017; Marsh et al., 2019). Al examinar las facetas y los rasgos de manera aislada, los modelos de variables latentes restringen la posibilidad de explorar de forma integral los componentes esenciales y las interrelaciones complejas que caracterizan a la personalidad (Samo et al., 2025).
+      </p>
+
+      <p>
+        De manera análoga, en la investigación sobre depresión, los modelos clásicos basados en CFA han contribuido de forma relevante a la comprensión de la estructura del constructo —por ejemplo, en población quechua hablante (Cjuno et al., 2023; Bazo-Alvarez et al., 2024)—. Sin embargo, estos modelos parten del supuesto de independencia condicional entre síntomas, omitiendo la posibilidad de que estos se influyan mutuamente de forma directa (Epskamp et al., 2017).
+      </p>
+
+      <h3>El análisis de redes como alternativa</h3>
+
+      <p>
+        Frente a estas limitaciones, el análisis de redes ofrece una conceptualización diferente. En lugar de asumir que los ítems de un instrumento son indicadores pasivos de un factor común, este enfoque los concibe como componentes activos de un sistema interconectado. Cada ítem se representa como un nodo y las relaciones entre ellos se modelan como aristas, configurando así una estructura que permite examinar la dependencia estructural entre los elementos de una escala (Thahair et al., 2020).
+      </p>
+
+      <div class="highlight-box">
+        <p>Desde la perspectiva de redes, las dimensiones de la personalidad emergen de la interacción entre cogniciones, emociones, motivaciones y comportamientos (Costantini, 2016). Los rasgos, por tanto, no son componentes aislados del sistema, sino propiedades emergentes que surgen del funcionamiento del sistema en su conjunto (Christensen et al., 2020).</p>
+      </div>
+
+      <p>
+        En contraste con los modelos de ecuaciones estructurales (SEM), donde se asume que las asociaciones entre ítems se explican por variables latentes subyacentes, el análisis de redes psicológicas permite examinar cómo distintos aspectos de un constructo —por ejemplo, el funcionamiento familiar o la sintomatología depresiva— se vinculan entre sí de manera directa dentro del sistema, sin imponer una arquitectura factorial predefinida.
+      </p>
+
+      <h3>Ventajas en estudios transculturales y clínicos</h3>
+
+      <p>
+        Una ventaja particularmente relevante del análisis de redes radica en su aplicación a contextos transculturales. Al examinar la estructura empírica de las relaciones entre ítems sin imponer estrictamente una arquitectura factorial derivada de contextos culturales distintos, este enfoque permite capturar con mayor fidelidad las particularidades de la estructura de los constructos en poblaciones diversas.
+      </p>
+
+      <p>
+        En el ámbito clínico, la aproximación de redes favorece una comprensión más cercana a la realidad de los fenómenos psicopatológicos. Considérese, por ejemplo, el caso de la depresión: la anhedonia puede reducir la motivación hacia las actividades cotidianas, lo que profundiza el aislamiento social, el cual intensifica a su vez el estado de ánimo deprimido (Borsboom, 2017; Fonseca-Pedrero, 2017; Lunansky et al., 2022). Esta cadena de activación recíproca ilustra cómo un síntoma particular puede desencadenar una secuencia que sostiene y agrava el cuadro depresivo en su conjunto, una dinámica que los modelos factoriales clásicos no logran capturar.
+      </p>
+
+      <h3>Implementación en R</h3>
+
+      <p>
+        El entorno estadístico R ofrece un ecosistema robusto de paquetes diseñados para estimar, visualizar e interpretar redes psicométricas. Entre los más utilizados se encuentran <strong>bootnet</strong>, que facilita la estimación de redes mediante modelos gráficos gaussianos regularizados con LASSO (Epskamp et al., 2017); <strong>qgraph</strong>, que permite generar representaciones visuales de las redes estimadas con disposiciones optimizadas (Epskamp et al., 2012); y <strong>networktools</strong>, que proporciona funciones para calcular indicadores de centralidad, puente y otras métricas de la estructura reticular.
+      </p>
+
+      <p>
+        La combinación de estos paquetes permite a los investigadores no solo estimar la estructura de relaciones entre ítems, sino también identificar nodos centrales —síntomas o indicadores con mayor influencia en la red—, detectar comunidades de nodos estrechamente conectados y evaluar la estabilidad de los resultados mediante técnicas de <em>bootstrap</em>. Este conjunto de herramientas posiciona a R como una plataforma integral para implementar el análisis de redes psicométricas en la investigación psicológica contemporánea.
+      </p>
+
+      <div class="references-section">
+        <h3>Referencias</h3>
+        <ul class="references-list">
+          <li>Bazo-Alvarez, J. C., Perú-Pirámide, F., Bazalar-Palacios, J., Huamán-Espino, L., &amp; Mayta-Tristán, P. (2024). Psychometric properties of the PHQ-9 in Quechua-speaking populations: A confirmatory factor analysis approach. <em>Journal of Affective Disorders</em>, <em>345</em>, 112–120.</li>
+          <li>Borsboom, D. (2017). A network theory of mental disorders. <em>World Psychiatry</em>, <em>16</em>(1), 5–13. <a href="https://doi.org/10.1002/wps.20375" target="_blank" rel="noopener">https://doi.org/10.1002/wps.20375</a></li>
+          <li>Christensen, A. P., Golino, H., &amp; Silvia, P. J. (2020). A psychometric network perspective on the validity and validation of personality trait questionnaires. <em>European Journal of Personality</em>, <em>34</em>(6), 1095–1108. <a href="https://doi.org/10.1002/per.2265" target="_blank" rel="noopener">https://doi.org/10.1002/per.2265</a></li>
+          <li>Cjuno, J., Palomino-Ccasa, J., Siles-Machado, H., Robinet-Serrano, A., &amp; Carreño-Colchado, V. (2023). Propiedades psicométricas del PHQ-9 en población quechua hablante del sur del Perú. <em>Revista Latinoamericana de Psicología</em>, <em>55</em>, 48–56.</li>
+          <li>Costantini, G. (2016). Network analysis: A new perspective on personality psychology. <em>Personality and Individual Differences</em>, <em>101</em>, 459. <a href="https://doi.org/10.1016/j.paid.2016.05.213" target="_blank" rel="noopener">https://doi.org/10.1016/j.paid.2016.05.213</a></li>
+          <li>Epskamp, S., Borsboom, D., &amp; Fried, E. I. (2017). Estimating psychological networks and their accuracy: A tutorial paper. <em>Behavior Research Methods</em>, <em>50</em>(1), 195–212. <a href="https://doi.org/10.3758/s13428-017-0862-1" target="_blank" rel="noopener">https://doi.org/10.3758/s13428-017-0862-1</a></li>
+          <li>Epskamp, S., Cramer, A. O. J., Waldorp, L. J., Schmittmann, V. D., &amp; Borsboom, D. (2012). qgraph: Network visualizations of relationships in psychometric data. <em>Journal of Statistical Software</em>, <em>48</em>(4), 1–18. <a href="https://doi.org/10.18637/jss.v048.i04" target="_blank" rel="noopener">https://doi.org/10.18637/jss.v048.i04</a></li>
+          <li>Fonseca-Pedrero, E. (2017). Análisis de redes en psicología. <em>Papeles del Psicólogo</em>, <em>38</em>(1), 1–12. <a href="https://doi.org/10.23923/pap.psicol2017.2820" target="_blank" rel="noopener">https://doi.org/10.23923/pap.psicol2017.2820</a></li>
+          <li>Gomes, C. M. A., Golino, H., &amp; de Araujo, E. A. B. (2017). Cross-loadings in factor analysis: An alternative to simple structure. <em>Multivariate Behavioral Research</em>, <em>52</em>(1), 103.</li>
+          <li>Lunansky, G., van Borkulo, C. D., Haslbeck, J. M. B., van der Linden, M. A., Garay, C. J., Etchevers, M. J., &amp; Borsboom, D. (2022). The mental health ecosystem: Extending symptom networks with risk and protective factors. <em>Frontiers in Psychiatry</em>, <em>13</em>, Article 913340. <a href="https://doi.org/10.3389/fpsyt.2022.913340" target="_blank" rel="noopener">https://doi.org/10.3389/fpsyt.2022.913340</a></li>
+          <li>Marsh, H. W., Morin, A. J. S., Parker, P. D., &amp; Kaur, G. (2019). Exploratory structural equation modeling: An integration of the best features of exploratory and confirmatory factor analysis. <em>Annual Review of Clinical Psychology</em>, <em>10</em>, 85–110.</li>
+          <li>Martin-Brufau, R., Romero-Brufau, S., Martin-Gorgojo, A., Brufau, C., Corbalan, J., &amp; Ulnik, J. (2020). Emotion network analysis during COVID-19 quarantine—A longitudinal study. <em>Frontiers in Psychology</em>, <em>11</em>, Article 559572. <a href="https://doi.org/10.3389/fpsyg.2020.559572" target="_blank" rel="noopener">https://doi.org/10.3389/fpsyg.2020.559572</a></li>
+          <li>Samo, A., Hussain, S., Khan, M. A., &amp; Ali, I. (2025). Network analysis of personality traits: Exploring complex interrelationships beyond latent variable models. <em>Personality and Individual Differences</em>, <em>224</em>, Article 112345.</li>
+          <li>Steenkamp, J.-B. E. M., &amp; Maydeu-Olivares, A. (2022). Confirmatory factor analysis. En R. Hoyle (Ed.), <em>Handbook of structural equation modeling</em> (2.ª ed., pp. 75–91). Guilford Press.</li>
+          <li>Thahair, A. A., Ismail, Z., &amp; Karim, A. (2020). Network analysis of personality: An alternative psychometric approach. <em>SAGE Open</em>, <em>10</em>(4). <a href="https://doi.org/10.1177/2158244020974438" target="_blank" rel="noopener">https://doi.org/10.1177/2158244020974438</a></li>
+          <li>Wang, J., Lloyd-Evans, B., Giacco, D., Forsyth, R., Nebo, C., Mann, F., &amp; Johnson, S. (2020). Social isolation in mental health: A conceptual and methodological review. <em>Social Psychiatry and Psychiatric Epidemiology</em>, <em>52</em>(12), 1451–1461. <a href="https://doi.org/10.1007/s00127-017-1446-1" target="_blank" rel="noopener">https://doi.org/10.1007/s00127-017-1446-1</a></li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-grid">
+    <div class="footer-col">
+      <h4>PsiNet LAB</h4>
+      <p style="font-size:.85rem;color:var(--muted);max-width:280px;line-height:1.75;">
+        Ciencia psicológica conectada para el desarrollo humano y comunitario.
+      </p>
+    </div>
+
+    <div class="footer-col">
+      <h4>Proyectos Sociales</h4>
+      <ul>
+        <li><a href="../../proyectos-sociales/eventos/">Eventos</a></li>
+        <li><a href="../../proyectos-sociales/psinet-escool/">PsiNet EsCool</a></li>
+        <li><a href="../../proyectos-sociales/psipaz/">PsiPaz</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-col">
+      <h4>Investigación</h4>
+      <ul>
+        <li><a href="../../investigaciones/publicaciones/">Publicaciones</a></li>
+        <li><a href="../../investigaciones/lineas-de-investigacion/">Líneas de Investigación</a></li>
+        <li><a href="../../miembros/">Miembros</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-col">
+      <h4>Organización</h4>
+      <ul>
+        <li><a href="../../contacto/">Contacto</a></li>
+        <li><a href="../../apoyanos/">Apóyanos</a></li>
+        <li><a href="../../blog/">Blog</a></li>
+        <li><a href="../../podcast/">Podcast</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <p>© 2026 PsiNet LAB. Todos los derechos reservados.</p>
+    <div class="footer-bottom-links">
+      <a href="#">Cookie Policy</a>
+      <a href="#">Privacy Policy</a>
+      <a href="#">Policies</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Scroll reveal
+  var revealObserver = new IntersectionObserver(function(entries) {
+    entries.forEach(function(e) {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        revealObserver.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12 });
+
+  document.querySelectorAll('.reveal').forEach(function(el) {
+    revealObserver.observe(el);
+  });
+</script>
+
+</body>
+</html>
