@@ -383,6 +383,115 @@
     .footer-bottom-links a { font-size: .8rem; color: var(--muted); }
     .footer-bottom-links a:hover { color: var(--teal); }
 
+    /* ── FLOATING NAV ── */
+    .floating-nav {
+      position: fixed;
+      right: 1.5rem;
+      top: 50%;
+      transform: translateY(-50%) translateX(100px);
+      z-index: 900;
+      display: flex;
+      flex-direction: column;
+      gap: .25rem;
+      opacity: 0;
+      transition: opacity .5s cubic-bezier(.4,0,.2,1), transform .5s cubic-bezier(.4,0,.2,1);
+      pointer-events: none;
+    }
+    .floating-nav.visible {
+      opacity: 1;
+      transform: translateY(-50%) translateX(0);
+      pointer-events: auto;
+    }
+
+    .floating-nav-inner {
+      background: rgba(14,31,56,.65);
+      backdrop-filter: blur(24px) saturate(1.4);
+      -webkit-backdrop-filter: blur(24px) saturate(1.4);
+      border: 1px solid rgba(94,234,212,.12);
+      border-radius: 16px;
+      padding: .65rem .55rem;
+      display: flex;
+      flex-direction: column;
+      gap: .2rem;
+      box-shadow: 0 8px 32px rgba(0,0,0,.35), inset 0 1px 0 rgba(255,255,255,.04);
+    }
+
+    .fnav-item {
+      position: relative;
+      display: flex;
+      align-items: center;
+      gap: .65rem;
+      padding: .5rem .6rem;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: background .3s ease, box-shadow .35s ease;
+      text-decoration: none;
+      color: var(--muted);
+      white-space: nowrap;
+    }
+    .fnav-item:hover {
+      background: rgba(94,234,212,.06);
+      color: var(--white);
+    }
+
+    .fnav-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      flex-shrink: 0;
+      border: 2px solid currentColor;
+      transition: background .3s ease, border-color .3s ease, box-shadow .4s ease, transform .3s ease;
+    }
+    .fnav-item:hover .fnav-dot {
+      transform: scale(1.15);
+    }
+    .fnav-item.active .fnav-dot {
+      background: var(--dot-accent);
+      border-color: var(--dot-accent);
+      box-shadow: 0 0 10px var(--dot-accent), 0 0 25px color-mix(in srgb, var(--dot-accent) 40%, transparent);
+      transform: scale(1.2);
+    }
+
+    .fnav-label {
+      font-family: 'DM Sans', sans-serif;
+      font-size: .72rem;
+      font-weight: 500;
+      letter-spacing: .03em;
+      transition: color .3s ease;
+      max-width: 0;
+      overflow: hidden;
+      opacity: 0;
+      transition: max-width .35s cubic-bezier(.4,0,.2,1), opacity .25s ease, color .3s ease;
+    }
+    .floating-nav-inner:hover .fnav-label {
+      max-width: 160px;
+      opacity: 1;
+    }
+
+    .fnav-item.active {
+      color: var(--white);
+    }
+    .fnav-item.active .fnav-label {
+      color: var(--dot-accent);
+      font-weight: 600;
+    }
+
+    /* Accent colors per section */
+    .fnav-item[data-section="sec-direccion"]      { --dot-accent: #f0b429; }
+    .fnav-item[data-section="sec-investigacion"]   { --dot-accent: #5eead4; }
+    .fnav-item[data-section="sec-proyectos"]       { --dot-accent: #f97316; }
+    .fnav-item[data-section="sec-talento"]         { --dot-accent: #a78bfa; }
+    .fnav-item[data-section="sec-comunicaciones"]  { --dot-accent: #60a5fa; }
+
+    /* Pulse animation for active dot */
+    @keyframes fnav-pulse {
+      0%, 100% { box-shadow: 0 0 8px var(--dot-accent), 0 0 20px color-mix(in srgb, var(--dot-accent) 30%, transparent); }
+      50%      { box-shadow: 0 0 14px var(--dot-accent), 0 0 36px color-mix(in srgb, var(--dot-accent) 45%, transparent); }
+    }
+    .fnav-item.active .fnav-dot {
+      animation: fnav-pulse 2.5s ease-in-out infinite;
+    }
+
     /* ── ANIMATIONS ── */
     .reveal {
       opacity: 0;
@@ -399,6 +508,11 @@
       .nav-left, .nav-right { gap: 1rem; }
       section { padding: 4rem 1.5rem; }
       .page-section { padding-top: 8rem; }
+
+      .floating-nav { right: .75rem; }
+      .floating-nav-inner { padding: .5rem .4rem; }
+      .fnav-item { padding: .4rem .45rem; }
+      .fnav-label { display: none; }
     }
 
     @media (max-width: 600px) {
@@ -407,6 +521,26 @@
       .nav-right { display: none; }
       .page-section { padding-top: 7rem; }
       .page-header { flex-direction: column; align-items: flex-start; gap: 1rem; }
+
+      .floating-nav {
+        right: auto;
+        left: 50%;
+        top: auto;
+        bottom: 1.25rem;
+        transform: translateX(-50%) translateY(80px);
+        flex-direction: row;
+      }
+      .floating-nav.visible {
+        transform: translateX(-50%) translateY(0);
+      }
+      .floating-nav-inner {
+        flex-direction: row;
+        border-radius: 28px;
+        padding: .5rem .75rem;
+        gap: .15rem;
+      }
+      .fnav-item { padding: .5rem .55rem; border-radius: 50%; }
+      .fnav-dot { width: 9px; height: 9px; }
     }
   </style>
 </head>
@@ -491,6 +625,13 @@
   </div>
 </section>
 
+<!-- Floating Section Nav -->
+<nav class="floating-nav" id="floating-nav" aria-label="Navegación de secciones">
+  <div class="floating-nav-inner" id="floating-nav-inner">
+    <!-- Populated dynamically -->
+  </div>
+</nav>
+
 <footer>
   <div class="footer-grid">
     <div class="footer-col">
@@ -543,6 +684,7 @@
 <script>
   (function renderMembers() {
     var container = document.getElementById('members-grid');
+    var fnavInner = document.getElementById('floating-nav-inner');
     if (!container || typeof MEMBERS === 'undefined') return;
 
     var sections = [
@@ -554,13 +696,17 @@
     ];
 
     var cardIndex = 0;
+    var renderedSections = [];
 
     sections.forEach(function(sec) {
       var members = MEMBERS.filter(function(m) { return sec.areas.indexOf(m.area) !== -1; });
       if (!members.length) return;
 
+      var sectionId = 'sec-' + sec.key;
+
       var section = document.createElement('div');
       section.className = 'area-section area-' + sec.key;
+      section.id = sectionId;
 
       var header = document.createElement('div');
       header.className = 'area-header reveal';
@@ -598,7 +744,90 @@
 
       section.appendChild(grid);
       container.appendChild(section);
+
+      renderedSections.push({ id: sectionId, label: sec.label, icon: sec.icon });
     });
+
+    // Build floating nav items
+    if (fnavInner) {
+      renderedSections.forEach(function(s) {
+        var a = document.createElement('a');
+        a.href = '#' + s.id;
+        a.className = 'fnav-item';
+        a.setAttribute('data-section', s.id);
+        a.setAttribute('title', s.label);
+        a.innerHTML = '<span class="fnav-dot"></span><span class="fnav-label">' + s.label + '</span>';
+        a.addEventListener('click', function(e) {
+          e.preventDefault();
+          var target = document.getElementById(s.id);
+          if (target) {
+            var headerOffset = 80;
+            var top = target.getBoundingClientRect().top + window.pageYOffset - headerOffset;
+            window.scrollTo({ top: top, behavior: 'smooth' });
+          }
+        });
+        fnavInner.appendChild(a);
+      });
+    }
+  })();
+
+  // Floating nav visibility & active tracking
+  (function initFloatingNav() {
+    var floatingNav = document.getElementById('floating-nav');
+    var pageSection = document.querySelector('.page-section');
+    if (!floatingNav || !pageSection) return;
+
+    var fnavItems = floatingNav.querySelectorAll('.fnav-item');
+    var sectionEls = [];
+    fnavItems.forEach(function(item) {
+      var id = item.getAttribute('data-section');
+      var el = document.getElementById(id);
+      if (el) sectionEls.push({ el: el, item: item });
+    });
+
+    // Show/hide floating nav based on scroll position
+    var showThreshold = pageSection.offsetTop + 200;
+
+    function updateFloatingNav() {
+      var scrollY = window.pageYOffset;
+
+      // Show/hide
+      if (scrollY > showThreshold) {
+        floatingNav.classList.add('visible');
+      } else {
+        floatingNav.classList.remove('visible');
+      }
+
+      // Active tracking
+      var current = null;
+      var headerOffset = 120;
+      for (var i = sectionEls.length - 1; i >= 0; i--) {
+        var rect = sectionEls[i].el.getBoundingClientRect();
+        if (rect.top <= headerOffset) {
+          current = sectionEls[i];
+          break;
+        }
+      }
+
+      fnavItems.forEach(function(item) { item.classList.remove('active'); });
+      if (current) {
+        current.item.classList.add('active');
+      }
+    }
+
+    var ticking = false;
+    window.addEventListener('scroll', function() {
+      if (!ticking) {
+        requestAnimationFrame(function() {
+          updateFloatingNav();
+          ticking = false;
+        });
+        ticking = true;
+      }
+    }, { passive: true });
+
+    // Initial check
+    updateFloatingNav();
   })();
 
   // Scroll reveal
