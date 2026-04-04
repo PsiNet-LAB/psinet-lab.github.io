@@ -216,6 +216,56 @@
     }
 
     /* ── MEMBERS GRID ── */
+    .area-section { margin-bottom: 4rem; }
+
+    .area-header {
+      display: flex;
+      align-items: center;
+      gap: 1.2rem;
+      margin-bottom: 2rem;
+    }
+    .area-icon {
+      width: 44px; height: 44px;
+      border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.2rem;
+      flex-shrink: 0;
+    }
+    .area-header-text { flex: 1; min-width: 0; }
+    .area-title {
+      font-family: 'Syne', sans-serif;
+      font-weight: 700;
+      font-size: 1.35rem;
+      letter-spacing: -.01em;
+    }
+    .area-count {
+      font-size: .75rem;
+      color: var(--muted);
+      margin-top: .15rem;
+    }
+    .area-line {
+      height: 2px;
+      border-radius: 1px;
+      flex-shrink: 0;
+      width: 100%;
+      max-width: 120px;
+      opacity: .5;
+    }
+
+    /* Area accent colors */
+    .area-direccion       { --accent: #f0b429; }
+    .area-investigacion   { --accent: #5eead4; }
+    .area-proyectos       { --accent: #f97316; }
+    .area-talento         { --accent: #a78bfa; }
+    .area-comunicaciones  { --accent: #60a5fa; }
+
+    .area-section .area-icon { background: color-mix(in srgb, var(--accent) 18%, transparent); color: var(--accent); }
+    .area-section .area-title { color: var(--accent); }
+    .area-section .area-line { background: var(--accent); }
+    .area-section .member-card-area { color: var(--accent); }
+    .area-section .member-card-link { color: var(--accent); }
+    .area-section .member-card:hover { border-color: color-mix(in srgb, var(--accent) 40%, transparent); }
+
     .members-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -435,7 +485,7 @@
       y proyectos de impacto social.
     </p>
 
-    <div class="members-grid" id="members-grid">
+    <div id="members-grid">
       <!-- Rendered dynamically from members-data.js -->
     </div>
   </div>
@@ -492,25 +542,62 @@
 <script src="../assets/js/members-data.js"></script>
 <script>
   (function renderMembers() {
-    var grid = document.getElementById('members-grid');
-    if (!grid || typeof MEMBERS === 'undefined') return;
+    var container = document.getElementById('members-grid');
+    if (!container || typeof MEMBERS === 'undefined') return;
 
-    MEMBERS.forEach(function(m, i) {
-      var card = document.createElement('a');
-      card.href = m.slug + '/';
-      card.className = 'member-card reveal';
-      card.style.transitionDelay = (0.08 + i * 0.06) + 's';
+    var sections = [
+      { key: 'direccion',      label: 'Dirección',         icon: '🎯', areas: ['Dirección'] },
+      { key: 'investigacion',  label: 'Investigación',     icon: '🔬', areas: ['Investigación'] },
+      { key: 'proyectos',      label: 'Proyectos Sociales',icon: '🤝', areas: ['Proyectos Sociales'] },
+      { key: 'talento',        label: 'Talento Humano',    icon: '💡', areas: ['Talento Humano', 'Talento Humano e Investigación'] },
+      { key: 'comunicaciones', label: 'Comunicaciones',    icon: '📡', areas: ['Comunicaciones'] }
+    ];
 
-      card.innerHTML =
-        '<img class="member-card-photo" src="../assets/images/photos/' + m.photo + '" alt="' + m.name + '" loading="lazy" />' +
-        '<div class="member-card-body">' +
-          '<span class="member-card-area">' + m.area + '</span>' +
-          '<h3 class="member-card-name">' + m.name + '</h3>' +
-          '<p class="member-card-role">' + m.role + '</p>' +
-          '<span class="member-card-link">Ver perfil →</span>' +
-        '</div>';
+    var cardIndex = 0;
 
-      grid.appendChild(card);
+    sections.forEach(function(sec) {
+      var members = MEMBERS.filter(function(m) { return sec.areas.indexOf(m.area) !== -1; });
+      if (!members.length) return;
+
+      var section = document.createElement('div');
+      section.className = 'area-section area-' + sec.key;
+
+      var header = document.createElement('div');
+      header.className = 'area-header reveal';
+      header.style.transitionDelay = (0.08 + cardIndex * 0.04) + 's';
+      header.innerHTML =
+        '<div class="area-icon">' + sec.icon + '</div>' +
+        '<div class="area-header-text">' +
+          '<div class="area-title">' + sec.label + '</div>' +
+          '<div class="area-count">' + members.length + (members.length === 1 ? ' miembro' : ' miembros') + '</div>' +
+        '</div>' +
+        '<div class="area-line"></div>';
+      section.appendChild(header);
+
+      var grid = document.createElement('div');
+      grid.className = 'members-grid';
+
+      members.forEach(function(m) {
+        var card = document.createElement('a');
+        card.href = m.slug + '/';
+        card.className = 'member-card reveal';
+        card.style.transitionDelay = (0.08 + cardIndex * 0.04) + 's';
+        cardIndex++;
+
+        card.innerHTML =
+          '<img class="member-card-photo" src="../assets/images/photos/' + m.photo + '" alt="' + m.name + '" loading="lazy" />' +
+          '<div class="member-card-body">' +
+            '<span class="member-card-area">' + m.area + '</span>' +
+            '<h3 class="member-card-name">' + m.name + '</h3>' +
+            '<p class="member-card-role">' + m.role + '</p>' +
+            '<span class="member-card-link">Ver perfil →</span>' +
+          '</div>';
+
+        grid.appendChild(card);
+      });
+
+      section.appendChild(grid);
+      container.appendChild(section);
     });
   })();
 
