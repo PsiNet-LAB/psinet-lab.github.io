@@ -911,7 +911,7 @@ boot_aristas <span class="r-operator">&lt;-</span> <span class="r-func">bootnet<
   statistics <span class="r-operator">=</span> <span class="r-string">"edge"</span>
 )
 
-<span class="r-comment"># Gráfico de diferencias: las aristas cuyas barras no se solapan</span>
+<span class="r-comment"># Gráfico de diferencias: ¿reales o por varianza muestral?</span>
 <span class="r-comment"># son significativamente distintas entre sí</span>
 <span class="r-func">plot</span>(boot_aristas,
      plot        <span class="r-operator">=</span> <span class="r-string">"difference"</span>,
@@ -920,7 +920,7 @@ boot_aristas <span class="r-operator">&lt;-</span> <span class="r-func">bootnet<
         </div>
         <div class="figure-container">
           <img src="img/Rplot03.png" alt="Diferencias significativas entre pesos de aristas." loading="lazy" />
-          <div class="figure-caption">Figura 4. Diferencias significativas entre pesos de aristas. Las barras que no se solapan indican diferencias estadísticamente distinguibles.</div>
+          <div class="figure-caption">Figura 4. Diferencias significativas entre pesos de aristas. Cada fila y columna representa una conexión específica entre dos nodos. Se ordenan de mayor a menor peso absoluto de la arista original. Cuadros Negros (Significativo): Indican que el intervalo de confianza para la diferencia entre el parámetro de esa fila y el de esa columna no incluye el cero. Por lo tanto, se puede afirmar que un parámetro es significativamente mayor o menor que el otro. Cuadros Grises (No Significativo): Indican que el intervalo de confianza sí incluye el cero. Esto significa que no se puede diferenciar estadísticamente el peso de ambas aristas o la centralidad de ambos nodos y que podría deberse a fluctuaciones del muestreo.</div>
         </div>
       </div>
 
@@ -951,12 +951,12 @@ boot_estab <span class="r-operator">&lt;-</span> <span class="r-func">bootnet</s
             <tr><th>CS</th><th>Interpretación</th></tr>
           </thead>
           <tbody>
-            <tr><td><strong>&gt; 0.50</strong></td><td>Estable ✓ — puedes interpretar con confianza</td></tr>
+            <tr><td><strong>&gt; 0.50</strong></td><td>Estable ✓ — puede interpretarse con confianza</td></tr>
             <tr><td><strong>0.25 – 0.50</strong></td><td>Aceptable ⚠️ — interpretar con cautela</td></tr>
-            <tr><td><strong>&lt; 0.25</strong></td><td>Inestable ✗ — no interpretar ese índice</td></tr>
+            <tr><td><strong>&lt; 0.25</strong></td><td>Inestable ✗</td></tr>
           </tbody>
         </table>
-        <p>Si el CS de <strong>Strength</strong> es &gt; 0.50, puedes interpretar con confianza el ordenamiento de centralidad. <strong>Betweenness</strong> y <strong>Closeness</strong> suelen ser menos estables; si su CS &lt; 0.25, reporta solo Strength en tu artículo.</p>
+        <p>Si el CS de <strong>Strength</strong> es &gt; 0.50, puedes interpretar con confianza el ordenamiento de centralidad. <strong>Betweenness</strong> y <strong>Closeness</strong> suelen ser menos estables; si su CS &lt; 0.25, debes explicar por qué es inestable en tu artículo.</p>
       </div>
 
       <!-- ── PASO 9: Comunidades ── -->
