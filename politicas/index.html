@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Políticas – PsiNet LAB</title>
+  <link rel="icon" type="image/x-icon" href="../favicon.ico" />
+  <link rel="icon" type="image/png" sizes="32x32" href="../assets/images/favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="192x192" href="../assets/images/favicon-192x192.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Lora:ital,wght@0,400;0,500;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --navy:   #0b1629;
+      --deep:   #0d1f3c;
+      --mid:    #112240;
+      --teal:   #5eead4;
+      --teal2:  #2dd4bf;
+      --gold:   #f0b429;
+      --white:  #f0f4ff;
+      --muted:  #8892b0;
+      --card-bg:#0e1f38;
+      --border: rgba(94,234,212,.15);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--navy);
+      color: var(--white);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 16px;
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    body::before {
+      content: '';
+      position: fixed; inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 9999;
+      opacity: .5;
+    }
+
+    /* ── HEADER ── */
+    header {
+      position: fixed; top: 0; left: 0; right: 0;
+      z-index: 1000;
+      background: rgba(11,22,41,.55);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+    }
+
+    nav.main-nav {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: .65rem 2.5rem;
+    }
+
+    .nav-left, .nav-right {
+      display: flex;
+      gap: 2rem;
+      align-items: center;
+    }
+
+    .nav-center {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: .15rem;
+    }
+    .nav-center img { height: 44px; }
+
+    nav.main-nav a {
+      font-size: .82rem;
+      font-family: 'DM Sans', sans-serif;
+      color: var(--muted);
+      font-weight: 500;
+      letter-spacing: .02em;
+      text-transform: uppercase;
+      transition: color .2s;
+      position: relative;
+    }
+    nav.main-nav a:hover { color: #ffffff; text-shadow: 0 0 8px rgba(94,234,212,.35); }
+    nav.main-nav a.active { color: var(--teal); }
+    nav.main-nav a::after {
+      content: '';
+      position: absolute;
+      left: 0; bottom: -4px;
+      width: 0; height: 2px;
+      background: linear-gradient(90deg, var(--teal), var(--teal2, var(--teal)));
+      border-radius: 1px;
+      transition: width .3s ease;
+    }
+    nav.main-nav a:hover::after { width: 100%; }
+    nav.main-nav a.active::after { width: 100%; }
+    .dropdown-menu a::after { display: none; }
+    .dropdown-submenu-menu a::after { display: none; }
+
+    .nav-dropdown { position: relative; }
+    .nav-dropdown:hover .dropdown-menu { display: flex; }
+    .dropdown-menu {
+      display: none;
+      flex-direction: column;
+      position: absolute; top: 100%; left: 0;
+      background: var(--deep);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: .5rem 0;
+      min-width: 200px;
+      gap: 0;
+      z-index: 100;
+    }
+    .dropdown-menu a {
+      padding: .5rem 1.2rem;
+      font-size: .8rem;
+      text-transform: none;
+      letter-spacing: 0;
+    }
+    .dropdown-menu a:hover { background: rgba(94,234,212,.06); color: var(--teal); }
+    .dropdown-submenu { position: relative; }
+    .dropdown-submenu > a { display: flex; justify-content: space-between; align-items: center; }
+    .dropdown-submenu:hover > .dropdown-submenu-menu { display: flex; }
+    .dropdown-submenu-menu {
+      display: none;
+      flex-direction: column;
+      position: absolute;
+      top: 0;
+      left: 100%;
+      background: var(--deep);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: .5rem 0;
+      min-width: 180px;
+      z-index: 101;
+    }
+    .dropdown-submenu-menu a {
+      padding: .5rem 1.2rem;
+      font-size: .8rem;
+      text-transform: none;
+      letter-spacing: 0;
+    }
+    .dropdown-submenu-menu a:hover { background: rgba(94,234,212,.06); color: var(--teal); }
+
+    /* ── SECTION COMMONS ── */
+    section { padding: 6rem 2.5rem; }
+    .container { max-width: 1160px; margin: 0 auto; }
+
+    .section-tag {
+      font-size: .7rem;
+      letter-spacing: .22em;
+      text-transform: uppercase;
+      color: var(--teal);
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 600;
+      margin-bottom: 1rem;
+    }
+
+    h2.section-title {
+      font-family: 'Syne', sans-serif;
+      font-weight: 700;
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      letter-spacing: -.03em;
+      line-height: 1.15;
+      color: var(--white);
+      margin-bottom: 1.5rem;
+    }
+
+    /* ── HERO ── */
+    .policy-hero {
+      padding-top: 10rem;
+      padding-bottom: 4rem;
+      position: relative;
+      overflow: hidden;
+      text-align: center;
+    }
+
+    .policy-hero .container {
+      position: relative;
+      z-index: 2;
+    }
+
+    .hero-eyebrow {
+      font-size: .7rem;
+      letter-spacing: .3em;
+      text-transform: uppercase;
+      color: var(--teal);
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 600;
+      margin-bottom: 1.5rem;
+      display: inline-flex;
+      align-items: center;
+      gap: .6rem;
+    }
+
+    .hero-eyebrow::before,
+    .hero-eyebrow::after {
+      content: '';
+      width: 30px;
+      height: 1px;
+      background: var(--teal);
+      opacity: .4;
+    }
+
+    .policy-hero h1 {
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: clamp(2.2rem, 5vw, 3.8rem);
+      letter-spacing: -.03em;
+      line-height: 1.1;
+      color: var(--white);
+      margin-bottom: 1.5rem;
+    }
+
+    .policy-hero h1 .accent {
+      background: linear-gradient(135deg, var(--teal), #38bdf8, #818cf8);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero-subtitle {
+      font-family: 'Lora', serif;
+      font-size: clamp(1rem, 2vw, 1.25rem);
+      color: var(--muted);
+      max-width: 600px;
+      margin: 0 auto;
+      font-style: italic;
+      line-height: 1.7;
+    }
+
+    /* ── POLICY CARDS ── */
+    .policies-section {
+      padding-top: 2rem;
+      padding-bottom: 6rem;
+    }
+
+    .policies-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 2rem;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .policy-link-card {
+      background: linear-gradient(145deg, var(--card-bg), var(--deep));
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 2.5rem;
+      position: relative;
+      overflow: hidden;
+      transition: border-color .3s, transform .3s, box-shadow .3s;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .policy-link-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--teal), #38bdf8);
+      opacity: 0;
+      transition: opacity .3s;
+    }
+
+    .policy-link-card:hover {
+      border-color: rgba(94,234,212,.35);
+      transform: translateY(-6px);
+      box-shadow: 0 12px 40px rgba(0,0,0,.3);
+    }
+
+    .policy-link-card:hover::before {
+      opacity: 1;
+    }
+
+    .policy-link-card .card-icon {
+      font-size: 2.5rem;
+      margin-bottom: 1.2rem;
+      display: block;
+    }
+
+    .policy-link-card h3 {
+      font-family: 'Syne', sans-serif;
+      font-weight: 700;
+      font-size: 1.3rem;
+      color: var(--white);
+      margin-bottom: .75rem;
+    }
+
+    .policy-link-card p {
+      font-family: 'Lora', serif;
+      font-size: .92rem;
+      color: var(--muted);
+      line-height: 1.75;
+      margin-bottom: 1.5rem;
+      flex-grow: 1;
+    }
+
+    .card-link {
+      display: inline-flex;
+      align-items: center;
+      gap: .5rem;
+      font-size: .82rem;
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 600;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      color: var(--teal);
+      transition: gap .3s;
+    }
+
+    .policy-link-card:hover .card-link { gap: .8rem; }
+
+    .card-link svg {
+      width: 16px;
+      height: 16px;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    /* ── COMMITMENT SECTION ── */
+    .commitment-section {
+      text-align: center;
+      padding: 5rem 2.5rem;
+      position: relative;
+    }
+
+    .commitment-section::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 50%;
+      transform: translateX(-50%);
+      width: 120px;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--teal), transparent);
+    }
+
+    .commitment-quote {
+      font-family: 'Lora', serif;
+      font-style: italic;
+      font-size: clamp(1.1rem, 2.5vw, 1.5rem);
+      color: var(--muted);
+      max-width: 700px;
+      margin: 0 auto 1rem;
+      line-height: 1.8;
+    }
+
+    .commitment-quote .highlight {
+      color: var(--teal);
+      font-weight: 500;
+    }
+
+    .commitment-note {
+      font-size: .85rem;
+      color: var(--muted);
+      opacity: .7;
+      max-width: 500px;
+      margin: 1.5rem auto 0;
+      line-height: 1.6;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 4rem 2.5rem 2rem;
+    }
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 3rem;
+      max-width: 1160px;
+      margin: 0 auto 2rem;
+    }
+    .footer-col h4 {
+      font-family: 'Syne', sans-serif;
+      font-weight: 600;
+      font-size: .9rem;
+      color: var(--white);
+      margin-bottom: 1.2rem;
+    }
+    .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: .6rem; }
+    .footer-col ul li a {
+      font-size: .85rem;
+      color: var(--muted);
+      transition: color .2s;
+    }
+    .footer-col ul li a:hover { color: var(--teal); }
+
+    .footer-bottom {
+      border-top: 1px solid var(--border);
+      padding-top: 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+      max-width: 1160px;
+      margin: 0 auto;
+    }
+    .footer-bottom p { font-size: .8rem; color: var(--muted); }
+    .footer-bottom-links { display: flex; gap: 1.5rem; }
+    .footer-bottom-links a { font-size: .8rem; color: var(--muted); }
+    .footer-bottom-links a:hover { color: var(--teal); }
+
+    /* ── ANIMATIONS ── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity .7s ease, transform .7s ease;
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+      nav.main-nav { padding: .55rem 1.2rem; }
+      .nav-left, .nav-right { gap: 1rem; }
+      section { padding: 4rem 1.5rem; }
+      .policy-hero { padding-top: 8rem; }
+    }
+
+    @media (max-width: 600px) {
+      .policies-grid { grid-template-columns: 1fr; }
+      .footer-grid { grid-template-columns: 1fr; gap: 2rem; }
+      .nav-right { display: none; }
+      .policy-hero { padding-top: 7rem; }
+      .policy-link-card { padding: 2rem; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <nav class="main-nav">
+    <div class="nav-left">
+      <div class="nav-dropdown">
+        <a href="#">Institucional ▾</a>
+        <div class="dropdown-menu">
+          <a href="../conocenos/">Identidad y Gobernanza</a>
+          <a href="../miembros/">Directorio de Miembros</a>
+          <a href="../actualidad/">Actualidad Institucional</a>
+        </div>
+      </div>
+      <div class="nav-dropdown">
+        <a href="../investigaciones/">Investigaciones ▾</a>
+        <div class="dropdown-menu">
+          <a href="../investigaciones/lineas-de-investigacion/">Líneas de Investigación</a>
+          <a href="../investigaciones/publicaciones/">Publicaciones</a>
+          <div class="dropdown-submenu">
+            <a href="../investigaciones/programas/">Programas ▸</a>
+            <div class="dropdown-submenu-menu">
+              <a href="../investigaciones/programas/bienestar/">BienEstar</a>
+              <a href="../investigaciones/programas/espacio-mental/">Espacio Mental</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="nav-dropdown">
+        <a href="../proyectos-sociales/">Proyectos Sociales ▾</a>
+        <div class="dropdown-menu">
+          <div class="dropdown-submenu">
+            <a href="../proyectos-sociales/eventos/">Eventos ▸</a>
+            <div class="dropdown-submenu-menu">
+              <a href="../proyectos-sociales/eventos/eventos-pasados/">Eventos Pasados</a>
+              <a href="../proyectos-sociales/eventos/eventos-proximos/">Eventos Próximos</a>
+            </div>
+          </div>
+          <a href="../proyectos-sociales/psinet-escool/">PsiNet EsCool</a>
+          <a href="../proyectos-sociales/psipaz/">PsiPaz</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="nav-center">
+      <a href="../index.html">
+        <img src="../assets/images/logo.png" alt="PsiNet LAB" onerror="this.style.display='none'" />
+      </a>
+    </div>
+
+    <div class="nav-right">
+      <a href="../blog/">Blog</a>
+      <a href="../podcast/">Podcast</a>
+      <a href="../contacto/">Contacto</a>
+      <a href="../apoyanos/">Apóyanos</a>
+      <a href="../colaboraciones/">Colaboraciones</a>
+    </div>
+  </nav>
+</header>
+
+<!-- ═══════ HERO ═══════ -->
+<section class="policy-hero">
+  <div class="container">
+    <div class="reveal">
+      <span class="hero-eyebrow">Legal</span>
+      <h1>Nuestras <span class="accent">Políticas</span></h1>
+      <p class="hero-subtitle">
+        Transparencia y confianza son los pilares de nuestra relación contigo.
+        Aquí encontrarás toda la información sobre cómo protegemos tus datos.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════ POLICY CARDS ═══════ -->
+<section class="policies-section">
+  <div class="container">
+    <div class="policies-grid">
+
+      <a href="cookies/" class="policy-link-card reveal">
+        <span class="card-icon">🍪</span>
+        <h3>Política de Cookies</h3>
+        <p>Conoce qué cookies utiliza nuestro sitio web, para qué sirven y cómo puedes gestionarlas según tus preferencias.</p>
+        <span class="card-link">
+          Leer política
+          <svg viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+        </span>
+      </a>
+
+      <a href="privacidad/" class="policy-link-card reveal" style="transition-delay:.1s">
+        <span class="card-icon">🔒</span>
+        <h3>Política de Privacidad</h3>
+        <p>Descubre cómo recopilamos, utilizamos y protegemos tus datos personales. Tu privacidad es nuestra prioridad.</p>
+        <span class="card-link">
+          Leer política
+          <svg viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+        </span>
+      </a>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══════ COMMITMENT ═══════ -->
+<section class="commitment-section reveal">
+  <p class="commitment-quote">
+    "Creemos que la <span class="highlight">transparencia</span> es fundamental para construir relaciones de confianza con nuestra comunidad."
+  </p>
+  <p class="commitment-note">
+    Si tienes alguna pregunta sobre nuestras políticas, no dudes en contactarnos a través de nuestra
+    <a href="../contacto/" style="color:var(--teal);text-decoration:underline;text-underline-offset:3px;">página de contacto</a>.
+  </p>
+</section>
+
+<!-- ═══════ FOOTER ═══════ -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-col">
+      <h4>PsiNet LAB</h4>
+      <p style="font-size:.85rem;color:var(--muted);max-width:280px;line-height:1.75;">
+        Ciencia psicológica conectada para el desarrollo humano y comunitario.
+      </p>
+    </div>
+
+    <div class="footer-col">
+      <h4>Proyectos Sociales</h4>
+      <ul>
+        <li><a href="../proyectos-sociales/eventos/">Eventos</a></li>
+        <li><a href="../proyectos-sociales/psinet-escool/">PsiNet EsCool</a></li>
+        <li><a href="../proyectos-sociales/psipaz/">PsiPaz</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-col">
+      <h4>Investigación</h4>
+      <ul>
+        <li><a href="../investigaciones/publicaciones/">Publicaciones</a></li>
+        <li><a href="../investigaciones/lineas-de-investigacion/">Líneas de Investigación</a></li>
+        <li><a href="../miembros/">Miembros</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-col">
+      <h4>Organización</h4>
+      <ul>
+        <li><a href="../contacto/">Contacto</a></li>
+        <li><a href="../apoyanos/">Apóyanos</a></li>
+        <li><a href="../blog/">Blog</a></li>
+        <li><a href="../podcast/">Podcast</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <p>© 2026 PsiNet LAB. Todos los derechos reservados.</p>
+    <div class="footer-bottom-links">
+      <a href="cookies/">Cookie Policy</a>
+      <a href="privacidad/">Privacy Policy</a>
+      <a href="./">Policies</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  var revealObserver = new IntersectionObserver(function(entries) {
+    entries.forEach(function(e) {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        revealObserver.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12 });
+
+  document.querySelectorAll('.reveal').forEach(function(el) {
+    revealObserver.observe(el);
+  });
+</script>
+
+</body>
+</html>
