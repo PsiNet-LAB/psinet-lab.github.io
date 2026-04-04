@@ -682,6 +682,8 @@
 
 <script src="../assets/js/members-data.js"></script>
 <script>
+  var HEADER_OFFSET = 90;
+
   (function renderMembers() {
     var container = document.getElementById('members-grid');
     var fnavInner = document.getElementById('floating-nav-inner');
@@ -761,8 +763,7 @@
           e.preventDefault();
           var target = document.getElementById(s.id);
           if (target) {
-            var headerOffset = 80;
-            var top = target.getBoundingClientRect().top + window.pageYOffset - headerOffset;
+            var top = target.getBoundingClientRect().top + window.pageYOffset - HEADER_OFFSET;
             window.scrollTo({ top: top, behavior: 'smooth' });
           }
         });
@@ -800,10 +801,9 @@
 
       // Active tracking
       var current = null;
-      var headerOffset = 120;
       for (var i = sectionEls.length - 1; i >= 0; i--) {
         var rect = sectionEls[i].el.getBoundingClientRect();
-        if (rect.top <= headerOffset) {
+        if (rect.top <= HEADER_OFFSET + 30) {
           current = sectionEls[i];
           break;
         }
