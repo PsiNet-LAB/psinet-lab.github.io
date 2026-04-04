@@ -469,7 +469,7 @@
     if (hasLink) wrapper.href = '../' + entry.url;
     if (i > 0) wrapper.style.transitionDelay = (i * 0.05) + 's';
 
-    var dateStr = new Date(entry.date).toLocaleDateString('es-ES', {
+    var dateStr = new Date(entry.date + 'T12:00:00').toLocaleDateString('es-ES', {
       year: 'numeric', month: 'long', day: 'numeric'
     });
 
