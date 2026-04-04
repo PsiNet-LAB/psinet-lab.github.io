@@ -991,20 +991,6 @@ comunidades <span class="r-operator">&lt;-</span> <span class="r-func">cluster_w
         </div>
       </div>
 
-      <!-- ── RESUMEN DEL FLUJO ── -->
-      <h3>Resumen del flujo de análisis</h3>
-      <div class="flow-box"><span class="flow-func">Datos</span> (wmt2[7:24])
-       <span class="flow-arrow">│</span>
-       <span class="flow-arrow">▼</span>
-<span class="flow-func">estimateNetwork()</span>      <span class="flow-desc">← EBICglasso + NPN</span>
-       <span class="flow-arrow">│</span>
-       <span class="flow-arrow">├──►</span> <span class="flow-func">plot()</span>                  <span class="flow-desc">→ Visualización de la red</span>
-       <span class="flow-arrow">├──►</span> <span class="flow-func">centralityPlot()</span>        <span class="flow-desc">→ Strength, Betweenness, Closeness</span>
-       <span class="flow-arrow">├──►</span> <span class="flow-func">bridge()</span>                <span class="flow-desc">→ Centralidad puente entre bloques</span>
-       <span class="flow-arrow">├──►</span> <span class="flow-func">bootnet(nonparametric)</span>  <span class="flow-desc">→ IC de aristas</span>
-       <span class="flow-arrow">├──►</span> <span class="flow-func">bootnet(case)</span>           <span class="flow-desc">→ Estabilidad de centralidad (CS)</span>
-       <span class="flow-arrow">└──►</span> <span class="flow-func">igraph walktrap</span>         <span class="flow-desc">→ Comunidades empíricas</span></div>
-
       <div class="references-section">
         <h3>Referencias</h3>
         <ul class="references-list">
