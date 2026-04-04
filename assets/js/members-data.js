@@ -198,5 +198,65 @@ var MEMBERS = [
     bio: "Miembro Investigador en PsiNet LAB. Participa en proyectos de investigación científica que buscan generar conocimiento innovador en el campo de la psicología.",
     interests: ["Psicología innovadora", "Investigación interdisciplinaria", "Ciencia del comportamiento"],
     email: ""
+  },
+  {
+    name: "Emilia del Rosario Béjar Camarena",
+    slug: "emilia-d-bejar-camarena",
+    photo: "Emilia-4k.jpeg",
+    role: "Miembro de Talento Humano",
+    area: "Talento Humano",
+    bio: "Egresada de Psicología con experiencia en gestión del talento humano y en el ámbito clínico. Ha desarrollado su formación en instituciones como EsSalud Arequipa, Bedregal Consultora, MINSA y la Universidad Nacional de San Agustín, además de participar en voluntariados vinculados a la intervención comunitaria, violencia de género e intervención en niños y adolescentes (Observatorio de Violencia de Género UNSA, Humanos, Colegio de Psicólogos Arequipa–Moquegua, e Intiwawa). Cree firmemente en la empatía, resiliencia, adaptación al cambio, estrategia y perseverancia; convencida de que es posible generar impactos positivos desde pequeños cambios.",
+    interests: ["Gestión del talento humano", "Psicología clínica", "Intervención comunitaria", "Violencia de género", "Intervención en niños y adolescentes"],
+    email: ""
+  },
+  {
+    name: "Kimberly Maria Talavera Cama",
+    slug: "kimberly-m-talavera-cama",
+    photo: "Kimberly 4k.jpeg",
+    role: "Miembro de Proyectos Sociales",
+    area: "Proyectos Sociales",
+    bio: "Estudiante de psicología de 5to año de la UNSA. Le gusta y ha trabajado con niños neurodivergentes y pacientes de un CAR. Con respecto a la investigación, a lo largo de su recorrido académico ha tenido cursos que la ayudaron en su formación, como investigación cuantitativa y cualitativa. Sus pasatiempos son los voluntariados y acompañar el resto del día a quienes ama.",
+    interests: ["Neurodivergencia", "Investigación cuantitativa", "Investigación cualitativa", "Voluntariado"],
+    email: ""
+  },
+  {
+    name: "Joao Aaron Cruz Corpuna",
+    slug: "joao-a-cruz-corpuna",
+    photo: "Joao 4k.jpeg",
+    role: "Miembro de Proyectos Sociales",
+    area: "Proyectos Sociales",
+    bio: "Estudiante del quinto año de Psicología de la Universidad Nacional de San Agustín, con experiencia en el ámbito clínico y organizacional. Ha trabajado con actividades como la evaluación psicológica, orientación y consejería, así como en procesos de gestión del talento humano. Cuenta con habilidades en aplicación e interpretación de pruebas psicológicas, observación clínica y atención al cliente. Se considera como una persona con mucha responsabilidad, capacidad de adaptación y trabajo bajo presión, además de experiencia en voluntariado en contextos hospitalarios y comunitarios.",
+    interests: ["Evaluación psicológica", "Orientación y consejería", "Gestión del talento humano", "Psicología clínica", "Psicología organizacional"],
+    email: ""
+  },
+  {
+    name: "Lia Estefani Mamani Ccorimanya",
+    slug: "lia-e-mamani-ccorimanya",
+    photo: "Lia 4k.jpeg",
+    role: "Miembro de Proyectos Sociales",
+    area: "Proyectos Sociales",
+    bio: "Estudiante de Psicología (10mo) y Trabajo Social (5to) de la UNSA con enfoque biopsicosocial, e interés en Talento Humano. Coordinadora del programa \"Menos estrés, más interés\", y subdirectora de Bienestar de Talento en United Peruvian Youth (UPY). Actualmente sigue fortaleciendo sus habilidades de liderazgo y trabajo en equipo.",
+    interests: ["Enfoque biopsicosocial", "Talento humano", "Liderazgo", "Trabajo en equipo", "Bienestar"],
+    email: ""
+  },
+  {
+    name: "María Eugenia Moncada Romero",
+    slug: "maria-e-moncada-romero",
+    photo: "Maria Eugenia 4k.jpeg",
+    role: "Miembro Investigadora",
+    area: "Investigación",
+    bio: "Graduada de psicóloga en la Universidad de Guayaquil, Ecuador. Su experiencia laboral se alinea a la mentoría de proyectos de titulación. Se ha formado en metodología de la investigación, redacción académica, revisiones sistemáticas, análisis cualitativos y estadísticos, gestores bibliográficos y normas APA.",
+    interests: ["Metodología de la investigación", "Redacción académica", "Revisiones sistemáticas", "Análisis cualitativos", "Análisis estadísticos"],
+    email: ""
+  },
+  {
+    name: "Alex Fernando Gonzales Tapia",
+    slug: "alex-f-gonzales-tapia",
+    photo: "Alex 4k.jpeg",
+    role: "Miembro Investigador",
+    area: "Investigación",
+    bio: "Estudiante de Psicología en la Universidad Nacional de San Agustín de Arequipa que busca introducirse en el mundo de la investigación académica. Uno de sus intereses principales es la investigación transcultural, donde aprovecha su dominio de cuatro idiomas (quechua, italiano, inglés y español) para trabajar con diferentes realidades y fuentes de información. Su objetivo es aprender todo lo que pueda, absorbiendo cada metodología y experiencia.",
+    interests: ["Investigación transcultural", "Metodología de la investigación", "Lingüística aplicada", "Psicología intercultural"],
+    email: ""
   }
 ];
