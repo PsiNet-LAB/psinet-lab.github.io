@@ -16,6 +16,7 @@ var BLOG_ENTRIES = [
     date: "2026-04-03",
     tag: "Investigación",
     emoji: "🕸️",
+    image: "blog/analisis-redes-psicometricas/img/Rplot.png",
     title: "Análisis de redes psicométricas en R: un enfoque alternativo para la evaluación psicológica",
     excerpt: "Descubre cómo el análisis de redes complementa los modelos tradicionales de variables latentes para comprender la estructura de los constructos psicológicos.",
     url: "blog/analisis-redes-psicometricas/"
