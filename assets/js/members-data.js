@@ -185,7 +185,7 @@ var MEMBERS = [
     photo: "lillian-8k.jpg",
     role: "Miembro de Proyectos Sociales",
     area: "Proyectos Sociales",
-    bio: "Miembro Investigadora en PsiNet LAB. Contribuye al desarrollo de proyectos de investigación psicológica orientados al bienestar y la comprensión del ser humano.",
+    bio: "Miembro de Proyectos Sociales en PsiNet LAB. Contribuye al desarrollo de proyectos de investigación psicológica orientados al bienestar y la comprensión del ser humano.",
     interests: ["Bienestar psicológico", "Investigación cualitativa", "Desarrollo humano"],
     email: ""
   },
