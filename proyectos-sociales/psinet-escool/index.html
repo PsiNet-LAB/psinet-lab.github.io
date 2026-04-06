@@ -508,6 +508,7 @@
     .mobile-menu-link:hover { color: var(--teal) !important; }
     .mobile-menu-link::after { display: none !important; }
     body.menu-open { overflow: hidden; }
+    body.menu-open header { backdrop-filter: none; -webkit-backdrop-filter: none; }
 
     @media (max-width: 768px) {
       .hamburger { display: flex; }
