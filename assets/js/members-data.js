@@ -265,8 +265,8 @@ var MEMBERS = [
     photo: "Claudia 4k.jpeg",
     role: "Miembro Investigadora",
     area: "Investigación",
-    bio: "Miembro Investigadora en PsiNet LAB. Contribuye al desarrollo de investigación psicológica con enfoque riguroso y colaborativo.",
-    interests: ["Investigación psicológica", "Metodología científica", "Comportamiento humano"],
+    bio: "Psicóloga clínica, psicoterapeuta, docente universitaria e investigadora RENACYT con más de 17 años de experiencia en docencia superior y más de 14 en ejercicio clínico. Especialista en evaluación psicológica, psicometría y psicoterapia cognitivo-conductual.",
+    interests: ["Evaluación psicológica", "Psicometría", "Psicoterapia cognitivo-conductual", "Bienestar y salud mental", "Comportamiento adaptativo"],
     email: ""
   },
   {
