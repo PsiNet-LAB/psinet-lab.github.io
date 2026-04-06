@@ -258,5 +258,45 @@ var MEMBERS = [
     bio: "Estudiante de Psicología en la Universidad Nacional de San Agustín de Arequipa que busca introducirse en el mundo de la investigación académica. Uno de sus intereses principales es la investigación transcultural, donde aprovecha su dominio de cuatro idiomas (quechua, italiano, inglés y español) para trabajar con diferentes realidades y fuentes de información. Su objetivo es aprender todo lo que pueda, absorbiendo cada metodología y experiencia.",
     interests: ["Investigación transcultural", "Metodología de la investigación", "Lingüística aplicada", "Psicología intercultural"],
     email: ""
+  },
+  {
+    name: "Claudia Karina Guevara Cordero",
+    slug: "claudia-k-guevara-cordero",
+    photo: "Claudia 4k.jpeg",
+    role: "Miembro Investigadora",
+    area: "Investigación",
+    bio: "Miembro Investigadora en PsiNet LAB. Contribuye al desarrollo de investigación psicológica con enfoque riguroso y colaborativo.",
+    interests: ["Investigación psicológica", "Metodología científica", "Comportamiento humano"],
+    email: ""
+  },
+  {
+    name: "Nataly Zarahí Villagra Apaza",
+    slug: "nataly-z-villagra-apaza",
+    photo: "Nataly 4k.png",
+    role: "Miembro Investigadora",
+    area: "Investigación",
+    bio: "Estudiante de Psicología (4to año). Ha participado del voluntariado RUA-UNSA y voluntariado del centro psicológico COGNITIVA. Cuenta con dos años de experiencia en atención al cliente. Sus áreas de interés incluyen la investigación en psicología, el arte, la cultura y la personalidad.",
+    interests: ["Investigación en psicología", "Arte", "Cultura", "Personalidad"],
+    email: ""
+  },
+  {
+    name: "Milene Camila Puma Choquecallata",
+    slug: "milene-c-puma-choquecallata",
+    photo: "Milene 4k.png",
+    role: "Miembro Investigadora",
+    area: "Investigación",
+    bio: "Estudiante de Psicología con orientación hacia la investigación en salud mental y psicopatología. Su trabajo se centra en el estudio del malestar emocional desde enfoques contemporáneos, particularmente mediante el análisis de redes psicológicas, integrando variables como ansiedad, rumiación y procesos de regulación emocional. Ha participado en proyectos de investigación y espacios académicos en neurociencias y psicología clínica, desarrollando competencias en análisis de datos, redacción científica y trabajo colaborativo.",
+    interests: ["Salud mental", "Psicopatología", "Análisis de redes psicológicas", "Ansiedad", "Regulación emocional", "Neurociencias", "Análisis de datos", "Redacción científica"],
+    email: ""
+  },
+  {
+    name: "Katherine Chacon Callata",
+    slug: "katherine-chacon-callata",
+    photo: "Katherine Chacon 4k.png",
+    role: "Miembro Investigadora",
+    area: "Investigación",
+    bio: "Estudiante de último año de la carrera de Psicología. Se caracteriza como una persona comprometida y responsable, con habilidades para trabajar en equipo. Interesada por la investigación y el análisis de datos, con el objetivo de aplicar sus conocimientos en un entorno profesional que le permita contribuir al avance de la psicología y mejorar la comprensión y el bienestar humano.",
+    interests: ["Investigación psicológica", "Análisis de datos", "Trabajo en equipo", "Bienestar humano"],
+    email: ""
   }
 ];
