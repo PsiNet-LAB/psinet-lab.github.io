@@ -208,11 +208,83 @@
       margin-bottom: 3rem;
     }
 
-    /* ── PUBLICATIONS GRID ── */
-    .publications-grid {
+    /* ── PUBLICATIONS TIMELINE ── */
+    .pub-timeline {
+      position: relative;
       display: flex;
       flex-direction: column;
-      gap: 2rem;
+      gap: 0;
+    }
+    .pub-timeline::before {
+      content: '';
+      position: absolute;
+      left: 28px;
+      top: 0;
+      bottom: 0;
+      width: 2px;
+      background: linear-gradient(to bottom, var(--teal), var(--teal2), transparent);
+      border-radius: 2px;
+    }
+
+    /* Year label */
+    .pub-year-label {
+      position: relative;
+      margin-left: 0;
+      margin-bottom: 1.5rem;
+      margin-top: 2.5rem;
+      display: flex;
+      align-items: center;
+    }
+    .pub-year-label:first-child { margin-top: 0; }
+    .pub-year-label .year-dot {
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: var(--navy);
+      border: 3px solid var(--teal);
+      box-shadow: 0 0 14px rgba(94,234,212,.35);
+      position: absolute;
+      left: 20px;
+      z-index: 2;
+    }
+    .pub-year-label span {
+      margin-left: 60px;
+      font-family: 'Syne', sans-serif;
+      font-weight: 700;
+      font-size: 1.6rem;
+      color: var(--teal);
+      letter-spacing: .04em;
+    }
+
+    /* Timeline item wrapper */
+    .pub-timeline-item {
+      position: relative;
+      margin-left: 68px;
+      margin-bottom: 2rem;
+    }
+    /* Timeline dot */
+    .pub-timeline-item::before {
+      content: '';
+      position: absolute;
+      left: -48px;
+      top: 1.6rem;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: var(--navy);
+      border: 2.5px solid var(--teal2);
+      box-shadow: 0 0 10px rgba(45,212,191,.25);
+      z-index: 2;
+    }
+    /* Connector from dot to card */
+    .pub-timeline-item::after {
+      content: '';
+      position: absolute;
+      left: -36px;
+      top: 2rem;
+      width: 36px;
+      height: 2px;
+      background: var(--border);
     }
 
     .pub-entry {
@@ -361,6 +433,9 @@
       .page-section { padding-top: 8rem; }
       .pub-entry { grid-template-columns: 220px 1fr; }
       .pub-entry-body { padding: 1.25rem 1.5rem; }
+      .pub-timeline-item { margin-left: 60px; }
+      .pub-timeline-item::before { left: -40px; }
+      .pub-timeline-item::after { left: -28px; width: 28px; }
     }
 
     @media (max-width: 600px) {
@@ -370,6 +445,12 @@
       .page-header { flex-direction: column; align-items: flex-start; gap: 1rem; }
       .pub-entry { grid-template-columns: 1fr; }
       .pub-entry-img { border-right: none; border-bottom: 1px solid var(--border); padding: 1.25rem; }
+      .pub-timeline::before { left: 16px; }
+      .pub-year-label .year-dot { left: 8px; width: 16px; height: 16px; }
+      .pub-year-label span { margin-left: 48px; font-size: 1.3rem; }
+      .pub-timeline-item { margin-left: 48px; }
+      .pub-timeline-item::before { left: -38px; top: 1.4rem; width: 10px; height: 10px; }
+      .pub-timeline-item::after { left: -28px; top: 1.7rem; width: 28px; }
     }
   
     /* ── MOBILE MENU ── */
@@ -495,79 +576,109 @@
       académicas más recientes.
     </p>
 
-    <div class="publications-grid">
+    <div class="pub-timeline">
 
-      <a href="https://doi.org/10.3389/fpubh.2022.981944" target="_blank" rel="noopener" class="pub-entry reveal">
-        <div class="pub-entry-img">
-          <img src="../../assets/images/papers-preview/image.png" alt="Identifying latent comorbidity patterns" />
-        </div>
-        <div class="pub-entry-body">
-          <h3>Identifying latent comorbidity patterns in adults with perceived cognitive impairment: Network findings from the behavioral risk factor surveillance system</h3>
-          <p class="pub-journal">Frontiers in Public Health (2022), 10.</p>
-          <p class="pub-date">19 de Setiembre de 2022</p>
-          <span class="pub-doi"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor"><path d="M4.715 6.542 3.343 7.914a3 3 0 1 0 4.243 4.243l1.828-1.829A3 3 0 0 0 8.586 5.5L8 6.086a1 1 0 0 0-.154.199 2 2 0 0 1 .861 3.337L6.88 11.45a2 2 0 1 1-2.83-2.83l.793-.792a4 4 0 0 1-.128-1.287z"/><path d="M6.586 4.672A3 3 0 0 0 7.414 9.5l.775-.776a2 2 0 0 1-.896-3.346L9.12 3.55a2 2 0 1 1 2.83 2.83l-.793.792c.112.42.155.855.128 1.287l1.372-1.372a3 3 0 1 0-4.243-4.243z"/></svg>https://doi.org/10.3389/fpubh.2022.981944</span>
-        </div>
-      </a>
+      <!-- ── 2024 ── -->
+      <div class="pub-year-label reveal">
+        <div class="year-dot"></div>
+        <span>2024</span>
+      </div>
 
-      <a href="https://doi.org/10.3389/fpsyt.2023.1124257" target="_blank" rel="noopener" class="pub-entry reveal" style="transition-delay:.08s">
-        <div class="pub-entry-img">
-          <img src="../../assets/images/papers-preview/image-2.png" alt="Psychological impact of COVID-19" />
-        </div>
-        <div class="pub-entry-body">
-          <h3>Psychological impact of COVID-19: A cross-lagged network analysis from the English Longitudinal Study of Aging COVID-19 database</h3>
-          <p class="pub-journal">Frontiers in Psychiatry (2023), 14.</p>
-          <p class="pub-date">21 de Febrero de 2023</p>
-          <span class="pub-doi"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor"><path d="M4.715 6.542 3.343 7.914a3 3 0 1 0 4.243 4.243l1.828-1.829A3 3 0 0 0 8.586 5.5L8 6.086a1 1 0 0 0-.154.199 2 2 0 0 1 .861 3.337L6.88 11.45a2 2 0 1 1-2.83-2.83l.793-.792a4 4 0 0 1-.128-1.287z"/><path d="M6.586 4.672A3 3 0 0 0 7.414 9.5l.775-.776a2 2 0 0 1-.896-3.346L9.12 3.55a2 2 0 1 1 2.83 2.83l-.793.792c.112.42.155.855.128 1.287l1.372-1.372a3 3 0 1 0-4.243-4.243z"/></svg>https://doi.org/10.3389/fpsyt.2023.1124257</span>
-        </div>
-      </a>
+      <div class="pub-timeline-item">
+        <a href="https://doi.org/10.1038/s41598-024-58256-8" target="_blank" rel="noopener" class="pub-entry reveal">
+          <div class="pub-entry-img">
+            <img src="../../assets/images/papers-preview/image-6.png" alt="Network analysis of anxiety and depressive symptoms" />
+          </div>
+          <div class="pub-entry-body">
+            <h3>Network analysis of anxiety and depressive symptoms during the COVID-19 pandemic in older adults in the United Kingdom</h3>
+            <p class="pub-journal">Scientific Reports (2024), 14.</p>
+            <p class="pub-date">02 de Abril de 2024</p>
+            <span class="pub-doi"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor"><path d="M4.715 6.542 3.343 7.914a3 3 0 1 0 4.243 4.243l1.828-1.829A3 3 0 0 0 8.586 5.5L8 6.086a1 1 0 0 0-.154.199 2 2 0 0 1 .861 3.337L6.88 11.45a2 2 0 1 1-2.83-2.83l.793-.792a4 4 0 0 1-.128-1.287z"/><path d="M6.586 4.672A3 3 0 0 0 7.414 9.5l.775-.776a2 2 0 0 1-.896-3.346L9.12 3.55a2 2 0 1 1 2.83 2.83l-.793.792c.112.42.155.855.128 1.287l1.372-1.372a3 3 0 1 0-4.243-4.243z"/></svg>https://doi.org/10.1038/s41598-024-58256-8</span>
+          </div>
+        </a>
+      </div>
 
-      <a href="https://doi.org/10.1177/00302228231166833" target="_blank" rel="noopener" class="pub-entry reveal" style="transition-delay:.16s">
-        <div class="pub-entry-img">
-          <img src="../../assets/images/papers-preview/image-3.png" alt="Validation of the Post-Traumatic Growth Inventory" />
-        </div>
-        <div class="pub-entry-body">
-          <h3>Validation of the Post-Traumatic Growth Inventory in Adolescents Who Lost a Family Member in the Past 4 years: Effects of Time After the Death Event and Gender</h3>
-          <p class="pub-journal">OMEGA – Journal of Death and Dying (2023).</p>
-          <p class="pub-date">03 de Abril de 2023</p>
-          <span class="pub-doi"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor"><path d="M4.715 6.542 3.343 7.914a3 3 0 1 0 4.243 4.243l1.828-1.829A3 3 0 0 0 8.586 5.5L8 6.086a1 1 0 0 0-.154.199 2 2 0 0 1 .861 3.337L6.88 11.45a2 2 0 1 1-2.83-2.83l.793-.792a4 4 0 0 1-.128-1.287z"/><path d="M6.586 4.672A3 3 0 0 0 7.414 9.5l.775-.776a2 2 0 0 1-.896-3.346L9.12 3.55a2 2 0 1 1 2.83 2.83l-.793.792c.112.42.155.855.128 1.287l1.372-1.372a3 3 0 1 0-4.243-4.243z"/></svg>https://doi.org/10.1177/00302228231166833</span>
-        </div>
-      </a>
+      <div class="pub-timeline-item">
+        <a href="https://doi.org/10.2147/PRBM.S435871" target="_blank" rel="noopener" class="pub-entry reveal" style="transition-delay:.08s">
+          <div class="pub-entry-img">
+            <img src="../../assets/images/papers-preview/image-5.png" alt="Network Analysis of Dark Triad Items" />
+          </div>
+          <div class="pub-entry-body">
+            <h3>A Network Analysis Approach to Understanding Centrality and Overlap of 21 Dark Triad Items in Adults of 10 Countries</h3>
+            <p class="pub-journal">Psychology Research and Behavior Management (2024), 17.</p>
+            <p class="pub-date">12 de Febrero de 2024</p>
+            <span class="pub-doi"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor"><path d="M4.715 6.542 3.343 7.914a3 3 0 1 0 4.243 4.243l1.828-1.829A3 3 0 0 0 8.586 5.5L8 6.086a1 1 0 0 0-.154.199 2 2 0 0 1 .861 3.337L6.88 11.45a2 2 0 1 1-2.83-2.83l.793-.792a4 4 0 0 1-.128-1.287z"/><path d="M6.586 4.672A3 3 0 0 0 7.414 9.5l.775-.776a2 2 0 0 1-.896-3.346L9.12 3.55a2 2 0 1 1 2.83 2.83l-.793.792c.112.42.155.855.128 1.287l1.372-1.372a3 3 0 1 0-4.243-4.243z"/></svg>https://doi.org/10.2147/PRBM.S435871</span>
+          </div>
+        </a>
+      </div>
 
-      <a href="https://doi.org/10.1016/j.paid.2023.112377" target="_blank" rel="noopener" class="pub-entry reveal" style="transition-delay:.24s">
-        <div class="pub-entry-img">
-          <img src="../../assets/images/papers-preview/image-4.png" alt="Dark and Light Triad" />
-        </div>
-        <div class="pub-entry-body">
-          <h3>Dark and Light Triad: A cross-cultural comparison of network analysis in 5 countries</h3>
-          <p class="pub-journal">Personality and Individual Differences (2023), 215.</p>
-          <p class="pub-date">16 de Agosto de 2023</p>
-          <span class="pub-doi"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor"><path d="M4.715 6.542 3.343 7.914a3 3 0 1 0 4.243 4.243l1.828-1.829A3 3 0 0 0 8.586 5.5L8 6.086a1 1 0 0 0-.154.199 2 2 0 0 1 .861 3.337L6.88 11.45a2 2 0 1 1-2.83-2.83l.793-.792a4 4 0 0 1-.128-1.287z"/><path d="M6.586 4.672A3 3 0 0 0 7.414 9.5l.775-.776a2 2 0 0 1-.896-3.346L9.12 3.55a2 2 0 1 1 2.83 2.83l-.793.792c.112.42.155.855.128 1.287l1.372-1.372a3 3 0 1 0-4.243-4.243z"/></svg>https://doi.org/10.1016/j.paid.2023.112377</span>
-        </div>
-      </a>
+      <!-- ── 2023 ── -->
+      <div class="pub-year-label reveal">
+        <div class="year-dot"></div>
+        <span>2023</span>
+      </div>
 
-      <a href="https://doi.org/10.2147/PRBM.S435871" target="_blank" rel="noopener" class="pub-entry reveal" style="transition-delay:.32s">
-        <div class="pub-entry-img">
-          <img src="../../assets/images/papers-preview/image-5.png" alt="Network Analysis of Dark Triad Items" />
-        </div>
-        <div class="pub-entry-body">
-          <h3>A Network Analysis Approach to Understanding Centrality and Overlap of 21 Dark Triad Items in Adults of 10 Countries</h3>
-          <p class="pub-journal">Psychology Research and Behavior Management (2024), 17.</p>
-          <p class="pub-date">12 de Febrero de 2024</p>
-          <span class="pub-doi"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor"><path d="M4.715 6.542 3.343 7.914a3 3 0 1 0 4.243 4.243l1.828-1.829A3 3 0 0 0 8.586 5.5L8 6.086a1 1 0 0 0-.154.199 2 2 0 0 1 .861 3.337L6.88 11.45a2 2 0 1 1-2.83-2.83l.793-.792a4 4 0 0 1-.128-1.287z"/><path d="M6.586 4.672A3 3 0 0 0 7.414 9.5l.775-.776a2 2 0 0 1-.896-3.346L9.12 3.55a2 2 0 1 1 2.83 2.83l-.793.792c.112.42.155.855.128 1.287l1.372-1.372a3 3 0 1 0-4.243-4.243z"/></svg>https://doi.org/10.2147/PRBM.S435871</span>
-        </div>
-      </a>
+      <div class="pub-timeline-item">
+        <a href="https://doi.org/10.1016/j.paid.2023.112377" target="_blank" rel="noopener" class="pub-entry reveal">
+          <div class="pub-entry-img">
+            <img src="../../assets/images/papers-preview/image-4.png" alt="Dark and Light Triad" />
+          </div>
+          <div class="pub-entry-body">
+            <h3>Dark and Light Triad: A cross-cultural comparison of network analysis in 5 countries</h3>
+            <p class="pub-journal">Personality and Individual Differences (2023), 215.</p>
+            <p class="pub-date">16 de Agosto de 2023</p>
+            <span class="pub-doi"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor"><path d="M4.715 6.542 3.343 7.914a3 3 0 1 0 4.243 4.243l1.828-1.829A3 3 0 0 0 8.586 5.5L8 6.086a1 1 0 0 0-.154.199 2 2 0 0 1 .861 3.337L6.88 11.45a2 2 0 1 1-2.83-2.83l.793-.792a4 4 0 0 1-.128-1.287z"/><path d="M6.586 4.672A3 3 0 0 0 7.414 9.5l.775-.776a2 2 0 0 1-.896-3.346L9.12 3.55a2 2 0 1 1 2.83 2.83l-.793.792c.112.42.155.855.128 1.287l1.372-1.372a3 3 0 1 0-4.243-4.243z"/></svg>https://doi.org/10.1016/j.paid.2023.112377</span>
+          </div>
+        </a>
+      </div>
 
-      <a href="https://doi.org/10.1038/s41598-024-58256-8" target="_blank" rel="noopener" class="pub-entry reveal" style="transition-delay:.40s">
-        <div class="pub-entry-img">
-          <img src="../../assets/images/papers-preview/image-6.png" alt="Network analysis of anxiety and depressive symptoms" />
-        </div>
-        <div class="pub-entry-body">
-          <h3>Network analysis of anxiety and depressive symptoms during the COVID-19 pandemic in older adults in the United Kingdom</h3>
-          <p class="pub-journal">Scientific Reports (2024), 14.</p>
-          <p class="pub-date">02 de Abril de 2024</p>
-          <span class="pub-doi"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor"><path d="M4.715 6.542 3.343 7.914a3 3 0 1 0 4.243 4.243l1.828-1.829A3 3 0 0 0 8.586 5.5L8 6.086a1 1 0 0 0-.154.199 2 2 0 0 1 .861 3.337L6.88 11.45a2 2 0 1 1-2.83-2.83l.793-.792a4 4 0 0 1-.128-1.287z"/><path d="M6.586 4.672A3 3 0 0 0 7.414 9.5l.775-.776a2 2 0 0 1-.896-3.346L9.12 3.55a2 2 0 1 1 2.83 2.83l-.793.792c.112.42.155.855.128 1.287l1.372-1.372a3 3 0 1 0-4.243-4.243z"/></svg>https://doi.org/10.1038/s41598-024-58256-8</span>
-        </div>
-      </a>
+      <div class="pub-timeline-item">
+        <a href="https://doi.org/10.1177/00302228231166833" target="_blank" rel="noopener" class="pub-entry reveal" style="transition-delay:.08s">
+          <div class="pub-entry-img">
+            <img src="../../assets/images/papers-preview/image-3.png" alt="Validation of the Post-Traumatic Growth Inventory" />
+          </div>
+          <div class="pub-entry-body">
+            <h3>Validation of the Post-Traumatic Growth Inventory in Adolescents Who Lost a Family Member in the Past 4 years: Effects of Time After the Death Event and Gender</h3>
+            <p class="pub-journal">OMEGA – Journal of Death and Dying (2023).</p>
+            <p class="pub-date">03 de Abril de 2023</p>
+            <span class="pub-doi"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor"><path d="M4.715 6.542 3.343 7.914a3 3 0 1 0 4.243 4.243l1.828-1.829A3 3 0 0 0 8.586 5.5L8 6.086a1 1 0 0 0-.154.199 2 2 0 0 1 .861 3.337L6.88 11.45a2 2 0 1 1-2.83-2.83l.793-.792a4 4 0 0 1-.128-1.287z"/><path d="M6.586 4.672A3 3 0 0 0 7.414 9.5l.775-.776a2 2 0 0 1-.896-3.346L9.12 3.55a2 2 0 1 1 2.83 2.83l-.793.792c.112.42.155.855.128 1.287l1.372-1.372a3 3 0 1 0-4.243-4.243z"/></svg>https://doi.org/10.1177/00302228231166833</span>
+          </div>
+        </a>
+      </div>
+
+      <div class="pub-timeline-item">
+        <a href="https://doi.org/10.3389/fpsyt.2023.1124257" target="_blank" rel="noopener" class="pub-entry reveal" style="transition-delay:.16s">
+          <div class="pub-entry-img">
+            <img src="../../assets/images/papers-preview/image-2.png" alt="Psychological impact of COVID-19" />
+          </div>
+          <div class="pub-entry-body">
+            <h3>Psychological impact of COVID-19: A cross-lagged network analysis from the English Longitudinal Study of Aging COVID-19 database</h3>
+            <p class="pub-journal">Frontiers in Psychiatry (2023), 14.</p>
+            <p class="pub-date">21 de Febrero de 2023</p>
+            <span class="pub-doi"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor"><path d="M4.715 6.542 3.343 7.914a3 3 0 1 0 4.243 4.243l1.828-1.829A3 3 0 0 0 8.586 5.5L8 6.086a1 1 0 0 0-.154.199 2 2 0 0 1 .861 3.337L6.88 11.45a2 2 0 1 1-2.83-2.83l.793-.792a4 4 0 0 1-.128-1.287z"/><path d="M6.586 4.672A3 3 0 0 0 7.414 9.5l.775-.776a2 2 0 0 1-.896-3.346L9.12 3.55a2 2 0 1 1 2.83 2.83l-.793.792c.112.42.155.855.128 1.287l1.372-1.372a3 3 0 1 0-4.243-4.243z"/></svg>https://doi.org/10.3389/fpsyt.2023.1124257</span>
+          </div>
+        </a>
+      </div>
+
+      <!-- ── 2022 ── -->
+      <div class="pub-year-label reveal">
+        <div class="year-dot"></div>
+        <span>2022</span>
+      </div>
+
+      <div class="pub-timeline-item">
+        <a href="https://doi.org/10.3389/fpubh.2022.981944" target="_blank" rel="noopener" class="pub-entry reveal">
+          <div class="pub-entry-img">
+            <img src="../../assets/images/papers-preview/image.png" alt="Identifying latent comorbidity patterns" />
+          </div>
+          <div class="pub-entry-body">
+            <h3>Identifying latent comorbidity patterns in adults with perceived cognitive impairment: Network findings from the behavioral risk factor surveillance system</h3>
+            <p class="pub-journal">Frontiers in Public Health (2022), 10.</p>
+            <p class="pub-date">19 de Setiembre de 2022</p>
+            <span class="pub-doi"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor"><path d="M4.715 6.542 3.343 7.914a3 3 0 1 0 4.243 4.243l1.828-1.829A3 3 0 0 0 8.586 5.5L8 6.086a1 1 0 0 0-.154.199 2 2 0 0 1 .861 3.337L6.88 11.45a2 2 0 1 1-2.83-2.83l.793-.792a4 4 0 0 1-.128-1.287z"/><path d="M6.586 4.672A3 3 0 0 0 7.414 9.5l.775-.776a2 2 0 0 1-.896-3.346L9.12 3.55a2 2 0 1 1 2.83 2.83l-.793.792c.112.42.155.855.128 1.287l1.372-1.372a3 3 0 1 0-4.243-4.243z"/></svg>https://doi.org/10.3389/fpubh.2022.981944</span>
+          </div>
+        </a>
+      </div>
 
     </div>
   </div>
