@@ -607,7 +607,7 @@
   
     /* ── MOBILE MENU ── */
     .hamburger {
-      display: none; background: none; border: none; cursor: pointer;
+      display: none; position: relative; background: none; border: none; cursor: pointer;
       padding: .5rem; z-index: 1002; flex-direction: column; justify-content: center; gap: 5px;
     }
     .hamburger span {
@@ -640,7 +640,7 @@
     body.menu-open header { backdrop-filter: none; -webkit-backdrop-filter: none; }
 
     @media (max-width: 768px) {
-      .hamburger { display: flex; }
+      .hamburger { display: flex !important; }
       .nav-left, .nav-right { display: none !important; }
       nav.main-nav { padding: .55rem 1.2rem; z-index: 1001; }
       .nav-center { position: relative; left: auto; transform: none; }
