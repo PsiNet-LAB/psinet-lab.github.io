@@ -1,0 +1,7 @@
+{
+  "dependencies": {
+    "@fortawesome/free-brands-svg-icons": "^7.2.0",
+    "@iconify/json": "^2.2.459",
+    "simple-icons": "^16.15.0"
+  }
+}
