@@ -240,6 +240,16 @@ var MEMBERS = [
     email: ""
   },
   {
+    name: "Carolina N. I. Terry Hernández",
+    slug: "carolina-n-i-terry-hernandez",
+    photo: "Carolina-4k.jpg",
+    role: "Clowns Coordinator",
+    area: "Proyectos Sociales",
+    bio: "Coordinadora de Clowns en PsiNet LAB. Organiza y dirige las actividades de clown social, integrando el arte del humor y la expresión corporal como herramientas de intervención comunitaria. A través del juego, la improvisación y la risa, promueve el bienestar emocional y la conexión humana en poblaciones vulnerables, aportando una perspectiva creativa y empática al trabajo de proyectos sociales.",
+    interests: ["Clown social", "Intervención comunitaria", "Expresión corporal", "Bienestar emocional", "Arte y humor terapéutico", "Trabajo con poblaciones vulnerables"],
+    email: ""
+  },
+  {
     name: "María Eugenia Moncada Romero",
     slug: "maria-e-moncada-romero",
     photo: "Maria Eugenia 4k.jpeg",
