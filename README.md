@@ -79,6 +79,16 @@ psinet-lab.github.io/
 - Widget de donaciones con [Ko-fi](https://ko-fi.com/psinetlab)
 - Diseño responsive y accesible
 
+### Modularización reciente (Home)
+
+- `assets/js/home/render-recent-blogs.js`: renderizado de entradas recientes.
+- `assets/js/home/reveal-effects.js`: animación de aparición en scroll.
+- `assets/js/home/header-mica.js`: efecto visual del header al hacer scroll.
+- `assets/js/home/honeycomb.js`: canvas interactivo de la tarjeta de logo.
+- `assets/js/home/particles-init.js`: configuración de partículas.
+- `assets/js/home/mobile-menu.js`: lógica del menú móvil con mejoras de accesibilidad.
+- `assets/js/legacy-support.js`: fallback exclusivo para navegadores antiguos.
+
 ## Valores
 
 | Valor | Descripción |
