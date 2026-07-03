@@ -1,0 +1,1355 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CIAM Sonrisas – Próximo Evento | PsiNet LAB</title>
+  <link rel="icon" href="../../../../favicon.ico" />
+  <link rel="icon" type="image/png" sizes="32x32" href="../../../../assets/images/favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="192x192" href="../../../../assets/images/favicon-192x192.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Lora:ital,wght@0,400;0,500;1,400&family=DM+Sans:wght@300;400;500;700&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ═══════════════════════════════════════
+       VARIABLES & RESET
+    ═══════════════════════════════════════ */
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --navy:   #0b1629;
+      --deep:   #0d1f3c;
+      --mid:    #112240;
+      --teal:   #5eead4;
+      --teal2:  #2dd4bf;
+      --gold:   #f0b429;
+      --gold2:  #fcd34d;
+      --orange: #fb923c;
+      --rose:   #fb7185;
+      --purple: #c084fc;
+      --white:  #f0f4ff;
+      --muted:  #8892b0;
+      --card-bg:#0e1f38;
+      --border: rgba(94,234,212,.15);
+    }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--navy);
+      color: var(--white);
+      overflow-x: hidden;
+      line-height: 1.6;
+    }
+    a { text-decoration: none; color: inherit; }
+    ul { list-style: none; }
+
+    /* ═══════════════════════════════════════
+       NOISE OVERLAY
+    ═══════════════════════════════════════ */
+    body::before {
+      content: '';
+      position: fixed; inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.04'/%3E%3C/svg%3E");
+      pointer-events: none; z-index: 9999; opacity: .5;
+    }
+
+    /* ═══════════════════════════════════════
+       HEADER / NAV
+    ═══════════════════════════════════════ */
+    header {
+      position: fixed; top: 0; left: 0; width: 100%; z-index: 1000;
+      background: rgba(11,22,41,.55);
+      backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+      transition: background .4s, box-shadow .4s;
+    }
+    header.scrolled { background: rgba(11,22,41,.8); box-shadow: 0 4px 30px rgba(0,0,0,.4); }
+    nav.main-nav {
+      max-width: 1260px; margin: auto;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1rem 2rem; position: relative;
+    }
+    .nav-left, .nav-right { display: flex; gap: 2rem; align-items: center; }
+    .nav-center {
+      position: absolute; left: 50%; transform: translateX(-50%);
+      display: flex; flex-direction: column; align-items: center; gap: .15rem;
+    }
+    .nav-center img { height: 44px; }
+    nav.main-nav a {
+      font-size: .82rem; color: rgba(240,244,255,.85); font-weight: 500;
+      letter-spacing: .02em; text-transform: uppercase;
+      transition: color .3s, text-shadow .3s; position: relative;
+    }
+    nav.main-nav a::after {
+      content: ''; position: absolute; left: 0; bottom: -4px;
+      width: 0; height: 2px;
+      background: linear-gradient(90deg, var(--teal), var(--teal2));
+      border-radius: 1px; transition: width .3s;
+    }
+    nav.main-nav a:hover { color: #fff; text-shadow: 0 0 8px rgba(94,234,212,.35); }
+    nav.main-nav a:hover::after { width: 100%; }
+    nav.main-nav a.active { color: var(--teal); }
+    nav.main-nav a.active::after { width: 100%; }
+    .nav-dropdown { position: relative; }
+    .dropdown-menu {
+      position: absolute; top: 100%; left: 50%;
+      transform: translateX(-50%) translateY(8px);
+      background: rgba(13,31,60,.97); backdrop-filter: blur(14px);
+      border: 1px solid var(--border); border-radius: 10px;
+      padding: .6rem 0; min-width: 210px;
+      opacity: 0; visibility: hidden; pointer-events: none;
+      transition: opacity .25s, transform .25s;
+      box-shadow: 0 8px 32px rgba(0,0,0,.45); z-index: 100;
+    }
+    .nav-dropdown:hover > .dropdown-menu {
+      opacity: 1; visibility: visible; pointer-events: auto;
+      transform: translateX(-50%) translateY(0);
+    }
+    .dropdown-menu a {
+      display: block; padding: .55rem 1.3rem;
+      font-size: .78rem; white-space: nowrap; transition: background .2s, color .2s;
+    }
+    .dropdown-menu a:hover { background: rgba(94,234,212,.08); color: var(--teal); }
+    .dropdown-menu a::after { display: none; }
+    .dropdown-submenu { position: relative; }
+    .dropdown-submenu-menu {
+      position: absolute; left: 100%; top: 0;
+      background: rgba(13,31,60,.97); backdrop-filter: blur(14px);
+      border: 1px solid var(--border); border-radius: 10px;
+      padding: .6rem 0; min-width: 200px;
+      opacity: 0; visibility: hidden; pointer-events: none;
+      transition: opacity .25s, transform .25s;
+      transform: translateX(8px);
+      box-shadow: 0 8px 32px rgba(0,0,0,.45);
+    }
+    .dropdown-submenu:hover > .dropdown-submenu-menu {
+      opacity: 1; visibility: visible; pointer-events: auto; transform: translateX(0);
+    }
+
+    /* ═══════════════════════════════════════
+       FLOATING CONFETTI BACKGROUND
+    ═══════════════════════════════════════ */
+    .confetti-bg { position: fixed; inset: 0; z-index: -1; pointer-events: none; overflow: hidden; }
+    .cb { position: absolute; border-radius: 50%; filter: blur(80px); opacity: .1; animation: cbDrift 22s ease-in-out infinite; }
+    .cb-1 { width: 500px; height: 500px; background: radial-gradient(circle, var(--gold), transparent 70%); top: -10%; left: -10%; animation-duration: 28s; }
+    .cb-2 { width: 400px; height: 400px; background: radial-gradient(circle, var(--rose), transparent 70%); top: 40%; right: -8%; animation-duration: 22s; animation-delay: -6s; }
+    .cb-3 { width: 350px; height: 350px; background: radial-gradient(circle, var(--teal), transparent 70%); bottom: 10%; left: 30%; animation-duration: 18s; animation-delay: -12s; }
+    .cb-4 { width: 300px; height: 300px; background: radial-gradient(circle, var(--purple), transparent 70%); top: 60%; left: 5%; animation-duration: 25s; animation-delay: -4s; }
+    @keyframes cbDrift {
+      0%,100% { transform: translate(0,0) scale(1); }
+      25% { transform: translate(60px,-50px) scale(1.1); }
+      50% { transform: translate(-40px,60px) scale(.9); }
+      75% { transform: translate(50px,30px) scale(1.05); }
+    }
+
+    /* Floating emoji */
+    .float-emoji { position: fixed; z-index: 0; pointer-events: none; font-size: 1.8rem; opacity: .12; }
+    .fe-1 { top: 15%; left: 3%; animation: feFloat 14s ease-in-out infinite; }
+    .fe-2 { top: 55%; right: 4%; animation: feFloat 18s ease-in-out infinite 2s; }
+    .fe-3 { top: 28%; right: 12%; animation: feFloat 12s ease-in-out infinite 1s; }
+    .fe-4 { bottom: 30%; left: 8%; animation: feFloat 16s ease-in-out infinite 3s; }
+    .fe-5 { top: 70%; left: 55%; animation: feFloat 20s ease-in-out infinite 4s; }
+    .fe-6 { bottom: 15%; right: 20%; animation: feFloat 11s ease-in-out infinite 1.5s; }
+    .fe-7 { top: 42%; left: 46%; animation: feFloat 15s ease-in-out infinite 5s; }
+    @keyframes feFloat {
+      0%,100% { transform: translate(0,0) rotate(0deg); }
+      33% { transform: translate(20px,-30px) rotate(15deg); }
+      66% { transform: translate(-15px,20px) rotate(-10deg); }
+    }
+
+    /* ═══════════════════════════════════════
+       HERO
+    ═══════════════════════════════════════ */
+    .hero {
+      position: relative; min-height: 100vh;
+      display: flex; align-items: center; justify-content: center;
+      text-align: center; overflow: hidden;
+      padding: 9rem 2rem 5rem;
+    }
+    .hero-bg {
+      position: absolute; inset: 0; z-index: 0;
+      background:
+        radial-gradient(ellipse 70% 60% at 20% 30%, rgba(240,180,41,.14) 0%, transparent 55%),
+        radial-gradient(ellipse 60% 50% at 80% 70%, rgba(251,113,60,.1) 0%, transparent 50%),
+        radial-gradient(ellipse 80% 80% at 50% 50%, rgba(13,31,60,.95) 0%, var(--navy) 100%);
+      animation: heroPulse 14s ease-in-out infinite alternate;
+    }
+    @keyframes heroPulse {
+      0% { filter: hue-rotate(0deg) brightness(1); }
+      50% { filter: hue-rotate(12deg) brightness(1.1); }
+      100% { filter: hue-rotate(-8deg) brightness(1.04); }
+    }
+    .hero-orb {
+      position: absolute; border-radius: 50%; pointer-events: none;
+      z-index: 0; filter: blur(70px); opacity: .35;
+    }
+    .ho-1 { width: 350px; height: 350px; background: radial-gradient(circle, rgba(240,180,41,.6), transparent 70%); top: 5%; left: -6%; animation: hoA 18s ease-in-out infinite; }
+    .ho-2 { width: 280px; height: 280px; background: radial-gradient(circle, rgba(251,113,60,.5), transparent 70%); bottom: 10%; right: -4%; animation: hoB 22s ease-in-out infinite; }
+    .ho-3 { width: 200px; height: 200px; background: radial-gradient(circle, rgba(251,113,188,.4), transparent 70%); top: 50%; left: 70%; animation: hoA 15s ease-in-out infinite 3s; }
+    .ho-4 { width: 240px; height: 240px; background: radial-gradient(circle, rgba(94,234,212,.4), transparent 70%); bottom: 25%; left: 10%; animation: hoB 20s ease-in-out infinite 2s; }
+    @keyframes hoA { 0%,100%{transform:translate(0,0) scale(1)} 40%{transform:translate(50px,-40px) scale(1.15)} 70%{transform:translate(-30px,25px) scale(.9)} }
+    @keyframes hoB { 0%,100%{transform:translate(0,0) scale(1)} 35%{transform:translate(-50px,35px) scale(1.1)} 65%{transform:translate(30px,-20px) scale(.92)} }
+
+    /* Sparkle particles */
+    .hero-particles { position: absolute; inset: 0; z-index: 1; overflow: hidden; }
+    .hero-particles span {
+      position: absolute; width: 4px; height: 4px; border-radius: 50%;
+      background: var(--gold); opacity: 0;
+      animation: sparkle 5s ease-in-out infinite;
+    }
+    .hero-particles span:nth-child(even) { background: var(--rose); }
+    .hero-particles span:nth-child(3n) { background: var(--teal); }
+    @keyframes sparkle {
+      0%,100% { opacity: 0; transform: scale(.5) translateY(0); }
+      50% { opacity: .9; transform: scale(1.5) translateY(-20px); }
+    }
+
+    .hero-content { position: relative; z-index: 2; max-width: 800px; }
+
+    .hero-eyebrow {
+      display: inline-flex; align-items: center; gap: .6rem;
+      font-size: .72rem; font-weight: 600; letter-spacing: .18em; text-transform: uppercase;
+      color: var(--gold); background: rgba(240,180,41,.1);
+      border: 1px solid rgba(240,180,41,.3); padding: .5rem 1.4rem;
+      border-radius: 50px; margin-bottom: 1.8rem;
+      animation: eyebrowPulse 2.8s ease-in-out infinite;
+    }
+    .eyebrow-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--gold); animation: blink 1.3s ease-in-out infinite; }
+    @keyframes eyebrowPulse { 0%,100%{box-shadow:0 0 0 0 rgba(240,180,41,.25)} 50%{box-shadow:0 0 24px 6px rgba(240,180,41,.15)} }
+    @keyframes blink { 0%,100%{opacity:1} 50%{opacity:.2} }
+
+    .hero-title {
+      font-family: 'Syne', sans-serif; font-weight: 800;
+      font-size: clamp(3rem, 9vw, 6.5rem);
+      line-height: .95; margin-bottom: .5rem;
+      background: linear-gradient(135deg, var(--gold2) 0%, var(--orange) 35%, var(--rose) 65%, var(--purple) 100%);
+      background-size: 300% 300%;
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: titleFlow 6s ease-in-out infinite;
+    }
+    @keyframes titleFlow { 0%,100%{background-position:0% 50%} 50%{background-position:100% 50%} }
+
+    .hero-subtitle {
+      font-family: 'Syne', sans-serif; font-weight: 600;
+      font-size: clamp(1rem, 2.5vw, 1.5rem);
+      color: rgba(240,244,255,.7); margin-bottom: 1.5rem;
+      letter-spacing: .03em;
+    }
+
+    .hero-desc {
+      font-family: 'Lora', serif; font-style: italic;
+      font-size: 1.1rem; color: rgba(240,244,255,.65);
+      max-width: 560px; margin: 0 auto 2.5rem;
+      line-height: 1.85;
+    }
+
+    /* Date pill */
+    .date-pill {
+      display: inline-flex; align-items: center; gap: .7rem;
+      background: rgba(240,244,255,.06); border: 1px solid rgba(240,244,255,.15);
+      border-radius: 14px; padding: .8rem 1.8rem; margin-bottom: 2.5rem;
+      flex-wrap: wrap; justify-content: center;
+    }
+    .date-pill .dp-item {
+      display: flex; align-items: center; gap: .4rem;
+      font-size: .88rem; color: var(--white); font-weight: 500;
+    }
+    .date-pill .dp-item .dp-icon { font-size: 1.1rem; }
+    .date-pill .dp-sep { color: rgba(240,244,255,.25); font-size: 1.2rem; }
+
+    /* Countdown */
+    .countdown-wrap { display: flex; gap: 1rem; justify-content: center; margin-bottom: 3rem; flex-wrap: wrap; }
+    .cd-block {
+      display: flex; flex-direction: column; align-items: center;
+      background: rgba(240,180,41,.07); border: 1px solid rgba(240,180,41,.2);
+      border-radius: 14px; padding: 1rem 1.4rem; min-width: 80px;
+      transition: transform .3s, box-shadow .3s;
+    }
+    .cd-block:hover { transform: translateY(-4px); box-shadow: 0 8px 30px rgba(240,180,41,.2); }
+    .cd-num {
+      font-family: 'Syne', sans-serif; font-weight: 800;
+      font-size: 2.2rem; color: var(--gold);
+      line-height: 1; letter-spacing: -.02em;
+    }
+    .cd-label { font-size: .65rem; color: var(--muted); text-transform: uppercase; letter-spacing: .1em; margin-top: .3rem; }
+
+    /* CTA hero buttons */
+    .hero-btns { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+    .btn {
+      display: inline-flex; align-items: center; gap: .5rem;
+      font-family: 'DM Sans', sans-serif; font-size: .9rem; font-weight: 600;
+      padding: .85rem 2rem; border-radius: 50px; transition: all .35s ease;
+      border: none; cursor: pointer; text-decoration: none;
+    }
+    .btn-gold {
+      background: linear-gradient(135deg, var(--gold), var(--orange));
+      color: var(--navy);
+      box-shadow: 0 4px 20px rgba(240,180,41,.35);
+    }
+    .btn-gold:hover { transform: translateY(-3px); box-shadow: 0 8px 35px rgba(240,180,41,.5); }
+    .btn-outline {
+      background: transparent; color: var(--teal);
+      border: 1px solid rgba(94,234,212,.3);
+    }
+    .btn-outline:hover { border-color: var(--teal); background: rgba(94,234,212,.07); transform: translateY(-3px); }
+
+    /* Hero scroll indicator */
+    .scroll-hint {
+      position: absolute; bottom: 2rem; left: 50%; transform: translateX(-50%);
+      display: flex; flex-direction: column; align-items: center; gap: .4rem;
+      font-size: .7rem; color: var(--muted); letter-spacing: .12em; text-transform: uppercase;
+      animation: fadeInUp 1s ease .5s both;
+    }
+    .scroll-arrow { width: 22px; height: 22px; border-right: 2px solid var(--muted); border-bottom: 2px solid var(--muted); transform: rotate(45deg); animation: arrowBounce 1.5s ease-in-out infinite; }
+    @keyframes arrowBounce { 0%,100%{transform:rotate(45deg) translate(0,0)} 50%{transform:rotate(45deg) translate(3px,3px)} }
+    @keyframes fadeInUp { from{opacity:0;transform:translateX(-50%) translateY(10px)} to{opacity:1;transform:translateX(-50%) translateY(0)} }
+
+    /* ═══════════════════════════════════════
+       BREADCRUMB
+    ═══════════════════════════════════════ */
+    .breadcrumb-bar {
+      background: var(--deep); border-bottom: 1px solid var(--border); padding: 1rem 2rem;
+    }
+    .breadcrumb-inner {
+      max-width: 1100px; margin: auto;
+      display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: .5rem;
+    }
+    .breadcrumb-nav { font-size: .82rem; color: var(--muted); display: flex; align-items: center; gap: .5rem; }
+    .breadcrumb-nav a { color: var(--teal); transition: color .3s; }
+    .breadcrumb-nav a:hover { color: var(--white); }
+    .breadcrumb-sep { color: var(--muted); opacity: .5; }
+    .back-link { font-size: .82rem; color: var(--teal); display: flex; align-items: center; gap: .4rem; transition: color .3s, transform .3s; }
+    .back-link:hover { color: var(--white); transform: translateX(-3px); }
+
+    /* ═══════════════════════════════════════
+       FLYER FEATURE SECTION
+    ═══════════════════════════════════════ */
+    .flyer-section {
+      max-width: 1100px; margin: 0 auto;
+      padding: 4rem 2rem 2rem;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center;
+    }
+    .flyer-frame {
+      position: relative;
+    }
+    .flyer-glow {
+      position: absolute; inset: -20px; border-radius: 24px;
+      background: radial-gradient(ellipse, rgba(240,180,41,.2), rgba(251,113,60,.15), transparent 70%);
+      filter: blur(30px); z-index: 0;
+      animation: flayerPulse 4s ease-in-out infinite;
+    }
+    @keyframes flayerPulse { 0%,100%{opacity:.6} 50%{opacity:1} }
+    .flyer-img-wrap {
+      position: relative; z-index: 1; border-radius: 20px; overflow: hidden;
+      border: 2px solid rgba(240,180,41,.25);
+      box-shadow: 0 20px 60px rgba(0,0,0,.5), 0 0 0 1px rgba(240,180,41,.1);
+      transition: transform .5s ease;
+    }
+    .flyer-img-wrap:hover { transform: translateY(-6px) rotate(1deg); }
+    .flyer-img-wrap img {
+      width: 100%; display: block;
+    }
+    .flyer-badge {
+      position: absolute; top: 1rem; right: 1rem; z-index: 2;
+      background: linear-gradient(135deg, var(--gold), var(--orange));
+      color: var(--navy); font-family: 'Syne', sans-serif;
+      font-weight: 800; font-size: .75rem; letter-spacing: .08em; text-transform: uppercase;
+      padding: .45rem 1rem; border-radius: 50px;
+      box-shadow: 0 4px 15px rgba(240,180,41,.4);
+    }
+
+    .flyer-info { }
+    .fi-eyebrow {
+      font-size: .72rem; font-weight: 600; letter-spacing: .18em; text-transform: uppercase;
+      color: var(--orange); margin-bottom: .8rem;
+    }
+    .fi-title {
+      font-family: 'Syne', sans-serif; font-weight: 800;
+      font-size: clamp(1.6rem, 3vw, 2.4rem); line-height: 1.1; margin-bottom: 1.2rem;
+      color: var(--white);
+    }
+    .fi-title span { color: var(--gold); }
+    .fi-desc {
+      font-family: 'Lora', serif; font-style: italic;
+      font-size: 1rem; color: var(--muted); line-height: 1.9; margin-bottom: 2rem;
+    }
+    .fi-meta { display: flex; flex-direction: column; gap: .9rem; }
+    .fi-meta-item {
+      display: flex; align-items: flex-start; gap: 1rem;
+      background: rgba(14,31,56,.7); border: 1px solid var(--border);
+      border-radius: 12px; padding: 1rem 1.2rem;
+    }
+    .fi-meta-icon { font-size: 1.4rem; flex-shrink: 0; margin-top: .1rem; }
+    .fi-meta-text { }
+    .fi-meta-label { font-size: .68rem; text-transform: uppercase; letter-spacing: .1em; color: var(--muted); margin-bottom: .2rem; }
+    .fi-meta-value { font-size: .9rem; color: var(--white); font-weight: 500; line-height: 1.4; }
+
+    /* ═══════════════════════════════════════
+       RIBBON DIVIDER
+    ═══════════════════════════════════════ */
+    .ribbon { position: relative; height: 100px; overflow: hidden; }
+    .ribbon svg { position: absolute; bottom: 0; left: 0; width: 100%; }
+
+    /* ═══════════════════════════════════════
+       BIG QUOTE / IMPACT STATEMENT
+    ═══════════════════════════════════════ */
+    .impact-section {
+      background: linear-gradient(135deg, rgba(240,180,41,.06) 0%, rgba(251,113,60,.05) 50%, rgba(251,113,188,.06) 100%);
+      border-top: 1px solid rgba(240,180,41,.12);
+      border-bottom: 1px solid rgba(240,180,41,.12);
+      padding: 5rem 2rem;
+      text-align: center; position: relative; overflow: hidden;
+    }
+    .impact-quote {
+      font-family: 'Syne', sans-serif; font-weight: 800;
+      font-size: clamp(1.5rem, 4vw, 2.8rem);
+      line-height: 1.25; max-width: 820px; margin: 0 auto 1.5rem;
+      background: linear-gradient(135deg, var(--gold2), var(--orange), var(--rose));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    }
+    .impact-sub {
+      font-family: 'Lora', serif; font-style: italic;
+      font-size: 1.1rem; color: var(--muted);
+      max-width: 580px; margin: 0 auto;
+      line-height: 1.85;
+    }
+    .impact-chips { display: flex; gap: .7rem; justify-content: center; flex-wrap: wrap; margin-top: 2rem; }
+    .chip {
+      display: inline-flex; align-items: center; gap: .4rem;
+      font-size: .78rem; padding: .4rem 1rem; border-radius: 50px;
+      font-weight: 500;
+    }
+    .chip-gold { color: var(--gold); background: rgba(240,180,41,.1); border: 1px solid rgba(240,180,41,.25); }
+    .chip-rose { color: var(--rose); background: rgba(251,113,133,.1); border: 1px solid rgba(251,113,133,.25); }
+    .chip-teal { color: var(--teal); background: rgba(94,234,212,.08); border: 1px solid rgba(94,234,212,.2); }
+    .chip-purple { color: var(--purple); background: rgba(192,132,252,.08); border: 1px solid rgba(192,132,252,.2); }
+
+    /* ═══════════════════════════════════════
+       WHAT / WHY / HOW SECTION
+    ═══════════════════════════════════════ */
+    .pillars-section {
+      max-width: 1100px; margin: 0 auto; padding: 5rem 2rem;
+    }
+    .section-header { text-align: center; margin-bottom: 3.5rem; }
+    .section-tag {
+      font-size: .72rem; font-weight: 600; letter-spacing: .18em; text-transform: uppercase;
+      color: var(--orange); margin-bottom: .6rem; display: block;
+    }
+    .section-title {
+      font-family: 'Syne', sans-serif; font-weight: 800;
+      font-size: clamp(1.6rem, 3.5vw, 2.4rem); line-height: 1.15;
+    }
+    .section-title span { color: var(--gold); }
+    .section-line { width: 60px; height: 3px; border-radius: 2px; margin: 1rem auto 0; background: linear-gradient(90deg, var(--gold), var(--orange)); }
+
+    .pillars-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem; }
+    .pillar-card {
+      position: relative; border-radius: 20px; padding: 2.2rem;
+      background: rgba(14,31,56,.6); border: 1px solid var(--border);
+      overflow: hidden; transition: transform .35s, box-shadow .35s, border-color .35s;
+    }
+    .pillar-card:hover { transform: translateY(-6px); box-shadow: 0 16px 50px rgba(0,0,0,.35); }
+    .pillar-card.gold  { border-top: 3px solid var(--gold); }
+    .pillar-card.gold:hover  { border-color: var(--gold); box-shadow: 0 16px 50px rgba(240,180,41,.15); }
+    .pillar-card.orange{ border-top: 3px solid var(--orange); }
+    .pillar-card.orange:hover{ border-color: var(--orange); box-shadow: 0 16px 50px rgba(251,113,60,.15); }
+    .pillar-card.rose  { border-top: 3px solid var(--rose); }
+    .pillar-card.rose:hover  { border-color: var(--rose); box-shadow: 0 16px 50px rgba(251,113,133,.15); }
+    .pillar-card.teal  { border-top: 3px solid var(--teal); }
+    .pillar-card.teal:hover  { border-color: var(--teal); box-shadow: 0 16px 50px rgba(94,234,212,.12); }
+    .pillar-card.full  { grid-column: span 2; }
+
+    .pillar-number {
+      font-family: 'Syne', sans-serif; font-weight: 800; font-size: 4rem;
+      line-height: 1; margin-bottom: .5rem; opacity: .12; position: absolute; top: 1rem; right: 1.5rem;
+    }
+    .pillar-icon { font-size: 2.5rem; margin-bottom: 1rem; display: block; }
+    .pillar-question {
+      font-family: 'Syne', sans-serif; font-weight: 700; font-size: 1rem;
+      letter-spacing: .04em; text-transform: uppercase; margin-bottom: .5rem;
+    }
+    .pillar-answer {
+      font-size: .95rem; color: var(--muted); line-height: 1.8;
+    }
+    .pillar-answer strong { color: var(--white); }
+
+    /* ═══════════════════════════════════════
+       STRUCTURE — SESSION TIME BLOCKS
+    ═══════════════════════════════════════ */
+    .structure-section {
+      padding: 5rem 2rem;
+      background: radial-gradient(ellipse 80% 60% at 50% 50%, rgba(240,180,41,.04) 0%, transparent 70%);
+    }
+    .structure-inner { max-width: 900px; margin: 0 auto; }
+
+    .timeline {
+      position: relative; margin-top: 3rem;
+    }
+    .timeline::before {
+      content: ''; position: absolute; left: 90px; top: 0; bottom: 0; width: 2px;
+      background: linear-gradient(to bottom, var(--gold), var(--orange), var(--rose));
+    }
+    .tl-item {
+      display: flex; gap: 2.5rem; margin-bottom: 2.5rem; align-items: flex-start;
+    }
+    .tl-time {
+      font-family: 'Syne', sans-serif; font-weight: 800; font-size: 1.5rem;
+      color: var(--gold); width: 80px; flex-shrink: 0; text-align: right;
+      padding-top: .2rem;
+    }
+    .tl-dot {
+      width: 22px; height: 22px; border-radius: 50%; flex-shrink: 0;
+      border: 3px solid; margin-top: .3rem; position: relative; z-index: 1;
+      background: var(--navy);
+    }
+    .tl-item:nth-child(1) .tl-dot { border-color: var(--gold); box-shadow: 0 0 14px rgba(240,180,41,.5); }
+    .tl-item:nth-child(2) .tl-dot { border-color: var(--orange); box-shadow: 0 0 14px rgba(251,113,60,.5); }
+    .tl-item:nth-child(3) .tl-dot { border-color: var(--rose); box-shadow: 0 0 14px rgba(251,113,133,.5); }
+    .tl-content {
+      flex: 1; background: rgba(14,31,56,.7); border: 1px solid var(--border);
+      border-radius: 16px; padding: 1.6rem 1.8rem;
+      transition: transform .3s, box-shadow .3s;
+    }
+    .tl-content:hover { transform: translateX(6px); box-shadow: 0 8px 30px rgba(0,0,0,.3); }
+    .tl-title {
+      font-family: 'Syne', sans-serif; font-weight: 700; font-size: 1.05rem;
+      margin-bottom: .5rem;
+    }
+    .tl-item:nth-child(1) .tl-title { color: var(--gold); }
+    .tl-item:nth-child(2) .tl-title { color: var(--orange); }
+    .tl-item:nth-child(3) .tl-title { color: var(--rose); }
+    .tl-desc { font-size: .9rem; color: var(--muted); line-height: 1.75; }
+
+    /* ═══════════════════════════════════════
+       SESSION MATRIX
+    ═══════════════════════════════════════ */
+    .sessions-section {
+      max-width: 1100px; margin: 0 auto; padding: 5rem 2rem;
+    }
+    .sessions-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.2rem; margin-top: 3rem;
+    }
+    .session-card {
+      background: rgba(14,31,56,.7); border: 1px solid var(--border);
+      border-radius: 18px; padding: 1.8rem 1.6rem;
+      transition: transform .35s, box-shadow .35s;
+      position: relative; overflow: hidden;
+    }
+    .session-card::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+    }
+    .session-card:nth-child(1)::before { background: linear-gradient(90deg, var(--gold), var(--orange)); }
+    .session-card:nth-child(2)::before { background: linear-gradient(90deg, var(--orange), var(--rose)); }
+    .session-card:nth-child(3)::before { background: linear-gradient(90deg, var(--rose), var(--purple)); }
+    .session-card:nth-child(4)::before { background: linear-gradient(90deg, var(--purple), var(--teal)); }
+    .session-card:nth-child(5)::before { background: linear-gradient(90deg, var(--teal), var(--gold)); }
+    .session-card:nth-child(6)::before { background: linear-gradient(90deg, var(--gold), var(--rose)); }
+    .session-card:hover { transform: translateY(-6px); box-shadow: 0 12px 40px rgba(0,0,0,.35); }
+    .session-num {
+      font-family: 'Syne', sans-serif; font-weight: 800; font-size: 3rem;
+      line-height: 1; color: rgba(240,244,255,.06); position: absolute; top: .8rem; right: 1rem;
+    }
+    .session-icon { font-size: 1.8rem; display: block; margin-bottom: .8rem; }
+    .session-title {
+      font-family: 'Syne', sans-serif; font-weight: 700; font-size: .95rem;
+      color: var(--white); margin-bottom: .6rem; line-height: 1.3;
+    }
+    .session-desc { font-size: .82rem; color: var(--muted); line-height: 1.7; }
+
+    /* ═══════════════════════════════════════
+       TEAM SECTION
+    ═══════════════════════════════════════ */
+    .team-section {
+      padding: 5rem 2rem;
+      background: rgba(14,31,56,.25);
+    }
+    .team-inner { max-width: 1100px; margin: 0 auto; }
+
+    .team-lead-grid {
+      display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem; margin-top: 3rem; margin-bottom: 1.5rem;
+    }
+    .team-lead-card {
+      background: rgba(14,31,56,.8); border: 1px solid rgba(240,180,41,.2);
+      border-radius: 18px; padding: 1.8rem 2rem;
+      display: flex; align-items: center; gap: 1.2rem;
+      transition: transform .35s, box-shadow .35s;
+    }
+    .team-lead-card:hover { transform: translateY(-5px); box-shadow: 0 12px 40px rgba(240,180,41,.12); }
+    .team-lead-avatar {
+      width: 52px; height: 52px; border-radius: 50%;
+      background: linear-gradient(135deg, var(--gold), var(--orange));
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.5rem; flex-shrink: 0;
+    }
+    .team-lead-role { font-size: .68rem; text-transform: uppercase; letter-spacing: .1em; color: var(--gold); font-weight: 600; margin-bottom: .2rem; }
+    .team-lead-name { font-size: .95rem; color: var(--white); font-weight: 600; line-height: 1.3; }
+
+    .team-exec-grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 1rem;
+    }
+    .team-exec-card {
+      background: rgba(14,31,56,.6); border: 1px solid var(--border);
+      border-radius: 14px; padding: 1.2rem 1.4rem;
+      transition: transform .3s, border-color .3s;
+    }
+    .team-exec-card:hover { transform: translateY(-4px); border-color: rgba(94,234,212,.25); }
+    .team-exec-role { font-size: .65rem; text-transform: uppercase; letter-spacing: .1em; color: var(--teal); font-weight: 600; margin-bottom: .3rem; }
+    .team-exec-name { font-size: .85rem; color: var(--white); font-weight: 500; line-height: 1.4; }
+
+    /* ═══════════════════════════════════════
+       ALIGNMENT / MARCO SECTION
+    ═══════════════════════════════════════ */
+    .marco-section {
+      max-width: 1100px; margin: 0 auto; padding: 5rem 2rem;
+    }
+    .marco-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-top: 3rem; }
+    .marco-card {
+      background: rgba(14,31,56,.6); border: 1px solid var(--border);
+      border-radius: 18px; padding: 2rem; text-align: center;
+      transition: transform .35s, box-shadow .35s;
+    }
+    .marco-card:hover { transform: translateY(-6px); box-shadow: 0 12px 40px rgba(0,0,0,.3); }
+    .marco-icon { font-size: 3rem; display: block; margin-bottom: 1rem; }
+    .marco-title {
+      font-family: 'Syne', sans-serif; font-weight: 700; font-size: 1rem;
+      color: var(--white); margin-bottom: .6rem;
+    }
+    .marco-desc { font-size: .85rem; color: var(--muted); line-height: 1.7; }
+
+    /* ═══════════════════════════════════════
+       BOTTOM CTA
+    ═══════════════════════════════════════ */
+    .cta-section {
+      text-align: center; padding: 6rem 2rem 7rem; position: relative; overflow: hidden;
+    }
+    .cta-bg {
+      position: absolute; inset: 0; z-index: 0;
+      background: radial-gradient(ellipse 80% 60% at 50% 50%, rgba(240,180,41,.08), rgba(251,113,60,.06), transparent 70%);
+    }
+    .cta-inner { position: relative; z-index: 1; }
+    .cta-tag { font-size: .72rem; font-weight: 600; letter-spacing: .18em; text-transform: uppercase; color: var(--orange); margin-bottom: .8rem; display: block; }
+    .cta-title { font-family: 'Syne', sans-serif; font-weight: 800; font-size: clamp(1.6rem, 4vw, 2.8rem); margin-bottom: 1.2rem; }
+    .cta-title span { color: var(--gold); }
+    .cta-desc { font-family: 'Lora', serif; font-style: italic; font-size: 1.05rem; color: var(--muted); max-width: 520px; margin: 0 auto 2.5rem; line-height: 1.85; }
+    .cta-btns { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+
+    /* ═══════════════════════════════════════
+       BACK LINK
+    ═══════════════════════════════════════ */
+    .bottom-back { max-width: 1100px; margin: 0 auto; padding: 0 2rem 4rem; text-align: center; }
+    .bottom-back a {
+      display: inline-flex; align-items: center; gap: .5rem;
+      font-size: .9rem; color: var(--teal);
+      border: 1px solid rgba(94,234,212,.25); padding: .7rem 1.8rem;
+      border-radius: 50px; transition: all .3s;
+    }
+    .bottom-back a:hover { background: rgba(94,234,212,.07); border-color: var(--teal); transform: translateY(-2px); }
+
+    /* ═══════════════════════════════════════
+       REVEAL
+    ═══════════════════════════════════════ */
+    .reveal { opacity: 0; transform: translateY(35px); transition: opacity .8s cubic-bezier(.16,1,.3,1), transform .8s cubic-bezier(.16,1,.3,1); }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .reveal-delay-1 { transition-delay: .12s; }
+    .reveal-delay-2 { transition-delay: .24s; }
+    .reveal-delay-3 { transition-delay: .36s; }
+    .reveal-delay-4 { transition-delay: .48s; }
+
+    /* ═══════════════════════════════════════
+       FOOTER
+    ═══════════════════════════════════════ */
+    footer { background: var(--deep); padding: 4rem 2rem 2rem; border-top: 1px solid var(--border); }
+    .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 3rem; max-width: 1160px; margin: auto; }
+    .footer-col h4 { font-family: 'Syne', sans-serif; font-size: .85rem; font-weight: 700; color: var(--white); margin-bottom: 1rem; text-transform: uppercase; letter-spacing: .06em; }
+    .footer-col ul { display: flex; flex-direction: column; gap: .5rem; }
+    .footer-col a { font-size: .82rem; color: var(--muted); transition: color .3s; }
+    .footer-col a:hover { color: var(--teal); }
+    .footer-bottom { max-width: 1160px; margin: 2.5rem auto 0; padding-top: 1.5rem; border-top: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
+    .footer-bottom p { font-size: .78rem; color: var(--muted); }
+    .footer-bottom-links { display: flex; gap: 1.5rem; }
+    .footer-bottom-links a { font-size: .75rem; color: var(--muted); transition: color .3s; }
+    .footer-bottom-links a:hover { color: var(--teal); }
+
+    /* ═══════════════════════════════════════
+       RESPONSIVE
+    ═══════════════════════════════════════ */
+    @media (max-width: 900px) {
+      .flyer-section { grid-template-columns: 1fr; gap: 2.5rem; }
+      .pillars-grid { grid-template-columns: 1fr; }
+      .pillar-card.full { grid-column: span 1; }
+      .sessions-grid { grid-template-columns: repeat(2, 1fr); }
+      .marco-grid { grid-template-columns: 1fr; }
+      .team-lead-grid { grid-template-columns: 1fr; }
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 640px) {
+      .sessions-grid { grid-template-columns: 1fr; }
+      .timeline::before { left: 55px; }
+      .tl-time { width: 50px; font-size: 1.1rem; }
+      .footer-grid { grid-template-columns: 1fr; gap: 2rem; }
+      .footer-bottom { flex-direction: column; text-align: center; }
+      .date-pill { gap: .5rem; }
+      .countdown-wrap { gap: .6rem; }
+      .cd-block { padding: .8rem 1rem; min-width: 65px; }
+      .cd-num { font-size: 1.8rem; }
+      .float-emoji { display: none; }
+    }
+
+    /* ═══════════════════════════════════════
+       MOBILE MENU
+    ═══════════════════════════════════════ */
+    .hamburger { display: none; background: none; border: none; cursor: pointer; padding: .5rem; z-index: 1002; flex-direction: column; justify-content: center; gap: 5px; }
+    .hamburger span { display: block; width: 24px; height: 2px; background: rgba(240,244,255,.85); border-radius: 1px; transition: transform .3s, opacity .3s; }
+    .hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+    .hamburger.active span:nth-child(2) { opacity: 0; }
+    .hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
+    .mobile-menu { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(11,22,41,.97); backdrop-filter: blur(20px); z-index: 999; padding: 5rem 2rem 2rem; overflow-y: auto; flex-direction: column; gap: 0; }
+    .mobile-menu.active { display: flex; }
+    .mobile-menu-section { font-size: .7rem; color: rgba(240,244,255,.4); text-transform: uppercase; letter-spacing: .1em; margin-top: 1.5rem; padding-bottom: .25rem; }
+    .mobile-menu-link { display: block; color: rgba(240,244,255,.85) !important; font-size: 1rem; padding: .75rem 0; border-bottom: 1px solid rgba(240,244,255,.08); text-decoration: none; font-family: 'DM Sans', sans-serif; text-transform: none !important; letter-spacing: 0 !important; }
+    .mobile-menu-link:hover { color: var(--teal) !important; }
+    .mobile-menu-link::after { display: none !important; }
+    body.menu-open { overflow: hidden; }
+    @media (max-width: 768px) {
+      .hamburger { display: flex; }
+      .nav-left, .nav-right { display: none !important; }
+      nav.main-nav { padding: .55rem 1.2rem; z-index: 1001; }
+      .nav-center { position: relative; left: auto; transform: none; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── Decorative background ── -->
+<div class="confetti-bg">
+  <div class="cb cb-1"></div>
+  <div class="cb cb-2"></div>
+  <div class="cb cb-3"></div>
+  <div class="cb cb-4"></div>
+</div>
+
+<!-- ── Floating emojis ── -->
+<div class="float-emoji fe-1">🎪</div>
+<div class="float-emoji fe-2">❤️</div>
+<div class="float-emoji fe-3">🎭</div>
+<div class="float-emoji fe-4">🌸</div>
+<div class="float-emoji fe-5">😄</div>
+<div class="float-emoji fe-6">🎶</div>
+<div class="float-emoji fe-7">✨</div>
+
+<!-- ── Header ── -->
+<header>
+  <nav class="main-nav">
+    <div class="nav-left">
+      <div class="nav-dropdown">
+        <a href="#">Institucional ▾</a>
+        <div class="dropdown-menu">
+          <a href="../../../../conocenos/">Identidad y Gobernanza</a>
+          <a href="../../../../miembros/">Directorio de Miembros</a>
+          <a href="../../../../actualidad/">Actualidad Institucional</a>
+        </div>
+      </div>
+      <div class="nav-dropdown">
+        <a href="../../../../investigaciones/">Investigaciones ▾</a>
+        <div class="dropdown-menu">
+          <a href="../../../../investigaciones/lineas-de-investigacion/">Líneas de Investigación</a>
+          <a href="../../../../investigaciones/publicaciones/">Publicaciones</a>
+          <div class="dropdown-submenu">
+            <a href="../../../../investigaciones/programas/">Programas ▸</a>
+            <div class="dropdown-submenu-menu">
+              <a href="../../../../investigaciones/programas/bienestar/">BienEstar</a>
+              <a href="../../../../investigaciones/programas/espacio-mental/">Espacio Mental</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="nav-dropdown">
+        <a href="../../../../proyectos-sociales/" class="active">Proyectos Sociales ▾</a>
+        <div class="dropdown-menu">
+          <div class="dropdown-submenu">
+            <a href="../../../../proyectos-sociales/eventos/">Eventos ▸</a>
+            <div class="dropdown-submenu-menu">
+              <a href="../../../../proyectos-sociales/eventos/eventos-pasados/">Eventos Pasados</a>
+              <a href="../../../../proyectos-sociales/eventos/eventos-proximos/">Eventos Próximos</a>
+            </div>
+          </div>
+          <a href="../../../../proyectos-sociales/psinet-escool/">PsiNet EsCool</a>
+          <a href="../../../../proyectos-sociales/psipaz/">PsiPaz</a>
+        </div>
+      </div>
+    </div>
+    <div class="nav-center">
+      <a href="../../../../index.html">
+        <img src="../../../../assets/images/logo.png" alt="PsiNet LAB" onerror="this.style.display='none'" />
+      </a>
+    </div>
+    <div class="nav-right">
+      <a href="../../../../blog/">Blog</a>
+      <a href="../../../../podcast/">Podcast</a>
+      <a href="../../../../contacto/">Contacto</a>
+      <a href="../../../../apoyanos/">Apóyanos</a>
+      <a href="../../../../colaboraciones/">Colaboraciones</a>
+    </div>
+    <button class="hamburger" aria-label="Menú"><span></span><span></span><span></span></button>
+  </nav>
+  <div class="mobile-menu"></div>
+</header>
+
+<!-- ═══════════════════════════════════════
+     HERO
+═══════════════════════════════════════ -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-orb ho-1"></div>
+  <div class="hero-orb ho-2"></div>
+  <div class="hero-orb ho-3"></div>
+  <div class="hero-orb ho-4"></div>
+  <div class="hero-particles" id="heroParticles"></div>
+
+  <div class="hero-content">
+    <div class="hero-eyebrow">
+      <span class="eyebrow-dot"></span>
+      Proyectos Sociales · Próximo Evento
+    </div>
+
+    <h1 class="hero-title">CIAM Sonrisas</h1>
+    <p class="hero-subtitle">Talleres de bienestar integral para adultos mayores</p>
+    <p class="hero-desc">
+      Ciencia, humor y humanidad al servicio del envejecimiento digno y activo en el CIAM de Jesús María.
+    </p>
+
+    <!-- Date & time pill -->
+    <div class="date-pill">
+      <div class="dp-item">
+        <span class="dp-icon">📅</span>
+        <span>Sábado, 18 de julio de 2026</span>
+      </div>
+      <span class="dp-sep">·</span>
+      <div class="dp-item">
+        <span class="dp-icon">🕙</span>
+        <span>10:00 – 11:30 AM</span>
+      </div>
+      <span class="dp-sep">·</span>
+      <div class="dp-item">
+        <span class="dp-icon">📍</span>
+        <span>CIAM Jesús María, Lima</span>
+      </div>
+    </div>
+
+    <!-- Countdown -->
+    <div class="countdown-wrap" id="countdownWrap">
+      <div class="cd-block">
+        <span class="cd-num" id="cd-days">--</span>
+        <span class="cd-label">Días</span>
+      </div>
+      <div class="cd-block">
+        <span class="cd-num" id="cd-hours">--</span>
+        <span class="cd-label">Horas</span>
+      </div>
+      <div class="cd-block">
+        <span class="cd-num" id="cd-min">--</span>
+        <span class="cd-label">Minutos</span>
+      </div>
+      <div class="cd-block">
+        <span class="cd-num" id="cd-sec">--</span>
+        <span class="cd-label">Segundos</span>
+      </div>
+    </div>
+
+    <div class="hero-btns">
+      <a href="../../../../contacto/" class="btn btn-gold">✉️ Contactar al equipo</a>
+      <a href="../../../../proyectos-sociales/eventos/eventos-proximos/" class="btn btn-outline">← Más eventos</a>
+    </div>
+  </div>
+
+  <div class="scroll-hint">
+    <span>Descubre más</span>
+    <div class="scroll-arrow"></div>
+  </div>
+</section>
+
+<!-- Breadcrumb -->
+<div class="breadcrumb-bar">
+  <div class="breadcrumb-inner">
+    <nav class="breadcrumb-nav">
+      <a href="../../../../proyectos-sociales/eventos/eventos-proximos/">Eventos Próximos</a>
+      <span class="breadcrumb-sep">→</span>
+      <span>CIAM Sonrisas</span>
+    </nav>
+    <a href="../../../../proyectos-sociales/eventos/eventos-proximos/" class="back-link">← Volver a Eventos Próximos</a>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════
+     FLYER + INFO
+═══════════════════════════════════════ -->
+<section class="flyer-section">
+  <!-- Flyer -->
+  <div class="flyer-frame reveal">
+    <div class="flyer-glow"></div>
+    <div class="flyer-img-wrap">
+      <span class="flyer-badge">🌟 Próximo sábado</span>
+      <img src="../../../../assets/images/eventos/ciam-sonrisas/flayer_fn.png" alt="Flyer CIAM Sonrisas" loading="lazy" />
+    </div>
+  </div>
+
+  <!-- Info -->
+  <div class="flyer-info reveal reveal-delay-1">
+    <p class="fi-eyebrow">Departamento de Proyectos Sociales · PsiNet LAB</p>
+    <h2 class="fi-title">Un espacio para <span>sonreír</span>, recordar y crecer</h2>
+    <p class="fi-desc">
+      Seis sesiones de 90 minutos llenas de lúdica, clowning médico y psicología preventiva, diseñadas con amor y rigor científico para las personas adultas mayores del CIAM de Jesús María.
+    </p>
+
+    <div class="fi-meta">
+      <div class="fi-meta-item">
+        <span class="fi-meta-icon">📅</span>
+        <div class="fi-meta-text">
+          <div class="fi-meta-label">Primera sesión</div>
+          <div class="fi-meta-value">Sábado 18 de julio de 2026 · 10:00 – 11:30 AM</div>
+        </div>
+      </div>
+      <div class="fi-meta-item">
+        <span class="fi-meta-icon">📍</span>
+        <div class="fi-meta-text">
+          <div class="fi-meta-label">Lugar</div>
+          <div class="fi-meta-value">CIAM del distrito de Jesús María, Lima – Perú</div>
+        </div>
+      </div>
+      <div class="fi-meta-item">
+        <span class="fi-meta-icon">🗓️</span>
+        <div class="fi-meta-text">
+          <div class="fi-meta-label">Duración del programa</div>
+          <div class="fi-meta-value">6 sesiones mensuales · 90 min por sesión</div>
+        </div>
+      </div>
+      <div class="fi-meta-item">
+        <span class="fi-meta-icon">👥</span>
+        <div class="fi-meta-text">
+          <div class="fi-meta-label">Dirigido a</div>
+          <div class="fi-meta-value">Adultos mayores usuarios del CIAM de Jesús María</div>
+        </div>
+      </div>
+      <div class="fi-meta-item">
+        <span class="fi-meta-icon">🎓</span>
+        <div class="fi-meta-text">
+          <div class="fi-meta-label">Equipo</div>
+          <div class="fi-meta-value">Psicólogos, enfermeros y clowns especializados</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     IMPACT QUOTE
+═══════════════════════════════════════ -->
+<section class="impact-section">
+  <p class="impact-quote reveal">
+    "Fomentar una cultura de paz y un florecimiento humano digno desde la ciencia, la educación y la acción social."
+  </p>
+  <p class="impact-sub reveal reveal-delay-1">
+    CIAM Sonrisas es la materialización de esa misión: llevar la ciencia psicológica directamente a quienes más merecen ser vistos, escuchados y celebrados.
+  </p>
+  <div class="impact-chips reveal reveal-delay-2">
+    <span class="chip chip-gold">🎯 ODS 3: Salud y Bienestar</span>
+    <span class="chip chip-rose">❤️ Década del Envejecimiento Saludable 2021–2030</span>
+    <span class="chip chip-teal">🧠 Enfoque preventivo basado en evidencia</span>
+    <span class="chip chip-purple">🎪 Clowning médico especializado</span>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     PILLARS: QUÉ / POR QUÉ / CÓMO / PARA QUÉ
+═══════════════════════════════════════ -->
+<section class="pillars-section">
+  <div class="section-header">
+    <span class="section-tag">La iniciativa</span>
+    <h2 class="section-title">Todo lo que <span>necesitas saber</span></h2>
+    <div class="section-line"></div>
+  </div>
+
+  <div class="pillars-grid">
+
+    <div class="pillar-card gold reveal">
+      <span class="pillar-number">01</span>
+      <span class="pillar-icon">🌱</span>
+      <p class="pillar-question">¿Qué haremos?</p>
+      <p class="pillar-answer">Estableceremos <strong>espacios preventivos</strong> para fortalecer la autonomía y funcionalidad de los adultos mayores, atendiendo sus necesidades asistenciales y previniendo el deterioro cognitivo y socioemocional.</p>
+    </div>
+
+    <div class="pillar-card orange reveal reveal-delay-1">
+      <span class="pillar-number">02</span>
+      <span class="pillar-icon">🎯</span>
+      <p class="pillar-question">¿Por qué lo haremos?</p>
+      <p class="pillar-answer">Para <strong>fortalecer las acciones del CIAM de Jesús María</strong> mediante talleres que fomenten el bienestar psicológico de los adultos mayores a través de actividades lúdicas y clowning médico.</p>
+    </div>
+
+    <div class="pillar-card rose reveal reveal-delay-2">
+      <span class="pillar-number">03</span>
+      <span class="pillar-icon">🌍</span>
+      <p class="pillar-question">¿Para qué?</p>
+      <p class="pillar-answer">Nos alineamos con el <strong>ODS 3: Salud y Bienestar</strong> y la <strong>Década del Envejecimiento Saludable 2021–2030</strong> de la OMS, contribuyendo a un envejecimiento activo, digno e integrado.</p>
+    </div>
+
+    <div class="pillar-card teal reveal reveal-delay-3">
+      <span class="pillar-number">04</span>
+      <span class="pillar-icon">⭐</span>
+      <p class="pillar-question">¿Qué esperamos lograr?</p>
+      <p class="pillar-answer">El <strong>bienestar genuino</strong> de cada participante y que lo aprendido se integre a su cotidianidad, fortaleciendo vínculos con sus seres queridos y cultivando una <strong>cultura de paz y convivencia armónica</strong>.</p>
+    </div>
+
+    <div class="pillar-card gold full reveal">
+      <span class="pillar-number">05</span>
+      <span class="pillar-icon">🔬</span>
+      <p class="pillar-question">¿Es una intervención de calidad?</p>
+      <p class="pillar-answer">Absolutamente. Todos los abordajes están <strong>basados en evidencias científicas comprobables y estandarizadas</strong> con amplio bagaje aplicativo mundial. Contamos con un equipo multidisciplinario de psicólogos, enfermeros y clowns de alto nivel de especialización en asistencias sociales creativas. Los ejes temáticos —emociones, habilidades cognitivas, habilidades sociales, uso saludable del tiempo libre, propósito de vida y autocuidado— responden a las necesidades reales del adulto mayor contemporáneo.</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     SESSION STRUCTURE TIMELINE
+═══════════════════════════════════════ -->
+<section class="structure-section">
+  <div class="structure-inner">
+    <div class="section-header">
+      <span class="section-tag">Metodología</span>
+      <h2 class="section-title">Estructura de <span>cada sesión</span></h2>
+      <div class="section-line"></div>
+    </div>
+
+    <div class="timeline">
+      <div class="tl-item reveal">
+        <span class="tl-time">10'</span>
+        <div class="tl-dot"></div>
+        <div class="tl-content">
+          <p class="tl-title">🌬️ Activación corporal y respiración</p>
+          <p class="tl-desc">Movimiento suave y técnicas de respiración para preparar el cuerpo y la mente. Un espacio de bienvenida cálida que invite a la presencia plena y la conexión grupal.</p>
+        </div>
+      </div>
+
+      <div class="tl-item reveal reveal-delay-1">
+        <span class="tl-time">30'</span>
+        <div class="tl-dot"></div>
+        <div class="tl-content">
+          <p class="tl-title">💬 Diálogo activo sobre temas centrales</p>
+          <p class="tl-desc">Charla psicoeducativa participativa sobre el tema de la sesión. El adulto mayor es protagonista: sus experiencias, saberes y reflexiones son el corazón del espacio.</p>
+        </div>
+      </div>
+
+      <div class="tl-item reveal reveal-delay-2">
+        <span class="tl-time">50'</span>
+        <div class="tl-dot"></div>
+        <div class="tl-content">
+          <p class="tl-title">🎪 Dinámicas lúdicas y clowning médico</p>
+          <p class="tl-desc">El corazón del programa. Improvisación, humor empático, música (valses criollos, boleros) y baile para la vinculación, expresión emocional y estimulación cognitiva. Los clowns invierten roles: son los aprendices torpes que necesitan de la sabiduría y liderazgo de los participantes.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     SESSION MATRIX CARDS
+═══════════════════════════════════════ -->
+<section class="sessions-section">
+  <div class="section-header">
+    <span class="section-tag">El programa</span>
+    <h2 class="section-title">6 sesiones, <span>6 transformaciones</span></h2>
+    <div class="section-line"></div>
+  </div>
+
+  <div class="sessions-grid">
+    <div class="session-card reveal">
+      <span class="session-num">1</span>
+      <span class="session-icon">😊</span>
+      <p class="session-title">Emociones y bienestar emocional</p>
+      <p class="session-desc">Reconocimiento de alegría, tristeza y nostalgia. Conexión con experiencias significativas a través de sketches de improvisación con giros cómicos que abren el corazón.</p>
+    </div>
+
+    <div class="session-card reveal reveal-delay-1">
+      <span class="session-num">2</span>
+      <span class="session-icon">🧠</span>
+      <p class="session-title">Habilidades cognitivas</p>
+      <p class="session-desc">Memoria y estimulación mental. Los clowns simulan ser aprendices torpes de baile que necesitan ser enseñados: los participantes toman el liderazgo y florecen.</p>
+    </div>
+
+    <div class="session-card reveal reveal-delay-2">
+      <span class="session-num">3</span>
+      <span class="session-icon">🤝</span>
+      <p class="session-title">Habilidades sociales</p>
+      <p class="session-desc">Comunicación asertiva y vínculos saludables. Impro dinámica que activa la escucha, la empatía y la risa compartida como puentes entre personas.</p>
+    </div>
+
+    <div class="session-card reveal">
+      <span class="session-num">4</span>
+      <span class="session-icon">🌈</span>
+      <p class="session-title">Uso saludable del tiempo libre</p>
+      <p class="session-desc">Intereses personales y ocio que nutre el alma. Descubrimos juntos que el tiempo libre bien vivido es una fuente inagotable de bienestar.</p>
+    </div>
+
+    <div class="session-card reveal reveal-delay-1">
+      <span class="session-num">5</span>
+      <span class="session-icon">⭐</span>
+      <p class="session-title">Sentido de trascendencia</p>
+      <p class="session-desc">Propósito de vida y realización personal. Una sesión profunda y luminosa que honra la sabiduría acumulada y el legado que cada persona porta.</p>
+    </div>
+
+    <div class="session-card reveal reveal-delay-2">
+      <span class="session-num">6</span>
+      <span class="session-icon">💚</span>
+      <p class="session-title">Autocuidado integral</p>
+      <p class="session-desc">Adherencia al tratamiento y hábitos saludables. Clowns de bata blanca en situaciones cotidianas que transforman el cuidado de la salud en algo cercano, divertido y digno.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     TEAM
+═══════════════════════════════════════ -->
+<section class="team-section">
+  <div class="team-inner">
+    <div class="section-header">
+      <span class="section-tag">Las personas detrás</span>
+      <h2 class="section-title">Nuestro equipo de <span>corazón</span></h2>
+      <div class="section-line"></div>
+    </div>
+
+    <!-- Leads -->
+    <div class="team-lead-grid">
+      <div class="team-lead-card reveal">
+        <div class="team-lead-avatar">🎯</div>
+        <div>
+          <div class="team-lead-role">Chief Social Work Officer · Coordinación General</div>
+          <div class="team-lead-name">Fiorella Grecia Capcha Gonzales</div>
+        </div>
+      </div>
+      <div class="team-lead-card reveal reveal-delay-1">
+        <div class="team-lead-avatar">🎪</div>
+        <div>
+          <div class="team-lead-role">Coordinadora de Clowns</div>
+          <div class="team-lead-name">Carolina Noemi Irene Terry Hernández</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Execution team -->
+    <div class="team-exec-grid">
+      <div class="team-exec-card reveal">
+        <div class="team-exec-role">Equipo de Ejecución</div>
+        <div class="team-exec-name">Katherine Rosa Olivera Rodrigo</div>
+      </div>
+      <div class="team-exec-card reveal reveal-delay-1">
+        <div class="team-exec-role">Equipo de Ejecución</div>
+        <div class="team-exec-name">Kimberly Maria Talavera Cama</div>
+      </div>
+      <div class="team-exec-card reveal reveal-delay-2">
+        <div class="team-exec-role">Equipo de Ejecución</div>
+        <div class="team-exec-name">Joao Aaron Cruz Corpuna</div>
+      </div>
+      <div class="team-exec-card reveal reveal-delay-3">
+        <div class="team-exec-role">Equipo de Ejecución</div>
+        <div class="team-exec-name">Lia Estefani Mamani Ccorimanya</div>
+      </div>
+      <div class="team-exec-card reveal">
+        <div class="team-exec-role">Equipo de Ejecución</div>
+        <div class="team-exec-name">Andrea Camila Moreno Tapia</div>
+      </div>
+      <div class="team-exec-card reveal reveal-delay-1">
+        <div class="team-exec-role">Equipo de Ejecución</div>
+        <div class="team-exec-name">Lillian Alexandra Infante Damian</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     MARCO CONCEPTUAL
+═══════════════════════════════════════ -->
+<section class="marco-section">
+  <div class="section-header">
+    <span class="section-tag">Marco conceptual</span>
+    <h2 class="section-title">Respaldado por la <span>ciencia global</span></h2>
+    <div class="section-line"></div>
+  </div>
+
+  <div class="marco-grid">
+    <div class="marco-card reveal">
+      <span class="marco-icon">🌍</span>
+      <p class="marco-title">ODS 3 — Salud y Bienestar</p>
+      <p class="marco-desc">Estrategias preventivas y formativas que garantizan una vida sana y promueven el bienestar integral en la adultez mayor, reduciendo la vulnerabilidad y fortaleciendo la autonomía funcional.</p>
+    </div>
+    <div class="marco-card reveal reveal-delay-1">
+      <span class="marco-icon">🏥</span>
+      <p class="marco-title">Década del Envejecimiento Saludable OMS 2021–2030</p>
+      <p class="marco-desc">Acciones colectivas para mejorar la calidad de vida de las personas mayores, cambiando percepciones sobre la edad y creando entornos adaptados que promuevan su plena participación.</p>
+    </div>
+    <div class="marco-card reveal reveal-delay-2">
+      <span class="marco-icon">🔬</span>
+      <p class="marco-title">Evidencia científica internacional</p>
+      <p class="marco-desc">Todos los abordajes están fundamentados en investigaciones comprobables y estandarizadas con amplio bagaje aplicativo a nivel mundial en gerontología, psicología preventiva y clowning terapéutico.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     CTA
+═══════════════════════════════════════ -->
+<section class="cta-section">
+  <div class="cta-bg"></div>
+  <div class="cta-inner">
+    <span class="cta-tag reveal">¿Tienes alguna pregunta?</span>
+    <h2 class="cta-title reveal reveal-delay-1">Únete a esta <span>historia de sonrisas</span></h2>
+    <p class="cta-desc reveal reveal-delay-2">
+      CIAM Sonrisas nace del convencimiento de que la ciencia más poderosa es la que se pone al servicio de la dignidad humana. ¡Escríbenos y sé parte del movimiento!
+    </p>
+    <div class="cta-btns reveal reveal-delay-3">
+      <a href="../../../../contacto/" class="btn btn-gold">✉️ Contáctanos</a>
+      <a href="../../../../proyectos-sociales/eventos/eventos-proximos/" class="btn btn-outline">← Todos los eventos próximos</a>
+    </div>
+  </div>
+</section>
+
+<!-- Back link -->
+<div class="bottom-back reveal">
+  <a href="../../../../proyectos-sociales/eventos/eventos-proximos/">← Volver a Eventos Próximos</a>
+</div>
+
+<!-- ═══════════════════════════════════════
+     FOOTER
+═══════════════════════════════════════ -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-col">
+      <h4>PsiNet LAB</h4>
+      <p style="font-size:.85rem;color:var(--muted);max-width:280px;line-height:1.75;">
+        Ciencia psicológica conectada para el desarrollo humano y comunitario.
+      </p>
+    </div>
+    <div class="footer-col">
+      <h4>Proyectos Sociales</h4>
+      <ul>
+        <li><a href="../../../../proyectos-sociales/eventos/">Eventos</a></li>
+        <li><a href="../../../../proyectos-sociales/psinet-escool/">PsiNet EsCool</a></li>
+        <li><a href="../../../../proyectos-sociales/psipaz/">PsiPaz</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Investigación</h4>
+      <ul>
+        <li><a href="../../../../investigaciones/publicaciones/">Publicaciones</a></li>
+        <li><a href="../../../../investigaciones/lineas-de-investigacion/">Líneas de Investigación</a></li>
+        <li><a href="../../../../miembros/">Miembros</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Organización</h4>
+      <ul>
+        <li><a href="../../../../contacto/">Contacto</a></li>
+        <li><a href="../../../../apoyanos/">Apóyanos</a></li>
+        <li><a href="../../../../blog/">Blog</a></li>
+        <li><a href="../../../../podcast/">Podcast</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>&copy; 2026 PsiNet LAB. Todos los derechos reservados.</p>
+    <div class="footer-bottom-links">
+      <a href="../../../../politicas/cookies/">Cookie Policy</a>
+      <a href="../../../../politicas/privacidad/">Privacy Policy</a>
+      <a href="../../../../politicas/">Policies</a>
+    </div>
+  </div>
+</footer>
+
+<!-- ═══════════════════════════════════════
+     SCRIPTS
+═══════════════════════════════════════ -->
+<script>
+  // ── Header scroll ──
+  window.addEventListener('scroll', () => {
+    document.querySelector('header').classList.toggle('scrolled', window.scrollY > 50);
+  });
+
+  // ── Scroll reveal ──
+  const revealObs = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('visible'); revealObs.unobserve(e.target); }
+    });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
+
+  // ── Hero sparkle particles ──
+  (function() {
+    const container = document.getElementById('heroParticles');
+    if (!container) return;
+    for (let i = 0; i < 40; i++) {
+      const span = document.createElement('span');
+      span.style.left = Math.random() * 100 + '%';
+      span.style.top  = Math.random() * 100 + '%';
+      span.style.animationDelay    = (Math.random() * 6).toFixed(2) + 's';
+      span.style.animationDuration = (3 + Math.random() * 5).toFixed(2) + 's';
+      container.appendChild(span);
+    }
+  })();
+
+  // ── Countdown to Saturday 18 July 2026 10:00 AM Lima (UTC-5) ──
+  (function() {
+    const target = new Date('2026-07-18T10:00:00-05:00').getTime();
+    function pad(n) { return String(n).padStart(2, '0'); }
+    function update() {
+      const now  = Date.now();
+      const diff = target - now;
+      if (diff <= 0) {
+        document.getElementById('countdownWrap').innerHTML =
+          '<p style="color:var(--gold);font-family:\'Syne\',sans-serif;font-weight:800;font-size:1.4rem;">🎉 ¡El evento ha comenzado!</p>';
+        return;
+      }
+      const days  = Math.floor(diff / 86400000);
+      const hours = Math.floor((diff % 86400000) / 3600000);
+      const mins  = Math.floor((diff % 3600000)  / 60000);
+      const secs  = Math.floor((diff % 60000)    / 1000);
+      document.getElementById('cd-days').textContent  = pad(days);
+      document.getElementById('cd-hours').textContent = pad(hours);
+      document.getElementById('cd-min').textContent   = pad(mins);
+      document.getElementById('cd-sec').textContent   = pad(secs);
+    }
+    update();
+    setInterval(update, 1000);
+  })();
+</script>
+
+<script>
+(function(){
+  var h=document.querySelector('.hamburger'),m=document.querySelector('.mobile-menu');
+  if(!h||!m)return;
+  document.querySelectorAll('.nav-left>.nav-dropdown').forEach(function(dd){
+    var t=dd.querySelector(':scope>a');
+    var s=document.createElement('div');s.className='mobile-menu-section';
+    s.textContent=t.textContent.replace(/[▾▸]/g,'').trim();m.appendChild(s);
+    var topHref=t.getAttribute('href');
+    if(topHref&&topHref!=='#'){var tl=document.createElement('a');tl.className='mobile-menu-link';tl.href=topHref;tl.textContent='Ver todo';m.appendChild(tl);}
+    dd.querySelectorAll('.dropdown-menu > a').forEach(function(a){var c=a.cloneNode(true);c.className='mobile-menu-link';m.appendChild(c);});
+    dd.querySelectorAll('.dropdown-submenu').forEach(function(sub){
+      var sa=sub.querySelector(':scope>a');
+      var sh=document.createElement('div');sh.className='mobile-menu-section';sh.style.marginTop='.75rem';
+      sh.textContent=sa.textContent.replace(/[▸▾]/g,'').trim();m.appendChild(sh);
+      var subHref=sa.getAttribute('href');
+      if(subHref&&subHref!=='#'){var sl=document.createElement('a');sl.className='mobile-menu-link';sl.href=subHref;sl.textContent='Ver todo';m.appendChild(sl);}
+      sub.querySelectorAll('.dropdown-submenu-menu>a').forEach(function(a){var c=a.cloneNode(true);c.className='mobile-menu-link';m.appendChild(c);});
+    });
+  });
+  var nr=document.querySelector('.nav-right');
+  if(nr){
+    var ns=document.createElement('div');ns.className='mobile-menu-section';ns.textContent='Más';m.appendChild(ns);
+    nr.querySelectorAll('a').forEach(function(a){var c=a.cloneNode(true);c.className='mobile-menu-link';m.appendChild(c);});
+  }
+  h.addEventListener('click',function(){h.classList.toggle('active');m.classList.toggle('active');document.body.classList.toggle('menu-open');});
+  m.addEventListener('click',function(e){if(e.target.tagName==='A'){h.classList.remove('active');m.classList.remove('active');document.body.classList.remove('menu-open');}});
+})();
+</script>
+</body>
+</html>
