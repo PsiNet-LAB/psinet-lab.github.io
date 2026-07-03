@@ -83,7 +83,7 @@ var MEMBERS = [
     name: "Mavila L. Collanqui Narváez",
     slug: "mavila-l-collanqui-narvaez",
     photo: "mavila-hd.jpeg",
-    role: "Miembro de Talento Humano e Investigación",
+    role: "People Manager",
     area: "Talento Humano e Investigación",
     bio: "Mavila Lizbeth Collanqui Narvaez is a student of psychology at the National University of San Agustín of Arequipa (UNSA), consistently ranking among the top students in her program. Winner of first place in the scientific poster contest organized by the Catholic University of Santa María (UCSM), with the research titled \"Effect of Physical Attractiveness on the Perception of Street Sexual Harassment.\" Currently contributes to research involving vulnerable populations, exploring topics such as child development in low-resource contexts and street sexual harassment. Her research interests focus on applying scientific methodologies to analyze human behavior, particularly in organizational and workplace contexts.",
     interests: ["Scientific methodologies", "Human behavior analysis", "Organizational psychology", "Workplace contexts"],
