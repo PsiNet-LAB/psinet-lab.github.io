@@ -460,6 +460,82 @@
       50%{box-shadow:0 0 25px rgba(94,234,212,.55),0 0 50px rgba(94,234,212,.3);}
     }
 
+    /* ── Featured Event Card ── */
+    .featured-event{
+      max-width:900px;width:100%;margin:0 auto 3.5rem;
+      background:rgba(14,31,56,.8);
+      border:1px solid rgba(240,180,41,.2);
+      border-radius:22px;overflow:hidden;
+      box-shadow:0 0 60px rgba(240,180,41,.08),0 20px 50px rgba(0,0,0,.35);
+      transition:transform .4s,box-shadow .4s;
+      animation:fadeUp 1s ease both .7s;
+    }
+    .featured-event:hover{
+      transform:translateY(-6px);
+      box-shadow:0 0 80px rgba(240,180,41,.14),0 24px 60px rgba(0,0,0,.4);
+    }
+    .fe-banner{
+      background:linear-gradient(135deg,rgba(240,180,41,.15),rgba(251,113,60,.12),rgba(251,113,188,.1));
+      border-bottom:1px solid rgba(240,180,41,.15);
+      padding:.7rem 2rem;
+      display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:.5rem;
+    }
+    .fe-banner-left{display:flex;align-items:center;gap:.6rem;}
+    .fe-dot{width:9px;height:9px;border-radius:50%;background:var(--gold);animation:dotPulse 1.4s ease-in-out infinite;}
+    .fe-label{font-size:.7rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);}
+    .fe-date-badge{
+      font-size:.75rem;font-weight:600;
+      color:var(--navy);
+      background:linear-gradient(135deg,var(--gold),#fb923c);
+      padding:.3rem .9rem;border-radius:50px;
+      box-shadow:0 3px 12px rgba(240,180,41,.3);
+    }
+    .fe-body{
+      display:grid;grid-template-columns:220px 1fr;
+      gap:0;
+    }
+    .fe-flyer{
+      position:relative;overflow:hidden;background:var(--deep);
+    }
+    .fe-flyer img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s ease;}
+    .fe-flyer-fallback{
+      width:100%;height:100%;min-height:220px;
+      display:flex;align-items:center;justify-content:center;
+      font-size:4rem;background:linear-gradient(135deg,rgba(240,180,41,.08),rgba(251,113,60,.08));
+    }
+    .featured-event:hover .fe-flyer img{transform:scale(1.05);}
+    .fe-content{padding:2rem 2rem 2rem;}
+    .fe-title{
+      font-family:'Syne',sans-serif;font-weight:800;
+      font-size:1.6rem;line-height:1.1;margin-bottom:.5rem;
+      background:linear-gradient(135deg,#fcd34d,#fb923c,#fb7185);
+      -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+    }
+    .fe-subtitle{font-size:.88rem;color:var(--muted);margin-bottom:1.2rem;font-style:italic;}
+    .fe-details{display:flex;flex-direction:column;gap:.55rem;margin-bottom:1.5rem;}
+    .fe-detail-item{display:flex;align-items:center;gap:.6rem;font-size:.85rem;color:rgba(240,244,255,.8);}
+    .fe-detail-item span:first-child{font-size:1rem;}
+    .fe-tags{display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:1.6rem;}
+    .fe-tag{
+      font-size:.72rem;padding:.3rem .75rem;border-radius:50px;font-weight:500;
+      background:rgba(94,234,212,.08);border:1px solid rgba(94,234,212,.2);color:var(--teal);
+    }
+    .fe-tag.gold{background:rgba(240,180,41,.08);border-color:rgba(240,180,41,.2);color:var(--gold);}
+    .fe-cta{
+      display:inline-flex;align-items:center;gap:.5rem;
+      font-family:'DM Sans',sans-serif;font-weight:600;font-size:.9rem;
+      padding:.75rem 1.8rem;border-radius:50px;
+      background:linear-gradient(135deg,var(--gold),#fb923c);
+      color:var(--navy);
+      box-shadow:0 4px 18px rgba(240,180,41,.35);
+      transition:all .3s;text-decoration:none;
+    }
+    .fe-cta:hover{transform:translateY(-3px);box-shadow:0 8px 30px rgba(240,180,41,.5);}
+    @media(max-width:640px){
+      .fe-body{grid-template-columns:1fr;}
+      .fe-flyer{min-height:200px;}
+    }
+
     /* ── Floating Emojis ── */
     .float-el{
       position:fixed;pointer-events:none;z-index:-1;
@@ -772,78 +848,109 @@
 <!-- Main Content -->
 <main>
 
-  <!-- Hero Coming Soon -->
+  <!-- Hero -->
   <section class="hero-coming">
     <div class="hero-tag">
       <span class="dot"></span>
       Eventos Próximos
     </div>
 
-    <h1 class="hero-headline">¡Pronto estaremos comunicando más eventos!</h1>
+    <h1 class="hero-headline">¡Nuestro próximo evento ya tiene fecha!</h1>
 
     <p class="hero-sub">
-      Estamos preparando experiencias increíbles para nuestra comunidad.
-      Algo grande está en camino…
+      El sábado 18 de julio de 2026, CIAM Sonrisas llega al CIAM de Jesús María para celebrar el bienestar, la alegría y la dignidad de nuestros adultos mayores.
     </p>
 
     <!-- Countdown Aesthetic Blocks -->
     <div class="countdown-aesthetic">
       <div class="count-block">
-        <span class="count-icon">📅</span>
-        <span class="count-label">Fechas</span>
+        <span class="count-icon">🎪</span>
+        <span class="count-label">Clowning</span>
       </div>
       <div class="count-block">
-        <span class="count-icon">🎤</span>
-        <span class="count-label">Charlas</span>
+        <span class="count-icon">🧠</span>
+        <span class="count-label">Cognición</span>
       </div>
       <div class="count-block">
-        <span class="count-icon">🤝</span>
-        <span class="count-label">Talleres</span>
+        <span class="count-icon">❤️</span>
+        <span class="count-label">Bienestar</span>
       </div>
       <div class="count-block">
-        <span class="count-icon">🌍</span>
-        <span class="count-label">Comunidad</span>
+        <span class="count-icon">😄</span>
+        <span class="count-label">Sonrisas</span>
       </div>
     </div>
   </section>
 
-  <!-- Glowing Ring -->
+  <!-- Featured Event: CIAM Sonrisas -->
+  <a href="ciam-sonrisas/" class="featured-event" aria-label="Ver detalles de CIAM Sonrisas">
+    <div class="fe-banner">
+      <div class="fe-banner-left">
+        <span class="fe-dot"></span>
+        <span class="fe-label">✦ Próximo evento destacado</span>
+      </div>
+      <span class="fe-date-badge">📅 Sáb 18 Jul · 10:00 – 11:30 AM</span>
+    </div>
+    <div class="fe-body">
+      <div class="fe-flyer">
+        <img src="../../../assets/images/eventos/ciam-sonrisas/flayer_fn.png" alt="Flyer CIAM Sonrisas" loading="lazy"
+             onerror="this.style.display='none';this.parentElement.innerHTML='<div class=\'fe-flyer-fallback\'>🎪</div>'" />
+      </div>
+      <div class="fe-content">
+        <h2 class="fe-title">CIAM Sonrisas</h2>
+        <p class="fe-subtitle">Talleres de bienestar integral para adultos mayores del CIAM de Jesús María</p>
+        <div class="fe-details">
+          <div class="fe-detail-item"><span>📅</span><span>Sábado 18 de julio de 2026 · 10:00 – 11:30 AM</span></div>
+          <div class="fe-detail-item"><span>📍</span><span>CIAM del distrito de Jesús María, Lima – Perú</span></div>
+          <div class="fe-detail-item"><span>🗓️</span><span>6 sesiones mensuales · 90 min por sesión</span></div>
+          <div class="fe-detail-item"><span>🎓</span><span>Psicólogos, enfermeros y clowns especializados</span></div>
+        </div>
+        <div class="fe-tags">
+          <span class="fe-tag gold">ODS 3: Salud y Bienestar</span>
+          <span class="fe-tag">Clowning médico</span>
+          <span class="fe-tag">Adultos mayores</span>
+          <span class="fe-tag">Enfoque preventivo</span>
+        </div>
+        <span class="fe-cta">Ver todos los detalles →</span>
+      </div>
+    </div>
+  </a>
+
+  <!-- Glow Ring -->
   <div class="glow-ring-wrap reveal">
     <div class="glow-ring">
-      <span class="glow-ring-inner">🔮</span>
+      <span class="glow-ring-inner">🌸</span>
     </div>
   </div>
 
   <!-- Message Card -->
   <div class="message-card reveal" style="transition-delay:.15s;">
-    <h3>Nuevas experiencias en preparación</h3>
+    <h3>Ciencia al servicio de quienes más importan</h3>
     <p>
-      Nuestro equipo está diseñando eventos que conectan la ciencia psicológica
-      con el bienestar comunitario. Conferencias, talleres interactivos y
-      encuentros que transforman. ¡Mantente atento!
+      CIAM Sonrisas nace de nuestra misión de fomentar una cultura de paz a través de la ciencia, la educación y la acción social. ¡Síguenos para no perderte ningún detalle!
     </p>
   </div>
 
   <!-- Marquee -->
   <div class="marquee-wrap reveal" style="transition-delay:.25s;">
     <div class="marquee-track">
-      <span class="marquee-item">Próximamente <span>✦</span></span>
-      <span class="marquee-item">Nuevos Eventos <span>✦</span></span>
-      <span class="marquee-item">Talleres <span>✦</span></span>
-      <span class="marquee-item">Conferencias <span>✦</span></span>
-      <span class="marquee-item">Comunidad <span>✦</span></span>
+      <span class="marquee-item">CIAM Sonrisas <span>✦</span></span>
+      <span class="marquee-item">18 de Julio <span>✦</span></span>
+      <span class="marquee-item">Jesús María <span>✦</span></span>
+      <span class="marquee-item">Clowning Médico <span>✦</span></span>
       <span class="marquee-item">Bienestar <span>✦</span></span>
-      <span class="marquee-item">Ciencia <span>✦</span></span>
-      <span class="marquee-item">Psicología <span>✦</span></span>
+      <span class="marquee-item">Adultos Mayores <span>✦</span></span>
+      <span class="marquee-item">ODS 3 <span>✦</span></span>
+      <span class="marquee-item">PsiNet LAB <span>✦</span></span>
       <!-- Duplicated for seamless loop -->
-      <span class="marquee-item">Próximamente <span>✦</span></span>
-      <span class="marquee-item">Nuevos Eventos <span>✦</span></span>
-      <span class="marquee-item">Talleres <span>✦</span></span>
-      <span class="marquee-item">Conferencias <span>✦</span></span>
-      <span class="marquee-item">Comunidad <span>✦</span></span>
+      <span class="marquee-item">CIAM Sonrisas <span>✦</span></span>
+      <span class="marquee-item">18 de Julio <span>✦</span></span>
+      <span class="marquee-item">Jesús María <span>✦</span></span>
+      <span class="marquee-item">Clowning Médico <span>✦</span></span>
       <span class="marquee-item">Bienestar <span>✦</span></span>
-      <span class="marquee-item">Ciencia <span>✦</span></span>
-      <span class="marquee-item">Psicología <span>✦</span></span>
+      <span class="marquee-item">Adultos Mayores <span>✦</span></span>
+      <span class="marquee-item">ODS 3 <span>✦</span></span>
+      <span class="marquee-item">PsiNet LAB <span>✦</span></span>
     </div>
   </div>
 
@@ -851,35 +958,35 @@
   <section class="wave-section">
     <div class="info-tiles">
       <div class="info-tile reveal">
-        <span class="tile-icon">📢</span>
-        <h4>Anuncios</h4>
-        <p>Publicaremos las fechas y detalles de nuestros próximos eventos aquí mismo.</p>
+        <span class="tile-icon">🎪</span>
+        <h4>Clowning Médico</h4>
+        <p>Improvisación, humor empático y baile como herramientas de estimulación cognitiva y vínculo afectivo.</p>
       </div>
       <div class="info-tile reveal" style="transition-delay:.12s;">
-        <span class="tile-icon">💡</span>
-        <h4>Ideas en Acción</h4>
-        <p>Estamos co-creando con nuestra comunidad para traer lo que más necesitan.</p>
+        <span class="tile-icon">🔬</span>
+        <h4>Basado en Evidencia</h4>
+        <p>Todos los abordajes están respaldados por investigaciones científicas comprobables y estandarizadas a nivel mundial.</p>
       </div>
       <div class="info-tile reveal" style="transition-delay:.24s;">
-        <span class="tile-icon">🔔</span>
-        <h4>No te lo pierdas</h4>
-        <p>Síguenos en redes sociales para ser de los primeros en enterarte.</p>
+        <span class="tile-icon">❤️</span>
+        <h4>Cultura de Paz</h4>
+        <p>Cada sesión cultiva el florecimiento humano y la convivencia armónica entre los adultos mayores y su entorno.</p>
       </div>
     </div>
   </section>
 
   <!-- CTA -->
   <section class="cta-section reveal" style="transition-delay:.1s;">
-    <p class="cta-label">Mantente conectado</p>
+    <p class="cta-label">Sé parte de la historia</p>
     <div class="cta-btns">
-      <a href="../../../contacto/" class="btn btn-primary">
+      <a href="ciam-sonrisas/" class="btn btn-primary">
+        🌟 Ver CIAM Sonrisas
+      </a>
+      <a href="../../../contacto/" class="btn btn-outline">
         ✉️ Contáctanos
       </a>
       <a href="../../../proyectos-sociales/eventos/eventos-pasados/" class="btn btn-outline">
-        📂 Ver Eventos Pasados
-      </a>
-      <a href="../../../blog/" class="btn btn-outline">
-        📰 Visitar el Blog
+        📂 Eventos Pasados
       </a>
     </div>
   </section>
