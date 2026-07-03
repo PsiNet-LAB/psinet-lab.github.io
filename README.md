@@ -9,7 +9,7 @@
 </p>
 
 <p align="center">
-  <a href="https://psinet-lab.github.io">🌐 Sitio Web</a> ·
+  <a href="https://psinetlab.dpdns.org">🌐 Sitio Web</a> ·
   <a href="https://www.instagram.com/psinetlab/">📸 Instagram</a> ·
   <a href="https://www.linkedin.com/company/psinet-lab">💼 LinkedIn</a> ·
   <a href="https://www.youtube.com/@PsiNetLAB">🎥 YouTube</a> ·
@@ -26,7 +26,7 @@
 ## Estructura del sitio
 
 ```
-psinet-lab.github.io/
+psinetlab.dpdns.org/
 ├── index.html                    # Página principal
 ├── conocenos/                    # Identidad y Gobernanza
 ├── miembros/                     # Directorio de Miembros
