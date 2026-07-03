@@ -200,13 +200,23 @@ var MEMBERS = [
     email: ""
   },
   {
-    name: "Emilia del Rosario Béjar Camarena",
-    slug: "emilia-d-bejar-camarena",
-    photo: "Emilia-4k.jpeg",
-    role: "Miembro de Talento Humano",
-    area: "Talento Humano",
-    bio: "Egresada de Psicología con experiencia en gestión del talento humano y en el ámbito clínico. Ha desarrollado su formación en instituciones como EsSalud Arequipa, Bedregal Consultora, MINSA y la Universidad Nacional de San Agustín, además de participar en voluntariados vinculados a la intervención comunitaria, violencia de género e intervención en niños y adolescentes (Observatorio de Violencia de Género UNSA, Humanos, Colegio de Psicólogos Arequipa–Moquegua, e Intiwawa). Cree firmemente en la empatía, resiliencia, adaptación al cambio, estrategia y perseverancia; convencida de que es posible generar impactos positivos desde pequeños cambios.",
-    interests: ["Gestión del talento humano", "Psicología clínica", "Intervención comunitaria", "Violencia de género", "Intervención en niños y adolescentes"],
+    name: "Xiomara Jasmin Colana Ponce",
+    slug: "xiomara-j-colana-ponce",
+    photo: "xiomara 6k.jpeg",
+    role: "Miembro Investigadora",
+    area: "Investigación",
+    bio: "Estudiante de Psicología en la Universidad Privada del Norte, interesada en contribuir al avance de la investigación psicológica y en fortalecer su formación científica y profesional. Sus áreas de interés incluyen la investigación psicológica, la psicometría, la evaluación psicológica y la salud mental. Actualmente participa en actividades orientadas a la generación de conocimiento científico y al desarrollo de proyectos de investigación aplicada. Asimismo, se ha involucrado en iniciativas de innovación y trabajo interdisciplinario, que han reforzado sus competencias en análisis, resolución de problemas y formulación de propuestas con impacto social. Se distingue por su compromiso, responsabilidad y dedicación al aprendizaje continuo.",
+    interests: ["Investigación psicológica", "Psicometría", "Evaluación psicológica", "Salud mental"],
+    email: ""
+  },
+  {
+    name: "Susana Angela Quinto Rojas",
+    slug: "susana-a-quinto-rojas",
+    photo: "susana 6k.jpeg",
+    role: "Miembro Investigadora",
+    area: "Investigación",
+    bio: "Estudiante de Psicología con especial interés en la investigación científica y la promoción del bienestar psicológico. Orientada al aprendizaje continuo, el rigor metodológico y la generación de conocimiento basado en evidencia. Comprometida con el desarrollo de proyectos que contribuyan al avance de la psicología y a la comprensión de las necesidades de la sociedad.",
+    interests: ["Investigación científica", "Bienestar psicológico", "Rigor metodológico", "Conocimiento basado en evidencia"],
     email: ""
   },
   {
