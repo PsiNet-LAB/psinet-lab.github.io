@@ -70,6 +70,16 @@ var MEMBERS = [
     email: ""
   },
   {
+    name: "Mario M. Antizana Ponce de León",
+    slug: "mario-manuel-antizana-ponce-de-leon",
+    photo: "mario-antizana.jpg",
+    role: "Chief Technology and Innovation Officer",
+    area: "Dirección",
+    bio: "Software Engineer with more than 8 years of experience in end-to-end IoT solutions, from firmware in microprocessors (C/C++, ESP32, Arduino, Raspberry Pi) to cloud services (Azure, AWS, GCP) and artificial vision models (OpenCV, TensorFlow). His career spans technical support (2016), embedded development (2018) and full-stack IoT & cloud architecture (2019–2026), working in startups, mid-size companies and large corporations including IBM, Telefónica, Kyndryl, Brimatech and Purifisa, where he led the design and implementation of IoT platforms for manufacturing, integrating wireless communications (LoRaWAN, MQTT, BLE, Wi-Fi), monitoring dashboards (Grafana, Wialon) and automated defect-detection systems. He has mentored more than 50 engineers in INNOVATEC hackathons and delivered technical talks on IoT at UTP. He is certified in ITIL 4, Data Engineering and Cisco Networking Academy, and is completing his Software Engineering degree at UTP. As Chief Technology and Innovation Officer of PsiNet LAB, he leads the technological strategy and innovation initiatives of the organization, building the bridge between psychological science and technology.",
+    interests: ["IoT", "Embedded systems", "Cloud computing", "Artificial vision", "Automation & DevOps", "Technology and innovation", "Machine learning"],
+    email: ""
+  },
+  {
     name: "Luis E. Viloria Moreno",
     slug: "luis-e-viloria-moreno",
     photo: "luis-6k.jpeg",
