@@ -44,7 +44,7 @@ var MEMBERS = [
     slug: "valery-y-marin-jaimes",
     photo: "valery-4k.jpg",
     role: "Chief People Officer",
-    area: "Dirección",
+    areas: ["Dirección", "Talento Humano"],
     bio: "Valery Yanira Marín Jaimes holds a Bachelor's degree in Psychology from the Pontifical Catholic University of Peru. As a member of PsiNet LAB (Peru), she actively contributes to research projects in positive psychology and acceptance and commitment therapy. Her research interests focus on applying quantitative methods to areas such as positive psychology, health and well-being, and education and technology, with a particular interest in learning and motivation within educational contexts. Valery is dedicated to advancing innovative methodologies that bridge psychology and technology, supporting progress in psychological sciences through her work at PsiNet LAB.",
     interests: ["Quantitative methods", "Positive psychology", "Health and well-being", "Education and technology", "Learning and motivation"],
     email: ""
@@ -100,26 +100,6 @@ var MEMBERS = [
     email: ""
   },
   {
-    name: "Gleni R. Quispe Callo",
-    slug: "gleni-r-quispe-callo",
-    photo: "gleni-f.jpeg",
-    role: "Miembro Investigadora",
-    area: "Investigación",
-    bio: "Gleni Quispe Callo holds a Bachelor's degree in Psychology from the Universidad Nacional de San Agustín de Arequipa (Peru), where she graduated with honors for her thesis on adolescent depression, demonstrating an early commitment to addressing mental health challenges during critical developmental stages. She furthered her education by obtaining a Master's degree in University Teaching from the Universidad San Martín de Porres, where her work expanded to include the study of anxiety and cognitive processes, focusing on how these psychological factors impact learning and decision-making in educational settings. Currently, she is a member of PsiNet LAB (Peru). She also holds a position as an Investigator at the Psychometrics Research Center at Universidad César Vallejo. Is a Renacyt researcher at Peru's National Council of Science and Technology (CONCYTEC). She also serves as an Editorial Assistant for INTERACCIONES: Journal of Family, Clinical and Health Psychology, contributing to the editorial process of high-impact publications in the fields of clinical psychology and public health. Additionally, she is an honorary member of the Centro de Estudios e Investigación en Neurociencias y Neuropsicología (CEINPS), reflecting her dedication to advancing knowledge in neuroscience. Her interdisciplinary interests are also evident through her membership in the Chemistry Student Society for Research-Peru. As a Research Assistant at the Neuroscience Laboratory of the Universidad Católica San Pablo. Her primary research interests include neuroscience and positive psychology, with a particular focus on anxiety, cognitive processes, decision-making, mild cognitive impairment, augmented reality, and EEG studies.",
-    interests: ["Neuroscience", "Positive psychology", "Anxiety", "Cognitive processes", "Decision-making", "Mild cognitive impairment", "Augmented reality", "EEG studies"],
-    email: ""
-  },
-  {
-    name: "Marcelo S. Casa Chicata",
-    slug: "marcelo-s-casa-chicata",
-    photo: "marcelo-f.jpeg",
-    role: "Miembro Investigador",
-    area: "Investigación",
-    bio: "Marcelo Saúl Casa Chicata is a Psychology student at the Universidad Nacional de San Agustín (UNSA) in Arequipa, Peru. He currently serves as the CFO of PsiNet LAB (Peru) and works as a researcher, contributing to projects that utilize advanced methodologies such as network analysis. In addition, he is the director of the Center for Research in Neuroscience and Neuropsychology (CEINPS) at UNSA. His main research interests focus on quantitative methods and digital behavior, with additional emphasis on neuropsychology, social cognition, and interpersonal violence.",
-    interests: ["Quantitative methods", "Digital behavior", "Neuropsychology", "Social cognition", "Interpersonal violence"],
-    email: ""
-  },
-  {
     name: "Katherine R. Olivera Rodrigo",
     slug: "katherine-r-olivera-rodrigo",
     photo: "kathy-4k.jpeg",
@@ -127,16 +107,6 @@ var MEMBERS = [
     area: "Proyectos Sociales",
     bio: "Katherine Rosa Olivera Rodrigo es licenciada en Enfermería por la Universidad Privada César Vallejo (Perú), donde se posicionó entre los cinco mejores estudiantes de su promoción por su promedio general. Completó una maestría en Docencia Universitaria en la misma institución, obteniendo el grado de Magíster, y una segunda especialización en Salud Mental y Psiquiatría en la Universidad Norbert Wiener. Además, posee un Diplomado en Metodología de Investigación en la UNMSM y cursa actualmente otro en Gestión de Seguridad y Salud en el Trabajo en la UNW. También, ha realizado cursos de actualización en atención de emergencias y urgencias, soporte vital básico, primeros auxilios, salud ocupacional y liderazgo, entre otros. En el presente, se desempeña como enfermera titulada en la Organización Magister, una institución educativa privada, donde ofrece atención preventiva y servicios de salud a niños, adolescentes y personal docente; en 2019, recibió un reconocimiento por su excelente desempeño laboral. Paralelamente, labora como docente universitaria en una Universidad privada de Lima Metropolitana.",
     interests: ["Mental health", "Psychiatry", "University teaching", "Emergency care", "Research methodology"],
-    email: ""
-  },
-  {
-    name: "Andrea C. Moreno Tapia",
-    slug: "andrea-c-moreno-tapia",
-    photo: "andrea-sd.jpg",
-    role: "Miembro de Proyectos Sociales",
-    area: "Proyectos Sociales",
-    bio: "Andrea Camila Moreno Tapia is a licensed psychologist from the Pontificia Universidad Católica del Perú (PUCP) and is currently pursuing a second specialization in Clinical Psychoanalytic Intervention at the same university. At PsiNet Lab, she works as a researcher with a particular interest in human identity processes, the psyche-soma relationship, and artistic and cultural manifestations. In addition to her background in psychology, she has a strong interest in performing arts and movement improvisation as potential psychotherapeutic tools. Through her research, she aims to contribute to their development.",
-    interests: ["Human identity processes", "Psyche-soma relationship", "Artistic and cultural manifestations", "Performing arts", "Movement improvisation"],
     email: ""
   },
   {
@@ -164,7 +134,7 @@ var MEMBERS = [
     slug: "o-carlos-puma-maque",
     photo: "carlos-f.jpeg",
     role: "Miembro Investigador",
-    area: "Investigación",
+    area: "Comunicaciones",
     bio: "Carlos Puma Maque holds a bachelor's degree in Psychology from the National University of San Agustín de Arequipa (UNSA), where he is currently completing his graduation through the publication of his article titled Psychometric Properties of the Collective Moral Disengagement Scale in the Classroom among Peruvian Adolescents. Over the past year, he has produced several publications and is a researcher at Psinet Lab. He is currently pursuing his master's degree at UNSA, furthering his expertise and interest in quantitative and qualitative analysis, as well as in methodologies related to psychometrics and network analysis.",
     interests: ["Quantitative analysis", "Qualitative analysis", "Psychometrics", "Network analysis"],
     email: ""
@@ -300,16 +270,6 @@ var MEMBERS = [
     email: ""
   },
   {
-    name: "Nataly Zarahí Villagra Apaza",
-    slug: "nataly-z-villagra-apaza",
-    photo: "Nataly 4k.png",
-    role: "Miembro Investigadora",
-    area: "Investigación",
-    bio: "Estudiante de Psicología (4to año). Ha participado del voluntariado RUA-UNSA y voluntariado del centro psicológico COGNITIVA. Cuenta con dos años de experiencia en atención al cliente. Sus áreas de interés incluyen la investigación en psicología, el arte, la cultura y la personalidad.",
-    interests: ["Investigación en psicología", "Arte", "Cultura", "Personalidad"],
-    email: ""
-  },
-  {
     name: "Milene Camila Puma Choquecallata",
     slug: "milene-c-puma-choquecallata",
     photo: "Milene 4k.png",
@@ -317,16 +277,6 @@ var MEMBERS = [
     area: "Investigación",
     bio: "Estudiante de Psicología con orientación hacia la investigación en salud mental y psicopatología. Su trabajo se centra en el estudio del malestar emocional desde enfoques contemporáneos, particularmente mediante el análisis de redes psicológicas, integrando variables como ansiedad, rumiación y procesos de regulación emocional. Ha participado en proyectos de investigación y espacios académicos en neurociencias y psicología clínica, desarrollando competencias en análisis de datos, redacción científica y trabajo colaborativo.",
     interests: ["Salud mental", "Psicopatología", "Análisis de redes psicológicas", "Ansiedad", "Regulación emocional", "Neurociencias", "Análisis de datos", "Redacción científica"],
-    email: ""
-  },
-  {
-    name: "Katherine Chacon Callata",
-    slug: "katherine-chacon-callata",
-    photo: "Katherine Chacon 4k.png",
-    role: "Miembro Investigadora",
-    area: "Investigación",
-    bio: "Estudiante de último año de la carrera de Psicología. Se caracteriza como una persona comprometida y responsable, con habilidades para trabajar en equipo. Interesada por la investigación y el análisis de datos, con el objetivo de aplicar sus conocimientos en un entorno profesional que le permita contribuir al avance de la psicología y mejorar la comprensión y el bienestar humano.",
-    interests: ["Investigación psicológica", "Análisis de datos", "Trabajo en equipo", "Bienestar humano"],
     email: ""
   }
 ];

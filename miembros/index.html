@@ -747,7 +747,10 @@
     var renderedSections = [];
 
     sections.forEach(function(sec) {
-      var members = MEMBERS.filter(function(m) { return sec.areas.indexOf(m.area) !== -1; });
+      var members = MEMBERS.filter(function(m) {
+        var areas = m.areas || [m.area];
+        return sec.areas.some(function(a) { return areas.indexOf(a) !== -1; });
+      });
       if (!members.length) return;
 
       var sectionId = 'sec-' + sec.key;
