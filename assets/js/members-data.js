@@ -44,7 +44,7 @@ var MEMBERS = [
     slug: "valery-y-marin-jaimes",
     photo: "valery-4k.jpg",
     role: "Chief People Officer",
-    areas: ["Dirección", "Talento Humano"],
+    areas: ["Dirección", "Talento Humano e Investigación"],
     bio: "Valery Yanira Marín Jaimes holds a Bachelor's degree in Psychology from the Pontifical Catholic University of Peru. As a member of PsiNet LAB (Peru), she actively contributes to research projects in positive psychology and acceptance and commitment therapy. Her research interests focus on applying quantitative methods to areas such as positive psychology, health and well-being, and education and technology, with a particular interest in learning and motivation within educational contexts. Valery is dedicated to advancing innovative methodologies that bridge psychology and technology, supporting progress in psychological sciences through her work at PsiNet LAB.",
     interests: ["Quantitative methods", "Positive psychology", "Health and well-being", "Education and technology", "Learning and motivation"],
     email: ""
@@ -133,7 +133,7 @@ var MEMBERS = [
     name: "O. Carlos Puma Maque",
     slug: "o-carlos-puma-maque",
     photo: "carlos-f.jpeg",
-    role: "Miembro Investigador",
+    role: "Community Manager",
     area: "Comunicaciones",
     bio: "Carlos Puma Maque holds a bachelor's degree in Psychology from the National University of San Agustín de Arequipa (UNSA), where he is currently completing his graduation through the publication of his article titled Psychometric Properties of the Collective Moral Disengagement Scale in the Classroom among Peruvian Adolescents. Over the past year, he has produced several publications and is a researcher at Psinet Lab. He is currently pursuing his master's degree at UNSA, furthering his expertise and interest in quantitative and qualitative analysis, as well as in methodologies related to psychometrics and network analysis.",
     interests: ["Quantitative analysis", "Qualitative analysis", "Psychometrics", "Network analysis"],

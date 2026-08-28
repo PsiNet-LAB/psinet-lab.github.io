@@ -781,10 +781,12 @@
         card.style.transitionDelay = (0.08 + cardIndex * 0.04) + 's';
         cardIndex++;
 
+        var cardArea = (m.areas || [m.area])[0];
+
         card.innerHTML =
           '<img class="member-card-photo" src="../assets/images/photos/' + m.photo + '" alt="' + m.name + '" loading="lazy" />' +
           '<div class="member-card-body">' +
-            '<span class="member-card-area">' + m.area + '</span>' +
+            '<span class="member-card-area">' + cardArea + '</span>' +
             '<h3 class="member-card-name">' + m.name + '</h3>' +
             '<p class="member-card-role">' + m.role + '</p>' +
             '<span class="member-card-link">Ver perfil →</span>' +
