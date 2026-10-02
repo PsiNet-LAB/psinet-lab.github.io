@@ -180,16 +180,6 @@ var MEMBERS = [
     email: ""
   },
   {
-    name: "Xiomara Jasmin Colana Ponce",
-    slug: "xiomara-j-colana-ponce",
-    photo: "xiomara 6k.jpeg",
-    role: "Miembro Investigadora",
-    area: "Investigación",
-    bio: "Estudiante de Psicología en la Universidad Privada del Norte, interesada en contribuir al avance de la investigación psicológica y en fortalecer su formación científica y profesional. Sus áreas de interés incluyen la investigación psicológica, la psicometría, la evaluación psicológica y la salud mental. Actualmente participa en actividades orientadas a la generación de conocimiento científico y al desarrollo de proyectos de investigación aplicada. Asimismo, se ha involucrado en iniciativas de innovación y trabajo interdisciplinario, que han reforzado sus competencias en análisis, resolución de problemas y formulación de propuestas con impacto social. Se distingue por su compromiso, responsabilidad y dedicación al aprendizaje continuo.",
-    interests: ["Investigación psicológica", "Psicometría", "Evaluación psicológica", "Salud mental"],
-    email: ""
-  },
-  {
     name: "Susana Angela Quinto Rojas",
     slug: "susana-a-quinto-rojas",
     photo: "susana 6k.jpeg",
